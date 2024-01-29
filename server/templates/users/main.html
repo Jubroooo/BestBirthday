@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    메인 페이지
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+    {% else %}
+        <li><a href="{% url 'users:login' %}">Login</a></li>
+        <li><a href="{% url 'users:signup' %}">Signup</a></li>
+    {% endif %}
 </body>
 </html>
