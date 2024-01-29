@@ -53,11 +53,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "BestBirthday.urls"
+'''로그인 관련
+AUTH_USER_MODEL = 'users.User'
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
+ACCOUNT_ADAPTER = 'apps.users.adapter.CustomAccountAdapter'
+'''
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [TEMPLATE_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -136,3 +142,112 @@ MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+'''로그인관련
+AUTHENTICATION_BACKENDS = (
+    #Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+
+    # 'allauth' specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+    
+    
+)
+
+
+LOGIN_REDIRECT_URL = '/'
+
+
+
+
+
+
+
+SOCIALACCOUNT_PROVIDERS ={
+"kakao": {
+"APP": {
+"client_id": ("c41c9d1accde350cbb76e4e36c29fe16"),
+"secret": "ff382e4f5f698f02d99418484b623a14",
+"key": ""
+},
+# These are provider-specific settings that can only be
+# listed here:
+"SCOPE": [
+
+],
+
+"AUTH_PARAMS": {
+"access_type": "online",
+'prompt': 'select_account',
+}},
+######################################################
+
+"naver": {
+"APP": {
+"client_id": ("JSv6sk6FvtglbqmUHUBT"),
+"secret": ("cAjdyN7dnC"),
+"key": ""
+},
+# These are provider-specific settings that can only be
+# listed here:
+"SCOPE": [
+
+],
+
+"AUTH_PARAMS": {
+"access_type": "online",
+'prompt': 'select_account',
+}},
+######################################################
+"google": {
+"APP": {
+"client_id": ("765028604986-4bb5fu9s2147c3qsvqbq6g8af2jekc8j.apps.googleusercontent.com"),
+"secret": ("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"),
+"key": ""
+},
+"SCOPE": [
+ "profile",
+ "email",
+],
+"AUTH_PARAMS": {
+"access_type": "online",
+'prompt': 'select_account',
+}}}
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# SOCIALACCOUNT_PROVIDERS = {"naver": {
+# "APP": {
+# "client_id": os.getenv("JSv6sk6FvtglbqmUHUBT"),
+# "secret": os.getenv("cAjdyN7dnC"),
+# "key": ""
+# },
+# # These are provider-specific settings that can only be
+# # listed here:
+# "SCOPE": [
+# "profile",
+# "email",
+# ],
+
+# "AUTH_PARAMS": {
+# "access_type": "online",
+# }}}
+
+# SOCIALACCOUNT_PROVIDERS = {
+# "google": {
+# "APP": {
+# "client_id": os.getenv("765028604986-4bb5fu9s2147c3qsvqbq6g8af2jekc8j.apps.googleusercontent.com"),
+# "secret": os.getenv("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"),
+# "key": ""
+# },
+# # These are provider-specific settings that can only be
+# # listed here:
+# "SCOPE": [
+# "profile",
+# "email",
+# ],
+
+# "AUTH_PARAMS": {
+# "access_type": "online",
+# }}}
+'''
