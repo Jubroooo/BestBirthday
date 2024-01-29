@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{%block content%}
+<div class="content_head">환영화면</div>
+<div class="content-wrapper">
+    {%for funding in fundings%}
+    <img src="{{post.photo.url}}" alt="대체텍스트" />
+    {%endfor%}
+</div>
+{%endblock%}
