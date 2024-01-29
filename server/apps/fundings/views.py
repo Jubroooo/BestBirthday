@@ -5,7 +5,7 @@ from .models import Funding, Funding_Msg
 
 def main(request) :
     funding = Funding.objects.all()
-    ctx = {"fundings : funding"}
+    ctx = {"fundings" : funding}
     return render(request, 'fundings/main.html', ctx)
 
 def create(request) :
