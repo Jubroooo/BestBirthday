@@ -15,22 +15,25 @@
     --BB_color_green: #12F9D9;
     --BB_color_blue_sub: #0049C2;
 
+    /*font size*/
+    font-size: 62.5%;
+
      /* Unna font sizes */
-    --unnabold61: 3.8125rem; 
-    --unnabold40: 2.5rem;    
+    --unnabold61: 6.1rem; 
+    --unnabold40: 4rem;    
 
     /* Noto Sans font sizes */
-    --notosansbold20: 1.25rem;  
-    --notosansbold17: 1.0625rem; 
-    --notosansbold16: 1rem;    
-    --notosansregular14: 0.875rem; 
-    --notosansbold10: 0.625rem;  
-    --notosansbold24: 1.5rem; 
-    --notosansregular12: 0.75rem; 
+    --notosansbold20: 2rem;  
+    --notosansbold17: 1.7rem; 
+    --notosansbold16: 1.6rem;    
+    --notosansregular14: 1.4rem; 
+    --notosansbold10: 1rem;  
+    --notosansbold24: 2.4rem; 
+    --notosansregular12: 1.2rem; 
 
     /*margin*/
-    --margin8px:0.5rem;
-    --margin16px:1rem;
+    --margin8px:0.8rem;
+    --margin16px:1.6rem;
 
 
     --vh: 8.44px;
