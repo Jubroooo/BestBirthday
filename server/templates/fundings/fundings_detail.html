@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {%block content%}
-<div class="image">이미지칸</div>
+<div class="image">
+{% if funding.photo %}
+    <p>
+      <img src="{{ funding.photo.url }}"/>
+    </p>
+  {% endif %}</div>
 <div class="funding-title">{{funding.title}}</div>
 <div class="funding-info">{{funding.content}}</div>
 <div class="price-info">

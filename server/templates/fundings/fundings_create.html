@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {%block content%}
-    <form method = "POST" action="">
+    <form method = "POST" enctype="multipart/form-data" action="">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="작성완료">
