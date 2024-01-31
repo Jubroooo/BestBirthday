@@ -64,6 +64,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "BestBirthday.urls"
+'''로그인 관련
+AUTH_USER_MODEL = 'users.User'
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
+ACCOUNT_ADAPTER = 'apps.users.adapter.CustomAccountAdapter'
+'''
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
