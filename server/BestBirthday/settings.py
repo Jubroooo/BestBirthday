@@ -92,7 +92,8 @@ WSGI_APPLICATION = "BestBirthday.wsgi.application"
 
 #SITE_ID: django.contrib.sites 앱에서 관리되는 사이트 목록에서 사용하려는 특정 사이트의 ID 값
 #settings.py에서의 SITE_ID: 현재 Django 프로젝트에서 사용되는 기본 사이트의 식별자
-SITE_ID = 1
+SITE_ID = 2
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
