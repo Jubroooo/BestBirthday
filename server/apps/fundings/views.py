@@ -1,11 +1,36 @@
 from django.shortcuts import render, redirect
 from .forms import FundingForm, MessageForm
 from .models import Funding, Funding_Msg
+from ..users.models import User
+from datetime import datetime
+from django.template.defaulttags import register
 
+#딕셔너리 필터링 함수
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 def main(request) :
-    funding = Funding.objects.all()
-    ctx = {"fundings" : funding}
+    fundings = Funding.objects.all()
+    dday_dict = {} #생일 디데이 딕셔너리
+
+    for funding in fundings:
+        user = funding.user
+        current_date = datetime.today()
+        birthday = datetime(current_date.year, user.birthday.month, user.birthday.day)
+        birthday1 = datetime(current_date.year - 1, user.birthday.month, user.birthday.day)
+        dday = (birthday - current_date).days+1
+
+        #생일 지났을 경우
+        if dday > -((birthday1 - current_date).days+1): 
+            dday = -((birthday1 - current_date).days+1)
+        else:
+            dday = -dday
+
+        dday_dict[user.id] = dday
+        # 생일이 지난 경우 양수, 생일이 다가올때는 음수값을 전달한다
+
+    ctx = {"fundings": fundings, "dday_dict": dday_dict}
     return render(request, 'fundings/main.html', ctx)
 
 def create(request) :

@@ -22,6 +22,9 @@
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
         <progress id="file" max="100" value="70">70%</progress>
+        <h2>디데이 : 
+            {{ dday_dict|get_item:funding.user.id }}
+        </h2>        
     </div>
     {%endfor%}
     <!-- 카테고리별로 필터링 해서 전송 -->
