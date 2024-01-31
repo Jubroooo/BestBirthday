@@ -6,7 +6,8 @@ app_name = 'fundings'
 urlpatterns = [
     path('', main, name="main"),
     path('create/', create, name="create"),
-    path('detail/<int:pk>/', detail, name="detail"),
-    path('delete/<int:pk>/', delete, name="delete"),
+    path('detail/<int:pk>/', detail, name="detail"), 
+    path('delete/<int:pk>/', delete, name="delete"), 
     path('update/<int:pk>/', update, name="update"),
+    path('message/create', message, name="message"),
 ]
