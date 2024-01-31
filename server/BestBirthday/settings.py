@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.kakao"
+    "allauth.socialaccount.providers.kakao",
+    "allauth.socialaccount.providers.naver",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -98,7 +99,7 @@ WSGI_APPLICATION = "BestBirthday.wsgi.application"
 
 #SITE_ID: django.contrib.sites 앱에서 관리되는 사이트 목록에서 사용하려는 특정 사이트의 ID 값
 #settings.py에서의 SITE_ID: 현재 Django 프로젝트에서 사용되는 기본 사이트의 식별자
-SITE_ID = 3
+SITE_ID = 4
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -154,7 +155,7 @@ STATICFILES_DIRS=[
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/' #웹서버가 미디어 파일 접근 시작 url
+MEDIA_URL = '/media/' #웹서버가 미디어 파일 접근 시작 url
 
 MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 
