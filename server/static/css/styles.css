@@ -1,0 +1,23 @@
+
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0; 
+    background-color: blueviolet;
+  }
+  .container {
+    width: 390px;
+    height: 844px;
+    background-color: black;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  .inner-container {
+    width: calc(100% - 48px); 
+    height: 100%;
+    background-color: brown;
+    margin: 0 24px; 
+  }
