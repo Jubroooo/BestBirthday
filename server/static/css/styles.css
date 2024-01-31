@@ -1,5 +1,62 @@
-
-body {
+ /*fonts*/
+ /* Unna font styles */
+   .unna-bold-61 {
+    font-family: var(--font-family-unna);
+    font-weight: bold;
+    font-size: var(--unnabold61);
+  }
+  
+  .unna-bold-40 {
+    font-family: var(--font-family-unna);
+    font-weight: bold;
+    font-size: var(--unnabold40);
+  }
+  
+  /* Noto Sans KR font styles */
+  .notosans-bold-20 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: bold;
+    font-size: var(--notosansbold20);
+  }
+  
+  .notosans-bold-17 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: bold;
+    font-size: var(--notosansbold17);
+  }
+  
+  .notosans-bold-16 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: bold;
+    font-size: var(--notosansbold16);
+  }
+  
+  .notosans-regular-14 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: normal;
+    font-size: var(--notosansregular14);
+  }
+  
+  .notosans-bold-10 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: bold;
+    font-size: var(--notosansbold10);
+  }
+  
+  .notosans-bold-24 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: bold;
+    font-size: var(--notosansbold24);
+  }
+  
+  .notosans-regular-12 {
+    font-family: var(--font-family-noto-sansKR);
+    font-weight: normal;
+    font-size: var(--notosansregular12);
+  }
+  
+  
+  /* body {
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -10,6 +67,8 @@ body {
   .container {
     width: 390px;
     height: 844px;
+    max-width: var(--app-max-width, 37.5rem);
+    min-height: calc(var(--vh, 1vh) * 100);
     background-color: black;
     display: flex; 
     justify-content: center; 
@@ -21,3 +80,4 @@ body {
     background-color: brown;
     margin: 0 24px; 
   }
+   */

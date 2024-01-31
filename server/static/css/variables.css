@@ -1,0 +1,38 @@
+:root {
+    /* Font families */
+    --font-family-unna: "Unna", serif;
+    --font-family-noto-sansKR: "Noto Sans KR", sans-serif;
+
+      /* Main Colors */
+    --BB_color_blue: #4114FF;
+    --BB_color_orange: #FF6245;
+    --BB_color_black: #141414;
+    --BB_color_white: #FFFFFF;
+
+    /* Sub Colors */
+    --BB_color_skyblue: #2BAAFF;
+    --BB_color_yellow: #FFB512;
+    --BB_color_green: #12F9D9;
+    --BB_color_blue_sub: #0049C2;
+
+     /* Unna font sizes */
+    --unnabold61: 3.8125rem; 
+    --unnabold40: 2.5rem;    
+
+    /* Noto Sans font sizes */
+    --notosansbold20: 1.25rem;  
+    --notosansbold17: 1.0625rem; 
+    --notosansbold16: 1rem;    
+    --notosansregular14: 0.875rem; 
+    --notosansbold10: 0.625rem;  
+    --notosansbold24: 1.5rem; 
+    --notosansregular12: 0.75rem; 
+
+    /*margin*/
+    --margin8px:0.5rem;
+    --margin16px:1rem;
+
+
+    --vh: 8.44px;
+    --app-max-width: 39.0rem;
+  }
