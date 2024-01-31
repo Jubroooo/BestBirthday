@@ -1,25 +1,44 @@
 from django.shortcuts import render, redirect
 from .forms import FundingForm, MessageForm
 from .models import Funding, Funding_Msg
-
+from django.db.models import F
+from datetime import date
 
 def main(request) :
-    funding = Funding.objects.all()
-    ctx = {"fundings" : funding}
+    today = date.today()
+    fundings = Funding.objects.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
+    fundings = fundings[:3]
+    ctx = {
+        "fundings": fundings,
+           }
     return render(request, 'fundings/main.html', ctx)
 
 def create(request) :
-    if request.method == 'GET':
-        form = FundingForm()
-        ctx = {'form':form}
-        return render(request, 'fundings/fundings_create.html', ctx)
-    #post일때
-    form = FundingForm(request.POST, request.FILES)
-    if form.is_valid():
-        new_funding = form.save(user=request.user)
-        pk_of_new_funding = new_funding.pk
-        return redirect('fundings:detail', pk=pk_of_new_funding)
-
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(instance=funding)
+            ctx = {
+                'form':form
+            }
+            return render(request, 'fundings/fundings_create.html', ctx)
+        #post일때
+        elif request.method == "POST":
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(request.POST, request.FILES, instance=funding)
+            if form.is_valid():
+                form.save()
+                funding_id = funding.id
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/fundings_create.html', ctx)
+    else:
+        return redirect('users:login')
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
     progress = int(funding.total_price / funding.goal_price * 100)
@@ -46,12 +65,62 @@ def update(request, pk) :
         form.save()
     return redirect('fundings:detail', pk)
 
-def message(request) :
-    if request.method == 'POST':
-        form = MessageForm(request.POST, request.FILES, request=request, current_post=current_post)
-        if form.is_valid():
-            # Save the form
-            form.save()
-            # Your additional logic here
+def create_message(request, pk) :
+    funding = Funding.objects.get (id = pk)
+    if request.user.is_authenticated:
+        if request.method == "GET":
+            funding_msg = Funding_Msg()
+            funding_msg.user = request.user
+            funding_msg.post = funding
+            form = MessageForm(instance=funding_msg)
+            ctx = {
+                'form':form
+            }
+            return render(request, 'fundings/fundings_message_create.html', ctx)
+        
+        elif request.method == "POST":
+            funding_msg = Funding_Msg()
+            funding_msg.user = request.user
+            funding_msg.post = funding
+            form = MessageForm(request.POST, instance=funding_msg)
+            if form.is_valid():
+                form.save()
+                funding.total_price = funding.total_price + funding_msg.funding_price 
+                funding.msg_count += 1
+                if funding.total_price >= funding.goal_price:
+                    funding.is_achieved = True
+                funding.save()
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/fundings_message_create.html', ctx)
+    
     else:
-        form = MessageForm(request=request, current_post=current_post)
+        if request.method == "GET":
+            funding_msg = Funding_Msg()
+            funding_msg.post = funding
+            form = MessageForm(instance=funding_msg)
+            ctx = {
+                'form':form
+            }
+            return render(request, 'fundings/fundings_message_create.html', ctx)
+        
+        elif request.method == "POST":
+            funding_msg = Funding_Msg()
+            funding_msg.post = funding
+            form = MessageForm(request.POST, instance=funding_msg)
+            if form.is_valid():
+                form.save()
+                funding.total_price = funding.total_price + funding_msg.funding_price 
+                funding.msg_count += 1
+                if funding.total_price >= funding.goal_price:
+                    funding.is_achieved = True
+                funding.save()
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/fundings_message_create.html', ctx)
