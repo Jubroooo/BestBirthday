@@ -10,13 +10,13 @@
 </head>
 <body>
     <header>
+        <a href="{% url 'fundings:main' %}">Best Birthday</a>
         {% if user.is_authenticated %}
         <li><a href="{% url 'users:logout' %}">Logout</a></li>
         {% else %}
         <li><a href="{% url 'users:login' %}">Login</a></li>
         <li><a href="{% url 'users:signup' %}">Signup</a></li>
         {% endif %}
-        헤더입니다
     </header>
     {%block content%} {%endblock%}
 </body>

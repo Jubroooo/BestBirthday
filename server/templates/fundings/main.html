@@ -1,14 +1,27 @@
 {% extends "base.html" %}
+{%load static%}
+
 {%block content%}
-<div class="content_welcome">환영화면</div>
+<div class="content-welcome">
+    환영화면
+    <a href="{%url 'fundings:create'%}">내 생일 축하받기</a>
+</div>
+
 <div class="content-wrapper">
     <div class="content-header">
-        <h2 class="total_funding">전체 생일축하</h2>
+        <h2 class="total-funding">전체 생일축하</h2>
     </div>
     {%for funding in fundings%}
     <div class="content-box">
-        <img src="{{funding.photo.url}}" alt="대체텍스트" />
-        
+        {%if post.photo.url != null and post.photo.url != ''%}
+        <img src="{{post.photo.url}}" alt="대체텍스트" />
+        {%else%}
+        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
+        {%endif%}
+        <h3>
+            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
+        </h3>
+        <progress id="file" max="100" value="70">70%</progress>
     </div>
     {%endfor%}
     <!-- 카테고리별로 필터링 해서 전송 -->
