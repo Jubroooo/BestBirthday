@@ -12,9 +12,10 @@
     <header>
         <a href="{% url 'fundings:main' %}">Best Birthday</a>
         {% if user.is_authenticated %}
+        <p>{{user}}</p>
         <li><a href="{% url 'users:logout' %}">Logout</a></li>
         {% else %}
-        <li><a href="{% provider_login_url 'kakao' %}"> 카카오 로그인 </a></li> 
+        <li><a href="{% provider_login_url 'kakao'%}"> 카카오 로그인 </a></li> 
         <li><a href="{% provider_login_url 'naver' %}"> 네이버 로그인 </a></li> 
         <li><a href="{% url 'users:login' %}">Login</a></li>
         <li><a href="{% url 'users:signup' %}">Signup</a></li>

@@ -10,3 +10,6 @@ class User(AbstractUser) :
     birthday = models.DateField('생일', null = True)
     toss_account = models.CharField('토스 송금링크', max_length=100, blank=True, null=True)
     kakao_account = models.CharField('카카오 송금링크', max_length=100, blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.name}({self.nickname})'
