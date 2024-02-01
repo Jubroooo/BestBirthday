@@ -11,7 +11,9 @@
     <div class="content-header">
         <h2 class="total-funding">전체 생일축하</h2>
     </div>
-    <h1> 오늘 생일자 </h1>
+    <h1 style = "color:green"> 오늘 생일자 </h1>
+    {%if today_fundings%}
+    <a href="{%url 'fundings:today_funding' %}">오늘 생일자 더 보기</a>
     {%for funding in today_fundings%}
     <div class="content-box">
         {%if funding.photo.url != null and funding.photo.url != ''%}
@@ -22,12 +24,17 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">70%</progress>
-        <h2>생일 디데이 :  {{ today_dday_dict|get_item:funding.user.id }} </h2>        
+        <progress id="file" max="100" value="70">70%</progress>     
         <h2>펀딩 디데이 :  {{ today_funding_dday_dict|get_item:funding.user.id }} </h2>        
     </div>
     {%endfor%}
-    <h1>내가 인싸</h1>
+    {%else%}
+    <div>오늘 생일자가 없습니다.</div>
+    {%endif%}
+
+    <h1 style = "color:green">내가 인싸</h1>
+    {%if fundings_in_msg_order%}
+    <a href="{%url 'fundings:msg_funding' %}">내가 인싸 더 보기</a>
     {%for funding in fundings_in_msg_order%}
     <div class="content-box">
         {%if funding.photo.url != null and funding.photo.url != ''%}
@@ -38,12 +45,17 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">70%</progress>
-        <h2>생일 디데이 :  {{ msg_dday_dict|get_item:funding.user.id }} </h2>        
+        <progress id="file" max="100" value="70">70%</progress>     
         <h2>펀딩 디데이 :  {{ msg_funding_dday_dict|get_item:funding.user.id }} </h2>        
     </div>
     {%endfor%}
-    <h1>진행 중인 펀딩</h1>
+    {%else%}
+    <div>진행 중인 펀딩이 없습니다.</div>
+    {%endif%}
+
+    <h1 style = "color:green">진행 중인 펀딩</h1>
+    {%if open_fundings %}
+    <a href="{%url 'fundings:open_funding' %}">진행 중인 펀딩 더 보기</a>
     {%for funding in open_fundings%}
     <div class="content-box">
         {%if funding.photo.url != null and funding.photo.url != ''%}
@@ -55,10 +67,12 @@
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
         <progress id="file" max="100" value="70">70%</progress>
-        <h2>생일 디데이 :  {{ open_dday_dict|get_item:funding.user.id }} </h2>        
         <h2>펀딩 디데이 :  {{ open_funding_dday_dict|get_item:funding.user.id }} </h2>        
     </div>
     {%endfor%}
+    {%else%}
+    <div>진행 중인 펀딩이 없습니다.</div>
+    {%endif%}
     <!-- 카테고리별로 필터링 해서 전송 -->
 </div>
 {%endblock%}
