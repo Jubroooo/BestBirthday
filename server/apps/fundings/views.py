@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import FundingForm, MessageForm
 from .models import Funding, Funding_Msg
 from ..users.models import User
-from datetime import datetime
+from datetime import datetime, date, timedelta
+from django.utils import timezone
 from django.template.defaulttags import register
 
 #딕셔너리 필터링 함수
@@ -13,12 +14,14 @@ def get_item(dictionary, key):
 def main(request) :
     fundings = Funding.objects.all()
     dday_dict = {} #생일 디데이 딕셔너리
+    funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
+    #생일 디데이 계산, 펀딩 디데이 계산 // 함수화 필요할듯!
     for funding in fundings:
         user = funding.user
-        current_date = datetime.today()
-        birthday = datetime(current_date.year, user.birthday.month, user.birthday.day)
-        birthday1 = datetime(current_date.year - 1, user.birthday.month, user.birthday.day)
+        current_date = timezone.now()
+        birthday = timezone.make_aware(datetime(current_date.year, user.birthday.month, user.birthday.day), timezone.get_current_timezone()) #time zone으로 설정해야 나중에 배포 시 서버 시간 vs db시간 계산을 할 수 있음
+        birthday1 = timezone.make_aware(datetime(current_date.year - 1, user.birthday.month, user.birthday.day), timezone.get_current_timezone())
         dday = (birthday - current_date).days+1
 
         #생일 지났을 경우
@@ -28,9 +31,17 @@ def main(request) :
             dday = -dday
 
         dday_dict[user.id] = dday
-        # 생일이 지난 경우 양수, 생일이 다가올때는 음수값을 전달한다
+        # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
+        
+        #펀딩 디데이 계산
+        funding_dday = (funding.created_date + timedelta(days=7)) - current_date
+        if funding_dday < timedelta(0):
+            funding.is_closed = True
+        
+        funding_dday_dict[user.id] = funding_dday.days
+        
 
-    ctx = {"fundings": fundings, "dday_dict": dday_dict}
+    ctx = {"fundings": fundings, "dday_dict": dday_dict, "funding_dday_dict": funding_dday_dict,}
     return render(request, 'fundings/main.html', ctx)
 
 def create(request) :
