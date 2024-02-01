@@ -161,7 +161,6 @@ def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
-    #생일 디데이 계산, 펀딩 디데이 계산 // 함수화 필요할듯!
     for funding in fundings:
         user = funding.user
         current_date = timezone.now()
