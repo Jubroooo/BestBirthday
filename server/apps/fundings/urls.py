@@ -9,5 +9,5 @@ urlpatterns = [
     path('detail/<int:pk>/', detail, name="detail"), 
     path('delete/<int:pk>/', delete, name="delete"), 
     path('update/<int:pk>/', update, name="update"),
-    path('message/create', message, name="message"),
+    path('detail/<int:pk>/message_create/', create_message, name="create_message"),
 ]
