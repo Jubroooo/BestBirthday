@@ -16,7 +16,7 @@ class Funding(models.Model) :
     user=models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = '작성자', related_name='funding_user')
     #펀딩 개설일
     created_date = models.DateTimeField('작성일', auto_created=True, auto_now_add=True) #auto_now_add > 데이터베이스에 추가될때 // auto_create 생성해라
-    
+    # is_closed = models.BooleanField('완료 여부', default = False)
     def __str__(self):
         return f'{self.title}'
     
