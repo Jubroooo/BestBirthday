@@ -14,6 +14,7 @@
     --BB_color_yellow: #FFB512;
     --BB_color_green: #12F9D9;
     --BB_color_blue_sub: #0049C2;
+    --BB_color_background_gray:#252525;
 
 
     --notosansregular14: 1.4rem; 
@@ -24,6 +25,7 @@
     /*margin*/
     --gutter8:0.8rem;
     --gutter16:1.6rem;
+    --gutter24:2.4rem;
 
   }
 /*fonts*/
@@ -53,10 +55,10 @@
   font-size: 2rem
 }
 
-.notosans-bold-17 {
+.notosans-bold-18 {
   font-family: var(--font-family-noto-sansKR);
   font-weight: bold;
-  font-size: 1.7rem
+  font-size: 1.8rem
 }
 
 .notosans-bold-16 {

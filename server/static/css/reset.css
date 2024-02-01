@@ -23,6 +23,9 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	font-size: 62.5%;
+	color: white;
+	font-family: "Noto Sans KR", sans-serif;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
