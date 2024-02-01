@@ -132,3 +132,16 @@ main {
   top: 0.8rem;
   font-weight: bold;
 }
+.header-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-title-container i {
+  font-size: 3.6rem;
+}
+.header-title-container div:nth-child(3) {
+  width: 3.6rem;
+  height: 3.6rem;
+}

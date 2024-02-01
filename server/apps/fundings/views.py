@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import FundingForm, MessageForm
 from .models import Funding, Funding_Msg
 
-
+# 예진:html보려고 추가한 것
+def all_list(request):
+    return render(request,'fundings/all_birthday_list.html')
 def main(request) :
     funding = Funding.objects.all()
     ctx = {"fundings" : funding}

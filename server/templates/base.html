@@ -17,6 +17,10 @@
       href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Noto+Sans+KR:wght@100..900&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/variables.css' %}" />
@@ -25,8 +29,16 @@
 
   <body>
     <div class="container">
-      <header><div id=header-container>{% block header %} {% endblock header %}</div></header>
-      <main><div id="main-container">{% block content %} {% endblock content %}</div></main>
+      <header>
+        <div id="header-container">
+          {% block header %} {% endblock header %}
+        </div>
+      </header>
+      <main>
+        <div id="main-container">
+          {% block content %} {% endblock content %}
+        </div>
+      </main>
     </div>
   </body>
 </html>

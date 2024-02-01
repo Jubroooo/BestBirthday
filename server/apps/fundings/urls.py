@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete/<int:pk>/', delete, name="delete"), 
     path('update/<int:pk>/', update, name="update"),
     path('message/create', message, name="message"),
+    # 예진 추가뷰
+    path('all_birthday_list/',all_list),
 ]
