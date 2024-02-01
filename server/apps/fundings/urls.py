@@ -10,4 +10,7 @@ urlpatterns = [
     path('delete/<int:pk>/', delete, name="delete"), 
     path('update/<int:pk>/', update, name="update"),
     path('detail/<int:pk>/message_create/', create_message, name="create_message"),
+    path('list/today_funding/', today_funding, name="today_funding"),
+    path('list/msg_funding/', msg_funding, name="msg_funding"),
+    path('list/open_funding/', open_funding, name="open_funding"),
 ]

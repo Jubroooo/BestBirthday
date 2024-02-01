@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block content%}
+<div class="content-welcome">
+    환영화면
+    <a href="{%url 'fundings:create'%}">내 생일 축하받기</a>
+</div>
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <h2 class="total-funding">전체 생일축하</h2>
+    </div>
+    <h1 style = "color:green"> 오늘 생일자 </h1>
+    {%if fundings%}
+    {%for funding in fundings%}
+    <div class="content-box">
+        {%if funding.photo.url != null and funding.photo.url != ''%}
+        <img src="{{funding.photo.url}}" alt="대체텍스트" />
+        {%else%}
+        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
+        {%endif%}
+        <h3>
+            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
+        </h3>
+        <progress id="file" max="100" value="70">70%</progress>   
+        <h2>펀딩 디데이 :  {{ funding_dday_dict|get_item:funding.user.id }} </h2>        
+    </div>
+    {%endfor%}
+    {%else%}
+    <div>오늘 생일자가 없습니다.</div>
+    {%endif%}
+{%endblock%}
