@@ -15,13 +15,13 @@ def get_item(dictionary, key):
 
 def main(request) :
     #오늘 생일자 필터링
-    today = date.today()
-    fundings = Funding.objects.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
-    fundings = fundings[:3]
-    ctx = {
-        "fundings": fundings,
-            }
-    #fundings = Funding.objects.all()
+    # today = date.today()
+    # fundings = Funding.objects.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
+    # fundings = fundings[:3]
+    # ctx = {
+    #     "fundings": fundings,
+    # }
+    fundings = Funding.objects.all()
     
     dday_dict = {} #생일 디데이 딕셔너리
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
@@ -83,7 +83,8 @@ def create(request) :
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
     progress = int(funding.total_price / funding.goal_price * 100)
-    ctx = {'funding':funding, 'progress':progress}    
+    dday = birthday_dday_cal(funding)
+    ctx = {'funding':funding, 'progress':progress, "dday":dday}    
     return render(request, 'fundings/fundings_detail.html', ctx)
 
 def delete(request, pk) :
@@ -165,3 +166,38 @@ def create_message(request, pk) :
                     "form": form
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
+            
+            
+def funding_dday_cal(fundings):
+     
+    funding_dday_dict = {} #펀딩 디데이 딕셔너리
+
+    #생일 디데이 계산, 펀딩 디데이 계산 // 함수화 필요할듯!
+    for funding in fundings:
+        user = funding.user
+        current_date = timezone.now()
+ 
+        #펀딩 디데이 계산
+        funding_dday = (funding.created_date + timedelta(days=7)) - current_date
+        if funding_dday < timedelta(0):
+            funding.is_closed = True
+        
+        funding_dday_dict[user.id] = funding_dday.days
+
+    return funding_dday_dict
+
+def birthday_dday_cal(funding):
+    user = funding.user
+    current_date = timezone.now()
+    birthday = timezone.make_aware(datetime(current_date.year, user.birthday.month, user.birthday.day), timezone.get_current_timezone()) #time zone으로 설정해야 나중에 배포 시 서버 시간 vs db시간 계산을 할 수 있음
+    birthday1 = timezone.make_aware(datetime(current_date.year - 1, user.birthday.month, user.birthday.day), timezone.get_current_timezone())
+    dday = (birthday - current_date).days+1
+
+    #생일 지났을 경우
+    if dday > -((birthday1 - current_date).days+1): 
+        dday = -((birthday1 - current_date).days+1)
+    else:
+        dday = -dday
+
+    return dday
+    # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
