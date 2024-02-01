@@ -1,0 +1,23 @@
+.input_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input_birthday{
+    align-self: flex-start; 
+    margin-top: 40%;
+    text-align: left;
+}
+.check_bday{
+    align-self: flex-start; 
+}
+
+.birthday_input {
+    width: 34rem;
+    height: 4.7rem;
+    border-radius: 1.1rem;
+    border: none;
+    margin: 2rem 0 2rem 0;
+}

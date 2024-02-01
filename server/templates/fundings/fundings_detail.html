@@ -1,11 +1,39 @@
-{% extends "base.html" %}
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/funding_details.css' %}">
+{% endblock head %}
 {%block content%}
-<div class="image">이미지칸</div>
-<div class="funding-title">{{funding.title}}</div>
-<div class="funding-info">{{funding.content}}</div>
+<div class="funding-title notosans-bold-24" style="color: var(--BB_color_white);">funding.title</div>
+<div class="image">
+    <p>
+        <img src="../../static/fundings/image/no_img.png"/>
+    </p>
+{% if funding.photo %}
+    <p>
+      <img src="{{ funding.photo.url }}"/>
+    </p>
+  {% endif %}</div>
+<div class="funding-title notosans-bold-20" style="color: var(--BB_color_white);">funding.title</div>
+<div class="funding-info notosans-regular-14" style="color: var(--BB_color_white);">funding.content</div>
+<div class="user-birthday notosans-bold-17" style="color: var(--BB_color_white);">내 생일 : funding.user.birthday
+      {% if dday < 0 %}
+          <span class="dday"> Ddday </span>
+      {% elif dday == 0 %}
+          <span class="dday"> D-Day </span>
+      {% else %}
+          <span class="dday"> D+dday </span>
+      {% endif %}
+</div> 
+
+
 <div class="price-info">
-    <div class="current-price">모인금액 : {{funding.total_price}}</div>
-    <div class="current-progress">{{progress}} %</div>
+    <div class="current-price notosans-bold-17" style="color: var(--BB_color_white);">모인금액 : funding.total_price</div>
+    <div class="current-progress notosans-bold-17" style="color: var(--BB_color_white);">progress : %</div>
 </div>
-<a href="{% url 'fundings:message'%}" class="funding-msg">축하 메세지 쓰기</a>
+
+<button class="give_present btn" type="button" onclick="location.href=' '">
+    <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
+</button>
+
 {%endblock%}

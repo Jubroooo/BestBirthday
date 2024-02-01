@@ -1,0 +1,35 @@
+.funding-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.funding-info {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.user-birthday {  
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.user-birthday .dday {
+    padding: 0.2rem 0.6rem;
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.price-info {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.give_present{
+    background-color: var(--BB_color_blue);
+    color: var(--BB_color_white);
+}

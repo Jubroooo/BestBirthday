@@ -1,83 +1,56 @@
- /*fonts*/
- /* Unna font styles */
-   .unna-bold-61 {
-    font-family: var(--font-family-unna);
-    font-weight: bold;
-    font-size: var(--unnabold61);
-  }
-  
-  .unna-bold-40 {
-    font-family: var(--font-family-unna);
-    font-weight: bold;
-    font-size: var(--unnabold40);
-  }
-  
-  /* Noto Sans KR font styles */
-  .notosans-bold-20 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: bold;
-    font-size: var(--notosansbold20);
-  }
-  
-  .notosans-bold-17 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: bold;
-    font-size: var(--notosansbold17);
-  }
-  
-  .notosans-bold-16 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: bold;
-    font-size: var(--notosansbold16);
-  }
-  
-  .notosans-regular-14 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: normal;
-    font-size: var(--notosansregular14);
-  }
-  
-  .notosans-bold-10 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: bold;
-    font-size: var(--notosansbold10);
-  }
-  
-  .notosans-bold-24 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: bold;
-    font-size: var(--notosansbold24);
-  }
-  
-  .notosans-regular-12 {
-    font-family: var(--font-family-noto-sansKR);
-    font-weight: normal;
-    font-size: var(--notosansregular12);
-  }
-  
-
 body {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh;
-    margin: 0; 
-    background-color: blueviolet;
-  }
-  .container {
-    width: 39rem;
-    height: 100vh;
-    max-width: var(--app-max-width, 37.5rem);
-    min-height: calc(var(--vh, 1vh) * 100);
-    background-color: black;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-  }
-  .inner-container {
-    width: calc(100% - 4.8rem); 
-    height: 100%;
-    background-color: brown;
-    margin: 0 2.4rem; 
-  }
-   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: white;
+}
+.container {
+  max-width: 39rem;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  width: 39rem;
+  height: 11rem;
+}
+#header-container{
+  display: flex;
+  justify-content:space-between;
+  flex-direction: row;
+  padding: 0 2.4rem;
+  padding-top: 6rem;
+  margin-bottom: var(--margin8px);
+}
+main{
+  padding: 0 2.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.logo{
+  color: white;
+}
+.profile{
+  background-image: url(../img/profile.svg);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--BB_color_blue);
+}
+
+.btn{
+  width: 34rem;
+  height: 4.7rem;
+  border: none;
+  border-radius: 1.1rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
