@@ -70,8 +70,10 @@ def create(request) :
         return redirect('users:login')
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
-    progress = int((funding.total_price / funding.goal_price) * 100)
-    ctx = {'funding':funding, 'progress':progress}   
+    progress = int(funding.total_price / funding.goal_price * 100)
+    dday = birthday_dday_cal(funding)
+    ctx = {'funding':funding, 'progress':progress, "dday":dday}    
+
     return render(request, 'fundings/fundings_detail.html', ctx)
 
 def delete(request, pk) :
@@ -153,6 +155,8 @@ def create_message(request, pk) :
                     "form": form
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
+
+
 def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
@@ -170,6 +174,7 @@ def funding_dday_cal(fundings):
         funding_dday_dict[user.id] = funding_dday.days
 
     return copy.deepcopy(funding_dday_dict)
+
 
 def birthday_dday_cal(funding):
     user = funding.user

@@ -10,7 +10,7 @@ class Funding(models.Model) :
     present_link = models.CharField('상품 링크', max_length=100)
     
     is_closed = models.BooleanField('펀딩 종료', default=False, blank=True)
-    is_achieved = models.BooleanField('펀딩 달성 여부', default = False)
+    is_achieved = models.BooleanField('펀딩 달성 여부', default = False, blank=True)
     msg_count = models.IntegerField('메시지 개수', default = 0)
     #작성자
     user=models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = '작성자', related_name='funding_user')
