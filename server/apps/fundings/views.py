@@ -135,7 +135,7 @@ def create_message(request, pk) :
             funding_msg.post = funding
             form = MessageForm(instance=funding_msg)
             ctx = {
-                'form':form
+                'form':form, 'funding' : funding
             }
             return render(request, 'fundings/fundings_message_create.html', ctx)
         
@@ -153,7 +153,7 @@ def create_message(request, pk) :
                 return redirect('fundings:main')
             else:
                 ctx = {
-                    "form": form
+                    "form": form, 'funding' : funding
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
 
