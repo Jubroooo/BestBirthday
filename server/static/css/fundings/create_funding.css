@@ -1,0 +1,11 @@
+
+#header-container{
+    align-items: center;
+}
+#header-container i {
+    font-size: 3.6rem;
+  }
+#header-container>div:nth-child(3) {
+    width: 3.6rem;
+    height: 3.6rem;
+}

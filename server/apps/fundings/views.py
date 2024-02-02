@@ -8,6 +8,10 @@ def all_birthday_list(request):
 
 def all_funding_list(request):
     return render(request,'fundings/all_funding_list.html')
+def create_payment(request):
+    return render(request,'fundings/create_payment.html')
+def create_funding(request):
+    return render(request,'fundings/create_funding.html')
 
 
 
