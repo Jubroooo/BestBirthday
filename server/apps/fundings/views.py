@@ -46,9 +46,9 @@ def main(request) :
             "open_fundings": open_fundings,
             "open_funding_dday_dict": open_funding_dday_dict
             }
-        return render(request, 'fundings/main.html', ctx)
+        return render(request, 'fundings/main2.html', ctx)
     else:
-        return render(request, 'fundings/main.html')
+        return render(request, 'fundings/main2.html')
 
 def create(request) :
     if request.user.is_authenticated:

@@ -40,6 +40,9 @@ main {
   display: flex;
   flex-direction: column;
 }
+a{
+  text-decoration: none;
+}
 .logo {
   color: white;
 }
