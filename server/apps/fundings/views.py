@@ -43,7 +43,7 @@ def main(request) :
     else:
         return render(request, 'fundings/main2.html')
 
-def create(request) :
+def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
             funding = Funding()
@@ -76,31 +76,8 @@ def detail(request, pk) :
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
 
     return render(request, 'fundings/fundings_detail.html', ctx)
-# 예진:html보려고 추가한 것
-def all_list(request):
-    return render(request,'fundings/all_birthday_list.html')
 
-def delete(request, pk) :
-    if request.method == "POST":
-        posts = Funding.objects.get(id=pk)
-        posts.delete()
-        # = Post.objects.get(id=pk).delete()
-    return redirect('fundings:main')
-
-def update(request, pk) :
-    post=Funding.objects.get(id=pk)
-    
-    if request.method=='GET':
-        form = FundingForm(instance=post)
-        ctx = {'form':form, 'pk':pk}
-        return render(request, 'fundings/fundings_update.html', ctx)
-    
-    form=FundingForm(request.POST, request.FILES, instance=post)
-    if form.is_valid():
-        form.save()
-    return redirect('fundings:detail', pk)
-
-def create_message(request, pk) :
+def create_gift(request, pk) :
     funding = Funding.objects.get (id = pk)
     if request.user.is_authenticated:
         if request.method == "GET":
@@ -160,7 +137,10 @@ def create_message(request, pk) :
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
 
-
+def create_gift_complete(request):
+    pass
+def create_gift_modal(request):
+    pass
 def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
@@ -196,7 +176,7 @@ def birthday_dday_cal(funding):
     return dday
     # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
 
-def today_funding(request):
+def main_all_birthday_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         today = date.today()
@@ -210,7 +190,7 @@ def today_funding(request):
         return render (request, 'fundings/fundings_today_funding.html', ctx)
     return render (request, 'fundings/fundings_today_funding.html')
 
-def msg_funding(request):
+def main_ranking_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         fundings = fundings.order_by('-msg_count')
@@ -223,7 +203,7 @@ def msg_funding(request):
         return render (request, 'fundings/fundings_msg_funding.html', ctx)
     return render (request, 'fundings/fundings_msg_funding.html')
 
-def open_funding(request):
+def main_all_funding_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         fundings = fundings.order_by(Random())
@@ -237,7 +217,7 @@ def open_funding(request):
     return render (request, 'fundings/fundings_open_funding.html')
 
 
-def view_messages(request, pk):
+def result_start(request, pk):
     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
     print (funding_msgs)
     if funding_msgs.exists():
@@ -253,7 +233,7 @@ def view_messages(request, pk):
         return render (request, 'fundings/fundings_view_messages.html')
 
 
-def view_all_messages(request, pk):
+def result_list(request, pk):
     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
     funding_msg_count = funding_msgs.count()
     ctx = {
@@ -263,7 +243,7 @@ def view_all_messages(request, pk):
     
     return render (request, 'fundings/fundings_view_all_messages.html', ctx)
 
-def funding_msg_detail (request, pk):
+def result_detail (request, pk):
     funding_msg = Funding_Msg.objects.get(id=pk)
     ctx = {
         "funding_msg": funding_msg,
