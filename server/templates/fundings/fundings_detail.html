@@ -19,6 +19,27 @@
     <p>
       <img src="{{ funding.photo.url }}"/>
     </p>
+  {% endif %}</div>
+<div class="funding-title">{{funding.title}}</div>
+<div class="funding-info">{{funding.content}}</div>
+<div class="user-birthday">내 생일 : {{funding.user.birthday}}
+      {% if dday < 0 %}
+          <span class="dday"> D{{dday}} </span>
+      {% elif dday == 0 %}
+          <span class="dday"> D-Day </span>
+      {% else %}
+          <span class="dday"> D+{{dday}} </span>
+      {% endif %}
+</div> 
+
+
+<div class="price-info">
+    <div class="current-price">모인금액 : {{funding.total_price}}</div>
+    <div class="current-progress">{{progress}} %</div>
+</div>
+<a href="{% url 'fundings:create_message' pk=funding.id%}" class="funding-msg">축하 메세지 쓰기</a>
+<a href="{% url 'fundings:view_messages' pk=funding.id%}"> 축하 메시지 보기 </a> 
+{%endblock%}
 {% endif %}</div>
 
 <div class="detail-wrapper">
