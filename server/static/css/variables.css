@@ -1,13 +1,13 @@
 :root {
-    /* Font families */
-    --font-family-unna: "Unna", serif;
-    --font-family-noto-sansKR: "Noto Sans KR", sans-serif;
+  /* Font families */
+  --font-family-unna: "Unna", serif;
+  --font-family-noto-sansKR: "Noto Sans KR", sans-serif;
 
-      /* Main Colors */
-    --BB_color_blue: #4114FF;
-    --BB_color_orange: #FF6245;
-    --BB_color_black: #141414;
-    --BB_color_white: #FFFFFF;
+    /* Main Colors */
+  --BB_color_blue: #4114FF;
+  --BB_color_orange: #FF6245;
+  --BB_color_black: #141414;
+  --BB_color_white: #FFFFFF;
 
     /* Sub Colors */
     --BB_color_skyblue: #2BAAFF;
