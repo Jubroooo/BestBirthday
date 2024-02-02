@@ -1,12 +1,18 @@
+.xmark-icon  {
+    text-align: right; 
+}
+
+.xmark-icon .fa-xmark {
+    font-size: 2rem;
+}
+
 .login-container {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .login-buttons {
-    width: auto;
     margin-top: 40%;
     display: flex;
     flex-direction: column;
@@ -14,7 +20,6 @@
 }
 
 .social-login {
-    width: 34rem;
     height: 4.7rem;
     padding: 1rem 2rem;
     border: none;

@@ -5,30 +5,36 @@
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock head %} 
 
+{% block header %}
+<div class="xmark-icon">
+    <i class="fa-solid fa-xmark"></i>
+</div>
+{% endblock header %}
+
 {% block content %}
 <div class="login-container">
     <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" style="color: var( --BB_color_white); text-decoration: none; "> Best Birthday</a>
     <form method="POST" action="">
         {% csrf_token %}
-        <!-- {{ form }} -->
+        <!-- 이거 일단 주석 처리{{ form }} 
         {% if user.is_authenticated %}
         <p>{{user}}</p>
         <li><a href="{% url 'users:logout' %}">Logout</a></li>
-        {% endif%}
+        {% endif%}-->
         <div class="login-buttons">
             <button class="social-login kakao btn" type="button" onclick="location.href=' '">
                 <img src="../../static/images/kakao.png" />
-                <p class="notosans-bold-16 ">카카오로 계속하기</p>
+                <p class="notosans-bold-16 "style="color: var(--BB_color_black);" >카카오로 계속하기</p>
             </button>
           
             <button class="social-login naver btn" type="button" onclick="location.href=' '">
                 <img src="../../static/images/naver.png" />
-                <p class="notosans-bold-16 ">네이버로 계속하기</p>
+                <p class="notosans-bold-16 "style="color: var(--BB_color_black);" >네이버로 계속하기</p>
             </button>
 
             <button class="social-login google btn" type="button" onclick="location.href=' '">
                 <img src="../../static/images/google.png" />
-                <p class="notosans-bold-16 ">구글로 계속하기</p>
+                <p class="notosans-bold-16 "style="color: var(--BB_color_black);" >구글로 계속하기</p>
             </button>
         </div>
 

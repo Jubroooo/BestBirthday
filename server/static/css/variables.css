@@ -1,88 +1,90 @@
 :root {
-    /* Font families */
-    --font-family-unna: "Unna", serif;
-    --font-family-noto-sansKR: "Noto Sans KR", sans-serif;
+  /* Font families */
+  --font-family-unna: "Unna", serif;
+  --font-family-noto-sansKR: "Noto Sans KR", sans-serif;
 
-      /* Main Colors */
-    --BB_color_blue: #4114FF;
-    --BB_color_orange: #FF6245;
-    --BB_color_black: #141414;
-    --BB_color_white: #FFFFFF;
+    /* Main Colors */
+  --BB_color_blue: #4114FF;
+  --BB_color_orange: #FF6245;
+  --BB_color_black: #141414;
+  --BB_color_white: #FFFFFF;
 
-    /* Sub Colors */
-    --BB_color_skyblue: #2BAAFF;
-    --BB_color_yellow: #FFB512;
-    --BB_color_green: #12F9D9;
-    --BB_color_blue_sub: #0049C2;
+  /* Sub Colors */
+  --BB_color_skyblue: #2BAAFF;
+  --BB_color_yellow: #FFB512;
+  --BB_color_green: #12F9D9;
+  --BB_color_blue_sub: #0049C2;
+  --BB_color_background_gray:#252525;
 
 
-    --notosansregular14: 1.4rem; 
-    --notosansbold10: 1rem;  
-    --notosansbold24: 2.4rem; 
-    --notosansregular12: 1.2rem; 
+  --notosansregular14: 1.4rem; 
+  --notosansbold10: 1rem;  
+  --notosansbold24: 2.4rem; 
+  --notosansregular12: 1.2rem; 
 
-    /*margin*/
-    --gutter8:0.8rem;
-    --gutter16:1.6rem;
+  /*margin*/
+  --gutter8:0.8rem;
+  --gutter16:1.6rem;
+  --gutter24:2.4rem;
 
-  }
+}
 /*fonts*/
 /* Unna font styles */
 .unna-bold-61 {
-  font-family: var(--font-family-unna);
-  font-weight: bold;
-  font-size:6.1rem
+font-family: var(--font-family-unna);
+font-weight: bold;
+font-size:6.1rem
 }
 
 .unna-bold-40 {
-  font-family: var(--font-family-unna);
-  font-weight: bold;
-  font-size: 4rem
+font-family: var(--font-family-unna);
+font-weight: bold;
+font-size: 4rem
 }
 
 .unna-bold-36 {
-  font-family: var(--font-family-unna);
-  font-weight: bold;
-  font-size: 3.6rem
+font-family: var(--font-family-unna);
+font-weight: bold;
+font-size: 3.6rem
 }
 
 /* Noto Sans KR font styles */
 .notosans-bold-20 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: bold;
-  font-size: 2rem
+font-family: var(--font-family-noto-sansKR);
+font-weight: bold;
+font-size: 2rem
 }
 
-.notosans-bold-17 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: bold;
-  font-size: 1.7rem
+.notosans-bold-18 {
+font-family: var(--font-family-noto-sansKR);
+font-weight: bold;
+font-size: 1.8rem
 }
 
 .notosans-bold-16 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: bold;
-  font-size: 1.6rem
+font-family: var(--font-family-noto-sansKR);
+font-weight: bold;
+font-size: 1.6rem
 }
 
 .notosans-regular-14 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: normal;
-  font-size: 1.4rem
+font-family: var(--font-family-noto-sansKR);
+font-weight: normal;
+font-size: 1.4rem
 }
 .notosans-regular-12 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: normal;
-  font-size: 1.2rem;
+font-family: var(--font-family-noto-sansKR);
+font-weight: normal;
+font-size: 1.2rem;
 }
 .notosans-bold-10 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: bold;
-  font-size: 1rem
+font-family: var(--font-family-noto-sansKR);
+font-weight: bold;
+font-size: 1rem
 }
 
 .notosans-bold-24 {
-  font-family: var(--font-family-noto-sansKR);
-  font-weight: bold;
-  font-size: 2.4rem
+font-family: var(--font-family-noto-sansKR);
+font-weight: bold;
+font-size: 2.4rem
 }
