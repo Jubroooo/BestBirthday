@@ -68,6 +68,7 @@ def create(request) :
                 return render (request, 'fundings/fundings_create.html', ctx)
     else:
         return redirect('users:login')
+    
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
     progress = int(funding.total_price / funding.goal_price * 100)
