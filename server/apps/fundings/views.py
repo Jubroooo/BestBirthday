@@ -76,6 +76,9 @@ def detail(request, pk) :
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
 
     return render(request, 'fundings/fundings_detail.html', ctx)
+# 예진:html보려고 추가한 것
+def all_list(request):
+    return render(request,'fundings/all_birthday_list.html')
 
 def delete(request, pk) :
     if request.method == "POST":
