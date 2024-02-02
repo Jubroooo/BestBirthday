@@ -187,8 +187,8 @@ def main_all_birthday_list(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_today_funding.html', ctx)
-    return render (request, 'fundings/fundings_today_funding.html')
+        return render (request, 'fundings/main_all_birthday_list.html', ctx)
+    return render (request, 'fundings/main_all_birthday_list.html')
 
 def main_ranking_list(request):
     fundings = Funding.objects.filter(is_closed=False)
@@ -200,8 +200,8 @@ def main_ranking_list(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_msg_funding.html', ctx)
-    return render (request, 'fundings/fundings_msg_funding.html')
+        return render (request, 'fundings/main_ranking_list.html', ctx)
+    return render (request, 'fundings/main_ranking_list.html')
 
 def main_all_funding_list(request):
     fundings = Funding.objects.filter(is_closed=False)
@@ -213,8 +213,8 @@ def main_all_funding_list(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_open_funding.html', ctx)
-    return render (request, 'fundings/fundings_open_funding.html')
+        return render (request, 'fundings/main_all_funding_list.html', ctx)
+    return render (request, 'fundings/main_all_funding_list.html')
 
 
 def result_start(request, pk):

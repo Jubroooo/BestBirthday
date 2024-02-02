@@ -2,11 +2,14 @@
 .card2-container {
   flex-direction: row;
 }
+#main-container {
+    gap: var(--gutter24);
+  }
 .card2-right{
     display: inline-flex;
     flex-direction: column;
     justify-content: center;   
-    align-items: flex-end;
+    align-items: end;
 }
 .card2-content{
     display: flex;
