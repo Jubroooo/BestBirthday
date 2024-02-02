@@ -1,0 +1,29 @@
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/users/mypage_list.css'%}" /> {% endblock head %}
+{% block header %}
+
+    <div><i class="ri-arrow-left-s-line"></i></div>
+    <div class="header-title notosans-bold-20">내가 참여한 펀딩</div>
+    <div></div>
+  
+{% endblock header %} {% block content %}
+<div class="card-container">
+  <div class="card-top">
+    <div class="card-image"></div>
+    <div class="D-day div-btn">
+      <p class="notosans-regular-12">1년 전</p>
+    </div>
+  </div>
+  <div class="card-title notosans-bold-16">얘들아 나 샤넬 향수!!!!!1</div>
+  <div class="progress-container">
+    <div class="coin-icon"></div>
+    <div class="progress-value-container">
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="progress-percent notosans-regular-12">32%</div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

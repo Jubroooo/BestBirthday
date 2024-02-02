@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
+#예진추가뷰
+def mypage_myfunding(request):
+    return render(request,'users/mypage_myfunding.html')
+def mypage_participated(request):
+    return render(request,'users/mypage_participated.html')
 
 #채연추가뷰
 def birth_input(request):

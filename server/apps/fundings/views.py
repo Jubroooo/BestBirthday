@@ -3,8 +3,14 @@ from .forms import FundingForm, MessageForm
 from .models import Funding, Funding_Msg
 
 # 예진:html보려고 추가한 것
-def all_list(request):
+def all_birthday_list(request):
     return render(request,'fundings/all_birthday_list.html')
+
+def all_funding_list(request):
+    return render(request,'fundings/all_funding_list.html')
+
+
+
 def main(request) :
     funding = Funding.objects.all()
     ctx = {"fundings" : funding}

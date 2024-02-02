@@ -11,7 +11,8 @@ urlpatterns = [
     path('update/<int:pk>/', update, name="update"),
     path('message/create', message, name="message"),
     # 예진 추가뷰
-    path('all_birthday_list/',all_list),
+    path('all_birthday_list/',all_birthday_list, name="all_birthday_list"),
+    path('all_funding_list/',all_funding_list, name="all_funding_list"),
     #뷰 확인용
      path('detail/', detail, name="detail"),
 ]
