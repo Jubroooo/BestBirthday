@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block content%}
+    <h1> 총 메시지 수: {{funding_msg_count}}</h1>
+    {%for funding_msg in funding_msgs%}
+    <a href="{% url "fundings:funding_msg_detail" pk=funding_msg.id%}">
+        <h1>{{funding_msg.comment_name}}에게서 온 메시지 </h1>
+    <a>
+    {%endfor%}
+{%endblock%}

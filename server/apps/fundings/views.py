@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
 import copy
+from django.db.models.functions import Length
 
 #딕셔너리 필터링 함수
 @register.filter
@@ -231,3 +232,38 @@ def open_funding(request):
     
         return render (request, 'fundings/fundings_open_funding.html', ctx)
     return render (request, 'fundings/fundings_open_funding.html')
+
+
+def view_messages(request, pk):
+    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
+    print (funding_msgs)
+    if funding_msgs.exists():
+        earliest_msg = funding_msgs.earliest('written_date')
+        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+        ctx = {
+            'pk': pk,
+            'earliest_msg': earliest_msg,
+            'longest_msg': longest_msg,
+        }
+        return render (request, 'fundings/fundings_view_messages.html', ctx)
+    else:
+        return render (request, 'fundings/fundings_view_messages.html')
+
+
+def view_all_messages(request, pk):
+    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
+    funding_msg_count = funding_msgs.count()
+    ctx = {
+        "funding_msg_count": funding_msg_count,
+        "funding_msgs": funding_msgs,
+    }
+    
+    return render (request, 'fundings/fundings_view_all_messages.html', ctx)
+
+def funding_msg_detail (request, pk):
+    funding_msg = Funding_Msg.objects.get(id=pk)
+    ctx = {
+        "funding_msg": funding_msg,
+    }
+    
+    return render (request, "fundings/funding_msg_detail.html", ctx)
