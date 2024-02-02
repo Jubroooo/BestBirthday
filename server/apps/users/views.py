@@ -3,6 +3,9 @@ from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 
+#채연추가뷰
+def birth_input(request):
+    return render(request,'users/birth_input.html')
 def signup(request):
     #POST method로 signup
     if request.method == "POST":

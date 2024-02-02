@@ -21,12 +21,15 @@ def create(request) :
         new_funding = form.save(user=request.user)
         pk_of_new_funding = new_funding.pk
         return redirect('fundings:detail', pk=pk_of_new_funding)
+#뷰 확인용
+def detail(request) :
+    return render(request, 'fundings/fundings_detail.html')
 
-def detail(request, pk) :
-    funding = Funding.objects.get(id=pk)
-    progress = int(funding.total_price / funding.goal_price * 100)
-    ctx = {'funding':funding, 'progress':progress}    
-    return render(request, 'fundings/fundings_detail.html', ctx)
+# def detail(request, pk) :
+#     funding = Funding.objects.get(id=pk)
+#     progress = int(funding.total_price / funding.goal_price * 100)
+#     ctx = {'funding':funding, 'progress':progress}    
+#     return render(request, 'fundings/fundings_detail.html', ctx)
 
 def delete(request, pk) :
     if request.method == "POST":
