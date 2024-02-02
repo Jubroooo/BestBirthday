@@ -13,4 +13,7 @@ urlpatterns = [
     path('list/today_funding/', today_funding, name="today_funding"),
     path('list/msg_funding/', msg_funding, name="msg_funding"),
     path('list/open_funding/', open_funding, name="open_funding"),
+    path('view_messages/<int:pk>/', view_messages, name="view_messages"),
+    path('view_all_messages/<int:pk>/', view_all_messages, name="view_all_messages"),
+    path('funding_msg_detail/<int:pk>/', funding_msg_detail, name="funding_msg_detail"),
 ]

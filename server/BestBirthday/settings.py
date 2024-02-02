@@ -41,13 +41,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.users",
     "apps.fundings",
-    
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.kakao",
     "allauth.socialaccount.providers.naver",
     "allauth.socialaccount.providers.google",
+    "social_django",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -92,9 +92,8 @@ TEMPLATES = [
         },
     },
 ]
-
+LOGIN_REDIRECT_URL = '/users/redirect_view/'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 
@@ -102,7 +101,7 @@ WSGI_APPLICATION = "BestBirthday.wsgi.application"
 
 #SITE_ID: django.contrib.sites 앱에서 관리되는 사이트 목록에서 사용하려는 특정 사이트의 ID 값
 #settings.py에서의 SITE_ID: 현재 Django 프로젝트에서 사용되는 기본 사이트의 식별자
-SITE_ID = 5
+SITE_ID = 7
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -167,3 +166,6 @@ MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+

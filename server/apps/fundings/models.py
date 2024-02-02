@@ -26,3 +26,4 @@ class Funding_Msg(models.Model) :
     comment_name = models.CharField('친구에게 보여질 이름', max_length=12)
     funding_price = models.IntegerField('선물금액', default=0, null=True)
     content = models.TextField('축하 메시지') 
+    written_date = models.DateTimeField('메시지 작성일', auto_created=True, auto_now_add=True)

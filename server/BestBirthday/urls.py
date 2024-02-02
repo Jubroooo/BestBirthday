@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('apps.fundings.urls')),
     path('users/', include('apps.users.urls')),
     path('accounts/', include('allauth.urls')),
+    path('social-auth/', include('social_django.urls')),
 ]
 
 if settings.DEBUG:
