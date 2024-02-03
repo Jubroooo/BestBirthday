@@ -136,6 +136,8 @@ def create_gift(request, pk) :
                     "form": form
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
+def create_payment(request):
+    return render(request, 'fundings/create_payment.html')
 
 def create_gift_complete(request):
     pass
