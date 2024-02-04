@@ -37,10 +37,10 @@
     <div class="current-price">모인금액 : {{funding.total_price}}</div>
     <div class="current-progress">{{progress}} %</div>
 </div>
-<a href="{% url 'fundings:create_message' pk=funding.id%}" class="funding-msg">축하 메세지 쓰기</a>
-<a href="{% url 'fundings:view_messages' pk=funding.id%}"> 축하 메시지 보기 </a> 
+<a href="{% url 'fundings:create_gift' pk=funding.id%}" class="funding-msg">축하 메세지 쓰기</a>
+<a href="{% url 'fundings:create_gift_complete' pk=funding.id%}"> 축하 메시지 보기 </a> 
 {%endblock%}
-{% endif %}</div>
+
 
 <div class="detail-wrapper">
     <div class="notosans-bold-20" style="color: var(--BB_color_white); margin-top: 1rem;">funding.title</div>
@@ -85,4 +85,3 @@
 
 {% endblock scripts %}
 
-{%endblock%}

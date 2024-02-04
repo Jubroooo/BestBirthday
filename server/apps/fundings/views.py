@@ -146,7 +146,7 @@ def create_gift(request, pk) :
 def create_payment(request):
     return render(request, 'fundings/create_payment.html')
 
-def create_gift_complete(request):
+def create_gift_complete(request, pk):
     pass
 def create_gift_modal(request):
     pass
