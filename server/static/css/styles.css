@@ -55,7 +55,7 @@ a{
   color: white;
 }
 .profile {
-  background-image: url(../img/profile.svg);
+  background-image: url(../images/profile.svg);
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -113,7 +113,7 @@ a{
 .coin-icon {
   width: 5rem;
   height: 4rem;
-  background-image: url(../img/coin.png);
+  background-image: url(../images/coin.png);
   margin-bottom: var(--gutter8);
 }
 .progress-value-container {
@@ -170,3 +170,7 @@ a{
   align-items: center;
 }
 
+.null-guide{
+  margin: var(--gutter24);
+  text-align: center;
+}

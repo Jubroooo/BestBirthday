@@ -4,9 +4,16 @@
 <a href="">
   <p class="logo unna-bold-36">Best Birthday</p>
 </a>
-<a href="">
+{% if user.is_authenticated %}
+<a href="{%url 'fundings:mypage_list'%}">
   <div class="profile"></div>
 </a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
+
 {% endblock header %} {% block content %}
 <div class="create-funding-container">
   <div id="gift-img"></div>

@@ -9,14 +9,9 @@ from django.contrib import auth
 #채연추가뷰--------------------------------------
 def login_info(request):
     return render(request,'users/birth_input.html')
-def mypage_list(request):
-    return render(request,'users/mypage_list.html')
 def mypage_profile_settings(request):
     return render(request,'users/mypage_profile_settings.html')
-def start(request):
-    return render(request,'users/start.html')
-def payment_guide(request):
-    return render(request,'users/mypage_payment_guide.html')
+
 def nickname_profile_input(request):
     return render(request,'users/nickname_profile_input.html')
 

@@ -4,7 +4,15 @@
 <a href="{%url 'fundings:main'%}">
   <p class="logo unna-bold-36">Best Birthday</p>
 </a>
-<div class="profile"></div>
+{% if user.is_authenticated %}
+<a href="{%url 'fundings:mypage_list'%}">
+  <div class="profile"></div>
+</a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
 {% endblock header %} {% block content %}
 <div class="header-title-container">
   <a href="{%url 'fundings:main'%}">

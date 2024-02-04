@@ -13,16 +13,17 @@
 
 {%block content%}
 <div class="img-container">
-<img class="changing-present" src="../../static/images/present1.png">
+<img class="changing-present" src="{%static 'images/present1.png'%}">
 </div>
-
+<form method = "POST" action="">
+    {% csrf_token %}
 <div class="create-gift-container">
     <div class="gift-first">
         <div>
         <p class="notosans-bold-18">선물 금액</p>
         <p class="notosans-regular-12 colorgray-create-html">*최대 금액은 300,000원까지 가능합니다</p>
         </div>
-        <p class="notosans-bold-18">20,000원</p>   
+        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="20000">
     </div>
 
     <div class="button-group">
@@ -37,10 +38,10 @@
     <p class="notosans-bold-18">계좌를 선택하세요</p>
     <div class="payment-link-btn-container">
         <button class="payment-btn-kakao div-btn">
-            <img src="../../static/images/kakao-pay.png">
+            <img src="{%static 'images/kakao-pay.png'%}">
         </button>
         <button class="payment-btn-toss div-btn">
-            <img src="../../static/images/toss-pay.png">
+            <img src="{%static 'images/toss-pay.png'%}">
         </button>
     </div>
 
@@ -48,17 +49,18 @@
         <div class="gift-second">
             <label class="notosans-bold-18" for="message">생일 축하 메시지</label><p class="notosans-regular-12 colorgray-create-html">*30자 ~ 500자</p>
         </div>
-        <p class="input-bday-message"></p>
+        <textarea id="birthday_message" class="input-bday-message" name="content"></textarea>
     </div>
     <p class="notosans-regular- colorgray-create-html">심한 비속어 및 상대를 비방하는 메시지는 전달되지 않을 수 있음을 알려드립니다.작성된 메시지는 수정 불가합니다. </p>
     <div class="nickname-container">
         <p class="notosans-bold-18">친구에게 보여줄 닉네임</p>
-        <p class="notosans-bold-16">챙용</p>
+        <input id="gift_nickname" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="챙용">
     </div>
-    <button class="give_present div-btn" type="button">
+    <button class="give_present div-btn" type="submit">
         <p class="notosans-bold-16 ">선물 완료하기</p>
     </button>
 </div>
+</form>
 
   
 {%endblock%}
