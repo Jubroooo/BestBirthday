@@ -19,6 +19,7 @@
 }
 .check_bday{
     align-self: flex-start; 
+    color: var(--BB_color_orange);
 }
 
 .birthday_input {
@@ -27,4 +28,7 @@
     border-radius: 1.1rem;
     border: none;
     margin: 2rem 0 2rem 0;
+}
+.commit-birthday{
+    background-color: var(--BB_color_blue);
 }

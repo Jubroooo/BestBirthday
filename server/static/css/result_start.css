@@ -1,0 +1,32 @@
+  .icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+  }
+
+  .show-card-title{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+  }
+
+  .icon-left {
+    position: absolute;
+    left: 0; 
+  }
+
+  .title-go-see-letter{
+    text-align: center;
+  }
+  .congrats-section{
+    height: 70vh;
+    background-color: var(--BB_color_blue);
+  
+  }
+
+  .filter-congrats{
+    color: var(--BB_color_white);
+    margin:var(--gutter16) 0;
+  }

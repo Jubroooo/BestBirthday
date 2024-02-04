@@ -1,19 +1,24 @@
 .funding-title {
-    display: flex; 
-    align-items: center; 
-    color: var(--BB_color_white);
-    position: relative; 
-    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
 }
-.funding-title::before {
-    content: "\f104"; 
-    font-family: "Font Awesome 5 Free";
-    display: inline-block; 
-    padding-right: 1rem;
-    font-weight: 900; 
+.icon-left{
     font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+
+  .funding-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
   }
-  
+
+
 .image img {
     width: 100%;
     height: auto;
@@ -22,6 +27,7 @@
 
 .funding-info {
     margin: 1rem 0;
+    color:gray;
 }
 
 .user-birthday {  
@@ -55,5 +61,24 @@
 }
 
 .participate-num{
-    margin-top: 20%;
+    margin: var(--gutter24) 0;
+}
+.funding-title-for-margin{
+    margin-top: var(--gutter16);
+}
+.images-icons{
+    display: inline-block; margin: 0; vertical-align: middle;
+}
+.current-progress{
+    color: var(--BB_color_orange);
+}
+.give_present{
+    margin-top: var(--gutter24);
+}
+.gift-to-buy{
+    margin-top: var(--gutter24);
+    cursor: pointer;
+}
+.detail-img{
+    vertical-align: middle;
 }

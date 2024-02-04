@@ -1,0 +1,57 @@
+   .icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+  }
+
+  .show-card-title{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+  }
+  .title-go-see-letter{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+  }
+
+  .first-line-congrats{
+    margin-top: 3.2rem
+  }
+
+  .highlight-blue{
+    color:var(--BB_color_blue);
+  }
+
+  .message-detail{
+    height: 50vh;
+    background-color:rgba(117, 117, 117,0.2);
+    border-radius: var(--gutter8);
+    margin-bottom: var(--gutter16);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: var(--gutter8);
+    padding: var(--gutter8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .letters-congrats{
+    margin-bottom: var(--gutter24);
+  }
+
+  .message-content{
+    display: block;
+    margin: 0 auto;
+    white-space: pre-wrap; /* 공백과 줄바꿈 보존 */
+    word-wrap: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
+    text-align: justify; 
+    line-height: 1.6; /* 행 높이 조정 */
+    hyphens: auto; /* 단어 자동 분리 */
+  }
+

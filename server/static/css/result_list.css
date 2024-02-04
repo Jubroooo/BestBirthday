@@ -1,0 +1,59 @@
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+  }
+
+  .show-card-title{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+  }
+
+  .title-go-see-letter{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+  }
+
+  .letters-congrats{
+    margin-bottom: var(--gutter24);
+  }
+
+  .delivered-messages{
+    height: 60vh;
+    background-color:rgba(117, 117, 117,0.2);
+    border-radius: var(--gutter8);
+    margin-bottom: var(--gutter8);
+    display: flex;
+    flex-direction: column;
+    margin: var(--gutter8);
+    padding: var(--gutter8);
+  }
+
+  .first-line-congrats{
+    margin-top: 3.2rem
+  }
+
+  .highlight-blue{
+    color:var(--BB_color_blue);
+  }
+  .b-day-message {
+    border-bottom: 1rem solid var(----BB_color_white); 
+    padding: 0.5rem 1rem; 
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .message-number {
+    font-weight: bold; 
+    margin-right: var(--gutter8);
+  }
+
+  .message-sender {
+    margin-right: 1rem; /* 이름과 날짜 사이 간격 설정 */
+  }

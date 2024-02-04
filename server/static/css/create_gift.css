@@ -1,0 +1,94 @@
+.create-gift-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.create-gift-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+    .payment-btn-kakao{
+    background-color: #f7e100;
+    }
+    .payment-btn-toss{
+    background-color: var(--BB_color_blue_sub);
+    }
+
+    .payment-link-btn-container{
+        display: flex;
+        gap: var(--gutter16);
+        margin: var(--gutter8) 0;
+    }
+    .button-group button {
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 5px;
+        flex: 1 1 30%;
+        cursor: pointer;
+      }
+
+      .button-group {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: space-around; 
+        gap: 10px;
+      }
+      .img-container {
+        text-align: center; 
+      }
+      
+      .img-container img {
+        max-width: 80%; /* 이미지 최대 너비를 80%로 제한 */
+        height: auto; /* 높이는 자동으로 설정되어 원본 비율을 유지 */
+        display: block;
+        margin: auto; 
+      }
+    
+      .blue-btn-gift{
+        background-color: var(--BB_color_blue);
+      }
+      .orange-btn-gift{
+        background-color: var(--BB_color_orange);
+      }
+      .gift-first{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .gift-second{
+        display: flex;
+        align-items: center;
+        gap:var(--gutter8)
+      }
+      .input-bday-message{
+        border-radius: var(--gutter8);
+        height: 20vh;
+        background-color: var(--BB_color_white);
+      }
+      .colorgray-create-html{
+        color:gray;
+        margin: var(--gutter8) 0;
+      }
+      .create-gift-container{
+        gap:var(--gutter16);
+      }
+
+      .give_present{
+        margin-top: var(--gutter8);
+      }
+
+    .nickname-container{
+        display: flex;
+        gap:var(--gutter8);
+        align-items: center;
+    }

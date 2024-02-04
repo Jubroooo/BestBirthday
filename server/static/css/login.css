@@ -49,3 +49,9 @@
     background-color: #03C75A; 
     color: black;
 }
+.logo{
+    text-decoration: none;
+}
+.login-color{
+    color:var(--BB_color_black);
+}
