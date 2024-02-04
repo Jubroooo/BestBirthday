@@ -24,7 +24,10 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">70%</progress>     
+        
+        <progress id="file" max={{funding.goal_price}} value={{funding.total_price}}></progress> 
+        <div class="funding-progress">{{open_funding_progress_dict|get_item:funding.user.id}}%</div> 
+
         <h2>펀딩 디데이 :  {{ today_funding_dday_dict|get_item:funding.user.id }} </h2>        
     </div>
     {%endfor%}
@@ -45,7 +48,8 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">70%</progress>     
+        <progress id="file" max={{funding.goal_price}} value={{funding.total_price}}></progress> 
+        <div class="funding-progress">{{open_funding_progress_dict|get_item:funding.user.id}}%</div>    
         <h2>펀딩 디데이 :  {{ msg_funding_dday_dict|get_item:funding.user.id }} </h2>        
     </div>
     {%endfor%}
@@ -66,7 +70,8 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">{{open_funding_progress_dict|get_item:funding.user.id}}</progress> 
+        <progress id="file" max={{funding.goal_price}} value={{funding.total_price}}></progress> 
+        <div class="funding-progress">{{open_funding_progress_dict|get_item:funding.user.id}}%</div>
         <div class="dday-box">
             {% with dday=open_funding_dday_dict|get_item:funding.user.id %}
                 {% if dday > 0 %}

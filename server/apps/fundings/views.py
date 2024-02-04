@@ -77,7 +77,7 @@ def create(request) :
     
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
-    progress = funding_progress(funding)
+    progress = int(funding.total_price / funding.goal_price * 100)
     dday = birthday_dday_cal(funding)
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
 
