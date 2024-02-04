@@ -30,7 +30,7 @@
     height: 50vh;
     background-color:rgba(117, 117, 117,0.2);
     border-radius: var(--gutter8);
-    margin-bottom: var(--gutter16);
+    margin-bottom: var(--gutter24);
     display: flex;
     text-align: center;
     justify-content: center;
@@ -55,3 +55,6 @@
     hyphens: auto; /* 단어 자동 분리 */
   }
 
+  .close-message-detail{
+    margin-top: var(--gutter24);
+  }

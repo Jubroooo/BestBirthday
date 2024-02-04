@@ -6,8 +6,6 @@
 {% endblock head %} 
 
 {% block content %}
-
-   
         <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
     <div class="nickname_img_wrapper">
         <p class="notosans-bold-18">프로필 설정</p>
@@ -16,8 +14,8 @@
         </div>
         <p class="notosans-bold-18">닉네임 설정</p>
         <input type="text" class="nickname-input" placeholder="닉네임을 입력하세요.">
-        <div class="div-btn setting-btn">
+        <a href="{% url 'fundings:main' %}" class="div-btn setting-btn">
             <p class="notosans-bold-18">확인</p>
-        </div>
+        </a>
     </div>
 {% endblock content %}

@@ -6,7 +6,7 @@
 
 {% block header %}
 <div class="create-payment-title">
-    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    <a href="{% url 'fundings:create_payment' %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
     <p class="create-payment-title-for-center notosans-bold-24">펀딩 생성하기</p>
 </div>
 {% endblock header %}
@@ -45,9 +45,9 @@
     <div class="to-friends-message">
         <p></p>
     </div>
-    <div class="div-btn start-btn-for-payment">
+    <a href="{% url 'fundings:main' %}" class="div-btn start-btn-for-payment">
         <p class="notosans-bold-18 ">시작하기</p>
-    </div>
+    </a>
 </div>
 
 {% endblock  %}

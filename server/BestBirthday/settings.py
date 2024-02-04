@@ -168,4 +168,3 @@ MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-

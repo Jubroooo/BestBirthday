@@ -6,8 +6,7 @@
 
 {% block header %}
 <div class="show-card-title">
-    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
-    <p class="title-go-see-letter notosans-bold-20">생일 편지 보기</p>
+    <p class="title-go-see-letter notosans-bold-20">편지 자세히 보기</p>
 </div>
 {% endblock header %}
 
@@ -17,10 +16,10 @@
 <div class="message-detail">
     <span class="notosans-bold-20 message-content">
         채연아 생일 축하해~~^^ 너를 본지 어언 7년............우리가 초딩때 만났는데 벌써 20살이다~~~생일축하해~~~~~~~~~넌 보물같은 사람!!!!^^
-        이 부분 좀...
+        이 부분 출력 형식 더 스껄한거 찾아보자
     </span>
 </div>
-<div class="div-btn" onclick="">
-    <p class="notosans-bold-18">닫기</p>
-</div>
+<a href="{% url 'fundings:result_start' %}"class="div-btn close-message-detail">
+    <p class="notosans-bold-18 ">닫기</p>
+</a>
 {% endblock %}

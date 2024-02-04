@@ -44,6 +44,7 @@
     }
     .profile-for-center {
         text-align: left;
+        margin-top: var(--gutter24);
     }
     
     .profile-setting ,.bank-setting ,.name-setting{
@@ -57,6 +58,7 @@
     }
     .mandatory{
         color:red;
+        margin-top: var(--gutter8);
     }
     .setting-btn{
         margin-top:20vh;

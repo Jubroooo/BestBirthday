@@ -1,13 +1,19 @@
-
-#header-container{
-    align-items: center;
+.create-payment-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
 }
-#header-container i {
-    font-size: 3.6rem;
-  }
-#header-container>div:nth-child(3) {
-    width: 3.6rem;
-    height: 3.6rem;
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.create-payment-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
 }
 .payment_description{
     display: flex;
@@ -44,6 +50,5 @@ background-color: #f7e100;
 }
 .create_payment_btn{
     width: 100%;
-    position: relative;
-    top: 30rem;
+    margin-top: var(--gutter24);
 }
