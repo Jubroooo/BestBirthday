@@ -1,0 +1,41 @@
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/mypage_funding_list.css'%}" /> {% endblock head %}
+{% block header %}
+<div class="mypage-title">
+  <a href="{%url 'fundings:mypage_list'%}">
+    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+</a>
+    <p class="mypage-title-for-center notosans-bold-24">내 생일 펀딩</p>
+</div>
+{% endblock header %} {% block content %}
+{%if fundings%}
+    {%for funding in fundings%}
+    <a href="{%url 'fundings:detail' pk=funding.pk%}">
+      <div class="card-container">
+        <div class="card-top">
+          {%if funding.photo.url != null and funding.photo.url != ''%}
+              <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+              {%else%}
+              <img class="card-image" src="{% static 'fundings/image/no_image.png' %}" alt="" />
+              {%endif%}
+          <div class="D-day div-btn">
+            <p class="notosans-regular-12">D - {{ today_funding_dday_dict|get_item:funding.user.id }}</p>
+          </div>
+        </div>
+        <div class="card-title notosans-bold-16">{{funding.title}}</div>
+        <div class="progress-container">
+          <div class="coin-icon"></div>
+          <div class="progress-value-container">
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+            <div class="progress-percent notosans-regular-12">32%</div>
+          </div>
+        </div>
+      </div>
+    </a>
+    {%endfor%}
+        {%else%}
+        <p class="null-guide notosans-bold-20"> 생성한 펀딩이 없습니다.</p>
+        {%endif%}
+{% endblock content %}

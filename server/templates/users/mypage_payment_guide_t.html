@@ -6,17 +6,16 @@
 
 {% block header %}
 <div class="payment-guide-title">
-    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    <a href="{%url 'users:mypage_profile_settings'%}">
+        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    </a>
     <p class="payment-guide-title-for-center notosans-bold-24">송금하기</p>
 </div>
 {% endblock header %}
 
 {% block content %}
-<p class="notosans-bold-18">선물받을 계좌를 선택하세요</p>
+<p class="notosans-bold-18">선물받을 계좌를 입력하세요</p>
 <div class="payment-link-btn-container">
-    <button class="payment-btn-kakao div-btn">
-        <img src="../../static/images/kakao-pay.png">
-    </button>
     <button class="payment-btn-toss div-btn">
         <img src="../../static/images/toss-pay.png">
     </button>
