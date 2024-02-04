@@ -147,7 +147,6 @@ def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
-    #생일 디데이 계산, 펀딩 디데이 계산 // 함수화 필요할듯!
     for funding in fundings:
         user = funding.user
         current_date = timezone.now()
@@ -242,13 +241,17 @@ def result_list(request, pk):
         "funding_msg_count": funding_msg_count,
         "funding_msgs": funding_msgs,
     }
-    
-    return render (request, 'fundings/fundings_view_all_messages.html', ctx)
+    return render(request, 'fundings/fundings_view_all_messages.html', ctx)
 
 def result_detail (request, pk):
     funding_msg = Funding_Msg.objects.get(id=pk)
     ctx = {
         "funding_msg": funding_msg,
     }
+    return render(request, "fundings/funding_msg_detail.html", ctx)
+
+def funding_progress(funding):
+    progress = int(funding.total_price / funding.goal_price * 100)
+    return progress
+
     
-    return render (request, "fundings/funding_msg_detail.html", ctx)
