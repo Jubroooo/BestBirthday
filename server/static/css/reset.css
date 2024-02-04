@@ -25,6 +25,7 @@ time, mark, audio, video {
 	font-size: 62.5%;
 	color: white;
 	font-family: "Noto Sans KR", sans-serif;
+	text-decoration: none;
 	
 }
 /* HTML5 display-role reset for older browsers */

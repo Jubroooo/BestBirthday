@@ -25,5 +25,15 @@ urlpatterns = [
     # path('mypage_profile_setting/', mypage_profile_setting, name="mypage_profile_setting"), 
     # path('mypage_payment_guide/', mypage_payment_guide, name="mypage_payment_guide"), 
     # path('mypage_myfunding/', mypage_myfunding, name="mypage_myfunding"), 
-    # path('mypage_participated/', mypage_participated, name="mypage_participated"), 
+    # path('mypage_participated/', mypage_participated, name="mypage_participated"),
+
+
+    # 채연 추가뷰
+    path('detail/', detail, name="detail"),
+    path('my_detail/', my_detail, name="my_detail"),
+    path("result_modal/",result_modal,name="result_modal"),
+    path("result_start/",result_start,name="result_start"),
+    path("result_list/",result_list,name="result_list"),
+    path("result_detail/",result_detail,name="result_detail"),
+    path("gift_complete/",gift_complete,name="gift_complete"),
 ]

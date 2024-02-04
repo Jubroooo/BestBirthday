@@ -1,0 +1,66 @@
+.mypage-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+
+.mypage-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+
+.mypage-profile2{
+    display: flex;
+    align-items: center;
+}
+.myname{
+    margin-right: 2rem;
+}
+
+.mypage-links{
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--gutter16);
+}
+
+.mypage-profile{
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--gutter24);
+}
+
+.mypage-first-section{
+    display:flex;
+    margin: var(--gutter24) 0 8rem 0;
+    position: relative;
+
+}
+
+.profileline{
+    margin-bottom: var(--gutter8);
+    color:gray;
+}
+
+.right-icon{
+    position:absolute;
+    right:0;
+    font-size: 3rem;
+    cursor: pointer;
+}
+.mypage-funding, .mypage-account,.mypage-etc{
+    margin: var(--gutter24) 0;
+}
+
+
+
+
+

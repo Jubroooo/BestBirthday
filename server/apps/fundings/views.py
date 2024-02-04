@@ -29,19 +29,47 @@ def main(request) :
         today_funding_dday_dict = funding_dday_cal(today_fundings)
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
-    
-            
+    funding = Funding.objects.all()
+    ctx = {"fundings" : funding}
+    return render(request, 'fundings/main2.html', ctx)
 
-        ctx = {"today_fundings": today_fundings, 
-            "today_funding_dday_dict": today_funding_dday_dict,
-            "fundings_in_msg_order": fundings_in_msg_order,
-            "msg_funding_dday_dict": msg_funding_dday_dict,
-            "open_fundings": open_fundings,
-            "open_funding_dday_dict": open_funding_dday_dict
-            }
-        return render(request, 'fundings/main2.html', ctx)
-    else:
-        return render(request, 'fundings/main2.html')
+def create(request) :
+    if request.method == 'GET':
+        form = FundingForm()
+        ctx = {'form':form}
+        return render(request, 'fundings/fundings_create.html', ctx)
+    #post일때
+    form = FundingForm(request.POST, request.FILES)
+    if form.is_valid():
+        new_funding = form.save(user=request.user)
+        pk_of_new_funding = new_funding.pk
+        return redirect('fundings:detail', pk=pk_of_new_funding)
+#채연 뷰 확인용--------------------------------------------
+def detail(request) :
+    return render(request, 'fundings/fundings_detail.html')
+def my_detail(request) :
+    return render(request, 'fundings/fundings_my_detail.html')
+
+#기존꺼
+# def detail(request, pk) :
+#     funding = Funding.objects.get(id=pk)
+#     progress = int(funding.total_price / funding.goal_price * 100)
+#     ctx = {'funding':funding, 'progress':progress}    
+#     return render(request, 'fundings/fundings_detail.html', ctx)
+def result_modal(request):
+    return render(request,'fundings/result_modal.html')
+def result_start(request):
+    return render(request,'fundings/result_start.html')
+def result_list(request):
+    return render(request,'fundings/result_list.html')
+def result_detail(request):
+    return render(request,'fundings/result_detail.html')
+def gift_complete(request):
+    return render(request,'fundings/gift_complete.html')
+def create_payment(request):
+    return render(request,'fundings/create_payment.html')
+def create_gift(request):
+    return render(request,'fundings/create_gift.html')
 
 def create_funding(request) :
     if request.user.is_authenticated:

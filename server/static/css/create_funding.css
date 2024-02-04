@@ -1,0 +1,70 @@
+
+.create-payment-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.create-payment-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+.to-friends-message{
+    border-radius: var(--gutter8);
+    height: 20vh;
+    background-color: var(--BB_color_white);
+}
+.funding-price{
+    display: flex;
+    justify-content:space-between;
+    margin: 0 var(--gutter16);
+}
+.to-friends{
+    display: flex;
+    gap:var(--gutter16);
+    align-items: center;
+}
+.funding-image{
+    display: flex;
+    gap:var(--gutter16);
+    align-items: center;
+    
+}
+.fa-circle-plus{
+    cursor: pointer;
+    font-size: var(--gutter16);
+    color: gray;
+}
+.create-payment-wrapper{
+    margin: var(--gutter16) 0;
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--gutter16)
+}
+.start-btn-for-payment{
+    margin-top: var(--gutter24);
+  }
+  .notice-for-paymentpage{
+    color:gray;
+  }
+
+  .wrapper-content-payment{
+    margin: var(--gutter8) 0;
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--gutter8)
+  }
+
+  .custom-font{
+    font-family: var(--font-family-unna);
+    font-weight: bold;
+    font-size: 2rem
+  }

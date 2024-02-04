@@ -6,7 +6,8 @@
 
 {% block header %}
 <div class="funding-title">
-    <p class="title notosans-bold-24">funding.title</span>
+    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    <p class="funding-title-for-center notosans-bold-24">funding.title</p>
 </div>
 {% endblock header %}
 
@@ -43,22 +44,24 @@
 {% endif %}</div>
 
 <div class="detail-wrapper">
-    <div class="notosans-bold-20" style="color: var(--BB_color_white); margin-top: 1rem;">funding.title</div>
-    <div class="funding-info notosans-regular-12" style="color:gray;">funding.content</div>
+    <div class="notosans-bold-20 funding-title-for-margin">funding.title</div>
+    <div class="funding-info notosans-regular-12">funding.content</div>
     <div class="percentage-container">
-        <div class="user-birthday notosans-bold-16" style="color: var(--BB_color_white);">모인 금액 : funding.total_price</div>
-        <div class="current-progress notosans-bold-16" style="color: var(--BB_color_orange);">20%</div>
+        <div class="user-birthday notosans-bold-16">모인 금액 : funding.total_price</div>
+        <div class="current-progress notosans-bold-16" >20%</div>
     </div>
-    <div class="progress-bar">
-        <div class="progress"></div>
+    <div class="progress-value-container">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
     </div>
-    <div class="participate-num notosans-bold-16" style="color: var(--BB_color_white);">참여 인원</div>
-    <div class="notosans-bold-16" style="color: var(--BB_color_white);">
-        <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/target.svg" style="vertical-align: middle;"></p>
+    <div class="participate-num notosans-bold-16" >참여 인원</div>
+    <div class="notosans-bold-16" >
+        <p class="images-icons"><img src="../../static/images/target.svg" class="detail-img"></p>
         목표 금액
     </div>
-    <div class="notosans-bold-16" style="color: var(--BB_color_white);">
-        <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/cake.svg"  style="vertical-align: middle;"></p>
+    <div class="notosans-bold-16">
+        <p class="images-icons"><img src="../../static/images/cake.svg" class="detail-img"></p>
         친구 생일  funding.user.birthday
           {% if dday < 0 %}
               <span class="dday"> Ddday </span>
@@ -68,8 +71,8 @@
               <span class="dday"> D+dday </span>
           {% endif %}
     </div>
-    <div class="gift-to-buy notosans-bold-16" style="color: var(--BB_color_white);" onclick="">
-        <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/computer.png" style="vertical-align: middle;"></p>
+    <div class="gift-to-buy notosans-bold-16"  onclick="">
+        <p class="images-icons"><img src="../../static/images/computer.png" class="detail-img"></p>
         내가 사줄 물건 보기</div>
     
 <div class="present-button-wrapper">

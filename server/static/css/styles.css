@@ -31,6 +31,14 @@ header {
   padding-top: 6rem;
   margin-bottom: var(--margin8px);
 }
+#header-container-icon{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 2.4rem;
+  padding-top: 6rem;
+  margin-bottom: var(--margin8px);
+}
 main {
   width: 100%;
   padding-bottom: var(--gutter24);
@@ -161,3 +169,4 @@ a{
   text-align: center;
   align-items: center;
 }
+
