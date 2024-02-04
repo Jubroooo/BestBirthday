@@ -1,87 +1,140 @@
-{% extends "base.html" %}
-{%load static%}
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/main.css'%}" /> {% endblock head %}
+{% block header %}
+<a href="">
+  <p class="logo unna-bold-36">Best Birthday</p>
+</a>
+{% if user.is_authenticated %}
+<a href="{%url 'fundings:mypage_list'%}">
+  <div class="profile"></div>
+</a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
 
-{%block content%}
-<div class="content-welcome">
-    환영화면
-    <a href="{%url 'fundings:create'%}">내 생일 축하받기</a>
+{% endblock header %} {% block content %}
+<div class="create-funding-container">
+  <div id="gift-img"></div>
+  <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
+  <div class="div-btn btn-main-create">
+    <a href="{%url 'fundings:create_funding'%}">
+      <p class="notosans-bold-18">내 생일 축하받기</p>
+    </a>
+  </div>
 </div>
-
-<div class="content-wrapper">
-    <div class="content-header">
-        <h2 class="total-funding">전체 생일축하</h2>
+<div class="funding-status notosans-bold-20">
+  오늘 생일자 <strong>7</strong>명, 축하메시지 <strong>35</strong>개
+</div>
+<div class="main-title">
+  <div class="notosans-bold-20">오늘 생일자</div>
+  <a href="{%url 'fundings:main_all_birthday_list' %}">
+    <div class="view-all notosans-regular-14">전체보기</div>
+  </a>
+</div>
+{%if today_fundings%}
+{%for funding in today_fundings%}
+<a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <div class="card-container">
+    <div class="card-top">
+      {%if funding.photo.url != null and funding.photo.url != ''%}
+          <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+          {%else%}
+          <img class="card-image" src="{%static 'images/no_img.png'%}" alt="" />
+          {%endif%}
+      <div class="D-day div-btn">
+        <p class="notosans-regular-12">D - {{ today_funding_dday_dict|get_item:funding.user.id }}</p>
+      </div>
     </div>
-    <h1 style = "color:green"> 오늘 생일자 </h1>
-    {%if today_fundings%}
-    <a href="{%url 'fundings:today_funding' %}">오늘 생일자 더 보기</a>
-    {%for funding in today_fundings%}
-    <div class="content-box">
-        {%if funding.photo.url != null and funding.photo.url != ''%}
-        <img src="{{funding.photo.url}}" alt="대체텍스트" />
-        {%else%}
-        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
-        {%endif%}
-        <h3>
-            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
-        </h3>
-        <progress id="file" max="100" value="70">70%</progress>     
-        <h2>펀딩 디데이 :  {{ today_funding_dday_dict|get_item:funding.user.id }} </h2>        
+    <div class="card-title notosans-bold-16">{{funding.title}}</div>
+    <div class="progress-container">
+      <div class="coin-icon"></div>
+      <div class="progress-value-container">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="progress-percent notosans-regular-12">32%</div>
+      </div>
     </div>
-    {%endfor%}
+  </div>
+</a>
+{%endfor%}
     {%else%}
     <div>오늘 생일자가 없습니다.</div>
     {%endif%}
 
-    <h1 style = "color:green">내가 인싸</h1>
-    {%if fundings_in_msg_order%}
-    <a href="{%url 'fundings:msg_funding' %}">내가 인싸 더 보기</a>
-    {%for funding in fundings_in_msg_order%}
-    <div class="content-box">
-        {%if funding.photo.url != null and funding.photo.url != ''%}
-        <img src="{{funding.photo.url}}" alt="대체텍스트" />
-        {%else%}
-        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
-        {%endif%}
-        <h3>
-            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
-        </h3>
-        <progress id="file" max="100" value="70">70%</progress>     
-        <h2>펀딩 디데이 :  {{ msg_funding_dday_dict|get_item:funding.user.id }} </h2>        
+    <div class="main-title">
+      <div class="notosans-bold-20">내가 제일 인싸</div>
+      <a href="{%url 'fundings:main_ranking_list' %}">
+        <div class="view-all notosans-regular-14">순위보기</div>
+      </a>
     </div>
-    {%endfor%}
+  {%if fundings_in_msg_order%}
+  {%for funding in fundings_in_msg_order%}
+<a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <div class="card-container">
+    <div class="card-top">
+      {%if funding.photo.url != null and funding.photo.url != ''%}
+          <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+      {%else%}
+          <img class="card-image" src="{%static 'images/no_img.png'%}" alt="" />
+      {%endif%}
+      <div class="D-day div-btn">
+        <p class="notosans-regular-12">D -  {{ msg_funding_dday_dict|get_item:funding.user.id }}</p>
+      </div>
+    </div>
+    <div class="card-title notosans-bold-16">{{funding.title}}</div>
+    <div class="progress-container">
+      <div class="coin-icon"></div>
+      <div class="progress-value-container">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="progress-percent notosans-regular-12">32%</div>
+      </div>
+    </div>
+  </div>
+</a>
+{%endfor%}
     {%else%}
     <div>진행 중인 펀딩이 없습니다.</div>
     {%endif%}
-
-    <h1 style = "color:green">진행 중인 펀딩</h1>
-    {%if open_fundings %}
-    <a href="{%url 'fundings:open_funding' %}">진행 중인 펀딩 더 보기</a>
-    {%for funding in open_fundings%}
-    <div class="content-box">
-        {%if funding.photo.url != null and funding.photo.url != ''%}
-        <img src="{{funding.photo.url}}" alt="대체텍스트" />
-        {%else%}
-        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
-        {%endif%}
-        <h3>
-            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
-        </h3>
-        <progress id="file" max="100" value="70">70%</progress> 
-        <div class="dday-box">
-            {% with dday=open_funding_dday_dict|get_item:funding.user.id %}
-                {% if dday > 0 %}
-                    <span class="dday"> D-{{dday}} </span>
-                {% elif dday == 0 %}
-                    <span class="dday"> D-Day </span>
-                {% endif %}
-            {% endwith %}
-        </div>     
-
-    </div>
-    {%endfor%}
-    {%else%}
-    <div>진행 중인 펀딩이 없습니다.</div>
-    {%endif%}
-    <!-- 카테고리별로 필터링 해서 전송 -->
+<div class="main-title">
+  <div class="notosans-bold-20">진행 중인 펀딩</div>
+  <a href="{%url 'fundings:main_all_funding_list' %}">
+    <div class="view-all notosans-regular-14">전체보기</div>
+  </a>
 </div>
-{%endblock%}
+{%if open_fundings %}
+{%for funding in open_fundings%}
+<a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <div class="card-container">
+    <div class="card-top">
+      {%if funding.photo.url != null and funding.photo.url != ''%}
+          <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+      {%else%}
+          <img class="card-image" src="{%static 'images/no_img.png'%}" alt="" />
+      {%endif%}
+      <div class="D-day div-btn">
+        <p class="notosans-regular-12">D -  {{ msg_funding_dday_dict|get_item:funding.user.id }}</p>
+      </div>
+    </div>
+    <div class="card-title notosans-bold-16">{{funding.title}}</div>
+    <div class="progress-container">
+      <div class="coin-icon"></div>
+      <div class="progress-value-container">
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="progress-percent notosans-regular-12">32%</div>
+      </div>
+    </div>
+  </div>
+</a>
+{%endfor%}
+    {%else%}
+    <div>진행 중인 펀딩이 없습니다.</div>
+    {%endif%}
+
+{% endblock content %}

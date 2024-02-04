@@ -1,7 +1,7 @@
 {% extends '../base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/mypage_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_list.css' %}">
 {% endblock head %}
 
 {% block header %}
@@ -14,7 +14,7 @@
 {% endblock header %}
 
 {% block content %}
-<a href="{%url 'users:mypage_profile_settings'%}">
+<a href="{%url 'fundings:mypage_profile_setting'%}">
     <div class="mypage-background">
         <div class="mypage-first-section">
             <div class="profile"></div>

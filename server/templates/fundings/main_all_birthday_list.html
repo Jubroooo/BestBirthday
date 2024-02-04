@@ -1,5 +1,5 @@
 {% extends "base.html" %} {%load static%} {% block head %}
-<link rel="stylesheet" href="{% static 'css/all_list.css'%}" /> {% endblock head %}
+<link rel="stylesheet" href="{% static 'css/fundings/all_list.css'%}" /> {% endblock head %}
 {% block header %}
 <a href="{%url 'fundings:main'%}">
   <p class="logo unna-bold-36">Best Birthday</p>
@@ -28,7 +28,7 @@
     {%if funding.photo.url != null and funding.photo.url != ''%}
     <img class="card2-image" src="{{funding.photo.url}}" alt="대체텍스트" />
     {%else%}
-    <img class="card2-image" src="{% static 'fundings/image/no_image.png' %}" alt="" />
+    <img class="card2-image" src="{%static 'images/no_img.png'%}" alt="" />
     {%endif%}
     <div class="card2-right">
         <div class="D-day div-btn">

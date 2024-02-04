@@ -9,9 +9,4 @@ urlpatterns = [
     path('login_info/', login_info, name="login_info"),
     path('redirect_view/', redirect_view, name="redirect_view"),
     path("nickname_profile_input/",nickname_profile_input,name="nickname_profile_input"),
-
-    #채연추가뷰
-    path("mypage_profile_settings/",mypage_profile_settings,name="mypage_profile_settings"),
-    path("nickname_profile_input/",nickname_profile_input,name="nickname_profile_input"),
-   
 ]

@@ -1,12 +1,12 @@
 {% extends '../base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/mypage_payment_guide.css' %}">
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_payment_guide.css' %}">
 {% endblock head %}
 
 {% block header %}
 <div class="payment-guide-title">
-    <a href="{%url 'users:mypage_profile_settings'%}">
+    <a href="{%url 'fundings:mypage_profile_setting'%}">
         <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
     </a>
     <p class="payment-guide-title-for-center notosans-bold-24">송금하기</p>
@@ -16,8 +16,8 @@
 {% block content %}
 <p class="notosans-bold-18">선물받을 계좌를 입력하세요</p>
 <div class="payment-link-btn-container">
-    <button class="payment-btn-kakao div-btn">
-        <img src="../../static/images/kakao-pay.png">
+    <button class="payment-btn-toss div-btn">
+        <img src="../../static/images/toss-pay.png">
     </button>
 </div>
 <p class="mandatory notosans-regular-12 ">*필수</p>

@@ -1,5 +1,5 @@
 {% extends "base.html" %} {%load static%} {% block head %}
-<link rel="stylesheet" href="{% static 'css/mypage_funding_list.css'%}" /> {% endblock head %}
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_list.css'%}" /> {% endblock head %}
 {% block header %}
 <div class="mypage-title">
   <a href="{%url 'fundings:mypage_list'%}">
@@ -16,7 +16,7 @@
           {%if funding.photo.url != null and funding.photo.url != ''%}
               <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
               {%else%}
-              <img class="card-image" src="{% static 'fundings/image/no_image.png' %}" alt="" />
+              <img class="card-image" src="{%static 'images/no_img.png'%}" alt="" />
               {%endif%}
           <div class="D-day div-btn">
             <p class="notosans-regular-12">D - {{ today_funding_dday_dict|get_item:funding.user.id }}</p>

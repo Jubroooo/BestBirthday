@@ -1,7 +1,7 @@
 {% extends '../base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/fundings_my_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/fundings/fundings_my_detail.css' %}">
 {% endblock head %}
 
 {% block header %}
@@ -14,7 +14,7 @@
 {%block content%}
 <div class="image">
     <p>
-        <img src="../../static/fundings/image/no_img.png"/>
+        <img src="{%static 'images/no_img.png'%}"/>
     </p>
 {% if funding.photo %}
     <p>
