@@ -1,0 +1,29 @@
+
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/create_payment.css'%}" /> {% endblock head %}
+{% block header %}
+
+    <div><i class="ri-arrow-left-s-line"></i></div>
+    <div class="header-title notosans-bold-20">송금링크 설정</div>
+    <div></div>
+  
+{% endblock header %} {% block content %}
+
+<div class="payment_description">
+    <p class="notosans-bold-24">잠깐! 선물을 받으려면</p>
+    <p class="notosans-bold-24">송금링크부터 만들어주세요</p>
+</div>
+
+<div class="notosans-bold-20">송금 링크 추가</div>
+<div class="payment-description">* 카카오페이 필수</div>
+<div class="payment-link-btn-container">
+    <div class="payment-btn-kakao div-btn">
+        <div></div>
+    </div>
+    <div class="payment-btn-toss div-btn">
+        <div></div>
+    </div>
+</div>
+<div class="div-btn create_payment_btn"><p class="notosans-bold-20">펀딩 생성하러 가기</p></div>
+
+{% endblock content %}

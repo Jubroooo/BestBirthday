@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
 import copy
+from django.db.models.functions import Length
 
 #딕셔너리 필터링 함수
 @register.filter
@@ -44,11 +45,11 @@ def main(request) :
             "msg_funding_progress_dict" : msg_funding_progress_dict,
             "open_funding_progress_dict" : open_funding_progress_dict,
             }
-        return render(request, 'fundings/main.html', ctx)
+        return render(request, 'fundings/main2.html', ctx)
     else:
-        return render(request, 'fundings/main.html')
+        return render(request, 'fundings/main2.html')
 
-def create(request) :
+def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
             funding = Funding()
@@ -83,27 +84,7 @@ def detail(request, pk) :
 
     return render(request, 'fundings/fundings_detail.html', ctx)
 
-def delete(request, pk) :
-    if request.method == "POST":
-        posts = Funding.objects.get(id=pk)
-        posts.delete()
-        # = Post.objects.get(id=pk).delete()
-    return redirect('fundings:main')
-
-def update(request, pk) :
-    post=Funding.objects.get(id=pk)
-    
-    if request.method=='GET':
-        form = FundingForm(instance=post)
-        ctx = {'form':form, 'pk':pk}
-        return render(request, 'fundings/fundings_update.html', ctx)
-    
-    form=FundingForm(request.POST, request.FILES, instance=post)
-    if form.is_valid():
-        form.save()
-    return redirect('fundings:detail', pk)
-
-def create_message(request, pk) :
+def create_gift(request, pk) :
     funding = Funding.objects.get (id = pk)
     if request.user.is_authenticated:
         if request.method == "GET":
@@ -162,8 +143,13 @@ def create_message(request, pk) :
                     "form": form, 'funding' : funding
                 }
                 return render (request, 'fundings/fundings_message_create.html', ctx)
+def create_payment(request):
+    return render(request, 'fundings/create_payment.html')
 
-
+def create_gift_complete(request):
+    pass
+def create_gift_modal(request):
+    pass
 def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
@@ -198,7 +184,7 @@ def birthday_dday_cal(funding):
     return dday
     # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
 
-def today_funding(request):
+def main_all_birthday_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         today = date.today()
@@ -209,10 +195,10 @@ def today_funding(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_today_funding.html', ctx)
-    return render (request, 'fundings/fundings_today_funding.html')
+        return render (request, 'fundings/main_all_birthday_list.html', ctx)
+    return render (request, 'fundings/main_all_birthday_list.html')
 
-def msg_funding(request):
+def main_ranking_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         fundings = fundings.order_by('-msg_count')
@@ -222,10 +208,10 @@ def msg_funding(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_msg_funding.html', ctx)
-    return render (request, 'fundings/fundings_msg_funding.html')
+        return render (request, 'fundings/main_ranking_list.html', ctx)
+    return render (request, 'fundings/main_ranking_list.html')
 
-def open_funding(request):
+def main_all_funding_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
         fundings = fundings.order_by(Random())
@@ -247,3 +233,35 @@ def funding_progress(fundings):
         funding_progress_dict[user.id] = int(funding.total_price / funding.goal_price * 100)
 
     return copy.deepcopy(funding_progress_dict)
+
+def result_start(request, pk):
+    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
+    print (funding_msgs)
+    if funding_msgs.exists():
+        earliest_msg = funding_msgs.earliest('written_date')
+        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+        ctx = {
+            'pk': pk,
+            'earliest_msg': earliest_msg,
+            'longest_msg': longest_msg,
+        }
+        return render (request, 'fundings/fundings_view_messages.html', ctx)
+    else:
+        return render (request, 'fundings/fundings_view_messages.html')
+
+
+def result_list(request, pk):
+    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
+    funding_msg_count = funding_msgs.count()
+    ctx = {
+        "funding_msg_count": funding_msg_count,
+        "funding_msgs": funding_msgs,
+    }
+    return render (request, 'fundings/fundings_view_all_messages.html', ctx)
+
+def result_detail (request, pk):
+    funding_msg = Funding_Msg.objects.get(id=pk)
+    ctx = {
+        "funding_msg": funding_msg,
+    }
+    return render (request, "fundings/funding_msg_detail.html", ctx)
