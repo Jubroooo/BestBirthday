@@ -1,6 +1,7 @@
 /* card2 CSS */
 .card2-container {
   flex-direction: row;
+  position: relative;
 }
 #main-container {
     gap: var(--gutter24);
@@ -26,11 +27,16 @@
     width: 100%;
 }
 .D-day{
-    width: 5rem;
+  position: absolute; 
+  top: var(--gutter16); 
+  right: var(--gutter16);  
     height: 2rem;
     font-weight: bold;
 }
 .progress-container{
-    width: 100%;
-    padding:0;
+  position: absolute;
+  bottom: var(--gutter16); 
+  right: var(--gutter16);
+  width: 55%;
+  padding:0;
 }
