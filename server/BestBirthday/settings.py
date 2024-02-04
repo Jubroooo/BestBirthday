@@ -12,9 +12,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+
+environ.Env.read_env(BASE_DIR/ '../.env')
+
+MYSQL_DBNAME = env('MYSQL_DBNAME')
+MYSQL_USERNAME = env('MYSQL_USERNAME')
+MYSQL_PASSWORD = env('MYSQL_PASSWORD')
+MYSQL_DBHOST = env('MYSQL_DBHOST')
+MYSQL_DBPORT = env('MYSQL_DBPORT')
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +38,7 @@ SECRET_KEY = "django-insecure-(ivmf3rfsm$xl53y%73@t&+9n9jazbd534hd#q&e9ctnx-&yr0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -107,10 +119,14 @@ SITE_ID = 7
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DBNAME,
+        'USER': MYSQL_USERNAME,
+        'PASSWORD': MYSQL_PASSWORD,
+        'HOST': MYSQL_DBHOST,
+        'PORT': MYSQL_DBPORT,
+    },
 }
 
 
