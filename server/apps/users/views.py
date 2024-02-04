@@ -7,7 +7,7 @@ from django.contrib import auth
 # def birth_input(request):
 #     return render(request,'users/birth_input.html')
 #채연추가뷰--------------------------------------
-def birth_input(request):
+def login_info(request):
     return render(request,'users/birth_input.html')
 def mypage_list(request):
     return render(request,'users/mypage_list.html')
@@ -29,19 +29,19 @@ def logout(request):
     auth.logout(request)
     return redirect ('fundings:main')
 
-def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카오에서 받는 건지 
-    user = request.user
-    if request.method == "POST":
-        form = UserProfileUpdateForm(request.POST, request.FILES, instance = user)
-        if form.is_valid():
-            form.save()
-            return redirect ('fundings:main')
-    else:
-        form = UserProfileUpdateForm(instance=user)
-    ctx = {
-        "form": form,
-    }        
-    return render (request, 'users/users_update.html', ctx)  
+# def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카오에서 받는 건지 
+#     user = request.user
+#     if request.method == "POST":
+#         form = UserProfileUpdateForm(request.POST, request.FILES, instance = user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect ('fundings:main')
+#     else:
+#         form = UserProfileUpdateForm(instance=user)
+#     ctx = {
+#         "form": form,
+#     }        
+#     return render (request, 'users/users_update.html', ctx)  
 
 def redirect_view(request):
     if request.user.is_authenticated:

@@ -29,9 +29,17 @@ def main(request) :
         today_funding_dday_dict = funding_dday_cal(today_fundings)
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
-    funding = Funding.objects.all()
-    ctx = {"fundings" : funding}
-    return render(request, 'fundings/main2.html', ctx)
+
+        ctx = {"today_fundings": today_fundings, 
+        "today_funding_dday_dict": today_funding_dday_dict,
+        "fundings_in_msg_order": fundings_in_msg_order,
+        "msg_funding_dday_dict": msg_funding_dday_dict,
+        "open_fundings": open_fundings,
+        "open_funding_dday_dict": open_funding_dday_dict
+        }
+        return render(request, 'fundings/main2.html', ctx)
+    else:
+        return render(request, 'fundings/main2.html')
 
 def create(request) :
     if request.method == 'GET':
@@ -49,13 +57,6 @@ def detail(request) :
     return render(request, 'fundings/fundings_detail.html')
 def my_detail(request) :
     return render(request, 'fundings/fundings_my_detail.html')
-
-#기존꺼
-# def detail(request, pk) :
-#     funding = Funding.objects.get(id=pk)
-#     progress = int(funding.total_price / funding.goal_price * 100)
-#     ctx = {'funding':funding, 'progress':progress}    
-#     return render(request, 'fundings/fundings_detail.html', ctx)
 def result_modal(request):
     return render(request,'fundings/result_modal.html')
 def result_start(request):
@@ -66,104 +67,103 @@ def result_detail(request):
     return render(request,'fundings/result_detail.html')
 def gift_complete(request):
     return render(request,'fundings/gift_complete.html')
-def create_payment(request):
-    return render(request,'fundings/create_payment.html')
+def create_funding(request):
+    return render(request,'fundings/create_funding.html')
 def create_gift(request):
     return render(request,'fundings/create_gift.html')
 
-def create_funding(request) :
-    if request.user.is_authenticated:
-        if request.method == 'GET':
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(instance=funding)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/fundings_create.html', ctx)
-        #post일때
-        elif request.method == "POST":
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(request.POST, request.FILES, instance=funding)
-            if form.is_valid():
-                form.save()
-                funding_id = funding.id
-                return redirect('fundings:main')
-            else:
-                ctx = {
-                    "form": form
-                }
-                return render (request, 'fundings/fundings_create.html', ctx)
-    else:
-        return redirect('users:login')
-def detail(request, pk) :
-    funding = Funding.objects.get(id=pk)
-    progress = int(funding.total_price / funding.goal_price * 100)
-    dday = birthday_dday_cal(funding)
-    ctx = {'funding':funding, 'progress':progress, "dday":dday}    
+# def create_funding(request) :
+#     if request.user.is_authenticated:
+#         if request.method == 'GET':
+#             funding = Funding()
+#             funding.user = request.user
+#             form = FundingForm(instance=funding)
+#             ctx = {
+#                 'form':form
+#             }
+#             return render(request, 'fundings/fundings_create.html', ctx)
+#         #post일때
+#         elif request.method == "POST":
+#             funding = Funding()
+#             funding.user = request.user
+#             form = FundingForm(request.POST, request.FILES, instance=funding)
+#             if form.is_valid():
+#                 form.save()
+#                 funding_id = funding.id
+#                 return redirect('fundings:main')
+#             else:
+#                 ctx = {
+#                     "form": form
+#                 }
+#                 return render (request, 'fundings/fundings_create.html', ctx)
+#     else:
+#         return redirect('users:login')
+# def detail(request, pk) :
+#     funding = Funding.objects.get(id=pk)
+#     progress = int(funding.total_price / funding.goal_price * 100)
+#     dday = birthday_dday_cal(funding)
+#     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
+    # return render(request, 'fundings/fundings_detail.html', ctx)
 
-    return render(request, 'fundings/fundings_detail.html', ctx)
-
-def create_gift(request, pk) :
-    funding = Funding.objects.get (id = pk)
-    if request.user.is_authenticated:
-        if request.method == "GET":
-            funding_msg = Funding_Msg()
-            funding_msg.user = request.user
-            funding_msg.post = funding
-            form = MessageForm(instance=funding_msg)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/fundings_message_create.html', ctx)
+# def create_gift(request, pk) :
+#     funding = Funding.objects.get (id = pk)
+#     if request.user.is_authenticated:
+#         if request.method == "GET":
+#             funding_msg = Funding_Msg()
+#             funding_msg.user = request.user
+#             funding_msg.post = funding
+#             form = MessageForm(instance=funding_msg)
+#             ctx = {
+#                 'form':form
+#             }
+#             return render(request, 'fundings/fundings_message_create.html', ctx)
         
-        elif request.method == "POST":
-            funding_msg = Funding_Msg()
-            funding_msg.user = request.user
-            funding_msg.post = funding
-            form = MessageForm(request.POST, instance=funding_msg)
-            if form.is_valid():
-                form.save()
-                funding.total_price = funding.total_price + funding_msg.funding_price 
-                funding.msg_count += 1
-                if funding.total_price >= funding.goal_price:
-                    funding.is_achieved = True
-                funding.save()
-                return redirect('fundings:main')
-            else:
-                ctx = {
-                    "form": form
-                }
-                return render (request, 'fundings/fundings_message_create.html', ctx)
+#         elif request.method == "POST":
+#             funding_msg = Funding_Msg()
+#             funding_msg.user = request.user
+#             funding_msg.post = funding
+#             form = MessageForm(request.POST, instance=funding_msg)
+#             if form.is_valid():
+#                 form.save()
+#                 funding.total_price = funding.total_price + funding_msg.funding_price 
+#                 funding.msg_count += 1
+#                 if funding.total_price >= funding.goal_price:
+#                     funding.is_achieved = True
+#                 funding.save()
+#                 return redirect('fundings:main')
+#             else:
+#                 ctx = {
+#                     "form": form
+#                 }
+#                 return render (request, 'fundings/fundings_message_create.html', ctx)
     
-    else:
-        if request.method == "GET":
-            funding_msg = Funding_Msg()
-            funding_msg.post = funding
-            form = MessageForm(instance=funding_msg)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/fundings_message_create.html', ctx)
+#     else:
+#         if request.method == "GET":
+#             funding_msg = Funding_Msg()
+#             funding_msg.post = funding
+#             form = MessageForm(instance=funding_msg)
+#             ctx = {
+#                 'form':form
+#             }
+#             return render(request, 'fundings/fundings_message_create.html', ctx)
         
-        elif request.method == "POST":
-            funding_msg = Funding_Msg()
-            funding_msg.post = funding
-            form = MessageForm(request.POST, instance=funding_msg)
-            if form.is_valid():
-                form.save()
-                funding.total_price = funding.total_price + funding_msg.funding_price 
-                funding.msg_count += 1
-                if funding.total_price >= funding.goal_price:
-                    funding.is_achieved = True
-                funding.save()
-                return redirect('fundings:main')
-            else:
-                ctx = {
-                    "form": form
-                }
-                return render (request, 'fundings/fundings_message_create.html', ctx)
+#         elif request.method == "POST":
+#             funding_msg = Funding_Msg()
+#             funding_msg.post = funding
+#             form = MessageForm(request.POST, instance=funding_msg)
+#             if form.is_valid():
+#                 form.save()
+#                 funding.total_price = funding.total_price + funding_msg.funding_price 
+#                 funding.msg_count += 1
+#                 if funding.total_price >= funding.goal_price:
+#                     funding.is_achieved = True
+#                 funding.save()
+#                 return redirect('fundings:main')
+#             else:
+#                 ctx = {
+#                     "form": form
+#                 }
+#                 return render (request, 'fundings/fundings_message_create.html', ctx)
 def create_payment(request):
     return render(request, 'fundings/create_payment.html')
 
@@ -247,36 +247,36 @@ def main_all_funding_list(request):
     return render (request, 'fundings/main_all_funding_list.html')
 
 
-def result_start(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-    print (funding_msgs)
-    if funding_msgs.exists():
-        earliest_msg = funding_msgs.earliest('written_date')
-        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
-        ctx = {
-            'pk': pk,
-            'earliest_msg': earliest_msg,
-            'longest_msg': longest_msg,
-        }
-        return render (request, 'fundings/fundings_view_messages.html', ctx)
-    else:
-        return render (request, 'fundings/fundings_view_messages.html')
+# def result_start(request, pk):
+#     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
+#     print (funding_msgs)
+#     if funding_msgs.exists():
+#         earliest_msg = funding_msgs.earliest('written_date')
+#         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+#         ctx = {
+#             'pk': pk,
+#             'earliest_msg': earliest_msg,
+#             'longest_msg': longest_msg,
+#         }
+#         return render (request, 'fundings/fundings_view_messages.html', ctx)
+#     else:
+#         return render (request, 'fundings/fundings_view_messages.html')
 
 
-def result_list(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
-    funding_msg_count = funding_msgs.count()
-    ctx = {
-        "funding_msg_count": funding_msg_count,
-        "funding_msgs": funding_msgs,
-    }
+# def result_list(request, pk):
+#     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
+#     funding_msg_count = funding_msgs.count()
+#     ctx = {
+#         "funding_msg_count": funding_msg_count,
+#         "funding_msgs": funding_msgs,
+#     }
     
-    return render (request, 'fundings/fundings_view_all_messages.html', ctx)
+#     return render (request, 'fundings/fundings_view_all_messages.html', ctx)
 
-def result_detail (request, pk):
-    funding_msg = Funding_Msg.objects.get(id=pk)
-    ctx = {
-        "funding_msg": funding_msg,
-    }
+# def result_detail (request, pk):
+#     funding_msg = Funding_Msg.objects.get(id=pk)
+#     ctx = {
+#         "funding_msg": funding_msg,
+#     }
     
-    return render (request, "fundings/funding_msg_detail.html", ctx)
+#     return render (request, "fundings/funding_msg_detail.html", ctx)

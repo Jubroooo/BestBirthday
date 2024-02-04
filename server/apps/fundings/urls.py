@@ -36,4 +36,5 @@ urlpatterns = [
     path("result_list/",result_list,name="result_list"),
     path("result_detail/",result_detail,name="result_detail"),
     path("gift_complete/",gift_complete,name="gift_complete"),
+    path("create_gift/",create_gift,name="create_gift"),
 ]
