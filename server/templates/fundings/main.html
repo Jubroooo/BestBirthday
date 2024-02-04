@@ -66,7 +66,7 @@
         <h3>
             <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
         </h3>
-        <progress id="file" max="100" value="70">70%</progress> 
+        <progress id="file" max="100" value="70">{{open_funding_progress_dict|get_item:funding.user.id}}</progress> 
         <div class="dday-box">
             {% with dday=open_funding_dday_dict|get_item:funding.user.id %}
                 {% if dday > 0 %}

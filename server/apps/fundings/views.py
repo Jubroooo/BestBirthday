@@ -17,7 +17,7 @@ def main(request) :
     open_fundings = Funding.objects.filter(is_closed=False).order_by(Random())
     if open_fundings.exists():
         today = date.today()
-        today_fundings = open_fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
+        today_fundings = open_fundings.filter(user__birthday__month = today.month, user__birthday__day = today.day) 
         today_fundings = today_fundings[:3]
         
         fundings_in_msg_order = open_fundings.order_by('-msg_count')
@@ -29,6 +29,9 @@ def main(request) :
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
     
+        today_funding_progress_dict = funding_progress(today_fundings)
+        msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
+        open_funding_progress_dict = funding_progress(open_fundings)
             
 
         ctx = {"today_fundings": today_fundings, 
@@ -36,7 +39,10 @@ def main(request) :
             "fundings_in_msg_order": fundings_in_msg_order,
             "msg_funding_dday_dict": msg_funding_dday_dict,
             "open_fundings": open_fundings,
-            "open_funding_dday_dict": open_funding_dday_dict
+            "open_funding_dday_dict": open_funding_dday_dict,
+            "today_funding_progress_dict" : today_funding_progress_dict,
+            "msg_funding_progress_dict" : msg_funding_progress_dict,
+            "open_funding_progress_dict" : open_funding_progress_dict,
             }
         return render(request, 'fundings/main.html', ctx)
     else:
@@ -71,7 +77,7 @@ def create(request) :
     
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
-    progress = int(funding.total_price / funding.goal_price * 100)
+    progress = funding_progress(funding)
     dday = birthday_dday_cal(funding)
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
 
@@ -231,3 +237,13 @@ def open_funding(request):
     
         return render (request, 'fundings/fundings_open_funding.html', ctx)
     return render (request, 'fundings/fundings_open_funding.html')
+
+#펀딩 진행률 함수
+def funding_progress(fundings):
+    funding_progress_dict = {} #펀딩 진행 딕셔너리
+
+    for funding in fundings:
+        user = funding.user
+        funding_progress_dict[user.id] = int(funding.total_price / funding.goal_price * 100)
+
+    return copy.deepcopy(funding_progress_dict)
