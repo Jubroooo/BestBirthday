@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block content%}
+<div class="content-welcome">
+    환영화면
+    <a href="{%url 'fundings:create'%}">내 생일 축하받기</a>
+</div>
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <h2 class="total-funding">전체 생일축하</h2>
+    </div>
+    <h1 style = "color:green"> 오늘 생일자 </h1>
+    {%if today_fundings%}
+    <a href="{%url 'fundings:today_funding' %}">오늘 생일자 더 보기</a>
+    {%for funding in today_fundings%}
+    <div class="content-box">
+        {%if funding.photo.url != null and funding.photo.url != ''%}
+        <img src="{{funding.photo.url}}" alt="대체텍스트" />
+        {%else%}
+        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
+        {%endif%}
+        <h3>
+            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
+        </h3>
+        <progress id="file" max="100" value="70">70%</progress>     
+        <h2>펀딩 디데이 :  {{ today_funding_dday_dict|get_item:funding.user.id }} </h2>        
+    </div>
+    {%endfor%}
+    {%else%}
+    <div>오늘 생일자가 없습니다.</div>
+    {%endif%}
+
+    <h1 style = "color:green">내가 인싸</h1>
+    {%if fundings_in_msg_order%}
+    <a href="{%url 'fundings:msg_funding' %}">내가 인싸 더 보기</a>
+    {%for funding in fundings_in_msg_order%}
+    <div class="content-box">
+        {%if funding.photo.url != null and funding.photo.url != ''%}
+        <img src="{{funding.photo.url}}" alt="대체텍스트" />
+        {%else%}
+        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
+        {%endif%}
+        <h3>
+            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
+        </h3>
+        <progress id="file" max="100" value="70">70%</progress>     
+        <h2>펀딩 디데이 :  {{ msg_funding_dday_dict|get_item:funding.user.id }} </h2>        
+    </div>
+    {%endfor%}
+    {%else%}
+    <div>진행 중인 펀딩이 없습니다.</div>
+    {%endif%}
+
+    <h1 style = "color:green">진행 중인 펀딩</h1>
+    {%if open_fundings %}
+    <a href="{%url 'fundings:open_funding' %}">진행 중인 펀딩 더 보기</a>
+    {%for funding in open_fundings%}
+    <div class="content-box">
+        {%if funding.photo.url != null and funding.photo.url != ''%}
+        <img src="{{funding.photo.url}}" alt="대체텍스트" />
+        {%else%}
+        <img src="{% static 'fundings/image/no_image.png' %}" alt="" />
+        {%endif%}
+        <h3>
+            <a href="{%url 'fundings:detail' pk=funding.pk%}" class="funding-title">{{funding.title}}</a>
+        </h3>
+        <progress id="file" max="100" value="70">70%</progress> 
+        <div class="dday-box">
+            {% with dday=open_funding_dday_dict|get_item:funding.user.id %}
+                {% if dday > 0 %}
+                    <span class="dday"> D-{{dday}} </span>
+                {% elif dday == 0 %}
+                    <span class="dday"> D-Day </span>
+                {% endif %}
+            {% endwith %}
+        </div>     
+
+    </div>
+    {%endfor%}
+    {%else%}
+    <div>진행 중인 펀딩이 없습니다.</div>
+    {%endif%}
+    <!-- 카테고리별로 필터링 해서 전송 -->
+</div>
+{%endblock%}

@@ -9,4 +9,4 @@ class FundingForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     class Meta():
         model = Funding_Msg
-        fields = ['comment_name', 'content', 'funding_price']
+        fields = ['funding_price', 'comment_name', 'content']

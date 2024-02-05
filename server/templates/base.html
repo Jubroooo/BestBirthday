@@ -1,25 +1,48 @@
-{%load static%}
-{% load socialaccount %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BestBirthday</title>
-    {%block head%} {%endblock%}
-</head>
-<body>
-    <header>
-        <a href="{% url 'fundings:main' %}">Best Birthday</a>
-        {% if user.is_authenticated %}
-        <p>{{user}}</p>
-        <li><a href="{% url 'users:logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% provider_login_url 'kakao'%}"> 카카오 로그인 </a></li> 
-        <li><a href="{% provider_login_url 'naver' %}"> 네이버 로그인 </a></li> 
-        <li><a href="{% provider_login_url 'google' %}">Google 로그인</a></li>  
-        {% endif %}
-    </header>
-    {%block content%} {%endblock%}
-</body>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Noto+Sans+KR:wght@100..900&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}" />
+    <script src="https://kit.fontawesome.com/5658349e28.js" crossorigin="anonymous"></script>
+    {% block head %} {% endblock head %}
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div id="header-container">
+          {% block header %} {% endblock header %}
+        </div>
+      </header>
+      <main>
+        <div id="main-container">
+          {% block content %} {% endblock content %}
+        </div>
+        {% block content2 %} {% endblock content2 %}
+      </main>
+    </div>
+    <script></script>
+    {% block script %}{% endblock script %}
+  </body>
 </html>
