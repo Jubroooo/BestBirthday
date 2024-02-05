@@ -258,8 +258,8 @@ def main_all_funding_list(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_open_funding.html', ctx)
-    return render (request, 'fundings/fundings_open_funding.html')
+        return render (request, 'fundings/main_all_funding_list.html', ctx)
+    return render (request, 'fundings/main_all_funding_list.html')
 
 #펀딩 진행률 함수
 def funding_progress(fundings):
