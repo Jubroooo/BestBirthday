@@ -67,7 +67,7 @@ def main(request) :
             "msg_funding_progress_dict" : msg_funding_progress_dict,
             "open_funding_progress_dict" : open_funding_progress_dict,
             }
-        return render(request, 'fundings/main2.html', ctx)
+        return render(request, 'fundings/main.html', ctx)
     else:
         return render(request, 'fundings/main.html')
 
@@ -300,10 +300,6 @@ def funding_progress(fundings):
 #         "funding_msg": funding_msg,
 #     }
 #     return render(request, "fundings/funding_msg_detail.html", ctx)
-
-def funding_progress(funding):
-    progress = int(funding.total_price / funding.goal_price * 100)
-    return progress
 
     
 # 마이페이지 백 작업 필요

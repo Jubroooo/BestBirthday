@@ -38,12 +38,18 @@
 
     <p class="notosans-bold-18">계좌를 선택하세요</p>
     <div class="payment-link-btn-container">
-        <button class="payment-btn-kakao div-btn" id="kakaoTransferLink">
-            <a href="{{funding.user.kakao_account}}"><img src="{%static 'images/kakao-pay.png'%}"></a>
-        </button>
-        <button class="payment-btn-toss div-btn " id="tossTransferLink">
-            <a href="{{funding.user.toss_account}}"><img src="{%static 'images/toss-pay.png'%}"></a>
-        </button>
+        <div class="payment-btn-kakao div-btn transfer-btn" id="kakaoTransferLink">
+            <a href="{{funding.user.kakao_account}}">
+                <img src="{%static 'images/kakao-pay.png'%}">
+            </a>
+        </div>        
+
+        <div class="payment-btn-toss div-btn transfer-btn" id="tossTransferLink">
+            <a href="{{funding.user.toss_account}}">
+                <img src="{%static 'images/toss-pay.png'%}">
+            </a>
+        </div>
+
     </div>
 
     <div class="input-group-create-gift">
@@ -81,7 +87,7 @@
         });
 
         //송금링크에 금액 추가
-        const transferButtons = document.querySelectorAll(".div-btn");
+        const transferButtons = document.querySelectorAll(".transfer-btn");
 
         const originalKakaoURL = document.getElementById("kakaoTransferLink").querySelector("a").href;
         const originalTossURL = document.getElementById("tossTransferLink").querySelector("a").href;
