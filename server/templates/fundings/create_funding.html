@@ -26,15 +26,10 @@
         </div>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">얼마?</p>
-            <input name="goal_price" value="10000"> 
-            <div class="progress-value-container">
-                <div class="progress-bar">
-                <div class="progress"></div>
-                </div>
-            </div>
-            <div class="funding-price">
-                <p class="notosans-regular-14">0</p>
-                <p class="notosans-regular-14">100,000</p>
+            <div class="slider-container">
+                <input type="range" id="price-slider" min="0" max="100000" value="0" step="100">
+                <span id="price-display" class="notosans-bold-16">0</span>원
+                <input type="hidden" name="goal_price" id="goal-price" value="0">
             </div>
         </div>
         <div class="funding-image">
@@ -56,3 +51,12 @@
 </form>
 {% endblock  %}
 
+{% block script %}
+<script>
+    document.getElementById('price-slider').addEventListener('input', function(e) {
+        var price = e.target.value;
+        document.getElementById('price-display').textContent = price.toLocaleString(); // 금액을 천 단위로 구분하여 표시
+        document.getElementById('goal-price').value = price; // 서버로 전송될 hidden input의 값을 업데이트
+    });
+</script>
+{% endblock %}

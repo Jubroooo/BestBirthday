@@ -21,11 +21,7 @@
     height: 20vh;
     background-color: var(--BB_color_white);
 }
-.funding-price{
-    display: flex;
-    justify-content:space-between;
-    margin: 0 var(--gutter16);
-}
+
 .to-friends{
     display: flex;
     gap:var(--gutter16);
@@ -108,4 +104,12 @@ textarea {
 }
 #photo-upload{
     display: none;
+}
+
+#price-slider {
+    width: 100%;
+}
+
+#price-display {
+    color: var(--BB_color_orange);
 }
