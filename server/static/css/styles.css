@@ -123,21 +123,20 @@ a{
   align-items: end;
   width: 100%;
 }
-.progress-bar {
-  position: relative;
+progress {
+  -webkit-appearance: none;
+  height: 1rem;
   width: 100%;
-  height: 10px;
-  background-color: var(--BB_color_blue);
-  border-radius: 11px;
 }
-.progress {
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 100%;
+
+::-webkit-progress-bar {
+  background-color: var(--BB_color_blue);
+  border-radius: 1.1rem;
+}
+
+::-webkit-progress-value {
   background-color: var(--BB_color_orange);
-  border-radius: 11px;
-  width: 32%; /*프로그레스 value*/
+  border-radius: 1.1rem;
 }
 .progress-percent {
   position: relative;

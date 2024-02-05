@@ -7,7 +7,9 @@
 
 {% block header %}
 <div class="create-gift-title">
-    <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    <a href="{%url 'fundings:detail' pk=funding.pk%}">
+        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    </a>
     <p class="create-gift-title-for-center notosans-bold-24">선물하기</p>
 </div>
 {% endblock header %}
