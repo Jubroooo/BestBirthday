@@ -1,4 +1,4 @@
-z{% extends '../base.html' %}
+{% extends '../base.html' %}
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fundings/detail.css' %}">
@@ -27,22 +27,22 @@ z{% extends '../base.html' %}
 {% endif %}</div>
 
 <div class="detail-wrapper">
-    <div class="notosans-bold-20" style="color: var(--BB_color_white); margin-top: 1rem;">{{funding.title}}</div>
-    <div class="funding-info notosans-regular-12" style="color:gray;">{{funding.content}}</div>
+    <div class="notosans-bold-20 detail-funding-title">{{funding.title}}</div>
+    <div class="funding-info notosans-regular-12">{{funding.content}}</div>
     <div class="percentage-container">
-        <div class="user-birthday notosans-bold-16" style="color: var(--BB_color_white);">모인 금액 : {{funding.total_price}}원</div>
-        <div class="current-progress notosans-bold-16" style="color: var(--BB_color_orange);">{{progress}}%</div>
+        <div class="user-birthday notosans-bold-16" >모인 금액 : {{funding.total_price}}원</div>
+        <div class="current-progress notosans-bold-16">{{progress}}%</div>
     </div>
     <div class="progress-bar">
-        <div class="progress" style="width: {{progress}}%;"></div>
+        <progress value="{{progress}}" max="100"></progress>
     </div>
-    <div class="participate-num notosans-bold-16" style="color: var(--BB_color_white);">참여 인원</div>
-    <div class="notosans-bold-16" style="color: var(--BB_color_white);">
-        <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/target.svg" style="vertical-align: middle;"></p>
+    <div class="participate-num notosans-bold-16">참여 인원<strong>{{funding.msg_count}}</strong>명</div>
+    <div class="notosans-bold-16">
+        <p class="detail-styles"><img  class="detial-img"src="{%static 'images/target.svg'%}"></p>
         목표 금액 {{funding.goal_price}}원
     </div>
-    <div class="notosans-bold-16" style="color: var(--BB_color_white);">
-        <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/cake.svg"  style="vertical-align: middle;"></p>
+    <div class="notosans-bold-16">
+        <p class="detail-styles"><img class="detial-img" src="{%static 'images/cake.svg'%}" ></p>
         친구 생일  {{funding.user.birthday}}
           {% if dday < 0 %}
               <span class="dday"> D{{dday}} </span>
@@ -53,8 +53,8 @@ z{% extends '../base.html' %}
           {% endif %}
     </div>
     <a href="{{funding.present_link}}" target="_blank">
-        <div class="gift-to-buy notosans-bold-16" style="color: var(--BB_color_white);" onclick="">
-            <p style="display: inline-block; margin: 0; vertical-align: middle;"><img src="../../static/images/computer.png" style="vertical-align: middle;"></p>
+        <div class="gift-to-buy notosans-bold-16">
+            <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
             내가 사줄 물건 보기</div>
     </a>
     

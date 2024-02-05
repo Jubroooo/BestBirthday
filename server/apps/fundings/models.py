@@ -15,7 +15,7 @@ class Funding(models.Model) :
     #작성자
     user=models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = '작성자', related_name='funding_user')
     #펀딩 개설일
-    created_date = models.DateTimeField('작성일', auto_created=True, auto_now_add=True) #auto_now_add > 데이터베이스에 추가될때 // auto_create 생성해라
+    created_date = models.DateTimeField('작성일', auto_now_add=True) #auto_now_add > 데이터베이스에 추가될때 // auto_create 생성해라
     # is_closed = models.BooleanField('완료 여부', default = False)
     def __str__(self):
         return f'{self.title}'
@@ -26,4 +26,4 @@ class Funding_Msg(models.Model) :
     comment_name = models.CharField('친구에게 보여질 이름', max_length=12)
     funding_price = models.IntegerField('선물금액', default=0, null=True)
     content = models.TextField('축하 메시지') 
-    written_date = models.DateTimeField('메시지 작성일', auto_created=True, auto_now_add=True)
+    written_date = models.DateTimeField('메시지 작성일', auto_now_add=True)

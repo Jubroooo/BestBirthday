@@ -6,16 +6,32 @@
 {% endblock head %} 
 
 {% block content %}
-        <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
+<form method="post">
+    {% csrf_token %}
+    <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
     <div class="nickname_img_wrapper">
         <p class="notosans-bold-18">프로필 설정</p>
-        <div class="profile-for-center">
-            <img class="input-profile-img"src="../../static/images/default_profile.png">
-        </div>
-        <p class="notosans-bold-18">닉네임 설정</p>
-        <input type="text" class="nickname-input" placeholder="닉네임을 입력하세요.">
-        <a href="{% url 'fundings:main' %}" class="div-btn setting-btn">
-            <p class="notosans-bold-18">확인</p>
-        </a>
+        <label for="profile-upload" class="profile-for-center">
+            <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
+            <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
+        </label>
+        <p class="notosans-bold-18">닉네임을 입력하세요</p>
+        <textarea class="add-nickname" name="nickname"></textarea>
+        <button type="submit"class="div-btn setting-btn">
+            <a href="{% url 'fundings:main' %}"class="notosans-bold-18">확인</a>
+        </button>
     </div>
+</form>
 {% endblock content %}
+<!-- 사진 첨부 후 미리보기 위해 자바스크립트 사용 -->
+{% block script %}
+<script>
+    var loadFile = function(event) {
+        var output = document.querySelector('.input-profile-img');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거
+        }
+    };
+</script>
+{% endblock script %}
