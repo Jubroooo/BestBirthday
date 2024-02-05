@@ -63,6 +63,7 @@ def main(request) :
     else:
         return render(request, 'fundings/main.html')
 
+#펀딩 만들기라는 양식을 사용해서 방문자가 정보를 입력하고, 그 정보로 새로운 펀딩을 만들어서 detail에
 def create(request) :
     if request.method == 'GET':
         form = FundingForm()
@@ -75,32 +76,32 @@ def create(request) :
         pk_of_new_funding = new_funding.pk
         return redirect('fundings:detail', pk=pk_of_new_funding)
 
-# def create_funding(request) :
-#     if request.user.is_authenticated:
-#         if request.method == 'GET':
-#             funding = Funding()
-#             funding.user = request.user
-#             form = FundingForm(instance=funding)
-#             ctx = {
-#                 'form':form
-#             }
-#             return render(request, 'fundings/create_funding.html', ctx)
-#         #post일때
-#         elif request.method == "POST":
-#             funding = Funding()
-#             funding.user = request.user
-#             form = FundingForm(request.POST, request.FILES, instance=funding)
-#             if form.is_valid():
-#                 form.save()
-#                 funding_id = funding.id
-#                 return redirect('fundings:main')
-#             else:
-#                 ctx = {
-#                     "form": form
-#                 }
-#                 return render (request, 'fundings/create_funding.html', ctx)
-#     else:
-#         return redirect('users:login')
+def create_funding(request) :
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(instance=funding)
+            ctx = {
+                'form':form
+            }
+            return render(request, 'fundings/create_funding.html', ctx)
+        #post일때
+        elif request.method == "POST":
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(request.POST, request.FILES, instance=funding)
+            if form.is_valid():
+                form.save()
+                funding_id = funding.id
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/create_funding.html', ctx)
+    else:
+        return redirect('users:login')
     
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)

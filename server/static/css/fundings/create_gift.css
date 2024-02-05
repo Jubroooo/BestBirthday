@@ -107,6 +107,7 @@ textarea {
     font-weight: initial;
     font-size: 16px;
     outline: none;
+    resize: none;
   }
 #funding_amount{
   width: 8rem;

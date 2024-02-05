@@ -35,13 +35,11 @@ background-color: #f7e100;
 .payment-btn-kakao>div{
     width: 8.5rem;
     height: 2.5rem;
-    background-image: url(../images/kakao-pay.png);
     background-size: cover;
 }
 .payment-btn-toss>div{
     width: 8.5rem;
     height: 2.5rem;
-    background-image: url(../images/toss-pay.png);
     background-size: cover;
 }
 .payment-description{

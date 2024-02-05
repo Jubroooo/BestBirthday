@@ -82,3 +82,12 @@
 .detail-img{
     vertical-align: middle;
 }
+.detail-funding-title{
+    margin-top: 1rem;
+}
+
+.detail-styles{
+    display: inline-block; 
+    margin: 0; 
+    vertical-align: middle;
+}

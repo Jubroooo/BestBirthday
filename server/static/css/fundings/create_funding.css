@@ -31,6 +31,7 @@
     gap:var(--gutter16);
     align-items: center;
 }
+
 .funding-image{
     display: flex;
     gap:var(--gutter16);
@@ -67,3 +68,44 @@
     font-weight: bold;
     font-size: 2rem
   }
+input[type="text"],
+textarea {
+    width: 100%; /* Adjust width as needed */
+    padding: 0 10px;
+    background-color: transparent; 
+    border: none;
+    border-bottom: 1px solid #ffffff; 
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    color:white;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: initial;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+  }
+  .to-friends-message,
+  .funding-title,
+  .present_link
+  {
+    border-radius: var(--gutter8);
+    background-color: var(--BB_color_white);
+    background-color: transparent; 
+    padding: 10px;
+    color: #ffffff; 
+    padding: 10px 20px; 
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 12px;
+}
+.to-friends-message{
+    height: 20vh;
+}
+
+.funding-title,
+.present_link{
+    height: 5vh;
+}
+#photo-upload{
+    display: none;
+}
