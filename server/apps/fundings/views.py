@@ -109,8 +109,8 @@ def detail(request, pk) :
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
     return render(request, 'fundings/detail.html', ctx)
 
-def create_gift(request, pk) :
-    funding = Funding.objects.get (id = pk)
+def create_gift(request, pk):
+    funding = Funding.objects.get(id = pk)
     if request.user.is_authenticated:
         if request.method == "GET":
             funding_msg = Funding_Msg()
@@ -118,7 +118,7 @@ def create_gift(request, pk) :
             funding_msg.post = funding
             form = MessageForm(instance=funding_msg)
             ctx = {
-                'form':form
+                'form':form, 'funding':funding
             }
             return render(request, 'fundings/create_gift.html', ctx)
         
@@ -137,7 +137,7 @@ def create_gift(request, pk) :
                 return redirect('fundings:create_gift_complete',pk)
             else:
                 ctx = {
-                    "form": form
+                    "form": form, 'funding':funding
                 }
                 return render (request, 'fundings/create_gift.html', ctx)
     
@@ -147,7 +147,7 @@ def create_gift(request, pk) :
             funding_msg.post = funding
             form = MessageForm(instance=funding_msg)
             ctx = {
-                'form':form
+                'form':form, 'funding':funding
             }
             return render(request, 'fundings/create_gift.html', ctx)
         
@@ -165,7 +165,7 @@ def create_gift(request, pk) :
                 return redirect('fundings:create_gift_complete',pk)
             else:
                 ctx = {
-                    "form": form
+                    "form": form, 'funding':funding
                 }
                 return render (request, 'fundings/create_gift.html', ctx)
 
@@ -268,30 +268,6 @@ def main_all_funding_list(request):
 #     else:
 #         return render (request, 'fundings/result_start.html')
 
-
-<<<<<<< HEAD
-def result_list(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
-    funding_msg_count = funding_msgs.count()
-    ctx = {
-        "funding_msg_count": funding_msg_count,
-        "funding_msgs": funding_msgs,
-    }
-    return render(request, 'fundings/fundings_view_all_messages.html', ctx)
-
-def result_detail (request, pk):
-    funding_msg = Funding_Msg.objects.get(id=pk)
-    ctx = {
-        "funding_msg": funding_msg,
-    }
-    return render(request, "fundings/funding_msg_detail.html", ctx)
-
-def funding_progress(funding):
-    progress = int(funding.total_price / funding.goal_price * 100)
-    return progress
-
-    
-=======
 # def result_list(request, pk):
 #     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
 #     funding_msg_count = funding_msgs.count()
@@ -299,18 +275,20 @@ def funding_progress(funding):
 #         "funding_msg_count": funding_msg_count,
 #         "funding_msgs": funding_msgs,
 #     }
-    
-#     return render (request, 'fundings/result_list.html', ctx)
+#     return render(request, 'fundings/fundings_view_all_messages.html', ctx)
 
 # def result_detail (request, pk):
 #     funding_msg = Funding_Msg.objects.get(id=pk)
 #     ctx = {
 #         "funding_msg": funding_msg,
 #     }
+#     return render(request, "fundings/funding_msg_detail.html", ctx)
+
+def funding_progress(funding):
+    progress = int(funding.total_price / funding.goal_price * 100)
+    return progress
+
     
-#     return render (request, "fundings/result_detail.html", ctx)
-
-
 # 마이페이지 백 작업 필요
 def mypage_list(request):
     return render(request,'fundings/mypage_list.html')
@@ -324,4 +302,3 @@ def mypage_payment_guide_k(request):
     return render(request,'fundings/mypage_payment_guide_k.html')
 def mypage_payment_guide_t(request):
     return render(request,'fundings/mypage_payment_guide_t.html')
->>>>>>> 945517d93be5218bef7b2d4b2c0b3d38bfde4486
