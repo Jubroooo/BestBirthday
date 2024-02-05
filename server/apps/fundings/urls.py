@@ -16,7 +16,7 @@ urlpatterns = [
     path('create_payment/', create_payment, name="create_payment"), 
     path('create_funding/', create_funding, name="create_funding"), 
     path('result_modal/', result_modal, name="result_modal"), 
-    # path('result_start/<int:pk>/', result_start, name="result_start"), 
+    #path('result_start/<int:pk>/', result_start, name="result_start"), 
     # path('result_detail/<int:pk>/', result_detail, name="result_detail"), 
  
      path('mypage_list/', mypage_list, name="mypage_list"), 
