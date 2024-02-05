@@ -39,4 +39,23 @@
   right: var(--gutter16);
   width: 55%;
   padding:0;
+  
+}
+.img-badge-container{
+  position: relative;
+}
+.img-badge-container span:nth-of-type(1){
+  position: absolute;
+  top: 0.6rem;
+  left: 0.9rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: wheat;
+}
+.badge{
+  width: 2.5rem;
+  height: 3.5rem;
+  position:absolute;
+  top: 0;
+  left: 0;
 }

@@ -16,10 +16,10 @@ def start(request):
     return render(request,'fundings/start.html')
 def my_detail(request) :
     return render(request, 'fundings/fundings_my_detail.html')
+#빽 작업 필요
 def result_modal(request):
     return render(request,'fundings/result_modal.html')
-def result_start(request):
-    return render(request,'fundings/result_start.html')
+
 def result_detail(request):
     return render(request,'fundings/result_detail.html')
 def gift_complete(request):
@@ -71,6 +71,7 @@ def main(request) :
     else:
         return render(request, 'fundings/main.html')
 
+#펀딩 만들기라는 양식을 사용해서 방문자가 정보를 입력하고, 그 정보로 새로운 펀딩을 만들어서 detail에
 def create(request) :
     if request.method == 'GET':
         form = FundingForm()
@@ -83,32 +84,32 @@ def create(request) :
         pk_of_new_funding = new_funding.pk
         return redirect('fundings:detail', pk=pk_of_new_funding)
 
-# def create_funding(request) :
-#     if request.user.is_authenticated:
-#         if request.method == 'GET':
-#             funding = Funding()
-#             funding.user = request.user
-#             form = FundingForm(instance=funding)
-#             ctx = {
-#                 'form':form
-#             }
-#             return render(request, 'fundings/create_funding.html', ctx)
-#         #post일때
-#         elif request.method == "POST":
-#             funding = Funding()
-#             funding.user = request.user
-#             form = FundingForm(request.POST, request.FILES, instance=funding)
-#             if form.is_valid():
-#                 form.save()
-#                 funding_id = funding.id
-#                 return redirect('fundings:main')
-#             else:
-#                 ctx = {
-#                     "form": form
-#                 }
-#                 return render (request, 'fundings/create_funding.html', ctx)
-#     else:
-#         return redirect('users:login')
+def create_funding(request) :
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(instance=funding)
+            ctx = {
+                'form':form
+            }
+            return render(request, 'fundings/create_funding.html', ctx)
+        #post일때
+        elif request.method == "POST":
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(request.POST, request.FILES, instance=funding)
+            if form.is_valid():
+                form.save()
+                funding_id = funding.id
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/create_funding.html', ctx)
+    else:
+        return redirect('users:login')
     
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
@@ -257,33 +258,32 @@ def main_all_funding_list(request):
             "funding_dday_dict": funding_dday_dict,
         }
     
-        return render (request, 'fundings/fundings_open_funding.html', ctx)
-    return render (request, 'fundings/fundings_open_funding.html')
+        return render (request, 'fundings/main_all_funding_list.html', ctx)
+    return render (request, 'fundings/main_all_funding_list.html')
 
 #펀딩 진행률 함수
 def funding_progress(fundings):
     funding_progress_dict = {} #펀딩 진행 딕셔너리
 
     for funding in fundings:
-        user = funding.user
-        funding_progress_dict[user.id] = int(funding.total_price / funding.goal_price * 100)
+        funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
     return copy.deepcopy(funding_progress_dict)
 
-# def result_start(request, pk):
-#     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-#     print (funding_msgs)
-#     if funding_msgs.exists():
-#         earliest_msg = funding_msgs.earliest('written_date')
-#         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
-#         ctx = {
-#             'pk': pk,
-#             'earliest_msg': earliest_msg,
-#             'longest_msg': longest_msg,
-#         }
-#         return render (request, 'fundings/result_start.html', ctx)
-#     else:
-#         return render (request, 'fundings/result_start.html')
+def result_start(request, pk):
+    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
+    print (funding_msgs)
+    if funding_msgs.exists():
+        earliest_msg = funding_msgs.earliest('written_date')
+        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+        ctx = {
+            'pk': pk,
+            'earliest_msg': earliest_msg,
+            'longest_msg': longest_msg,
+        }
+        return render (request, 'fundings/result_start.html', ctx)
+    else:
+        return render (request, 'fundings/result_start.html')
 
 # def result_list(request, pk):
 #     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
@@ -315,19 +315,3 @@ def mypage_payment_guide_k(request):
     return render(request,'fundings/mypage_payment_guide_k.html')
 def mypage_payment_guide_t(request):
     return render(request,'fundings/mypage_payment_guide_t.html')
-
-def result_list(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
-    funding_msg_count = funding_msgs.count()
-    ctx = {
-        "funding_msg_count": funding_msg_count,
-        "funding_msgs": funding_msgs,
-    }
-    return render (request, 'fundings/fundings_view_all_messages.html', ctx)
-
-def result_detail (request, pk):
-    funding_msg = Funding_Msg.objects.get(id=pk)
-    ctx = {
-        "funding_msg": funding_msg,
-    }
-    return render (request, "fundings/funding_msg_detail.html", ctx)
