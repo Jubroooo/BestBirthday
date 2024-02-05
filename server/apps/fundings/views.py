@@ -265,8 +265,7 @@ def funding_progress(fundings):
     funding_progress_dict = {} #펀딩 진행 딕셔너리
 
     for funding in fundings:
-        user = funding.user
-        funding_progress_dict[user.id] = int(funding.total_price / funding.goal_price * 100)
+        funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
     return copy.deepcopy(funding_progress_dict)
 
