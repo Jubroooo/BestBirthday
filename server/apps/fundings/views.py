@@ -57,6 +57,8 @@ def main(request) :
         open_funding_progress_dict = funding_progress(open_fundings)
             
 
+        # Tony: fundings만 알면 나머지는 클라이언트에서 할 수 있는 부분들이다.
+        # Tony: 서버에서 아래 변수들을 처리했을 때의 장점이 전혀 보이지 않습니다.
         ctx = {"today_fundings": today_fundings, 
             "today_funding_dday_dict": today_funding_dday_dict,
             "fundings_in_msg_order": fundings_in_msg_order,
@@ -151,6 +153,7 @@ def create_gift(request, pk):
     
     else:
         if request.method == "GET":
+            # Tony: FundingMsg로 정의하는 게 파이썬 코딩 작성 가이드리인에 맞습니다.
             funding_msg = Funding_Msg()
             funding_msg.post = funding
             form = MessageForm(instance=funding_msg)
@@ -201,12 +204,16 @@ def funding_dday_cal(fundings):
         
         funding_dday_dict[user.id] = funding_dday.days
 
+    # Tony : 딥 카피를 하고 리턴하는 이유가 있나요?
     return copy.deepcopy(funding_dday_dict)
 
 
 def birthday_dday_cal(funding):
     user = funding.user
     current_date = timezone.now()
+    # Tony: birthday1 변수를 정의할 필요가 없다. 
+    # Tony: 쉽게 오늘 날과 생일 날의 Time Delta를 전달하면 될 것 같은데, 복잡하게 코드가 작성되어 있는 것 같습니다.
+    # Tony: python 시간 객체가 비직관적이어서 arrow 라이브러리 쓰는 것 추천드립니다.
     birthday = timezone.make_aware(datetime(current_date.year, user.birthday.month, user.birthday.day), timezone.get_current_timezone()) #time zone으로 설정해야 나중에 배포 시 서버 시간 vs db시간 계산을 할 수 있음
     birthday1 = timezone.make_aware(datetime(current_date.year - 1, user.birthday.month, user.birthday.day), timezone.get_current_timezone())
     dday = (birthday - current_date).days+1
@@ -226,6 +233,8 @@ def main_all_birthday_list(request):
         today = date.today()
         fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
         funding_dday_dict = funding_dday_cal(fundings)
+        # Tony: fundings와 funding_dday_dict를 나눠서 리턴하는 이유는?
+        # Tony: 클라이언트에서 알아서 연산할 수 있는 부분인데, fundings와 fundings_dday_dict를 둘 다 전달하면 두 값에 어떤 정보가 있는 지 헷갈릴 것 같다.
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
