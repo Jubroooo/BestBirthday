@@ -1,0 +1,47 @@
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-buttons {
+    margin-top: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.social-login {
+    height: 4.7rem;
+    width: 100%;
+    border: none;
+    margin: 1rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-login img, .social-login p {
+    margin: 0 0.5rem;
+}
+
+
+.social-login.kakao {
+    background-color: #FEE500; 
+}
+
+.social-login.google {
+    background-color: #FFFFFF; 
+}
+.social-login.naver {
+    background-color: #03C75A; 
+}
+.logo{
+    text-decoration: none;
+}
+.login-color{
+    color:var(--BB_color_black);
+}

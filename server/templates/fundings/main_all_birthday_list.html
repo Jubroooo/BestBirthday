@@ -1,10 +1,18 @@
 {% extends "base.html" %} {%load static%} {% block head %}
-<link rel="stylesheet" href="{% static 'css/all_list.css'%}" /> {% endblock head %}
+<link rel="stylesheet" href="{% static 'css/fundings/all_list.css'%}" /> {% endblock head %}
 {% block header %}
 <a href="{%url 'fundings:main'%}">
   <p class="logo unna-bold-36">Best Birthday</p>
 </a>
-<div class="profile"></div>
+{% if user.is_authenticated %}
+<a href="{%url 'fundings:mypage_list'%}">
+  <div class="profile"></div>
+</a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
 {% endblock header %} {% block content %}
 <div class="header-title-container">
   <a href="{%url 'fundings:main'%}">
@@ -20,7 +28,7 @@
     {%if funding.photo.url != null and funding.photo.url != ''%}
     <img class="card2-image" src="{{funding.photo.url}}" alt="대체텍스트" />
     {%else%}
-    <img class="card2-image" src="{% static 'fundings/image/no_image.png' %}" alt="" />
+    <img class="card2-image" src="{%static 'images/no_img.png'%}" alt="" />
     {%endif%}
     <div class="card2-right">
         <div class="D-day div-btn">

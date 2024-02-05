@@ -6,9 +6,17 @@ from django.contrib import auth
 #채연추가뷰
 # def birth_input(request):
 #     return render(request,'users/birth_input.html')
+#채연추가뷰--------------------------------------
+def login_info(request):
+    return render(request,'users/login_info.html')
+
+def nickname_profile_input(request):
+    return render(request,'users/nickname_profile_input.html')
+
+#-----------------------------------------------
         
 def login(request):
-    return render (request, 'users/users_login.html')
+    return render (request, 'users/login.html')
 
 def logout(request):
     auth.logout(request)
@@ -26,13 +34,13 @@ def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카�
     ctx = {
         "form": form,
     }        
-    return render (request, 'users/users_update.html', ctx)  
+    return render (request, 'users/login_info.html', ctx)  
 
 def redirect_view(request):
     if request.user.is_authenticated:
         # Check if it's the user's first login
         if request.user.name is None or request.user.birthday is None or request.user.nickname is None:
-            return redirect('users:login_info')  # Redirect to login_info for first login
+            return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
         else:
             return redirect('/')  # Redirect to home for subsequent logins
     else:

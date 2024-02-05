@@ -1,0 +1,48 @@
+.payment-guide-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.payment-guide-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+.mandatory{
+    color:red;
+}
+
+.payment-btn-kakao{
+    background-color: #f7e100;
+ }
+
+    .payment-btn-toss{
+    background-color: var(--BB_color_blue_sub);
+    }
+    
+    .payment-link-btn-container{
+        display: flex;
+        gap: var(--gutter16);
+        margin: var(--gutter16) 0;
+    }
+.guide-kakaopay{
+    max-width: 60%; /* 이미지 최대 너비를 80%로 제한 */
+    height: auto; /* 높이는 자동으로 설정되어 원본 비율을 유지 */
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+.paymentguide-link{
+    display: flex;
+    align-items: center;
+    gap:var(--gutter24);
+    margin: var(--gutter16) 0;
+}

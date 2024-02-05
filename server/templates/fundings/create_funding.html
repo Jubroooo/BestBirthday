@@ -1,0 +1,53 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/create_funding.css' %}">
+{% endblock head %}
+
+{% block header %}
+<div class="create-payment-title">
+    <a href="{% url 'fundings:create_payment' %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
+    <p class="create-payment-title-for-center notosans-bold-24">펀딩 생성하기</p>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="create-payment-wrapper">
+    <p class="notosans-bold-16 notice-for-paymentpage">펀딩은 7일 동안만 생성됩니다.</p>
+    <div class="wrapper-content-payment">
+        <p class="notosans-bold-20">펀딩 이름</p>
+        <p class="notosans-regular-14">이름이름이름</p>
+    </div>
+    <div class="wrapper-content-payment">
+        <p class="notosans-bold-20">사고 싶은 물건  <span class="custom-font">URL</span> 링크</p>
+        <p  class="notosans-regular-14">링크링크링크</p>
+    </div>
+    <div class="wrapper-content-payment">
+        <p class="notosans-bold-20">얼마?</p>
+        <div class="progress-value-container">
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+        </div>
+        <div class="funding-price">
+            <p class="notosans-regular-14">0</p>
+            <p class="notosans-regular-14">100,000</p>
+        </div>
+    </div>
+    <div class="funding-image">
+        <p class="notosans-bold-20">펀딩 이미지</p>
+        <i class="fa-solid fa-circle-plus"></i>
+    </div>
+    <div class="to-friends">
+        <p class="notosans-bold-20">친구들에게 전하는 메세지</p>
+        <p class="notosans-bold-16 notice-for-paymentpage">*30자 ~ 50자</p>
+    </div>
+    <div class="to-friends-message">
+        <p></p>
+    </div>
+    <a href="{% url 'fundings:main' %}" class="div-btn start-btn-for-payment">
+        <p class="notosans-bold-18 ">시작하기</p>
+    </a>
+</div>
+
+{% endblock  %}

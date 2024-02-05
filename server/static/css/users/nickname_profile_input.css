@@ -1,0 +1,34 @@
+.xmark-icon  {
+    text-align: right; 
+}
+
+.xmark-icon .fa-xmark {
+    font-size: 2rem;
+}
+.profile-for-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nickname-input{
+    width: 100%;
+    height: 4.7rem;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 1.1rem;
+    background-color: gray;
+}
+.nickname_img_wrapper{
+    display: flex; 
+    flex-direction: column; 
+    gap:var(--gutter16);
+    margin-top: 5rem;
+}
