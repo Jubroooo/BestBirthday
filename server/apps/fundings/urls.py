@@ -29,6 +29,5 @@ urlpatterns = [
 
     # 채연 추가뷰
     path('my_detail/', my_detail, name="my_detail"),
-    path("result_start/",result_start,name="result_start"),
     path("result_detail/",result_detail,name="result_detail"),
 ]

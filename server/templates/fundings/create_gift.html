@@ -2,6 +2,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fundings/create_gift.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 {% endblock head %}
 
 {% block header %}
@@ -23,26 +24,32 @@
         <p class="notosans-bold-18">선물 금액</p>
         <p class="notosans-regular-12 colorgray-create-html">*최대 금액은 300,000원까지 가능합니다</p>
         </div>
-        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="20000">
+        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0">
     </div>
 
     <div class="button-group">
-      <button class="notosans-bold-16 blue-btn-gift" type="button">5,000</button>
-      <button class="notosans-bold-16 blue-btn-gift" type="button">10,000</button>
-      <button class="notosans-bold-16 blue-btn-gift" type="button">20,000</button>
-      <button class="notosans-bold-16 blue-btn-gift" type="button">30,000</button>
-      <button class="notosans-bold-16 blue-btn-gift" type="button">50,000</button>
-      <button class="notosans-bold-16 orange-btn-gift" type="button">직접 입력</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "5000">5,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "10000">10,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "20000">20,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "30000">30,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "50000">50,000</button>
+      <button class="notosans-bold-16 orange-btn-gift" type="button" data-value = "0">직접 입력</button>
     </div>
 
     <p class="notosans-bold-18">계좌를 선택하세요</p>
     <div class="payment-link-btn-container">
-        <button class="payment-btn-kakao div-btn">
-            <img src="{%static 'images/kakao-pay.png'%}">
-        </button>
-        <button class="payment-btn-toss div-btn">
-            <img src="{%static 'images/toss-pay.png'%}">
-        </button>
+        <div class="payment-btn-kakao div-btn transfer-btn" id="kakaoTransferLink">
+            <a href="{{funding.user.kakao_account}}">
+                <img src="{%static 'images/kakao-pay.png'%}">
+            </a>
+        </div>        
+
+        <div class="payment-btn-toss div-btn transfer-btn" id="tossTransferLink">
+            <a href="{{funding.user.toss_account}}">
+                <img src="{%static 'images/toss-pay.png'%}">
+            </a>
+        </div>
+
     </div>
 
     <div class="input-group-create-gift">
@@ -64,3 +71,44 @@
 
   
 {%endblock%}
+
+{%block script%}
+<script>
+        
+    document.addEventListener("DOMContentLoaded", function() {
+        //버튼 누를시 input 벨류를 버튼 클릭시 금액으로 변경
+        const priceButtons = document.querySelectorAll(".blue-btn-gift");
+
+        priceButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                let value = this.getAttribute("data-value");
+                document.querySelector("input[name='funding_price']").value = value;
+            });
+        });
+
+        //송금링크에 금액 추가
+        const transferButtons = document.querySelectorAll(".transfer-btn");
+
+        const originalKakaoURL = document.getElementById("kakaoTransferLink").querySelector("a").href;
+        const originalTossURL = document.getElementById("tossTransferLink").querySelector("a").href;
+
+        transferButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                let kakaoTransferLink = document.getElementById("kakaoTransferLink").querySelector("a");
+                let tossTransferLink = document.getElementById("tossTransferLink").querySelector("a");
+
+                let inputValue = document.querySelector("input[name='funding_price']").value;
+                let multipliedValue = inputValue * 8;
+                let hexadecimalValue = multipliedValue.toString(16);
+                
+                let kakaoInfo = [originalKakaoURL, hexadecimalValue, '0000'];
+                kakaoTransferLink.href = kakaoInfo.join('');
+                
+                let tossInfo = [originalTossURL, inputValue.toString()];
+                tossTransferLink.href = tossInfo.join('/');
+            });
+        });
+    });
+    
+</script>
+{%endblock script%}

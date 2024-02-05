@@ -76,11 +76,21 @@
     margin-top: var(--gutter24);
 }
 .gift-to-buy{
-    margin-top: var(--gutter24);
     cursor: pointer;
 }
 .detail-img{
     vertical-align: middle;
+}
+.friend-birthday{
+    margin: var(--gutter8) 0;
+}
+.participate-num{
+    margin-top: 0;
+}
+.participate-num strong{
+    font-size: 2rem;
+    padding: 0 var(--gutter8);
+    color: var(--BB_color_blue);
 }
 .detail-funding-title{
     margin-top: 1rem;
