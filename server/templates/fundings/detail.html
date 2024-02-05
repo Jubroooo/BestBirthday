@@ -1,4 +1,4 @@
-z{% extends '../base.html' %}
+{% extends '../base.html' %}
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fundings/detail.css' %}">
@@ -36,7 +36,7 @@ z{% extends '../base.html' %}
     <div class="progress-bar">
         <div class="progress" style="width: {{progress}}%;"></div>
     </div>
-    <div class="participate-num notosans-bold-16" >참여 인원</div>
+    <div class="participate-num notosans-bold-16">참여 인원<strong>{{funding.msg_count}}</strong>명</div>
     <div class="notosans-bold-16">
         <p class="detail-styles"><img  class="detial-img"src="{%static 'images/target.svg'%}"></p>
         목표 금액 {{funding.goal_price}}원
