@@ -39,7 +39,7 @@ def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카�
 def redirect_view(request):
     if request.user.is_authenticated:
         # Check if it's the user's first login
-        if request.user.name is None or request.user.birthday is None or request.user.nickname is None:
+        if request.user.birthday is None or request.user.nickname is None:
             return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
         else:
             return redirect('/')  # Redirect to home for subsequent logins

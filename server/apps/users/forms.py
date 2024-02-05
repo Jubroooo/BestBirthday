@@ -5,7 +5,7 @@ from .models import User
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'name', 'nickname', 'birthday']
+        fields = ['username', 'password1', 'password2', 'nickname', 'birthday']
         
 class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
