@@ -25,31 +25,18 @@
 .payment-link-btn-container{
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: center;
     gap: var(--gutter8);
     margin: var(--gutter16) 0;
-    
+    position: relative;
+    width: 100%;
 }
 .payment-btn-kakao{
-background-color: #f7e100;
+    background-color: #f7e100;
 }
-.payment-btn-kakao>div{
-    width: 8.5rem;
-    height: 2.5rem;
-<<<<<<< HEAD
-    background-image: url(../../images/kakao-pay.png);
-=======
->>>>>>> 1bcae999dd8a0563acd62468dac54c64f9a3d94a
-    background-size: cover;
-}
-.payment-btn-toss>div{
-    width: 8.5rem;
-    height: 2.5rem;
-<<<<<<< HEAD
-    background-image: url(../../images/toss-pay.png);
-    background-size: cover;
-}
-=======
-    background-size: cover;
+.payment-link-btn-container a {
+    flex: 1;
 }
 .payment-description{
     color: var(--BB_color_orange);
@@ -59,4 +46,3 @@ background-color: #f7e100;
     width: 100%;
     margin-top: var(--gutter24);
 }
->>>>>>> 1bcae999dd8a0563acd62468dac54c64f9a3d94a

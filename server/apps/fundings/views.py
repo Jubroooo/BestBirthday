@@ -14,8 +14,6 @@ import time
 #채연 뷰 확인용--------------------------------------------
 def start(request):
     return render(request,'fundings/start.html')
-def my_detail(request) :
-    return render(request, 'fundings/fundings_my_detail.html')
 def result_modal(request, pk):
     funding = Funding.objects.get(id = pk)
     ctx = {

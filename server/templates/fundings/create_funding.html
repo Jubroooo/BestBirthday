@@ -3,10 +3,9 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fundings/create_funding.css' %}">
 {% endblock head %}
-
 {% block header %}
 <div class="create-payment-title">
-    <a href="{% url 'fundings:create_payment' %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="create-payment-title-for-center notosans-bold-24">펀딩 생성하기</p>
 </div>
 {% endblock header %}

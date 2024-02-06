@@ -26,8 +26,4 @@ urlpatterns = [
      path('mypage_payment_guide_t/', mypage_payment_guide_t, name="mypage_payment_guide_t"), 
      path('mypage_myfunding/', mypage_myfunding, name="mypage_myfunding"), 
      path('mypage_participated/', mypage_participated, name="mypage_participated"),
-
-
-    # 채연 추가뷰
-    path('my_detail/', my_detail, name="my_detail"),
 ]

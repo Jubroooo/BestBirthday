@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/fundings/create_payment.css'%}" /> {% endblock head %}
 {% block header %}
     <div class="create-payment-title">
-        <a href="{% url 'fundings:main' %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
+        <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
         <p class="create-payment-title-for-center notosans-bold-24">송금링크 설정</p>
     </div>
 {% endblock header %} 
@@ -16,17 +16,17 @@
 <div class="payment-description">* 카카오페이 필수</div>
 <div class="payment-link-btn-container">
     <a href="{%url 'fundings:mypage_payment_guide_k'%}">
-    <button class="payment-btn-kakao div-btn">
-        <img src="../../static/images/kakao-pay.png">
-    </button>
+        <button class="payment-btn-kakao div-btn">
+            <img src="../../static/images/kakao-pay.png">
+        </button>
     </a>
     <a href="{%url 'fundings:mypage_payment_guide_t'%}">
-    <button class="payment-btn-toss div-btn">
-        <img src="../../static/images/toss-pay.png">
-    </button>
+        <button class="payment-btn-toss div-btn">
+            <img src="../../static/images/toss-pay.png">
+        </button>
     </a>
 </div>
 <button class="div-btn create_payment_btn" type="submit">
-    <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">펀딩 생성하러 가기</a>
+    <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
 </button>
 {% endblock content %}

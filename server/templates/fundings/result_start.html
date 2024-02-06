@@ -6,7 +6,7 @@
 
 {% block header %}
 <div class="show-card-title">
-    <a href="{% url 'fundings:result_modal' pk=pk %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="title-go-see-letter notosans-bold-20">생일 편지 보기</p>
 </div>
 {% endblock header %}
