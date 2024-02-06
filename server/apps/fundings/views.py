@@ -5,7 +5,6 @@ from datetime import datetime, date, timedelta
 from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
-import copy
 from django.db.models.functions import Length
 import time
 
@@ -17,8 +16,12 @@ def start(request):
 def my_detail(request) :
     return render(request, 'fundings/fundings_my_detail.html')
 #빽 작업 필요
-def result_modal(request):
-    return render(request,'fundings/result_modal.html')
+def result_modal(request, pk):
+    funding = Funding.objects.get(id = pk)
+    ctx = {
+        'funding': funding,
+    }
+    return render(request,'fundings/result_modal.html', ctx)
 
 def result_detail(request):
     return render(request,'fundings/result_detail.html')
@@ -51,7 +54,6 @@ def main(request) :
         today_funding_dday_dict = funding_dday_cal(today_fundings)
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
-    
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
@@ -87,13 +89,16 @@ def create(request) :
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(instance=funding)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/create_funding.html', ctx)
+            if request.user.toss_account is None and request.user.kakao_account is None:
+                return render (request, 'fundings/mypage_profile_setting.html')
+            else:
+                funding = Funding()
+                funding.user = request.user
+                form = FundingForm(instance=funding)
+                ctx = {
+                    'form':form
+                }
+                return render(request, 'fundings/create_funding.html', ctx)
         #post일때
         elif request.method == "POST":
             funding = Funding()
@@ -201,8 +206,7 @@ def funding_dday_cal(fundings):
             funding.is_closed = True
         
         funding_dday_dict[user.id] = funding_dday.days
-
-    return copy.deepcopy(funding_dday_dict)
+    return funding_dday_dict
 
 
 def birthday_dday_cal(funding):
@@ -227,6 +231,7 @@ def main_all_birthday_list(request):
         today = date.today()
         fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
         funding_dday_dict = funding_dday_cal(fundings)
+        
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
@@ -268,11 +273,10 @@ def funding_progress(fundings):
     for funding in fundings:
         funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
-    return copy.deepcopy(funding_progress_dict)
+    return funding_progress_dict
 
 def result_start(request, pk):
     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-    print (funding_msgs)
     if funding_msgs.exists():
         earliest_msg = funding_msgs.earliest('written_date')
         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
