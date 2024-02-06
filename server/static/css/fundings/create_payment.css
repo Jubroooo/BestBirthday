@@ -25,22 +25,18 @@
 .payment-link-btn-container{
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: center;
     gap: var(--gutter8);
     margin: var(--gutter16) 0;
-    
+    position: relative;
+    width: 100%;
 }
 .payment-btn-kakao{
-background-color: #f7e100;
+    background-color: #f7e100;
 }
-.payment-btn-kakao>div{
-    width: 8.5rem;
-    height: 2.5rem;
-    background-size: cover;
-}
-.payment-btn-toss>div{
-    width: 8.5rem;
-    height: 2.5rem;
-    background-size: cover;
+.payment-link-btn-container a {
+    flex: 1;
 }
 .payment-description{
     color: var(--BB_color_orange);

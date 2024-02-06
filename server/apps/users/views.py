@@ -2,20 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
-from allauth.account.views import LogoutView
-from allauth.socialaccount.models import SocialAccount
-from django.contrib.auth.decorators import login_required
-#채연추가뷰
-# def birth_input(request):
-#     return render(request,'users/birth_input.html')
-#채연추가뷰--------------------------------------
-def login_info(request):
-    return render(request,'users/login_info.html')
-
-def nickname_profile_input(request):
-    return render(request,'users/nickname_profile_input.html')
-
-#-----------------------------------------------
         
 def login(request):
     return render (request, 'users/login.html')
@@ -37,6 +23,9 @@ def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카�
         "form": form,
     }        
     return render (request, 'users/login_info.html', ctx)  
+
+def nickname_profile_input(request):
+    return render(request,'users/nickname_profile_input.html')
 
 def redirect_view(request):
     if request.user.is_authenticated:

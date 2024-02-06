@@ -49,6 +49,7 @@
 .percentage-container {
     display: flex; 
     justify-content: space-between; 
+    align-items: center;
 }
 
 .participate-num{
@@ -58,6 +59,7 @@
 .present-button-wrapper{
     display: flex;
     justify-content: center;
+    gap: var(--gutter8);
 }
 
 .participate-num{
@@ -100,4 +102,33 @@
     display: inline-block; 
     margin: 0; 
     vertical-align: middle;
+}
+
+.give_present{
+    background-color: var(--BB_color_blue);
+    color: var(--BB_color_white);
+    margin-left: 1rem;
+}
+
+.percentage-container {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.participate-num{
+    margin-bottom: 1rem;margin: 
+    var(--gutter24) 0;
+}
+.share-btn{
+    background-color:var(--BB_color_yellow);
+    width: 50%;
+}
+#pop-up-message{
+    display:none; color:var(--BB_color_orange); text-align: center; margin-top: 20px;
+}
+.give-onload-btn{
+    background-color: gray;
+}
+.give-onload-btn p{
+    color: var(--BB_color_white);
 }

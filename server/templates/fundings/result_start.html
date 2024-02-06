@@ -6,7 +6,7 @@
 
 {% block header %}
 <div class="show-card-title">
-    <a href="{% url 'fundings:result_modal' pk=pk %}" class="icon-left"><i class="fa-solid fa-chevron-left"></i></a>
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="title-go-see-letter notosans-bold-20">생일 편지 보기</p>
 </div>
 {% endblock header %}
@@ -14,18 +14,18 @@
 {% block content %}
 <div class="congrats-section">어떻게 꾸밀깡</div>
 {%if earliest_msg %}
-<p class="notosans-bold-18 filter-congrats">가장 먼저 축하해 준 친구 {{earliest_msg.comment_name}}</p>
-<p class="notosans-bold-18 filter-congrats">가장 길게 축하해 준 친구 {{longest_msg.comment_name}}</p>
+<p class="notosans-bold-18 filter-congrats">가장 먼저 축하해 준 친구  <span class="highlight-blue notosans-bold-18"> {{earliest_msg.comment_name}}</span></p>
+<p class="notosans-bold-18 filter-congrats">가장 길게 축하해 준 친구 <span class="highlight-blue notosans-bold-18"> {{longest_msg.comment_name}}</span></p>
 {%else%}
-<p class="notosans-bold-16">축하해 준 친구가 없어요. ㅠㅠ</p>
+<p class="notosans-bold-18 no-messages">축하해 준 친구가 없어요. ㅠㅠ</p>
 {%endif%}
-<p class="notosans-bold-18 letters-congrats first-line-congrats">채연님 생일을 진심으로 축하합니다</p>
+<p class="notosans-bold-18 letters-congrats first-line-congrats">{{funding.user.nickname}}님 생일을 진심으로 축하합니다</p>
 <p class="notosans-bold-18 letters-congrats">축하 메세지 <span class="highlight-blue notosans-bold-18">{{funding_msg_count}}개</span>가 쌓였어요</p>
 <div class="delivered-messages">
     {%for funding_msg in funding_msgs%}
     <a href="{% url 'fundings:result_detail' pk=funding_msg.id %}"class="b-day-message" >
         <div>
-            <span class="message-number notosans-bold-16">1</span>
+            <span class="message-number notosans-bold-16">{{ forloop.counter }}</span>
             <span class="message-sender notosans-regular-14 ">{{funding_msg.comment_name}}</span>
         </div>
         <span class="message-date notosans-regular-14 ">{{funding_msg.written_date}}</span>
