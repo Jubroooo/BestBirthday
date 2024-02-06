@@ -89,13 +89,16 @@ def create(request) :
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(instance=funding)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/create_funding.html', ctx)
+            if request.user.toss_account is None and request.user.kakao_account is None:
+                return render (request, 'fundings/mypage_profile_setting.html')
+            else:
+                funding = Funding()
+                funding.user = request.user
+                form = FundingForm(instance=funding)
+                ctx = {
+                    'form':form
+                }
+                return render(request, 'fundings/create_funding.html', ctx)
         #post일때
         elif request.method == "POST":
             funding = Funding()
@@ -194,7 +197,6 @@ def funding_dday_cal(fundings):
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
     for funding in fundings:
-        print (funding)
         user = funding.user
         current_date = timezone.now()
  
@@ -204,7 +206,6 @@ def funding_dday_cal(fundings):
             funding.is_closed = True
         
         funding_dday_dict[user.id] = funding_dday.days
-    print (funding_dday_dict)
     return funding_dday_dict
 
 
@@ -276,7 +277,6 @@ def funding_progress(fundings):
 
 def result_start(request, pk):
     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-    print (funding_msgs)
     if funding_msgs.exists():
         earliest_msg = funding_msgs.earliest('written_date')
         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
