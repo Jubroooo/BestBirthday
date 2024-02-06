@@ -60,6 +60,11 @@
   font-weight: bold;
   font-size: 1.8rem
 }
+.notosans-regular-18 {
+  font-family: var(--font-family-noto-sansKR);
+  font-weight: normal;
+  font-size: 1.8rem
+}
 
 .notosans-bold-16 {
   font-family: var(--font-family-noto-sansKR);

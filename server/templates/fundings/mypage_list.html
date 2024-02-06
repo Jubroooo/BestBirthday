@@ -6,26 +6,27 @@
 
 {% block header %}
 <div class="mypage-title">
-    <a href="{%url 'fundings:main'%}">
-        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
-    </a>
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="mypage-title-for-center notosans-bold-24">마이페이지</p>
 </div>
 {% endblock header %}
 
 {% block content %}
 <a href="{%url 'fundings:mypage_profile_setting'%}">
+    <p class="notosans-bold-24 mypage-links">프로필</p>
     <div class="mypage-background">
         <div class="mypage-first-section">
             <div class="profile"></div>
             <div class="mypage-profile">
-                <p class="notosans-bold-16 profileline">프로필</p>
                 <div class="mypage-profile2">
-                <p class="notosans-bold-16 myname">예진</p>
-                <p class="notosans-regular-12">4월 26일생</p>
+                <p class="notosans-bold-20 myname">예진</p>
+                <div class="D-day div-btn">
+                    <p>
+                      4월 26일생
+                    </p>
+                  </div>
                 </div>
             </div>
-    
             <div class="right-icon" onclick="">
             <i class="fa-solid fa-chevron-right"></i>
             </div>
@@ -35,18 +36,19 @@
 
 <div class="mypage-funding">
     <p class="notosans-bold-24 mypage-links">펀딩</p>
-    <a href="{%url 'fundings:mypage_myfunding'%}" class="mypage-links notosans-bold-16">내 생일 펀딩</a>
-    <a href="{%url 'fundings:mypage_participated'%}" class="mypage-links notosans-bold-16">내가 참여한 펀딩</a>
+    <a href="{%url 'fundings:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
+    <a href="{%url 'fundings:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
+    <a href="{%url 'fundings:create_payment'%}" class="mypage-links notosans-regular-18">송금 링크 관리</a>
 </div>
 
 <div class="mypage-account">
     <p class="notosans-bold-24 mypage-links">계정 관리</p>
-    <a href="{%url 'users:logout'%}" class="mypage-links notosans-bold-16">로그아웃</a>
-    <a href="" class="mypage-links notosans-bold-16">회원탈퇴</a>
+    <a href="{%url 'users:logout'%}" class="mypage-links notosans-regular-18">로그아웃</a>
+    <a href="" class="mypage-links notosans-regular-18">회원탈퇴</a>
 </div>
 
 <div class="mypage-etc">
-<a href=""class="notosans-bold-20 mypage-links">서비스</a>
-<a href=""class="notosans-bold-20 mypage-links">팀소개</a>
+<a href=""class="notosans-bold-24 mypage-links">서비스</a>
+<a href=""class="notosans-regular-18 mypage-links">팀소개</a>
 </div>
 {% endblock content %}
