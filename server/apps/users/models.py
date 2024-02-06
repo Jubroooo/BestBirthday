@@ -11,4 +11,4 @@ class User(AbstractUser) :
     kakao_account = models.CharField('카카오 송금링크', max_length=100, blank=True, null=True)
     profile = models.ImageField('프로필', blank=True, upload_to='profiles/%Y%m%d', null=True)
     def __str__(self):
-        return f'{self.nickname}'
+        return str(self.nickname)

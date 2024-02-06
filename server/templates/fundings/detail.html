@@ -6,9 +6,7 @@
 
 {% block header %}
 <div class="funding-title">
-    <a href="{%url 'fundings:main'%}">
-        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
-    </a>
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="funding-title-for-center notosans-bold-24">{{funding.title}}</p>
 </div>
 {% endblock header %}
@@ -57,15 +55,25 @@
             <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
             내가 사줄 물건 보기</div>
     </a>
-    
-<div class="present-button-wrapper">
-    <a href="{% url 'fundings:create_gift' pk=funding.id%}">
-        <button class="give_present btn" type="button">
-            <p class="notosans-bold-16 ">선물하기</p>
-        </button>
-    </a>
-</div>
 
+    {% if request.user == funding.user %}
+    <div class="present-button-wrapper">
+        <button class="share-btn btn" type="button">
+            <p class="notosans-bold-16">공유하기</p>
+        </button>
+        <button class="btn give-onload-btn" type="button" onclick="showMessage()">
+            <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
+        </button>
+    </div>
+    {% else %}
+    <div class="present-button-wrapper">
+        <a href="{% url 'fundings:create_gift' pk=funding.id%}">
+            <button class="give_present btn" type="button">
+                <p class="notosans-bold-16 ">선물하기</p>
+            </button>
+        </a>
+    </div>
+{% endif %}
 
 </div>
 

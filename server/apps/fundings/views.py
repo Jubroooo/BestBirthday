@@ -5,29 +5,8 @@ from datetime import datetime, date, timedelta
 from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
-import copy
 from django.db.models.functions import Length
 import time
-
-
-
-#채연 뷰 확인용--------------------------------------------
-def start(request):
-    return render(request,'fundings/start.html')
-def my_detail(request) :
-    return render(request, 'fundings/fundings_my_detail.html')
-#빽 작업 필요
-def result_modal(request):
-    return render(request,'fundings/result_modal.html')
-
-def result_detail(request):
-    return render(request,'fundings/result_detail.html')
-def gift_complete(request):
-    return render(request,'fundings/gift_complete.html')
-def create_funding(request):
-    return render(request,'fundings/create_funding.html')
-#------------------------------------------------------
-
 
 
 #딕셔너리 필터링 함수
@@ -35,6 +14,11 @@ def create_funding(request):
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+#0. 시작하기
+def start(request):
+    return render(request,'fundings/start.html')
+
+#1-1 펀딩 확인 뷰
 def main(request) :
     #열려 있는 펀딩들 랜덤으로 정렬
     open_fundings = Funding.objects.filter(is_closed=False).order_by(Random())
@@ -51,7 +35,6 @@ def main(request) :
         today_funding_dday_dict = funding_dday_cal(today_fundings)
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
-    
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
@@ -71,46 +54,47 @@ def main(request) :
     else:
         return render(request, 'fundings/main.html')
 
-#펀딩 만들기라는 양식을 사용해서 방문자가 정보를 입력하고, 그 정보로 새로운 펀딩을 만들어서 detail에
-def create(request) :
-    if request.method == 'GET':
-        form = FundingForm()
-        ctx = {'form':form}
-        return render(request, 'fundings/[d]create_funding.html', ctx)
-    #post일때
-    form = FundingForm(request.POST, request.FILES)
-    if form.is_valid():
-        new_funding = form.save(user=request.user)
-        pk_of_new_funding = new_funding.pk
-        return redirect('fundings:detail', pk=pk_of_new_funding)
-
-def create_funding(request) :
-    if request.user.is_authenticated:
-        if request.method == 'GET':
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(instance=funding)
-            ctx = {
-                'form':form
-            }
-            return render(request, 'fundings/create_funding.html', ctx)
-        #post일때
-        elif request.method == "POST":
-            funding = Funding()
-            funding.user = request.user
-            form = FundingForm(request.POST, request.FILES, instance=funding)
-            if form.is_valid():
-                form.save()
-                funding_id = funding.id
-                return redirect('fundings:main')
-            else:
-                ctx = {
-                    "form": form
-                }
-                return render (request, 'fundings/create_funding.html', ctx)
-    else:
-        return redirect('users:login')
+def main_all_birthday_list(request):
+    fundings = Funding.objects.filter(is_closed=False)
+    if fundings.exists():
+        today = date.today()
+        fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
+        funding_dday_dict = funding_dday_cal(fundings)
+        ctx = {
+            "fundings": fundings,
+            "funding_dday_dict": funding_dday_dict,
+        }
     
+        return render (request, 'fundings/main_all_birthday_list.html', ctx)
+    return render (request, 'fundings/main_all_birthday_list.html')
+
+def main_ranking_list(request):
+    fundings = Funding.objects.filter(is_closed=False)
+    if fundings.exists():
+        fundings = fundings.order_by('-msg_count')
+        funding_dday_dict = funding_dday_cal(fundings)
+
+        ctx = {
+            "fundings": fundings,
+            "funding_dday_dict": funding_dday_dict,
+        }
+    
+        return render (request, 'fundings/main_ranking_list.html', ctx)
+    return render (request, 'fundings/main_ranking_list.html')
+
+def main_all_funding_list(request):
+    fundings = Funding.objects.filter(is_closed=False)
+    if fundings.exists():
+        fundings = fundings.order_by(Random())
+        funding_dday_dict = funding_dday_cal(fundings)
+        ctx = {
+            "fundings": fundings,
+            "funding_dday_dict": funding_dday_dict,
+        }
+    
+        return render (request, 'fundings/main_all_funding_list.html', ctx)
+    return render (request, 'fundings/main_all_funding_list.html')
+
 def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
     progress = int(funding.total_price / funding.goal_price * 100)
@@ -118,6 +102,7 @@ def detail(request, pk) :
     ctx = {'funding':funding, 'progress':progress, "dday":dday}    
     return render(request, 'fundings/detail.html', ctx)
 
+#1-2 펀딩 참여 뷰
 def create_gift(request, pk):
     funding = Funding.objects.get(id = pk)
     if request.user.is_authenticated:
@@ -178,15 +163,103 @@ def create_gift(request, pk):
                 }
                 return render(request, 'fundings/create_gift.html', ctx)
 
-def create_payment(request):
-    return render(request, 'fundings/create_payment.html')
-
 def create_gift_complete(request,pk):
     return render(request, 'fundings/gift_complete.html',{'pk': pk})
 
 def create_gift_modal(request,pk):
     return render(request, 'fundings/gift_modal.html',{'pk': pk})
 
+#2. 펀딩 생성 관련 뷰
+def create_funding(request) :
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            if request.user.toss_account is None and request.user.kakao_account is None:
+                return render (request, 'fundings/create_payment.html')
+            else:
+                funding = Funding()
+                funding.user = request.user
+                form = FundingForm(instance=funding)
+                ctx = {
+                    'form':form
+                }
+                return render(request, 'fundings/create_funding.html', ctx)
+        #post일때
+        elif request.method == "POST":
+            funding = Funding()
+            funding.user = request.user
+            form = FundingForm(request.POST, request.FILES, instance=funding)
+            if form.is_valid():
+                form.save()
+                funding_id = funding.id
+                return redirect('fundings:main')
+            else:
+                ctx = {
+                    "form": form
+                }
+                return render (request, 'fundings/create_funding.html', ctx)
+    else:
+        return redirect('users:login')
+    
+
+def create_payment(request):
+    return render(request, 'fundings/create_payment.html')
+
+
+#3. 결과 관련 뷰
+def result_modal(request, pk):
+    funding = Funding.objects.get(id = pk)
+    ctx = {
+        'funding': funding,
+    }
+    return render(request,'fundings/result_modal.html', ctx)
+
+def result_start(request, pk):
+    funding = Funding.objects.get(id = pk)
+    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
+    funding_msg_count = funding_msgs.count() 
+    if funding_msgs.exists():
+        earliest_msg = funding_msgs.earliest('written_date')
+        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+        ctx = {
+            'funding':funding,
+            'pk': pk,
+            "funding_msgs": funding_msgs,
+            'earliest_msg': earliest_msg,
+            'longest_msg': longest_msg,
+            'funding_msg_count': funding_msg_count,  # funding_msg_count 변수 추가
+        }
+        return render (request, 'fundings/result_start.html', ctx)
+    else:
+         ctx = {
+            'funding':funding,
+            'pk': pk,
+            'funding_msg_count': funding_msg_count,  # funding_msg_count 변수 추가
+        }
+         return render (request, 'fundings/result_start.html',ctx)
+
+def result_detail (request, pk):
+    funding_msg = Funding_Msg.objects.get(id=pk)
+    ctx = {
+        "funding_msg": funding_msg,
+    }
+    return render (request, "fundings/result_detail.html", ctx)
+    
+# 4. 마이페이지 뷰(백 작업 필요)
+def mypage_list(request):
+    return render(request,'fundings/mypage_list.html')
+def mypage_myfunding(request):
+    return render(request,"fundings/mypage_myfunding.html")
+def mypage_profile_setting(request):
+    return render(request,'fundings/mypage_profile_setting.html')
+def mypage_participated(request):
+    return render(request, "fundings/mypage_participated.html")
+def mypage_payment_guide_k(request):
+    return render(request,'fundings/mypage_payment_guide_k.html')
+def mypage_payment_guide_t(request):
+    return render(request,'fundings/mypage_payment_guide_t.html')
+
+
+# 기타: 함수들
 def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
@@ -201,8 +274,7 @@ def funding_dday_cal(fundings):
             funding.is_closed = True
         
         funding_dday_dict[user.id] = funding_dday.days
-
-    return copy.deepcopy(funding_dday_dict)
+    return funding_dday_dict
 
 
 def birthday_dday_cal(funding):
@@ -221,97 +293,11 @@ def birthday_dday_cal(funding):
     return dday
     # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
 
-def main_all_birthday_list(request):
-    fundings = Funding.objects.filter(is_closed=False)
-    if fundings.exists():
-        today = date.today()
-        fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
-        funding_dday_dict = funding_dday_cal(fundings)
-        ctx = {
-            "fundings": fundings,
-            "funding_dday_dict": funding_dday_dict,
-        }
-    
-        return render (request, 'fundings/main_all_birthday_list.html', ctx)
-    return render (request, 'fundings/main_all_birthday_list.html')
-
-def main_ranking_list(request):
-    fundings = Funding.objects.filter(is_closed=False)
-    if fundings.exists():
-        fundings = fundings.order_by('-msg_count')
-        funding_dday_dict = funding_dday_cal(fundings)
-        ctx = {
-            "fundings": fundings,
-            "funding_dday_dict": funding_dday_dict,
-        }
-    
-        return render (request, 'fundings/main_ranking_list.html', ctx)
-    return render (request, 'fundings/main_ranking_list.html')
-
-def main_all_funding_list(request):
-    fundings = Funding.objects.filter(is_closed=False)
-    if fundings.exists():
-        fundings = fundings.order_by(Random())
-        funding_dday_dict = funding_dday_cal(fundings)
-        ctx = {
-            "fundings": fundings,
-            "funding_dday_dict": funding_dday_dict,
-        }
-    
-        return render (request, 'fundings/main_all_funding_list.html', ctx)
-    return render (request, 'fundings/main_all_funding_list.html')
-
-#펀딩 진행률 함수
+    #펀딩 진행률 함수
 def funding_progress(fundings):
     funding_progress_dict = {} #펀딩 진행 딕셔너리
 
     for funding in fundings:
         funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
-    return copy.deepcopy(funding_progress_dict)
-
-def result_start(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-    print (funding_msgs)
-    if funding_msgs.exists():
-        earliest_msg = funding_msgs.earliest('written_date')
-        longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
-        ctx = {
-            'pk': pk,
-            'earliest_msg': earliest_msg,
-            'longest_msg': longest_msg,
-        }
-        return render (request, 'fundings/result_start.html', ctx)
-    else:
-        return render (request, 'fundings/result_start.html')
-
-# def result_list(request, pk):
-#     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
-#     funding_msg_count = funding_msgs.count()
-#     ctx = {
-#         "funding_msg_count": funding_msg_count,
-#         "funding_msgs": funding_msgs,
-#     }
-#     return render(request, 'fundings/fundings_view_all_messages.html', ctx)
-
-# def result_detail (request, pk):
-#     funding_msg = Funding_Msg.objects.get(id=pk)
-#     ctx = {
-#         "funding_msg": funding_msg,
-#     }
-#     return render(request, "fundings/funding_msg_detail.html", ctx)
-
-    
-# 마이페이지 백 작업 필요
-def mypage_list(request):
-    return render(request,'fundings/mypage_list.html')
-def mypage_myfunding(request):
-    return render(request,"fundings/mypage_myfunding.html")
-def mypage_profile_setting(request):
-    return render(request,'fundings/mypage_profile_setting.html')
-def mypage_participated(request):
-    return render(request, "fundings/mypage_participated.html")
-def mypage_payment_guide_k(request):
-    return render(request,'fundings/mypage_payment_guide_k.html')
-def mypage_payment_guide_t(request):
-    return render(request,'fundings/mypage_payment_guide_t.html')
+    return funding_progress_dict

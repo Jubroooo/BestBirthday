@@ -2,9 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/fundings/mypage_list.css'%}" /> {% endblock head %}
 {% block header %}
 <div class="mypage-title">
-    <a href="{%url 'fundings:mypage_list'%}">
-        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
-    </a>
+  <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
     <p class="mypage-title-for-center notosans-bold-24">내가 참여한 펀딩</p>
 </div>
 {% endblock header %} {% block content %}

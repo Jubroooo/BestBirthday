@@ -43,9 +43,9 @@
       {%endif%}
       {%if funding.photo.url != null and funding.photo.url != ''%}
           <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
-          {%else%}
+      {%else%}
           <img class="card-image" src="{%static 'images/no_img.png'%}" alt="" />
-          {%endif%}
+      {%endif%}
       <div class="D-day div-btn">
         <p class="notosans-regular-12">
           {% with dday=today_funding_dday_dict|get_item:funding.user.id %}

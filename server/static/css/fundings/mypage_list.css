@@ -1,6 +1,6 @@
 
 #main-container {
-    gap: var(--gutter24);
+    gap: 4.8rem;
   }
 .mypage-title {
     display: flex;
@@ -27,7 +27,7 @@
     align-items: center;
 }
 .myname{
-    margin-right: 2rem;
+    margin-right: var(--gutter8);
 }
 
 .mypage-links{
@@ -44,14 +44,9 @@
 
 .mypage-first-section{
     display:flex;
-    margin: var(--gutter24) 0 8rem 0;
     position: relative;
+    align-items: center;
 
-}
-
-.profileline{
-    margin-bottom: var(--gutter8);
-    color:gray;
 }
 
 .right-icon{
@@ -60,11 +55,7 @@
     font-size: 3rem;
     cursor: pointer;
 }
-.mypage-funding, .mypage-account,.mypage-etc{
-    margin: var(--gutter24) 0;
+.D-day{
+    height: 2rem;
+    font-weight: normal;
 }
-
-
-
-
-
