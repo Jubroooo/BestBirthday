@@ -12,7 +12,7 @@
 {% endblock header %}
 
 {% block content %}
-<a href="{%url 'fundings:mypage_profile_setting'%}">
+<a href="{%url 'users:mypage_profile_setting'%}">
     <p class="notosans-bold-24 mypage-links">프로필</p>
     <div class="mypage-background">
         <div class="mypage-first-section">
@@ -36,8 +36,8 @@
 
 <div class="mypage-funding">
     <p class="notosans-bold-24 mypage-links">펀딩</p>
-    <a href="{%url 'fundings:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
-    <a href="{%url 'fundings:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
+    <a href="{%url 'users:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
+    <a href="{%url 'users:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
     <a href="{%url 'fundings:create_payment'%}" class="mypage-links notosans-regular-18">송금 링크 관리</a>
 </div>
 

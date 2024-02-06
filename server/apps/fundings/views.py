@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import FundingForm, MessageForm
+from .forms import *
 from .models import Funding, Funding_Msg
 from datetime import datetime, date, timedelta
 from django.utils import timezone
@@ -244,21 +244,6 @@ def result_detail (request, pk):
     }
     return render (request, "fundings/result_detail.html", ctx)
     
-# 4. 마이페이지 뷰(백 작업 필요)
-def mypage_list(request):
-    return render(request,'fundings/mypage_list.html')
-def mypage_myfunding(request):
-    return render(request,"fundings/mypage_myfunding.html")
-def mypage_profile_setting(request):
-    return render(request,'fundings/mypage_profile_setting.html')
-def mypage_participated(request):
-    return render(request, "fundings/mypage_participated.html")
-def mypage_payment_guide_k(request):
-    return render(request,'fundings/mypage_payment_guide_k.html')
-def mypage_payment_guide_t(request):
-    return render(request,'fundings/mypage_payment_guide_t.html')
-
-
 # 기타: 함수들
 def funding_dday_cal(fundings):
      
@@ -293,7 +278,7 @@ def birthday_dday_cal(funding):
     return dday
     # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
 
-    #펀딩 진행률 함수
+#펀딩 진행률 함수
 def funding_progress(fundings):
     funding_progress_dict = {} #펀딩 진행 딕셔너리
 
