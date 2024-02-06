@@ -5,7 +5,6 @@ from datetime import datetime, date, timedelta
 from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
-import copy
 from django.db.models.functions import Length
 import time
 
@@ -17,8 +16,12 @@ def start(request):
 def my_detail(request) :
     return render(request, 'fundings/fundings_my_detail.html')
 #빽 작업 필요
-def result_modal(request):
-    return render(request,'fundings/result_modal.html')
+def result_modal(request, pk):
+    funding = Funding.objects.get(id = pk)
+    ctx = {
+        'funding': funding,
+    }
+    return render(request,'fundings/result_modal.html', ctx)
 
 def result_detail(request):
     return render(request,'fundings/result_detail.html')
@@ -51,7 +54,6 @@ def main(request) :
         today_funding_dday_dict = funding_dday_cal(today_fundings)
         msg_funding_dday_dict = funding_dday_cal(fundings_in_msg_order)
         open_funding_dday_dict = funding_dday_cal(open_fundings)
-    
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
@@ -192,6 +194,7 @@ def funding_dday_cal(fundings):
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
     for funding in fundings:
+        print (funding)
         user = funding.user
         current_date = timezone.now()
  
@@ -201,8 +204,8 @@ def funding_dday_cal(fundings):
             funding.is_closed = True
         
         funding_dday_dict[user.id] = funding_dday.days
-
-    return copy.deepcopy(funding_dday_dict)
+    print (funding_dday_dict)
+    return funding_dday_dict
 
 
 def birthday_dday_cal(funding):
@@ -227,6 +230,7 @@ def main_all_birthday_list(request):
         today = date.today()
         fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
         funding_dday_dict = funding_dday_cal(fundings)
+        
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
@@ -268,7 +272,7 @@ def funding_progress(fundings):
     for funding in fundings:
         funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
-    return copy.deepcopy(funding_progress_dict)
+    return funding_progress_dict
 
 def result_start(request, pk):
     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
