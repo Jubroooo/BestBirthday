@@ -274,35 +274,43 @@ def funding_progress(fundings):
 
 #결과 관련 페이지
 def result_start(request, pk):
+    funding = Funding.objects.get(id = pk)
     funding_msgs = Funding_Msg.objects.filter(post_id=pk)
-    funding_msg_count = funding_msgs.count()
+    funding_msg_count = funding_msgs.count() 
     if funding_msgs.exists():
         earliest_msg = funding_msgs.earliest('written_date')
         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
         ctx = {
+            'funding':funding,
             'pk': pk,
+            "funding_msgs": funding_msgs,
             'earliest_msg': earliest_msg,
             'longest_msg': longest_msg,
+            'funding_msg_count': funding_msg_count,  # funding_msg_count 변수 추가
         }
         return render (request, 'fundings/result_start.html', ctx)
     else:
-        return render (request, 'fundings/result_start.html')
+         ctx = {
+            'funding':funding,
+            'pk': pk,
+            'funding_msg_count': funding_msg_count,  # funding_msg_count 변수 추가
+        }
+         return render (request, 'fundings/result_start.html',ctx)
+# def result_list(request, pk):
+#     funding_msgs = Funding_Msg.objects.filter(post_id = pk)
+#     funding_msg_count = funding_msgs.count()
+#     ctx = {
+#         "funding_msg_count": funding_msg_count,
+#         "funding_msgs": funding_msgs,
+#     }
+#     return render(request, 'fundings/result_start.html', ctx)
 
-def result_list(request, pk):
-    funding_msgs = Funding_Msg.objects.filter(post_id = pk)
-    funding_msg_count = funding_msgs.count()
-    ctx = {
-        "funding_msg_count": funding_msg_count,
-        "funding_msgs": funding_msgs,
-    }
-    return render(request, 'fundings/result_start.html', ctx)
-
-def result_detail (request, pk):
-    funding_msg = Funding_Msg.objects.get(id=pk)
-    ctx = {
-        "funding_msg": funding_msg,
-    }
-    return render (request, "fundings/funding_msg_detail.html", ctx)
+# def result_detail (request, pk):
+#     funding_msg = Funding_Msg.objects.get(id=pk)
+#     ctx = {
+#         "funding_msg": funding_msg,
+#     }
+#     return render (request, "fundings/result_start.html", ctx)
     
 # 마이페이지 백 작업 필요
 def mypage_list(request):
