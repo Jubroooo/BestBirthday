@@ -176,7 +176,7 @@ def create_gift(request, pk):
                 ctx = {
                     "form":form, 'funding':funding
                 }
-                return render (request, 'fundings/create_gift.html', ctx)
+                return render(request, 'fundings/create_gift.html', ctx)
 
 def create_payment(request):
     return render(request, 'fundings/create_payment.html')
