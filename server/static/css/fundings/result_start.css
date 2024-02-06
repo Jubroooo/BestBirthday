@@ -43,7 +43,7 @@
   }
 
   .first-line-congrats{
-    margin-top: 3.2rem
+    margin-top: var(--gutter24);
   }
 
   .highlight-blue{
@@ -64,4 +64,8 @@
 
   .message-sender {
     margin-right: 1rem; /* 이름과 날짜 사이 간격 설정 */
+  }
+
+  .no-messages{
+    margin-top: var(--gutter24);
   }
