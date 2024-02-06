@@ -33,7 +33,7 @@
     <div class="card2-right">
         <div class="D-day div-btn">
               <p class="notosans-regular-12">
-                {% with dday=funding_dday_dict|get_item:funding.user.id %}
+                {% with dday=funding_dday_dict|get_item:funding.id %}
                 {% if dday > 0 %}
                     D - {{dday}} 
                 {% elif dday == 0 %}
@@ -45,12 +45,17 @@
         <div class="card2-content">
   
           <div class="card2-title notosans-bold-16">{{funding.title}}</div>
-          <div class="progress-percent2 notosans-regular-14">32%</div>
+          <div class="progress-percent2 notosans-regular-14">
+            {% with progress=funding_progresses|get_item:funding.id %}
+            <p>{{progress}}</p>
+            {% endwith %}
+          </div>
           <div class="progress-container">
             <div class="progress-value-container">
   
               <div class="progress-bar">
-                <div class="progress"></div>
+                <div class="progress">
+                </div>
               </div>
             </div>
           </div>
