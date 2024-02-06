@@ -64,5 +64,15 @@ def mypage_payment_guide_k(request):
     return render(request,'users/mypage_payment_guide_k.html')
 
 def mypage_payment_guide_t(request):
-    
+    user = request.user
+    if request.method == "POST":
+        form = tossForm(request.POST, instance = user)
+        if form.is_valid():
+            form.save()
+            return redirect ('users:mypage_list')
+    else:
+        form = tossForm(instance=user)
+    ctx = {
+        "form": form,
+    }        
     return render(request,'users/mypage_payment_guide_t.html')

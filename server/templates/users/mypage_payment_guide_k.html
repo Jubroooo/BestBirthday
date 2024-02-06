@@ -33,7 +33,7 @@
     function checkLink() {
         const inputValue = document.getElementById("kakaolink").value;
 
-        let pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
+        const pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
 
         if (pattern.test(inputValue)) {
             alert("유효한 링크입니다!");
