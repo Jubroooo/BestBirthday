@@ -1,0 +1,31 @@
+.start-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin:10vh 0;
+}
+
+.unna-bold-55 {
+    font-family: var(--font-family-unna);
+    font-weight: bold;
+    font-size:5.5rem
+}
+
+.start-head-container {
+    position: relative;
+}
+
+.start-logo {
+    margin-bottom: var(--gutter16);
+    position: relative;
+    z-index: 2; 
+}
+
+.logo-top {
+    position: absolute;
+    bottom: 0%; 
+    right: 0%;
+    z-index: 1; /* "Best Birthday" 문구 뒤로 가도록 z-index 설정 */
+}
+  

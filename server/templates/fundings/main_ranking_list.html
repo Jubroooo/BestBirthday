@@ -1,0 +1,71 @@
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/all_list.css'%}" /> {% endblock head %}
+{% block header %}
+<a href="{%url 'fundings:main'%}">
+  <p class="logo unna-bold-36">Best Birthday</p>
+</a>
+{% if user.is_authenticated %}
+<a href="{%url 'fundings:mypage_list'%}">
+  <div class="profile"></div>
+</a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
+{% endblock header %} {% block content %}
+<div class="header-title-container">
+  <a href="{%url 'fundings:main'%}">
+    <div><i class="ri-arrow-left-s-line"></i></div>
+  </a>
+  <div class="header-title notosans-bold-20">인싸 랭킹</div>
+  <div></div>
+</div>
+{%if fundings%}
+    {%for funding in fundings%}
+<a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <div class="card-container card2-container">
+    <div class="img-badge-container">
+      {%if funding.photo.url != null and funding.photo.url != ''%}
+      <img class="card2-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+      {%else%}
+      <img class="card2-image" src="{%static 'images/no_img.png'%}" alt="" />
+      {%endif%}
+      <div class="badge-container">
+        <img class="badge" src="{% static 'images/badge_rank.png'%}" alt="">
+        <span>{{ forloop.counter }}</span>
+      </div>
+    </div>
+    <div class="card2-right">
+        <div class="D-day div-btn">
+              <p class="notosans-regular-12">
+                {% with dday=funding_dday_dict|get_item:funding.user.id %}
+                {% if dday > 0 %}
+                    D - {{dday}} 
+                {% elif dday == 0 %}
+                    D - Day 
+                {% endif %}
+                {% endwith %}
+              </p>
+          </div>
+        <div class="card2-content">
+          <div class="card2-title notosans-bold-16">{{funding.title}}</div>
+          <div class="progress-percent2 notosans-regular-14">32%</div>
+          <div class="progress-container">
+            <div class="progress-value-container">
+  
+              <div class="progress-bar">
+                <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</a>
+{%endfor%}
+    {%else%}
+    <div>오늘 생일자가 없습니다.</div>
+    {%endif%}
+
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/detail.css' %}">
+{% endblock head %}
+
+{% block header %}
+<div class="funding-title">
+    <a href="{%url 'fundings:main'%}">
+        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    </a>
+    <p class="funding-title-for-center notosans-bold-24">{{funding.title}}</p>
+</div>
+{% endblock header %}
+
+{%block content%}
+<div class="image">
+   
+{% if funding.photo %}
+    <p>
+      <img src="{{ funding.photo.url }}"/>
+    </p>
+    {%else%}
+     <p>
+        <img src="{%static 'images/no_img.png'%}"/>
+    </p>
+{% endif %}</div>
+
+<div class="detail-wrapper">
+    <div class="notosans-bold-20 detail-funding-title">{{funding.title}}</div>
+    <div class="funding-info notosans-regular-12">{{funding.content}}</div>
+    <div class="percentage-container">
+        <div class="user-birthday notosans-bold-16" >모인 금액 : {{funding.total_price}}원</div>
+        <div class="current-progress notosans-bold-16">{{progress}}%</div>
+    </div>
+    <div class="progress-bar">
+        <progress value="{{progress}}" max="100"></progress>
+    </div>
+    <div class="participate-num notosans-bold-16">참여 인원<strong>{{funding.msg_count}}</strong>명</div>
+    <div class="notosans-bold-16">
+        <p class="detail-styles"><img  class="detial-img"src="{%static 'images/target.svg'%}"></p>
+        목표 금액 {{funding.goal_price}}원
+    </div>
+    <div class="notosans-bold-16">
+        <p class="detail-styles"><img class="detial-img" src="{%static 'images/cake.svg'%}" ></p>
+        친구 생일  {{funding.user.birthday}}
+          {% if dday < 0 %}
+              <span class="dday"> D{{dday}} </span>
+          {% elif dday == 0 %}
+              <span class="dday"> D-Day </span>
+          {% else %}
+              <span class="dday"> D+{{dday}} </span>
+          {% endif %}
+    </div>
+    <a href="{{funding.present_link}}" target="_blank">
+        <div class="gift-to-buy notosans-bold-16">
+            <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
+            내가 사줄 물건 보기</div>
+    </a>
+    
+<div class="present-button-wrapper">
+    <a href="{% url 'fundings:create_gift' pk=funding.id%}">
+        <button class="give_present btn" type="button">
+            <p class="notosans-bold-16 ">선물하기</p>
+        </button>
+    </a>
+</div>
+
+
+</div>
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+{%endblock%}

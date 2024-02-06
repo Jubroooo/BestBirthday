@@ -12,9 +12,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+
+environ.Env.read_env(BASE_DIR/ '../.env')
+
+MYSQL_DBNAME = env('MYSQL_DBNAME')
+MYSQL_USERNAME = env('MYSQL_USERNAME')
+MYSQL_PASSWORD = env('MYSQL_PASSWORD')
+MYSQL_DBHOST = env('MYSQL_DBHOST')
+MYSQL_DBPORT = env('MYSQL_DBPORT')
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +38,7 @@ SECRET_KEY = "django-insecure-(ivmf3rfsm$xl53y%73@t&+9n9jazbd534hd#q&e9ctnx-&yr0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,13 +56,17 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.kakao"
+    "allauth.socialaccount.providers.kakao",
+    "allauth.socialaccount.providers.naver",
+    "allauth.socialaccount.providers.google",
+    "social_django",
 ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -88,9 +104,8 @@ TEMPLATES = [
         },
     },
 ]
-
+LOGIN_REDIRECT_URL = '/users/redirect_view/'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True
 
@@ -98,16 +113,20 @@ WSGI_APPLICATION = "BestBirthday.wsgi.application"
 
 #SITE_ID: django.contrib.sites 앱에서 관리되는 사이트 목록에서 사용하려는 특정 사이트의 ID 값
 #settings.py에서의 SITE_ID: 현재 Django 프로젝트에서 사용되는 기본 사이트의 식별자
-SITE_ID = 3
+SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DBNAME,
+        'USER': MYSQL_USERNAME,
+        'PASSWORD': MYSQL_PASSWORD,
+        'HOST': MYSQL_DBHOST,
+        'PORT': MYSQL_DBPORT,
+    },
 }
 
 
@@ -154,7 +173,7 @@ STATICFILES_DIRS=[
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/' #웹서버가 미디어 파일 접근 시작 url
+MEDIA_URL = '/media/' #웹서버가 미디어 파일 접근 시작 url
 
 MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 
@@ -163,3 +182,5 @@ MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'

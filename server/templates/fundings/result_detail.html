@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/result_detail.css' %}">
+{% endblock head %}
+
+{% block header %}
+<div class="show-card-title">
+    <p class="title-go-see-letter notosans-bold-20">편지 자세히 보기</p>
+</div>
+{% endblock header %}
+
+{% block content %}
+<p class="notosans-bold-18 letters-congrats first-line-congrats">채연님 생일을 진심으로 축하합니다</p>
+<p class="notosans-bold-18 letters-congrats">축하 메세지 <span class="highlight-blue notosans-bold-18">{{funding_msg_count}}개</span>가 쌓였어요</p>
+<div class="message-detail">
+    <span class="notosans-bold-16">
+        작성자: {{funding_msg.comment_name}}
+    </span>
+    <span class="notosans-bold-20 message-content">
+        {{funding_msg.content}}
+    </span>
+    <span class="notosans-bold-16">
+        선물금액: {{funding_msg.funding_price}}원
+    </span>
+    <span class="notosans-bold-16">
+        작성일: {{funding_msg.written_date}}
+    </span>
+</div>
+<a href="{% url 'fundings:result_start' %}"class="div-btn close-message-detail">
+    <p class="notosans-bold-18 ">닫기</p>
+</a>
+{% endblock %}

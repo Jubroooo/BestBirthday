@@ -4,12 +4,9 @@ from .views import *
 app_name = 'users'
 
 urlpatterns = [
-    path('signup/', signup, name="signup"),
     path('login/', login, name="login"),
     path('logout/', logout, name="logout"),
-    #채연추가뷰
-    path("birth_input/",birth_input,name="birth_input"),
-    #예진추가뷰
-    path("mypage_myfunding/",mypage_myfunding,name="mypage_myfunding"),
-    path("mypage_participated/",mypage_participated,name="mypage_participated"),
+    path('login_info/', login_info, name="login_info"),
+    path('redirect_view/', redirect_view, name="redirect_view"),
+    path("nickname_profile_input/",nickname_profile_input,name="nickname_profile_input"),
 ]

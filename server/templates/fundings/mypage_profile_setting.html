@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_profile_setting.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="mypage-title">
+    <a href="{%url 'fundings:mypage_list'%}">
+        <div class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
+    </a>
+    <p class="mypage-title-for-center notosans-bold-24">프로필 설정</p>
+</div>
+<div class="profile-for-center">
+    <p class="notosans-bold-18 profile-setting">프로필 설정</p>
+    <img class="input-profile-img"src="../../static/images/default_profile.png">
+</div>
+<p class="notosans-bold-18 name-setting">이름 설정</p>
+<input type="text" class="notosans-bold-16 input-name" placeholder="바꿀 이름을 입력하세요"> 
+<div>
+    <p class="notosans-bold-18 bank-setting">송금 링크 관리</p>
+    <div class="payment-link-btn-container">
+        <a href="{%url 'fundings:mypage_payment_guide_k'%}">
+            <button class="payment-btn-kakao div-btn">
+                <img src="../../static/images/kakao-pay.png">
+            </button>
+        </a>
+        <a href="{%url 'fundings:mypage_payment_guide_t'%}">
+            <button class="payment-btn-toss div-btn">
+                <img src="../../static/images/toss-pay.png">
+            </button>
+        </a>
+    </div>
+    <p class="mandatory notosans-regular-12 ">*필수</p>
+    <a href="{% url 'fundings:main' %}">
+    <div class="div-btn setting-btn">
+        <p class="notosans-bold-18">완료</p>
+    </div> 
+    </a>
+</div>
+{% endblock %}

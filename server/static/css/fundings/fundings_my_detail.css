@@ -1,0 +1,87 @@
+.funding-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+
+  .funding-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+  }
+
+  .funding-title-for-margin{
+    margin-top: var(--gutter16);
+}
+.current-progress{
+    color: var(--BB_color_orange);
+}
+.images-icons{
+    display: inline-block; margin: 0; vertical-align: middle;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.funding-info {
+    margin: 1rem 0;
+    color:gray;
+}
+
+.user-birthday {  
+    margin-bottom: 2rem;
+}
+
+.user-birthday .dday {
+    padding: 0.2rem 0.6rem;
+    display: inline-block;
+    margin-left: 0.5rem;
+    background-color: var(--BB_color_blue);
+}
+
+.give_present{
+    background-color: var(--BB_color_blue);
+    color: var(--BB_color_white);
+    margin-left: 1rem;
+}
+
+.percentage-container {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.participate-num{
+    margin-bottom: 1rem;
+}
+
+.present-button-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.participate-num{
+    margin: var(--gutter24) 0;
+}
+
+.detail-img{
+    vertical-align: middle;
+}
+
+.share-btn{
+    background-color:var(--BB_color_yellow);
+}
+
+#pop-up-message{
+    display:none; color:var(--BB_color_orange); text-align: center; margin-top: 20px;
+}
