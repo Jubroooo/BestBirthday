@@ -25,7 +25,7 @@
     {%for funding_msg in funding_msgs%}
     <a href="{% url 'fundings:result_detail' pk=funding_msg.id %}"class="b-day-message" >
         <div>
-            <span class="message-number notosans-bold-16">1</span>
+            <span class="message-number notosans-bold-16">{{ forloop.counter }}</span>
             <span class="message-sender notosans-regular-14 ">{{funding_msg.comment_name}}</span>
         </div>
         <span class="message-date notosans-regular-14 ">{{funding_msg.written_date}}</span>
