@@ -25,8 +25,15 @@ def main(request) :
     if open_fundings.exists():
         today = date.today()
         today_fundings = open_fundings.filter(user__birthday__month = today.month, user__birthday__day = today.day) 
+        today_fundings_num=today_fundings.count()
+        total_today_funding_msg_count = 0
+
+        # 오늘 생일 펀딩 메시지 세기
+        for funding in today_fundings:
+            msg_count = Funding_Msg.objects.filter(post=funding).count()
+            total_today_funding_msg_count += msg_count
+
         today_fundings = today_fundings[:3]
-        
         fundings_in_msg_order = open_fundings.order_by('-msg_count')
         fundings_in_msg_order = fundings_in_msg_order[:3]
         
@@ -40,6 +47,8 @@ def main(request) :
         open_funding_progress_dict = funding_progress(open_fundings)
         
         ctx = {"today_fundings":today_fundings, 
+               "today_fundings_num":today_fundings_num,
+               "total_today_funding_msg_count":total_today_funding_msg_count,
             "today_funding_dday_dict":today_funding_dday_dict,
             "fundings_in_msg_order":fundings_in_msg_order,
             "msg_funding_dday_dict":msg_funding_dday_dict,
