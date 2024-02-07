@@ -103,7 +103,8 @@ def detail(request, pk) :
     funding = Funding.objects.get(id=pk)
     progress = int(funding.total_price / funding.goal_price * 100)
     dday = birthday_dday_cal(funding)
-    ctx = {'funding':funding, 'progress':progress, "dday":dday}    
+    current_date = timezone.now()
+    ctx = {'funding':funding, 'progress':progress, "dday":dday,"current_date":current_date }    
     return render(request, 'fundings/detail.html', ctx)
 
 #1-2 펀딩 참여 뷰

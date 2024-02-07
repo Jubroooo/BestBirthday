@@ -37,9 +37,11 @@
   position: absolute;
   bottom: var(--gutter16); 
   right: var(--gutter16);
-  width: 55%;
+  width: 57%;
   padding:0;
-  
+}
+.progress-percent2{
+  font-weight: bold;
 }
 .img-badge-container{
   position: relative;

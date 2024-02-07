@@ -4,13 +4,11 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
-  background-color: white;
+  background-color: black;
 }
 .container {
   width: 100%;
   max-width: 39rem;
-  height: 100vh;
-  overflow-y: auto;
   overflow-x: hidden;
   background-color: black;
   display: flex;

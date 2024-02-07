@@ -57,14 +57,24 @@
     </a>
 
     {% if request.user == funding.user %}
-    <div class="present-button-wrapper">
-        <button class="share-btn btn" type="button">
-            <p class="notosans-bold-16">공유하기</p>
-        </button>
-        <button class="btn give-onload-btn" type="button" onclick="showMessage()">
-            <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
-        </button>
-    </div>
+        {% if current_date|date:"Y-m-d" == user.birthday|date:"Y-m-d" %}
+        <div class="present-button-wrapper">
+            <a href="{% url 'fundings:result_start' pk=funding.id%}">
+                <button class="give_present btn" type="button">
+                    <p class="notosans-bold-16 ">선물 확인하러 가기</p>
+                </button>
+            </a>
+        </div>
+        {%else%}
+        <div class="present-button-wrapper">
+            <button class="share-btn btn" type="button">
+                <p class="notosans-bold-16">공유하기</p>
+            </button>
+            <button class="btn give-onload-btn" type="button" onclick="showMessage()">
+                <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
+            </button>
+        </div>
+        {% endif %}
     {% else %}
     <div class="present-button-wrapper">
         <a href="{% url 'fundings:create_gift' pk=funding.id%}">
