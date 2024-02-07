@@ -56,9 +56,11 @@ background-color: var(--BB_color_blue_sub);
 
   .blue-btn-gift{
     background-color: var(--BB_color_blue);
+    color: white;
   }
   .orange-btn-gift{
     background-color: var(--BB_color_orange);
+    color: white;
   }
   .gift-first{
     display: flex;
