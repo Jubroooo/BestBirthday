@@ -17,11 +17,11 @@
         <p class="notosans-bold-16 notice-for-paymentpage">펀딩은 7일 동안만 생성됩니다.</p>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">펀딩 이름</p>
-            <textarea class="funding-title" name="title"></textarea>
+            <input type="text" class="funding-title" name="title"></input>
         </div>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">사고 싶은 물건  <span class="custom-font">URL</span> 링크</p>
-            <textarea class="present_link" name="present_link"></textarea>
+            <input type="text" class="present_link" name="present_link"></input>
         </div>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">얼마?</p>
@@ -36,6 +36,8 @@
             <label for="photo-upload" class="fa-solid fa-circle-plus">
                 <input id="photo-upload" type="file" name="photo">
             </label>
+             <!-- 이미지 미리보기 -->
+            <img id="photo-preview" src="" alt="Image preview" style="display: none;"">
         </div>
         <div class="to-friends">
             <p class="notosans-bold-18">친구들에게 전하는 메세지</p>
@@ -43,7 +45,6 @@
         </div>
         <textarea class="to-friends-message" name="content"></textarea>
         <button class="div-btn start-btn-for-payment "type="submit">
-             <!-- <a href="{% url 'fundings:main' %} " class="notosans-bold-18">펀딩 생성하기</a> -->
              <p class="notosans-bold-18">펀딩 생성하기</p>
         </button>
     </div>
@@ -51,11 +52,26 @@
 {% endblock  %}
 
 {% block script %}
+
 <script>
+    //슬라이더로 송금받을 금액 설정
     document.getElementById('price-slider').addEventListener('input', function(e) {
         var price = e.target.value;
         document.getElementById('price-display').textContent = price.toLocaleString(); // 금액을 천 단위로 구분하여 표시
         document.getElementById('goal-price').value = price; // 서버로 전송될 hidden input의 값을 업데이트
     });
+
+    //이미지 미리보기
+    document.getElementById('photo-upload').addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // reader가 이미지를 읽어들인 후 실행될 함수
+            const preview = document.getElementById('photo-preview');
+            preview.src = e.target.result; // 읽어들인 이미지의 내용을 미리보기의 src 속성으로 설정
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]); // 선택된 파일을 Data URL 형태로 읽어들임
+    });
+
 </script>
 {% endblock %}
