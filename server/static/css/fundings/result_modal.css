@@ -3,15 +3,11 @@
     bottom: 0;
     width: 39rem;
 }
-
 .result-modal-wrapper{
-   background-color:rgba(117, 117, 117,0.2); /*반투명*/
+   background-color:rgba(117, 117, 117,0.2); 
    border-top-left-radius: 3.2rem; 
    border-top-right-radius: 3.2rem;
-   max-height: 100vh; /* 화면 높이를 초과하지 않음 */
-   overflow: hidden; /*스크롤 없애기 */
 }
-
 .xmark-icon{
    position:absolute;
    right: var(--gutter16);
@@ -24,7 +20,6 @@
     display: flex;
     flex-direction: column;
 }
-
 .go-and-check{
     display: flex;
     flex-direction: column;
@@ -33,11 +28,9 @@
     align-items: center;
     padding-bottom: var(--gutter24);
 }
-
 .congrats-notice{
     margin: 3.2rem 0 var(--gutter16) 0;
 }
-
 .lock-img{
     margin: var(--gutter24) 0;
     display: flex;

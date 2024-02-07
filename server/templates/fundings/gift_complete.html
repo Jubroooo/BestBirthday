@@ -5,9 +5,9 @@
 
 {% block content %}
 <div class="gift-giving">
-    <p class="notosans-bold-24">예진이에게 선물하는 중...</p>
+    <p class="notosans-bold-24">{{ funding.user.nickname }}에게 선물하는 중...</p>
     <img src="{%static 'images/givinggift.png'%}">
-    <p class="notosans-bold-18 giving-comment">메세지는 생일 날 예진이게 전달됩니다</p>
+    <p class="notosans-bold-18 giving-comment">메세지는 생일 날 {{ funding.user.nickname }}에게 전달됩니다</p>
 </div>
 {% endblock content %}
 
