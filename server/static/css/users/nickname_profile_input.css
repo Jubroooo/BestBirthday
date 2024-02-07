@@ -10,6 +10,7 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    margin-bottom: var(--gutter24);
 }
 
 .logo{
@@ -23,7 +24,6 @@
     border: none;
     cursor: pointer;
     font-weight: bold;
-    border-radius: 1.1rem;
     background-color: gray;
 }
 .nickname_img_wrapper{
@@ -57,9 +57,9 @@ textarea {
     outline: none;
     resize: none;
   }
+
 .add-nickname{
     height: 5vh;
-    border-radius: var(--gutter8);
     background-color: var(--BB_color_white);
     background-color: transparent; 
     padding: 10px;

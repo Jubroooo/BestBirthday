@@ -27,7 +27,7 @@
         <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0">
     </div>
 
-    <div class="button-group">
+    <div class="button-group transfer-btn-presents">
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "5000">5,000</button>
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "10000">10,000</button>
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "20000">20,000</button>
@@ -79,12 +79,21 @@
         //버튼 누를시 input 벨류를 버튼 클릭시 금액으로 변경
         const priceButtons = document.querySelectorAll(".blue-btn-gift");
 
+        //금액 직접 입력시
         priceButtons.forEach(function(button) {
             button.addEventListener("click", function() {
                 let value = this.getAttribute("data-value");
                 document.querySelector("input[name='funding_price']").value = value;
             });
         });
+        
+        //엔터 누를때 폼 기본 제출 방지
+        const form = document.querySelector("form"); 
+
+        form.addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        });
+
 
         //송금링크에 금액 추가
         const transferButtons = document.querySelectorAll(".transfer-btn");
@@ -107,6 +116,40 @@
                 let tossInfo = [originalTossURL, inputValue.toString()];
                 tossTransferLink.href = tossInfo.join('/');
             });
+        });
+    });
+
+
+
+    //금액 버튼 누를때 뜨는 선물 이미지가 달라지게 
+    const priceButtons = document.querySelectorAll(".blue-btn-gift");
+    const presentImage = document.querySelector(".changing-present");
+
+    priceButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            let value = this.getAttribute("data-value");
+            switch(value) {
+                case "5000":
+                    presentImage.src = "{% static 'images/present1.png' %}";
+                    break;
+                case "10000":
+                    presentImage.src = "{% static 'images/present2.png' %}";
+                    break;
+                case "20000":
+                    presentImage.src = "{% static 'images/present3.png' %}";
+                    break;
+                case "30000":
+                    presentImage.src = "{% static 'images/present4.png' %}";
+                    break;
+                case "50000":
+                    presentImage.src = "{% static 'images/present5.png' %}";
+                    break;
+                case "0":
+                    presentImage.src = "{% static 'images/present6.png' %}";
+                    break;
+                default:
+                    presentImage.src = "{% static 'images/present_default.png' %}";
+            }
         });
     });
     
