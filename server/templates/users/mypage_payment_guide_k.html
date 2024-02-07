@@ -22,10 +22,25 @@
 <img  class="guide-kakaopay"src="../../static/images/guide.png">
 <div class="paymentguide-link">
     <p class="notosans-bold-18">링크</p>
-    <p class="notosans-bold-16">linklinklink</p>
+    <p class="notosans-bold-16"><input type="text" id="kakaolink"></p>
 </div>
-<div class="div-btn setting-btn">
+<button class="div-btn setting-btn" type="submit" onclick="checkLink()">
     <p class="notosans-bold-18">링크 생성하기</p>
-</div> 
+</button> 
+
+<!-- 링크 유효성 확인 링크 -->
+<script>
+    function checkLink() {
+        const inputValue = document.getElementById("kakaolink").value;
+
+        const pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
+
+        if (pattern.test(inputValue)) {
+            alert("유효한 링크입니다!");
+        } else {
+            alert("링크를 다시 확인해주세요!");
+        }
+    }
+</script>
 
 {% endblock content %}
