@@ -164,8 +164,6 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-**/migrations/**_initial.py
-!**/migrations/_init_.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
@@ -175,7 +173,3 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
-
-#migration 정보 ignore, 배포때는 지우기
-**/migrations/**_initial.py
-!**/migrations/_init_.py

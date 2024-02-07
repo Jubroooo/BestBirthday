@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import FundingForm, MessageForm
+from .forms import *
 from .models import Funding, Funding_Msg
 from datetime import datetime, date, timedelta
 from django.utils import timezone
@@ -38,17 +38,16 @@ def main(request) :
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
-            
-
-        ctx = {"today_fundings": today_fundings, 
-            "today_funding_dday_dict": today_funding_dday_dict,
-            "fundings_in_msg_order": fundings_in_msg_order,
-            "msg_funding_dday_dict": msg_funding_dday_dict,
-            "open_fundings": open_fundings,
-            "open_funding_dday_dict": open_funding_dday_dict,
-            "today_funding_progress_dict" : today_funding_progress_dict,
-            "msg_funding_progress_dict" : msg_funding_progress_dict,
-            "open_funding_progress_dict" : open_funding_progress_dict,
+        
+        ctx = {"today_fundings":today_fundings, 
+            "today_funding_dday_dict":today_funding_dday_dict,
+            "fundings_in_msg_order":fundings_in_msg_order,
+            "msg_funding_dday_dict":msg_funding_dday_dict,
+            "open_fundings":open_fundings,
+            "open_funding_dday_dict":open_funding_dday_dict,
+            "today_funding_progress_dict":today_funding_progress_dict,
+            "msg_funding_progress_dict":msg_funding_progress_dict,
+            "open_funding_progress_dict":open_funding_progress_dict,
             }
         return render(request, 'fundings/main.html', ctx)
     else:
@@ -60,9 +59,11 @@ def main_all_birthday_list(request):
         today = date.today()
         fundings = fundings.filter (user__birthday__month = today.month, user__birthday__day = today.day) 
         funding_dday_dict = funding_dday_cal(fundings)
+        funding_progresses = funding_progress(fundings)
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
+            "funding_progresses": funding_progresses,
         }
     
         return render (request, 'fundings/main_all_birthday_list.html', ctx)
@@ -73,10 +74,11 @@ def main_ranking_list(request):
     if fundings.exists():
         fundings = fundings.order_by('-msg_count')
         funding_dday_dict = funding_dday_cal(fundings)
-
+        funding_progresses = funding_progress(fundings)
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
+            "funding_progresses": funding_progresses
         }
     
         return render (request, 'fundings/main_ranking_list.html', ctx)
@@ -87,9 +89,11 @@ def main_all_funding_list(request):
     if fundings.exists():
         fundings = fundings.order_by(Random())
         funding_dday_dict = funding_dday_cal(fundings)
+        funding_progresses = funding_progress(fundings)
         ctx = {
             "fundings": fundings,
             "funding_dday_dict": funding_dday_dict,
+            "funding_progresses": funding_progresses
         }
     
         return render (request, 'fundings/main_all_funding_list.html', ctx)
@@ -161,7 +165,7 @@ def create_gift(request, pk):
                 ctx = {
                     "form":form, 'funding':funding
                 }
-                return render (request, 'fundings/create_gift.html', ctx)
+                return render(request, 'fundings/create_gift.html', ctx)
 
 def create_gift_complete(request,pk):
     return render(request, 'fundings/gift_complete.html',{'pk': pk})
@@ -244,28 +248,12 @@ def result_detail (request, pk):
     }
     return render (request, "fundings/result_detail.html", ctx)
     
-# 4. 마이페이지 뷰(백 작업 필요)
-def mypage_list(request):
-    return render(request,'fundings/mypage_list.html')
-def mypage_myfunding(request):
-    return render(request,"fundings/mypage_myfunding.html")
-def mypage_profile_setting(request):
-    return render(request,'fundings/mypage_profile_setting.html')
-def mypage_participated(request):
-    return render(request, "fundings/mypage_participated.html")
-def mypage_payment_guide_k(request):
-    return render(request,'fundings/mypage_payment_guide_k.html')
-def mypage_payment_guide_t(request):
-    return render(request,'fundings/mypage_payment_guide_t.html')
-
-
 # 기타: 함수들
 def funding_dday_cal(fundings):
      
     funding_dday_dict = {} #펀딩 디데이 딕셔너리
 
     for funding in fundings:
-        user = funding.user
         current_date = timezone.now()
  
         #펀딩 디데이 계산
@@ -273,7 +261,7 @@ def funding_dday_cal(fundings):
         if funding_dday < timedelta(0):
             funding.is_closed = True
         
-        funding_dday_dict[user.id] = funding_dday.days
+        funding_dday_dict[funding.id] = funding_dday.days
     return funding_dday_dict
 
 
@@ -293,7 +281,7 @@ def birthday_dday_cal(funding):
     return dday
     # 생일이 지난 경우 양수, 생일이 다가올때는(생일 전에는) 음수값을 전달한다
 
-    #펀딩 진행률 함수
+#펀딩 진행률 함수
 def funding_progress(fundings):
     funding_progress_dict = {} #펀딩 진행 딕셔너리
 

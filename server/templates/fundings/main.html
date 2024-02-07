@@ -1,11 +1,14 @@
-{% extends "base.html" %} {%load static%} {% block head %}
-<link rel="stylesheet" href="{% static 'css/fundings/main.css'%}" /> {% endblock head %}
+{% extends "base.html" %}
+{%load static%}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/fundings/main.css'%}" /> 
+{% endblock head %}
 {% block header %}
 <a href="">
   <p class="logo unna-bold-36">Best Birthday</p>
 </a>
 {% if user.is_authenticated %}
-<a href="{%url 'fundings:mypage_list'%}">
+<a href="{%url 'users:mypage_list'%}">
   <div class="profile"></div>
 </a>
 {% else %}
@@ -13,8 +16,9 @@
   <div class="profile"></div>
 </a>
 {% endif %}
+{% endblock header %} 
 
-{% endblock header %} {% block content %}
+{% block content %}
 <div class="create-funding-container">
   <div id="gift-img"></div>
   <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
@@ -48,7 +52,7 @@
       {%endif%}
       <div class="D-day div-btn">
         <p class="notosans-regular-12">
-          {% with dday=today_funding_dday_dict|get_item:funding.user.id %}
+          {% with dday=today_funding_dday_dict|get_item:funding.pk %}
           {% if dday > 0 %}
                D - {{dday}} 
           {% elif dday == 0 %}
@@ -62,7 +66,7 @@
     <div class="progress-container">
       <div class="coin-icon"></div>
       <div class="progress-value-container">
-        {% with progress=today_funding_progress_dict|get_item:funding.id %}
+        {% with progress=today_funding_progress_dict|get_item:funding.pk %}
         <progress value="{{progress}}" max="100"></progress>
         <div class="progress-percent notosans-regular-12">
           {{progress}}%
@@ -85,7 +89,7 @@
     </div>
   {%if fundings_in_msg_order%}
   {%for funding in fundings_in_msg_order%}
-  <a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <a href="{%url 'fundings:detail' pk=funding.pk %}">
     <div class="card-container">
       <div class="card-top">
         {% if funding.is_achieved %}
@@ -98,7 +102,7 @@
             {%endif%}
         <div class="D-day div-btn">
           <p class="notosans-regular-12">
-            {% with dday=today_funding_dday_dict|get_item:funding.user.id %}
+            {% with dday=msg_funding_dday_dict|get_item:funding.pk %}
             {% if dday > 0 %}
                  D - {{dday}} 
             {% elif dday == 0 %}
@@ -112,7 +116,7 @@
       <div class="progress-container">
         <div class="coin-icon"></div>
         <div class="progress-value-container">
-          {% with progress=today_funding_progress_dict|get_item:funding.id %}
+          {% with progress=msg_funding_progress_dict|get_item:funding.pk %}
           <progress value="{{progress}}" max="100"></progress>
           <div class="progress-percent notosans-regular-12">
             {{progress}}%
@@ -147,7 +151,7 @@
           {%endif%}
       <div class="D-day div-btn">
         <p class="notosans-regular-12">
-          {% with dday=today_funding_dday_dict|get_item:funding.user.id %}
+          {% with dday=open_funding_dday_dict|get_item:funding.pk %}
           {% if dday > 0 %}
                D - {{dday}} 
           {% elif dday == 0 %}
@@ -161,11 +165,11 @@
     <div class="progress-container">
       <div class="coin-icon"></div>
       <div class="progress-value-container">
-        {% with progress=today_funding_progress_dict|get_item:funding.id %}
+        {% with progress=open_funding_progress_dict|get_item:funding.pk %}
         <progress value="{{progress}}" max="100"></progress>
         <div class="progress-percent notosans-regular-12">
           {{progress}}%
-          {% endwith %}
+        {% endwith %}
         </div>
       </div>
     </div>

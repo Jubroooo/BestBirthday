@@ -10,3 +10,4 @@ class MessageForm(forms.ModelForm):
     class Meta():
         model = Funding_Msg
         fields = ['funding_price', 'comment_name', 'content']
+       
