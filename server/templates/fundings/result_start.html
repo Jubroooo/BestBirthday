@@ -13,9 +13,11 @@
 
 {% block content %}
 <div class="congrats-section">어떻게 꾸밀깡</div>
+<p class="notosans-bold-18 filter-congrats"> 친구들이 선물한 금액  <span class="highlight-blue notosans-bold-18"> {{funding.total_price}}</span>원</p>
 {%if earliest_msg %}
 <p class="notosans-bold-18 filter-congrats">가장 먼저 축하해 준 친구  <span class="highlight-blue notosans-bold-18"> {{earliest_msg.comment_name}}</span></p>
 <p class="notosans-bold-18 filter-congrats">가장 길게 축하해 준 친구 <span class="highlight-blue notosans-bold-18"> {{longest_msg.comment_name}}</span></p>
+
 {%else%}
 <p class="notosans-bold-18 no-messages">축하해 준 친구가 없어요. ㅠㅠ</p>
 {%endif%}
