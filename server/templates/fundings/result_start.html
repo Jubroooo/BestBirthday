@@ -12,7 +12,9 @@
 {% endblock header %}
 
 {% block content %}
-<div class="congrats-section">어떻게 꾸밀깡</div>
+<div class="congrats-section">
+   
+</div>
 <p class="notosans-bold-18 filter-congrats"> 친구들이 선물한 금액  <span class="highlight-blue notosans-bold-18"> {{funding.total_price}}</span>원</p>
 {%if earliest_msg %}
 <p class="notosans-bold-18 filter-congrats">가장 먼저 축하해 준 친구  <span class="highlight-blue notosans-bold-18"> {{earliest_msg.comment_name}}</span></p>
@@ -25,7 +27,7 @@
 <p class="notosans-bold-18 letters-congrats">축하 메세지 <span class="highlight-blue notosans-bold-18">{{funding_msg_count}}개</span>가 쌓였어요</p>
 <div class="delivered-messages">
     {%for funding_msg in funding_msgs%}
-    <a href="{% url 'fundings:result_detail' pk=funding_msg.id %}"class="b-day-message" >
+    <a href="#" data-message-id="{{ funding_msg.id }}" class="b-day-message">
         <div>
             <span class="message-number notosans-bold-16">{{ forloop.counter }}</span>
             <span class="message-sender notosans-regular-14 ">{{funding_msg.comment_name}}</span>
@@ -37,4 +39,39 @@
 <div class="div-btn">
     <p class="notosans-bold-18">공유하기</p>
 </div>
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <p id="modalMessageContent">메시지 내용이 여기에 표시됨</p>
+        <div class="div-btn close">
+            <p class="notosans-bold-18">편지 닫기</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+{% block script %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 메시지 클릭 이벤트 리스너
+    document.querySelectorAll('.b-day-message').forEach(function(messageLink) {
+        messageLink.addEventListener('click', function(e) {
+            e.preventDefault(); // 기본 링크 동작 방지
+
+            const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
+            // AJAX 요청으로 메시지 상세 내용 가져오기
+               fetch(`http://127.0.0.1:8000/result_detail/${messageId}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
+                    document.getElementById('messageModal').style.display = 'block'; // 모달 표시
+                });
+        });
+    });
+
+    // 닫기 버튼 클릭 이벤트 리스너
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
+    });
+});
+</script>
+{% endblock%}
