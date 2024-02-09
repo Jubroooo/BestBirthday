@@ -26,6 +26,12 @@
         </button>
     </a>
 </div>
+{% if user.kakao_account != null %}
+    <div>카카오 송금링크 존재</div>
+{% endif %}
+{% if user.toss_account != null %}
+    <div>토스 송금링크 존재</div>
+{% endif %}
 <button class="div-btn create_payment_btn" type="submit">
     <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
 </button>
