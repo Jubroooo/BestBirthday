@@ -60,6 +60,7 @@
     display: flex;
     justify-content: center;
     gap: var(--gutter8);
+    margin-bottom: var(--gutter8);
 }
 
 .participate-num{
@@ -131,4 +132,7 @@
 }
 .give-onload-btn p{
     color: var(--BB_color_white);
+}
+.end-funding{
+    margin-top: 3.2rem;
 }

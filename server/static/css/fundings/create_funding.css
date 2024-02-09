@@ -50,7 +50,7 @@
   }
   .notice-for-paymentpage{
     color:gray;
-    margin-bottom: var(--gutter16);
+    margin-bottom: var(--gutter8);
   }
 
   .wrapper-content-payment{

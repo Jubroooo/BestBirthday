@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
 from django.db.models.functions import Length
+from django.contrib import messages
 import time
 
 
@@ -203,11 +204,11 @@ def create_funding(request) :
             temp_fundings = Funding.objects.filter(user=request.user)
             temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
             temp_fundings = temp_fundings.filter(is_closed=False)
-            
+
             if temp_fundings.exists():
-                print (temp_fundings)
-                return redirect ('fundings:main')
+                return redirect('fundings:main')
             # 생일 기간에 두 개 이상의 펀딩을 같은 유저가 만들지 못하도록! 
+            # 이 부분 하는 중 ! 
             # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
             else:
                 funding = Funding()

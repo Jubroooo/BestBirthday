@@ -23,11 +23,14 @@
   <div id="gift-img"></div>
   <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
   <div class="div-btn btn-main-create">
-    <a href="{%url 'fundings:create_funding'%}">
+    <a href="{%url 'fundings:create_funding'%}" data-open="alertModal">
       <p class="notosans-bold-18">내 생일 축하받기</p>
     </a>
   </div>
 </div>
+<!--alert 모달-->
+
+<!---->
 <div class="funding-status notosans-bold-20">
   오늘 생일 <strong>{{today_fundings_num}}</strong>명, 축하메시지 <strong>{{total_today_funding_msg_count}}</strong>개
 </div>
@@ -181,3 +184,7 @@
     {%endif%}
 
 {% endblock content %}
+{% block script %}
+
+
+{% endblock%}

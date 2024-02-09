@@ -76,6 +76,8 @@
     z-index: 1; 
     left: 50%;
     top: 50%;
+    right: 0;
+    bottom: 0;
     transform: translate(-50%, -50%); /* 정중앙 정렬 */
     width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
     height: 100%; /* 전체 높이 */
@@ -85,7 +87,7 @@
 
 .modal-content {
     margin: 15% auto; /* 페이지 중앙에 위치 */
-    width: 34.2rem; /* 모달 너비 */
+    max-width: 34.2rem; /* 모달 너비 */
     display: flex;
     justify-content: center;
     flex-direction: column;
