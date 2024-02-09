@@ -17,5 +17,6 @@ urlpatterns = [
     path('create_funding/', create_funding, name="create_funding"), 
     path('result_modal/<int:pk>/', result_modal, name="result_modal"), 
     path('result_start/<int:pk>/', result_start, name="result_start"), 
-    path('result_detail/<int:pk>/', result_detail, name="result_detail"),     
+    path('result_detail/<int:pk>/', result_detail, name="result_detail"),  
+    path('finish/<int:pk>/', finish, name="finish"),  
 ]

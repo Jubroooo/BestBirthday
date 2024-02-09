@@ -64,6 +64,13 @@
         <button class="btn give-onload-btn" type="button" onclick="showMessage()">
             <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
         </button>
+
+        <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
+            {% csrf_token %}
+            <button class="btn give-onload-btn" type="submit">
+                <p class="notosans-bold-16">펀딩 마감하기</p>
+            </button>
+        </form>
     </div>
     {% else %}
     <div class="present-button-wrapper">
