@@ -31,8 +31,8 @@
 <!-- 사진 첨부 후 미리보기 위해 자바스크립트 사용 -->
 {% block script %}
 <script>
-    var loadFile = function(event) {
-        var output = document.querySelector('.input-profile-img');
+    let loadFile = function(event) {
+        let output = document.querySelector('.input-profile-img');
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
             URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거

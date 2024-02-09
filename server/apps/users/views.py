@@ -41,9 +41,11 @@ def redirect_view(request):
         return redirect('/')  # Redirect to home for non-authenticated users
 
 
-# 4. 마이페이지 뷰(백 작업 필요)
+# 마이페이지 뷰
 def mypage_list(request):
-    return render(request,'users/mypage_list.html')
+    user=request.user
+    ctx={"user":user}
+    return render(request,'users/mypage_list.html',ctx)
 
 def mypage_myfunding(request):
     user = request.user
@@ -75,7 +77,18 @@ def mypage_participated(request):
     return render(request, "users/mypage_participated.html", ctx)
 
 def mypage_profile_setting(request):
-    return render(request,'users/mypage_profile_setting.html')
+    user = request.user
+    if request.method == "POST":
+        form = UserProfilesettingForm(request.POST, request.FILES, instance = user)
+        if form.is_valid():
+            form.save()
+            return redirect ('users:mypage_list')
+    else:
+        form = UserProfilesettingForm(instance=user)
+    ctx = {
+        "form": form,
+    }
+    return render(request,'users/mypage_profile_setting.html', ctx)    
 
 
 def mypage_payment_guide_k(request):

@@ -13,7 +13,12 @@ class UserProfileUpdateForm(forms.ModelForm):
         fields = ['nickname', 'birthday', 'profile']
     nickname = forms.CharField(label='닉네임', max_length=24, required=True)
     birthday = forms.DateField(label='생일', required=True)
-    
+
+class UserProfilesettingForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['nickname', 'profile']
+
     
 class kakaoForm(forms.ModelForm):
     class Meta():
