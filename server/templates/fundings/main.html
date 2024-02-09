@@ -179,5 +179,61 @@
     {%else%}
     <div class="null-guide notosans-bold-16">진행 중인 펀딩이 없습니다.</div>
     {%endif%}
-
 {% endblock content %}
+{% block content2 %}
+<div id="modal_container">
+    <div class="result-modal-wrapper">
+        <a href="{% url 'fundings:main'%}" class="xmark-icon">
+            <i class="fa-solid fa-xmark close-area"></i>
+        </a>
+        <div class="go-and-check">
+            <p id="congrats-message" class="notosans-bold-20 congrats-notice" style="color:var(--BB_color_white)"> 선물전달 완료</p>
+            <div class="lock-img">
+                <img src="{%static 'images/gift_main.png'%}">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content2%}
+
+{% block script %}
+<script>
+  //이전페이지가 선물완료 페이지인지 확인
+  function showModalBasedOnPreviousPage() {
+    const prevPage = document.referrer;
+    const isPreviousPageB = prevPage.endsWith("/create_gift_complete/"); 
+    if (isPreviousPageB) {
+        const modal_pk = prevPage.split("/")[prevPage.split("/").length - 3];
+        console.log(prevPage)
+        console.log(modal_pk)
+        modalOn(modal_pk);
+    }
+}
+
+  function modalOn(modal_pk) {
+    const modal = document.getElementById("modal_container");
+    modal.style.display = "block";
+
+    const congratsMessage = document.getElementById("congrats-message");
+    congratsMessage.innerText = "{{modal_pk.user}}에게 전달완료";
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+  function modalOff() {
+    const modal = document.getElementById("modal_container");
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  // X 누르면 닫기
+  const closeBtn = document.querySelector(".close-area");
+  closeBtn.addEventListener("click", e => {
+    modalOff();
+  });
+
+  // 전페이지에 따라 모달 띄우는 함수 실행
+  window.onload = showModalBasedOnPreviousPage;
+</script>
+{% endblock script %}
