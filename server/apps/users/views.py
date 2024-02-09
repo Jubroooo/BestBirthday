@@ -84,7 +84,7 @@ def mypage_payment_guide_k(request):
         form = kakaoForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('users:mypage_list')
+            return redirect ('fundings:create_payment')
     else:
         form = kakaoForm(instance=user)
     ctx = {
@@ -98,13 +98,13 @@ def mypage_payment_guide_t(request):
         form = tossForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('users:mypage_list')
+            return redirect ('fundings:create_payment')
     else:
         form = tossForm(instance=user)
     ctx = {
         "form": form,
     }
-    return render(request,'users/mypage_payment_guide_t.html')
+    return render(request,'users/mypage_payment_guide_t.html', ctx)
 
 #펀딩 날짜 계산
 def funding_dday_cal(fundings):

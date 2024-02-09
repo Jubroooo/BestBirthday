@@ -25,7 +25,7 @@
     {% csrf_token %}
     <div class="paymentguide-link">
         <p class="notosans-bold-18">링크</p>
-        <input type="text" class="notosans-bold-16" id="kakaolink" value="{{ form.kakao_account.value }}">
+        <input type="text" class="notosans-bold-16" name="kakao_account" id="kakaolink" value="{{ form.kakao_account.value }}">
     </div>
     <div id="linkValidationMsg" class="link-validation-message"></div><br>
     <button class="div-btn setting-btn" type="submit">
