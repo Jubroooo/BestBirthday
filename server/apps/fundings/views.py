@@ -217,7 +217,9 @@ def create_funding(request) :
     
 
 def create_payment(request):
-    return render(request, 'fundings/create_payment.html')
+    user=request.user
+    ctx = {"user":user}
+    return render(request, 'fundings/create_payment.html', ctx)
 
 
 #3. 결과 관련 뷰
