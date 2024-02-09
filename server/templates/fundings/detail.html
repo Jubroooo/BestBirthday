@@ -57,15 +57,7 @@
     </a>
 
     {% if request.user == funding.user %}
-        {% if current_date|date:"Y-m-d" == user.birthday|date:"Y-m-d" %}
-        <div class="present-button-wrapper">
-            <a href="{% url 'fundings:result_start' pk=funding.id%}">
-                <button class="give_present btn" type="button">
-                    <p class="notosans-bold-16 ">선물 확인하러 가기</p>
-                </button>
-            </a>
-        </div>
-        {%else%}
+        {% if funding.is_closed == False %}
         <div class="present-button-wrapper">
             <button class="share-btn btn" type="button">
                 <p class="notosans-bold-16">공유하기</p>
@@ -73,6 +65,17 @@
             <button class="btn give-onload-btn" type="button" onclick="showMessage()">
                 <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
             </button>
+
+            <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
+                {% csrf_token %}
+                <button class="btn give-onload-btn" type="submit">
+                    <p class="notosans-bold-16">펀딩 마감하기</p>
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <div class="present-button-wrapper">
+            <span>마감된 펀딩</span>
         </div>
         {% endif %}
     {% else %}

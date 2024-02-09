@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
+from ..fundings.models import *
+from datetime import datetime, date, timedelta
+from django.utils import timezone
         
 def login(request):
     return render (request, 'users/login.html')
@@ -21,7 +24,7 @@ def login_info(request):
         form = UserProfileUpdateForm(instance=user)
     ctx = {
         "form": form,
-    }        
+    }
     return render (request, 'users/login_info.html', ctx)  
 
 def nickname_profile_input(request):
@@ -41,12 +44,38 @@ def redirect_view(request):
 # 4. 마이페이지 뷰(백 작업 필요)
 def mypage_list(request):
     return render(request,'users/mypage_list.html')
+
 def mypage_myfunding(request):
-    return render(request,"users/mypage_myfunding.html")
+    user = request.user
+    myfundings = user.funding_user.all()
+    funding_dday_dict = funding_dday_cal(myfundings)
+    funding_progress_dict = funding_progress(myfundings)
+    ctx={
+        "myfundings":myfundings,
+        "funding_dday_dict":funding_dday_dict,
+        "funding_progress_dict":funding_progress_dict        
+    }
+    return render(request,"users/mypage_myfunding.html", ctx)
+
+def mypage_participated(request):
+    current_user = request.user
+    # 유저가 쓴 메세지 필터링
+    fundings_participated_in = Funding_Msg.objects.filter(user=current_user).values_list('post', flat=True)
+
+    # 메세지ID가 포함된 펀딩글 필터링
+    participated_fundings = Funding.objects.filter(id__in=fundings_participated_in)
+    funding_dday_dict = funding_dday_cal(participated_fundings)
+    funding_progress_dict = funding_progress(participated_fundings)
+    ctx={
+        "participated_fundings":participated_fundings,
+        "funding_dday_dict":funding_dday_dict,
+        "funding_progress_dict":funding_progress_dict        
+    }
+    
+    return render(request, "users/mypage_participated.html", ctx)
+
 def mypage_profile_setting(request):
     return render(request,'users/mypage_profile_setting.html')
-def mypage_participated(request):
-    return render(request, "users/mypage_participated.html")
 
 
 def mypage_payment_guide_k(request):
@@ -55,13 +84,13 @@ def mypage_payment_guide_k(request):
         form = kakaoForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('users:mypage_list')
+            return redirect ('fundings:create_payment')
     else:
         form = kakaoForm(instance=user)
     ctx = {
         "form": form,
     }        
-    return render(request,'users/mypage_payment_guide_k.html')
+    return render(request,'users/mypage_payment_guide_k.html', ctx)
 
 def mypage_payment_guide_t(request):
     user = request.user
@@ -69,10 +98,35 @@ def mypage_payment_guide_t(request):
         form = tossForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('users:mypage_list')
+            return redirect ('fundings:create_payment')
     else:
         form = tossForm(instance=user)
     ctx = {
         "form": form,
-    }        
-    return render(request,'users/mypage_payment_guide_t.html')
+    }
+    return render(request,'users/mypage_payment_guide_t.html', ctx)
+
+#펀딩 날짜 계산
+def funding_dday_cal(fundings):
+     
+    funding_dday_dict = {} #펀딩 디데이 딕셔너리
+
+    for funding in fundings:
+        current_date = timezone.now()
+ 
+        #펀딩 디데이 계산
+        funding_dday = (funding.created_date + timedelta(days=7)) - current_date
+        if funding_dday < timedelta(0):
+            funding.is_closed = True
+        
+        funding_dday_dict[funding.id] = funding_dday.days
+    return funding_dday_dict
+
+#펀딩 진행률 함수
+def funding_progress(fundings):
+    funding_progress_dict = {} #펀딩 진행 딕셔너리
+
+    for funding in fundings:
+        funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
+
+    return funding_progress_dict

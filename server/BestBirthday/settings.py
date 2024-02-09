@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.naver",
     "allauth.socialaccount.providers.google",
     "social_django",
+    "django_crontab",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -184,3 +185,7 @@ MEDIA_ROOT = BASE_DIR / 'media' #웹서버가 접근하는 미디어 파일
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+CRONJOBS = [
+    ('* 0 * * *', 'apps.fundings.cron.update_funding_status')
+]
