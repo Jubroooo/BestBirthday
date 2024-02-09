@@ -19,10 +19,10 @@
             <div class="profile"></div>
             <div class="mypage-profile">
                 <div class="mypage-profile2">
-                <p class="notosans-bold-20 myname">예진</p>
+                <p class="notosans-bold-20 myname">{{user.nickname}}</p>
                 <div class="D-day div-btn">
                     <p>
-                      4월 26일생
+                      {{user.birthday|date:"F j일"}}
                     </p>
                   </div>
                 </div>
