@@ -46,3 +46,17 @@
     gap:var(--gutter24);
     margin: var(--gutter16) 0;
 }
+input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #ffffff; 
+    width: 80%; /* Adjust width as needed */
+    padding: 0 10px;
+    background-color: transparent;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    color:white;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: initial;
+    font-size: 15px;
+    outline: none;
+    resize: none;
+  }

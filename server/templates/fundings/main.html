@@ -20,17 +20,30 @@
 
 {% block content %}
 <div class="create-funding-container">
-  <div id="gift-img"></div>
-  <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
-  <div class="div-btn btn-main-create">
-    <a href="{%url 'fundings:create_funding'%}" data-open="alertModal">
-      <p class="notosans-bold-18">내 생일 축하받기</p>
-    </a>
-  </div>
-</div>
-<!--alert 모달-->
+<div id="gift-img"></div>
+<p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
 
-<!---->
+{% if messages %}
+        {% for message in messages %}
+        <div class="main-class-forcenter">
+          <div class="cbtn btn-main-create change-color">
+          <p class="notosans-bold-18">내 생일 축하받기</p>
+          </div>
+          <div class="alert-message">
+            <i class="fa-solid fa-circle-exclamation notosans-regular-12"></i>
+            <div class="notosans-regular-12">{{ message }}</div>
+          </div> 
+        </div>
+        {% endfor %}
+{% else %}
+        <!-- 메시지가 없을 경우, "내 생일 축하받기" 버튼을 표시 -->
+        <a href="{% url 'fundings:create_funding' %}" class="div-btn btn-main-create">
+            <p class="notosans-bold-18">내 생일 축하받기</p>
+        </a>
+{% endif %}
+
+</div>
+
 <div class="funding-status notosans-bold-20">
   오늘 생일 <strong>{{today_fundings_num}}</strong>명, 축하메시지 <strong>{{total_today_funding_msg_count}}</strong>개
 </div>
@@ -185,6 +198,16 @@
 
 {% endblock content %}
 {% block script %}
+<script>
+function showFundingMessage() {
+  // 메시지 표시
+  var messageDiv = document.getElementById('funding-exists-message');
+  messageDiv.style.display = 'block';
 
+  // 클릭한 div의 스타일 변경
+  var createButtonDiv = document.querySelector('.cbtn.btn-main-create.change-color');
+  createButtonDiv.classList.add('clicked');
+}
+</script>
 
 {% endblock%}

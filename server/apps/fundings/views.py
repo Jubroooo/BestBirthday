@@ -205,19 +205,21 @@ def create_funding(request) :
             temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
             temp_fundings = temp_fundings.filter(is_closed=False)
 
-            if temp_fundings.exists():
-                return redirect('fundings:main')
+            # if temp_fundings.exists():
+            #     return redirect('fundings:main')
             # 생일 기간에 두 개 이상의 펀딩을 같은 유저가 만들지 못하도록! 
             # 이 부분 하는 중 ! 
             # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
-            else:
-                funding = Funding()
-                funding.user = request.user
-                form = FundingForm(instance=funding)
-                ctx = {
-                    'form':form
-                }
-                return render(request, 'fundings/create_funding.html', ctx)
+            print("temp_fundings exists:", temp_fundings.exists())
+
+            if temp_fundings.exists():
+                # 사용자에게 메시지를 추가하고 메인 페이지로 리디렉션
+                messages.info(request, "이미 생성된 펀딩이 있습니다. 펀딩 생성은 1번만 가능합니다.")
+                return redirect('fundings:main')
+
+            funding = Funding(user=request.user)
+            form = FundingForm(instance=funding)
+            return render(request, 'fundings/create_funding.html', {'form': form})
         #post일때
         elif request.method == "POST":
             funding = Funding()
