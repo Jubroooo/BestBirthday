@@ -14,7 +14,7 @@
 
 {%block content%}
 <div class="img-container">
-<img class="changing-present" src="{%static 'images/present1.png'%}">
+<img class="changing-present" src="{%static 'images/1.png'%}">
 </div>
 <form method = "POST" action="">
     {% csrf_token %}
@@ -130,25 +130,25 @@
             let value = this.getAttribute("data-value");
             switch(value) {
                 case "5000":
-                    presentImage.src = "{% static 'images/present1.png' %}";
+                    presentImage.src = "{% static 'images/2.png' %}";
                     break;
                 case "10000":
-                    presentImage.src = "{% static 'images/present2.png' %}";
+                    presentImage.src = "{% static 'images/3.png' %}";
                     break;
                 case "20000":
-                    presentImage.src = "{% static 'images/present3.png' %}";
+                    presentImage.src = "{% static 'images/4.png' %}";
                     break;
                 case "30000":
-                    presentImage.src = "{% static 'images/present4.png' %}";
+                    presentImage.src = "{% static 'images/5.png' %}";
                     break;
                 case "50000":
-                    presentImage.src = "{% static 'images/present5.png' %}";
+                    presentImage.src = "{% static 'images/6.png' %}";
                     break;
                 case "0":
-                    presentImage.src = "{% static 'images/present6.png' %}";
+                    presentImage.src = "{% static 'images/7.png' %}";
                     break;
                 default:
-                    presentImage.src = "{% static 'images/present_default.png' %}";
+                    presentImage.src = "{% static 'images/1.png' %}";
             }
         });
     });

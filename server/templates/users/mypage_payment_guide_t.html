@@ -20,24 +20,31 @@
 </div>
 <p class="mandatory notosans-regular-12 ">*필수</p>
 <img  class="guide-kakaopay"src="../../static/images/guide.png">
-<div class="paymentguide-link">
-    <p class="notosans-bold-18">링크</p>
-    <p class="notosans-bold-16"><input type="text" id="tosslink"></p>
-</div>
-<button class="div-btn setting-btn" type="submit" onclick="checkLink()">
-    <p class="notosans-bold-18">링크 생성하기</p>
-</button> 
+
+<form method="post" class="notosans-bold-18" id="myForm" onsubmit="return validateLink()">
+    {% csrf_token %}
+    <div class="paymentguide-link">
+        <p class="notosans-bold-18">링크</p>
+        <input type="text" autocomplete="off" class="notosans-bold-16" name="toss_account" id="tosslink" value="{{ form.toss_account.value }}">
+    </div>
+    <div id="linkValidationMsg" class="link-validation-message"></div><br>
+    <button class="div-btn setting-btn" type="submit">
+        <span class="notosans-bold-18">링크 저장</span>
+    </button>
+</form>
 
 <script>
-    function checkLink() {
+    function validateLink() {
         const inputValue = document.getElementById("tosslink").value;
-
+        const validationMessage = document.getElementById("linkValidationMsg");
         const pattern = /^https:\/\/toss\.me\//;
 
         if (pattern.test(inputValue)) {
-            alert("유효한 링크입니다!");
+            validationMessage.innerText = "유효한 링크";
+            return true; 
         } else {
-            alert("링크를 다시 확인해주세요!");
+            validationMessage.innerText = "링크를 다시 확인해주세요!";
+            return false; 
         }
     }
 </script>

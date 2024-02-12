@@ -20,12 +20,14 @@
     border-radius: var(--gutter8);
     height: 20vh;
     background-color: var(--BB_color_white);
+    margin: var(--gutter16) 0;
 }
 
 .to-friends{
     display: flex;
-    gap:var(--gutter16);
-    align-items: center;
+    gap:var(--gutter8);
+    align-items: flex-end;
+    margin-top: var(--gutter16);
 }
 
 .funding-image{
@@ -50,7 +52,6 @@
   }
   .notice-for-paymentpage{
     color:gray;
-    margin-bottom: var(--gutter16);
   }
 
   .wrapper-content-payment{
@@ -67,30 +68,29 @@ input[type="text"],
 textarea {
     width: 100%; /* Adjust width as needed */
     padding: 0 10px;
-    background-color: transparent; 
-    border: none;
-    border-bottom: 1px solid #ffffff; 
+    background-color: transparent;
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     color:white;
     font-family: 'Noto Sans', sans-serif;
     font-weight: initial;
-    font-size: 16px;
+    font-size: 12px;
     outline: none;
     resize: none;
+  }
+  input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #ffffff; 
   }
   .to-friends-message,
   .funding-title,
   .present_link
   {
-    background-color: var(--BB_color_white);
     background-color: transparent; 
-    padding: 10px;
     color: #ffffff; 
     padding: 10px 20px; 
-    border: 1px solid #ffffff;
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
-    font-size: 12px;
+
 }
 .to-friends-message{
     height: 15vh;
@@ -105,6 +105,7 @@ textarea {
 }
 
 #price-slider {
+    cursor: pointer; 
     width: 100%;
     margin: var(--gutter16) 0 var(--gutter8);
 }
@@ -117,5 +118,17 @@ textarea {
     width: auto;
     max-height: 4vh;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.limit-title{
+    display: flex;
+    gap:var(--gutter8);
+    align-items: flex-end;
+    margin-top: var(--gutter16);
+}
+
+.limit-funding{
+    color:gray;
 }
 

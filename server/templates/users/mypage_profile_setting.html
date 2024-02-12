@@ -13,15 +13,32 @@
 
 
 {% block content %}
-<div class="profile-for-center">
-    <p class="notosans-bold-18 profile-setting">프로필 설정</p>
-    <img class="input-profile-img"src="../../static/images/default_profile.png">
-    <p class="notosans-bold-18 name-setting">이름 설정</p>
-     <input type="text" class="add-nickname notosans-regular-12 input-name" name="nickname"></input>
-    <a href="{% url 'users:mypage_list' %}">
-        <div class="div-btn setting-btn">
+<form method="post">
+    {% csrf_token %}
+
+    <div class="nickname_img_wrapper">
+        <p class="notosans-bold-18">프로필 설정</p>
+        <label for="profile-upload" class="profile-for-center">
+            <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
+            <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
+        </label>
+        <p class="notosans-bold-18">닉네임을 입력하세요</p>
+        <textarea class="add-nickname" name="nickname"></textarea> 
+        <button class="div-btn" type="submit">
             <p class="notosans-bold-18">완료</p>
-        </div> 
-    </a>
-</div>
+        </button>
+    </div>
+</form>
 {% endblock %}
+<!-- 사진 첨부 후 미리보기 위해 자바스크립트 사용 -->
+{% block script %}
+<script>
+    let loadFile = function(event) {
+        let output = document.querySelector('.input-profile-img');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거
+        }
+    };
+</script>
+{% endblock script %}

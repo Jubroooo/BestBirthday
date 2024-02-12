@@ -37,12 +37,12 @@
     margin-bottom: var(--gutter8);
     display: flex;
     flex-direction: column;
-    margin: var(--gutter8);
+    margin: var(--gutter8) var(--gutter8) var(--gutter24);
     padding: var(--gutter8);
   }
 
   .first-line-congrats{
-    margin-top: var(--gutter24);
+    margin: var(--gutter16) 0;
   }
 
   .highlight-blue{
@@ -68,3 +68,31 @@
   .no-messages{
     margin-top: var(--gutter24);
   }
+
+  /*모달 관련 css*/
+  .modal {
+    display: none; /* 기본적으로 모달 숨김 */
+    position: fixed; /* 화면에 고정 */
+    z-index: 1; 
+    left: 50%;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    transform: translate(-50%, -50%); /* 정중앙 정렬 */
+    width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
+    height: 100%; /* 전체 높이 */
+    background-color: rgba(0,0,0,0.9); /* 불투명도 조절 */
+
+}
+
+.modal-content {
+    margin: 15% auto; /* 페이지 중앙에 위치 */
+    max-width: 34.2rem; /* 모달 너비 */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.close{
+  margin-top: var(--gutter16);
+  background-color: #FC606C;
+}

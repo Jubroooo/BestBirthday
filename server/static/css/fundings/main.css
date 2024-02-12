@@ -27,6 +27,7 @@
   animation-iteration-count: infinite; 
   animation-fill-mode: forwards; 
 }
+
 .btn-main-create {
   width: 80%;
 }
@@ -134,4 +135,39 @@
 .lock-img img{
   width: 17rem;
   height: auto;
+}
+/*펀딩 이미 생성한 유저가 내 생일 축하받기 눌렀을때*/
+.clicked {
+  background-color:gray; /* 클릭 후 배경색 변경 */
+  color: #fff; /* 클릭 후 텍스트 색상 변경 */
+}
+
+.fa-solid ,.fa-circle-exclamation{
+     color:var(--BB_color_blue)
+}
+
+.alert-message{
+  display: flex;
+  justify-content: center;
+  gap:1rem;
+}
+
+.main-class-forcenter{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cbtn{
+  height: 4.7rem;
+  border: none;
+  border-radius: 1.1rem;
+  margin-bottom: 1rem ;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: gray;
 }

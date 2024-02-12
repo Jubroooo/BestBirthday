@@ -50,22 +50,14 @@
               <span class="dday"> D+{{dday}} </span>
           {% endif %}
     </div>
-    <a href="{{funding.present_link}}" target="_blank">
-        <div class="gift-to-buy notosans-bold-16">
-            <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
-            내가 사줄 물건 보기</div>
-    </a>
 
     {% if request.user == funding.user %}
-        {% if current_date|date:"Y-m-d" == user.birthday|date:"Y-m-d" %}
-        <div class="present-button-wrapper">
-            <a href="{% url 'fundings:result_start' pk=funding.id%}">
-                <button class="give_present btn" type="button">
-                    <p class="notosans-bold-16 ">선물 확인하러 가기</p>
-                </button>
-            </a>
-        </div>
-        {%else%}
+        {% if funding.is_closed == False %}
+        <a href="{{funding.present_link}}" target="_blank">
+            <div class="gift-to-buy notosans-bold-16">
+                <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
+                내가 받을 물건 보기</div>
+        </a>    
         <div class="present-button-wrapper">
             <button class="share-btn btn" type="button">
                 <p class="notosans-bold-16">공유하기</p>
@@ -74,8 +66,28 @@
                 <p class="notosans-bold-16 ">선물이 쌓이는 중..</p>
             </button>
         </div>
+        <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
+            {% csrf_token %}
+            <button class="div-btn" type="submit">
+                <p class="notosans-bold-16">펀딩 마감하기</p>
+            </button>
+        </form>
+        {% else %}
+        <a href="{{funding.present_link}}" target="_blank">
+            <div class="gift-to-buy notosans-bold-16">
+                <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
+                내가 받을 물건 보기</div>
+        </a>    
+        <div class="btn give-onload-btn end-funding">
+            <span class="notosans-bold-16">마감된 펀딩</span>
+        </div>
         {% endif %}
     {% else %}
+    <a href="{{funding.present_link}}" target="_blank">
+        <div class="gift-to-buy notosans-bold-16">
+            <p class="detail-styles"><img class="detial-img"src="{%static 'images/computer.png'%}"></p>
+            내가 사줄 물건 보기</div>
+    </a>  
     <div class="present-button-wrapper">
         <a href="{% url 'fundings:create_gift' pk=funding.id%}">
             <button class="give_present btn" type="button">
