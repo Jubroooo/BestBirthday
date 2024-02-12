@@ -233,11 +233,13 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
     });
 });
+
+//컨페티 함수
 const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI * 0.5;
 
 // canvas settings
-var viewWidth = 300,
+var viewWidth = 380,
     viewHeight = 200,
     drawingCanvas = document.getElementById("drawing_canvas"),
     ctx,
@@ -432,8 +434,17 @@ function draw() {
 
 window.onload = function() {
     initDrawingCanvas();
-    requestAnimationFrame(loop);
+    setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
 };
+
+function runFunctionAfterDelay() {
+    requestAnimationFrame(loop);
+}
+
+//window.onload = function() {
+//    initDrawingCanvas();
+//    requestAnimationFrame(loop);
+//};
 
 function loop() {
     update();
