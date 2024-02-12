@@ -22,11 +22,8 @@
 <div class="create-funding-container">
 <div id="gift-img"></div>
 <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
-
 {% if messages %}
         {% for message in messages %}
-        {%console.log (message)%}
-          {% if message == "이미 생성된 펀딩이 있습니다. 펀딩 생성은 1번만 가능합니다."%}
           <div class="main-class-forcenter">
             <div class="cbtn btn-main-create change-color">
             <p class="notosans-bold-18">내 생일 축하받기</p>
@@ -36,11 +33,6 @@
               <div class="notosans-regular-12">{{ message }}</div>
             </div> 
           </div>
-          {%else%}
-          <a href="{% url 'fundings:create_funding' %}" class="div-btn btn-main-create">
-            <p class="notosans-bold-18">내 생일 축하받기</p>
-          </a>
-          {%endif%}
         {% endfor %}
 {% else %}
         <!-- 메시지가 없을 경우, "내 생일 축하받기" 버튼을 표시 -->
