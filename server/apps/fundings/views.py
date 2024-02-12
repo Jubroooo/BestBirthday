@@ -193,7 +193,7 @@ def create_gift_modal(request,pk):
     }
     return render(request, 'fundings/gift_modal.html',ctx)
 
-#2. 펀딩 생성 관련 뷰
+# 2. 펀딩 생성 관련 뷰
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
