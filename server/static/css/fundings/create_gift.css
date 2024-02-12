@@ -72,7 +72,8 @@ background-color: var(--BB_color_blue_sub);
   .gift-second{
     display: flex;
     align-items: center;
-    gap:var(--gutter8)
+    gap:var(--gutter8);
+    margin-bottom: var(--gutter8);
   }
   .input-bday-message{
     border-radius: var(--gutter8);
@@ -95,9 +96,7 @@ background-color: var(--BB_color_blue_sub);
 
 .nickname-container{
     display: flex;
-    gap:var(--gutter8);
-    align-items: start;
-    flex-direction: column;
+    justify-content: space-between;
 }
 input[type="text"],
 textarea {
@@ -114,11 +113,8 @@ textarea {
     outline: none;
     resize: none;
   }
-#funding_amount{
+#funding_amount, #gift_nickname{
   width: 8rem;
-}
-#gift_nickname{
-  width: 40%;
 }
 #birthday_message {
     background-color: transparent; 

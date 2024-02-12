@@ -25,7 +25,7 @@
 
 .to-friends{
     display: flex;
-    gap:var(--gutter8);
+    justify-content: space-between;
     align-items: flex-end;
     margin-top: var(--gutter16);
 }
@@ -33,7 +33,7 @@
 .funding-image{
     display: flex;
     gap:var(--gutter16);
-    align-items: center;
+    align-items: flex-end
     
 }
 .fa-circle-plus{
@@ -51,7 +51,8 @@
     margin-top: var(--gutter24);
   }
   .notice-for-paymentpage{
-    color:gray;
+    color: var(--BB_color_blue);
+    margin-bottom: var(--gutter16);
   }
 
   .wrapper-content-payment{
@@ -111,7 +112,14 @@ textarea {
 }
 
 #price-display {
-    color: var(--BB_color_orange);
+    color: var(--BB_color_blue);
+}
+.right-price{
+    position:absolute;
+    right: 0;
+}
+.slider-container{
+    position: relative;
 }
 
 #photo-preview{
@@ -124,12 +132,12 @@ textarea {
 
 .limit-title{
     display: flex;
-    gap:var(--gutter8);
+    justify-content: space-between;
     align-items: flex-end;
     margin-top: var(--gutter16);
 }
 
 .limit-funding{
-    color:gray;
+    color:#808080;
 }
 
