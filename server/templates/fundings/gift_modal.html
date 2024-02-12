@@ -4,19 +4,23 @@
 {% endblock head %}
 {% block header %}
 <p class="logo unna-bold-36">Best Birthday</p>
-<div class="profile"></div>
+<a href="{%url 'users:mypage_list'%}">
+    <div class="profile"></div>
+</a>
 {% endblock header %}
+
 {% block content2 %}
-<div class="just-for-space"></div>
+<div class="modal_container">
     <div class="result-modal-wrapper">
-        <div class="xmark-icon" style="cursor: pointer;" onclick="">
-            <a href="{% url 'fundings:main' %}"><i class="fa-solid fa-xmark"></i></a>
-        </div>
+        <a href="{% url 'fundings:main'%}" class="xmark-icon">
+            <i class="fa-solid fa-xmark"></i>
+        </a>
         <div class="go-and-check">
-            <p class="notosans-bold-20 congrats-notice" style="color:var(--BB_color_white)">예진에게 선물전달 완료</p>
+            <p class="notosans-bold-20 congrats-notice" style="color:var(--BB_color_white)">{{ funding.user.nickname }}에게 선물전달 완료
             <div class="lock-img">
                 <img src="{%static 'images/gift_main.png'%}">
             </div>
         </div>
     </div>
+</div>
 {% endblock content2%}

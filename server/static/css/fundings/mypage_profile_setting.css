@@ -18,44 +18,61 @@
 }
 
 .input-name{
-    background-color: gray;
     width: 100%;
     height: 4.7rem;
     border: none;
     cursor: pointer;
-    border-radius: 1.1rem;
+    margin-bottom: var(--gutter24);
+}
+/*이미지 첨부시 안깨지게*/
+.input-profile-img {
+    cursor: pointer;
+    margin: var(--gutter24) auto 3.2rem;
+    width: 100px;  /* 이미지의 너비 */
+    height: 100px; /* 이미지의 높이 */
+    border-radius: 50%; /* 이미지를 원형으로 만들기 */
+    object-fit: cover; /* 이미지 비율 유지하면서 영역 채우기 */
+}
+
+.profile-for-center{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer;
+}
+
+#profile-upload{
+    display: none;
+}
+
+input[type="text"],
+textarea{
+    width: 100%; /* Adjust width as needed */
+    padding: 0 10px;
+    background-color: transparent; 
+    border: none;
+    border-bottom: 1px solid #ffffff; 
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    color:white;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: initial;
+    font-size: 16px;
+    resize: none;
+  }
+  .add-nickname{
+    height: 5vh;
+    background-color: transparent; 
+    color: #ffffff; 
+    padding: 10px 20px; 
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 12px;
     margin-bottom: var(--gutter24);
 }
 
-.payment-btn-kakao{
-background-color: #f7e100;
+form{
+    margin-top: var(--gutter24);
 }
-.payment-btn-toss{
-background-color: var(--BB_color_blue_sub);
+.add-nickname:focus {
+    outline: none;
 }
-
-.payment-link-btn-container{
-    display: flex;
-    gap: var(--gutter16);
-}
-
-.input-profile-img{
-    cursor: pointer;
-}
-.profile-for-center {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gutter8);
-}
-
-.profile-setting ,.name-setting{
-    display: block; 
-    margin: var(--gutter16) 0 0 0;
-}
-
-.profile-for-center img {
-    display: block; 
-    margin: 0 auto;
-}
-
- 

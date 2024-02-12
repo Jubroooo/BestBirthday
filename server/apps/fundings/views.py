@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.template.defaulttags import register
 from django.db.models.functions import Random
 from django.db.models.functions import Length
+from django.contrib import messages
 import time
 
 
@@ -25,8 +26,15 @@ def main(request) :
     if open_fundings.exists():
         today = date.today()
         today_fundings = open_fundings.filter(user__birthday__month = today.month, user__birthday__day = today.day) 
+        today_fundings_num=today_fundings.count()
+        total_today_funding_msg_count = 0
+
+        # 오늘 생일 펀딩 메시지 세기
+        for funding in today_fundings:
+            msg_count = Funding_Msg.objects.filter(post=funding).count()
+            total_today_funding_msg_count += msg_count
+
         today_fundings = today_fundings[:3]
-        
         fundings_in_msg_order = open_fundings.order_by('-msg_count')
         fundings_in_msg_order = fundings_in_msg_order[:3]
         
@@ -40,6 +48,8 @@ def main(request) :
         open_funding_progress_dict = funding_progress(open_fundings)
         
         ctx = {"today_fundings":today_fundings, 
+               "today_fundings_num":today_fundings_num,
+               "total_today_funding_msg_count":total_today_funding_msg_count,
             "today_funding_dday_dict":today_funding_dday_dict,
             "fundings_in_msg_order":fundings_in_msg_order,
             "msg_funding_dday_dict":msg_funding_dday_dict,
@@ -168,10 +178,20 @@ def create_gift(request, pk):
                 return render(request, 'fundings/create_gift.html', ctx)
 
 def create_gift_complete(request,pk):
-    return render(request, 'fundings/gift_complete.html',{'pk': pk})
+    funding = Funding.objects.get(id = pk)
+    ctx = {
+        'funding': funding,
+        'pk': pk
+    }
+    return render(request, 'fundings/gift_complete.html',ctx)
 
 def create_gift_modal(request,pk):
-    return render(request, 'fundings/gift_modal.html',{'pk': pk})
+    funding = Funding.objects.get(id = pk)
+    ctx = {
+        'funding': funding,
+        'pk': pk
+    }
+    return render(request, 'fundings/gift_modal.html',ctx)
 
 #2. 펀딩 생성 관련 뷰
 def create_funding(request) :
@@ -184,20 +204,22 @@ def create_funding(request) :
             temp_fundings = Funding.objects.filter(user=request.user)
             temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
             temp_fundings = temp_fundings.filter(is_closed=False)
-            
-            if temp_fundings.exists():
-                print (temp_fundings)
-                return redirect ('fundings:main')
+
+            # if temp_fundings.exists():
+            #     return redirect('fundings:main')
             # 생일 기간에 두 개 이상의 펀딩을 같은 유저가 만들지 못하도록! 
+            # 이 부분 하는 중 ! 
             # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
-            else:
-                funding = Funding()
-                funding.user = request.user
-                form = FundingForm(instance=funding)
-                ctx = {
-                    'form':form
-                }
-                return render(request, 'fundings/create_funding.html', ctx)
+            print("temp_fundings exists:", temp_fundings.exists())
+
+            if temp_fundings.exists():
+                # 사용자에게 메시지를 추가하고 메인 페이지로 리디렉션
+                messages.info(request, "이미 생성된 펀딩이 있습니다. 펀딩 생성은 1번만 가능합니다.")
+                return redirect('fundings:main')
+
+            funding = Funding(user=request.user)
+            form = FundingForm(instance=funding)
+            return render(request, 'fundings/create_funding.html', {'form': form})
         #post일때
         elif request.method == "POST":
             funding = Funding()

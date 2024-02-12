@@ -16,7 +16,7 @@
             <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
         </label>
         <p class="notosans-bold-18">닉네임을 입력하세요</p>
-        <textarea class="add-nickname" name="nickname"></textarea>
+        <input type="text" class="add-nickname notosans-regular-12" name="nickname"></input>
         <button type="submit"class="div-btn setting-btn">
             <a href="{% url 'fundings:main' %}"class="notosans-bold-18">확인</a>
         </button>

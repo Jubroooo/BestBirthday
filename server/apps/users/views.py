@@ -13,7 +13,7 @@ def logout(request):
     auth.logout(request)
     return redirect ('fundings:main')
 
-def login_info(request): #이름, 닉네임, 생일, 프로필 사진 => 카카오에서 받는 건지 
+def login_info(request): 
     user = request.user
     if request.method == "POST":
         form = UserProfileUpdateForm(request.POST, request.FILES, instance = user)

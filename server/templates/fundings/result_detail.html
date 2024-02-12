@@ -1,32 +1,28 @@
-{% extends '../base.html' %}
 {% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/fundings/result_detail.css' %}">
-{% endblock head %}
-
-{% block header %}
-<div class="show-card-title">
-    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
-    <p class="title-go-see-letter notosans-bold-20">편지 자세히 보기</p>
-</div>
-{% endblock header %}
-
-{% block content %}
-<div class="message-detail">
-    <span class="notosans-bold-16">
-        작성자: {{funding_msg.comment_name}}
-    </span>
-    <span class="notosans-bold-20 message-content">
-        {{funding_msg.content}}
-    </span>
-    <span class="notosans-bold-16">
-        선물금액: {{funding_msg.funding_price}}원
-    </span>
-    <span class="notosans-bold-16">
-        작성일: {{funding_msg.written_date}}
-    </span>
-</div>
-<div onClick="history.go(-1)" class="div-btn close-message-detail">
-    <p class="notosans-bold-18 ">닫기</p>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Birthday</title>
+    <link rel="stylesheet" href="{% static 'css/fundings/result_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}" />
+</head>
+<body>
+    <div class="message-detail">
+        <span class="notosans-bold-16 ">
+            작성자: {{funding_msg.comment_name}}
+        </span>
+        <span class="notosans-bold-20 message-content">
+            {{funding_msg.content}}
+        </span>
+        <span class="notosans-bold-16">
+            선물금액: {{funding_msg.funding_price}}원
+        </span>
+        <span class="notosans-bold-16">
+            작성일: {{funding_msg.written_date}}
+        </span>
+    </div>
+</body>
+</html>

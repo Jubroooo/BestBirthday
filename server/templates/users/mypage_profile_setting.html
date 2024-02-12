@@ -19,11 +19,11 @@
     <div class="nickname_img_wrapper">
         <p class="notosans-bold-18">프로필 설정</p>
         <label for="profile-upload" class="profile-for-center">
-            <img class="input-profile-img"src="{% static '../../static/images/default_profile.png' %}">
+            <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
             <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
         </label>
         <p class="notosans-bold-18">닉네임을 입력하세요</p>
-        <input type="text" class="notosans-bold-16 input-name" name="nickname" placeholder="바꿀 이름을 입력하세요"> 
+        <textarea class="add-nickname" name="nickname"></textarea> 
         <button class="div-btn" type="submit">
             <p class="notosans-bold-18">완료</p>
         </button>

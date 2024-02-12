@@ -16,7 +16,6 @@
     position: absolute;
     left: 0; 
 }
-
 .mypage-title-for-center{
     text-align: center;
     margin-bottom: var(--gutter24);
@@ -46,6 +45,7 @@
     display:flex;
     position: relative;
     align-items: center;
+    margin-top: var(--gutter24);
 
 }
 

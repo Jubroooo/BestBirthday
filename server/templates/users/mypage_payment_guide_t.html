@@ -25,7 +25,7 @@
     {% csrf_token %}
     <div class="paymentguide-link">
         <p class="notosans-bold-18">링크</p>
-        <input type="text" class="notosans-bold-16" name="toss_account" id="tosslink" value="{{ form.toss_account.value }}">
+        <input type="text" autocomplete="off" class="notosans-bold-16" name="toss_account" id="tosslink" value="{{ form.toss_account.value }}">
     </div>
     <div id="linkValidationMsg" class="link-validation-message"></div><br>
     <button class="div-btn setting-btn" type="submit">
