@@ -6,7 +6,7 @@
 
 {% block header %}
 <div class="payment-guide-title">
-    <div class="icon-left" onClick="history.go(-1)" ><i class="fa-solid fa-chevron-left"></i></div>
+    <a href="{%url 'fundings:create_payment'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
     <p class="payment-guide-title-for-center notosans-bold-24">송금하기</p>
 </div>
 {% endblock header %}

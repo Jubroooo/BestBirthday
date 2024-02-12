@@ -185,14 +185,6 @@ def create_gift_complete(request,pk):
     }
     return render(request, 'fundings/gift_complete.html',ctx)
 
-# def create_gift_modal(request,pk):
-#     funding = Funding.objects.get(id = pk)
-#     ctx = {
-#         'funding': funding,
-#         'pk': pk
-#     }
-#     return render(request, 'fundings/gift_modal.html',ctx)
-
 #2. 펀딩 생성 관련 뷰
 def create_funding(request) :
     if request.user.is_authenticated:

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/fundings/create_payment.css'%}" /> {% endblock head %}
 {% block header %}
     <div class="create-payment-title">
-        <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
+        <a href="{%url 'users:mypage_list'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
         <p class="create-payment-title-for-center notosans-bold-24">송금링크 설정</p>
     </div>
 {% endblock header %} 
@@ -14,6 +14,7 @@
 </div>
 <div class="notosans-bold-20">송금 링크 추가</div>
 <div class="payment-description">* 카카오페이 필수</div>
+<div class="payment-description">* 설정한 송금 링크는 언제든지 수정할 수 있어요</div>
 <div class="payment-link-btn-container">
     <a href="{%url 'users:mypage_payment_guide_k'%}">
         <button class="payment-btn-kakao div-btn">

@@ -22,7 +22,7 @@
     <div class="gift-first">
         <div>
         <p class="notosans-bold-18">선물 금액</p>
-        <p class="notosans-regular-12 colorgray-create-html">*최대 금액은 300,000원까지 가능합니다</p>
+        <p class="notosans-regular-12 colorgray-create-html">* 0원부터 1,000,000원까지 선물할 수 있어요!</p>
         </div>
         <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0">
     </div>
@@ -36,19 +36,20 @@
       <button class="notosans-bold-16 orange-btn-gift" type="button" data-value = "0">직접 입력</button>
     </div>
 
-    <p class="notosans-bold-18">계좌를 선택하세요</p>
+    <p class="notosans-bold-18">송금할 서비스</p>
     <div class="payment-link-btn-container">
         <div class="payment-btn-kakao div-btn transfer-btn" id="kakaoTransferLink">
             <a href="{{funding.user.kakao_account}}">
                 <img src="{%static 'images/kakao-pay.png'%}">
             </a>
         </div>        
-
+        {% if funding.user.toss_account %}
         <div class="payment-btn-toss div-btn transfer-btn" id="tossTransferLink">
             <a href="{{funding.user.toss_account}}">
                 <img src="{%static 'images/toss-pay.png'%}">
             </a>
         </div>
+        {%endif%}
 
     </div>
 
@@ -57,8 +58,9 @@
             <label class="notosans-bold-18" for="message">생일 축하 메시지</label><p class="notosans-regular-12 colorgray-create-html">*30자 ~ 500자</p>
         </div>
         <textarea id="birthday_message" class="input-bday-message" name="content"></textarea>
+        <p class="notosans-regular- colorgray-create-html"> 전달 완료된 메시지는 나중에 수정할 수 없어요!<br>심한 비속어 및 상대를 비방하는 메시지는 전달되지 않을 수 있습니다. </p>
     </div>
-    <p class="notosans-regular- colorgray-create-html">심한 비속어 및 상대를 비방하는 메시지는 전달되지 않을 수 있음을 알려드립니다.작성된 메시지는 수정 불가합니다. </p>
+    
     <div class="nickname-container">
         <p class="notosans-bold-18">친구에게 보여줄 닉네임</p>
         <input id="gift_nickname" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="챙용">
