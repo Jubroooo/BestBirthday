@@ -146,13 +146,14 @@
      color:var(--BB_color_blue)
 }
 
-.alert-message{
-  display: flex;
+#alert-funding{
   justify-content: center;
   gap:1rem;
+  display: none;
 }
 
 .main-class-forcenter{
+  width: 100%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -160,6 +161,7 @@
 }
 .cbtn{
   height: 4.7rem;
+  width: 80%;
   border: none;
   border-radius: 1.1rem;
   margin-bottom: 1rem ;
@@ -169,5 +171,5 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-color: gray;
+  background-color:var(--BB_color_blue);
 }

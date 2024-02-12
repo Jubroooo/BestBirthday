@@ -23,20 +23,19 @@
 <div id="gift-img"></div>
 <p class="notosans-bold-20">한 번 뿐인 생일을 최고의 날로</p>
 
-{% if messages %}
-        {% for message in messages %}
+{% if funding_exists %}
         <div class="main-class-forcenter">
           <div class="cbtn btn-main-create change-color">
           <p class="notosans-bold-18">내 생일 축하받기</p>
           </div>
-          <div class="alert-message">
+          <!--숨겨두기-->
+          <div id="alert-funding">
             <i class="fa-solid fa-circle-exclamation notosans-regular-12"></i>
-            <div class="notosans-regular-12">{{ message }}</div>
+            <div class="notosans-regular-12">이미 생성된 펀딩이 있습니다. 펀딩 생성은 1번만 가능합니다.</div>
           </div> 
         </div>
-        {% endfor %}
 {% else %}
-        <!-- 메시지가 없을 경우, "내 생일 축하받기" 버튼을 표시 -->
+        <!-- 만든 펀딩이 없을 경우, "내 생일 축하받기" 버튼을 표시 -->
         <a href="{% url 'fundings:create_funding' %}" class="div-btn btn-main-create">
             <p class="notosans-bold-18">내 생일 축하받기</p>
         </a>
@@ -266,6 +265,16 @@
   var createButtonDiv = document.querySelector('.cbtn.btn-main-create.change-color');
   createButtonDiv.classList.add('clicked');
 }
+document.addEventListener('DOMContentLoaded', function() {
+    // 'cbtn btn-main-create change-color' 클래스를 가진 요소에 대한 참조를 가져옵니다.
+    var btn = document.querySelector('.cbtn.btn-main-create.change-color');
 
+    btn.addEventListener('click', function() {
+        // 'alert-message'보이게
+        document.getElementById('alert-funding').style.display = 'flex';
+        //클릭한 버튼 회색으로
+        this.style.backgroundColor = '#808080';
+    });
+});
 </script>
 {% endblock script %}
