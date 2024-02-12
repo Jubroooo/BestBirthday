@@ -46,7 +46,7 @@ def main(request) :
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
-        
+        funding_exists = request.session.get('funding_exists', False) # 1유저 1펀딩 위한 
         ctx = {"today_fundings":today_fundings, 
                "today_fundings_num":today_fundings_num,
                "total_today_funding_msg_count":total_today_funding_msg_count,
@@ -58,6 +58,7 @@ def main(request) :
             "today_funding_progress_dict":today_funding_progress_dict,
             "msg_funding_progress_dict":msg_funding_progress_dict,
             "open_funding_progress_dict":open_funding_progress_dict,
+            'funding_exists': funding_exists, # 1유저 1펀딩 위한 
             }
         return render(request, 'fundings/main.html', ctx)
     else:
@@ -185,14 +186,6 @@ def create_gift_complete(request,pk):
     }
     return render(request, 'fundings/gift_complete.html',ctx)
 
-def create_gift_modal(request,pk):
-    funding = Funding.objects.get(id = pk)
-    ctx = {
-        'funding': funding,
-        'pk': pk
-    }
-    return render(request, 'fundings/gift_modal.html',ctx)
-
 #2. 펀딩 생성 관련 뷰
 def create_funding(request) :
     if request.user.is_authenticated:
@@ -211,10 +204,12 @@ def create_funding(request) :
             # 이 부분 하는 중 ! 
             # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
             print("temp_fundings exists:", temp_fundings.exists())
+            funding_exists = temp_fundings.exists()
 
-            if temp_fundings.exists():
-                # 사용자에게 메시지를 추가하고 메인 페이지로 리디렉션
-                messages.info(request, "이미 생성된 펀딩이 있습니다. 펀딩 생성은 1번만 가능합니다.")
+            # 메인 페이지 템플릿에 funding_exists만 컨텍스트 전달하는 식으로 하면, 기존 main 페이지 ctx로 넘겨준게 초기화 되길래 
+            if funding_exists:
+                # funding_exists를 세션에 저장
+                request.session['funding_exists'] = True
                 return redirect('fundings:main')
 
             funding = Funding(user=request.user)

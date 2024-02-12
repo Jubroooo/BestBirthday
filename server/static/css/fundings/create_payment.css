@@ -34,6 +34,7 @@
 }
 .payment-btn-kakao{
     background-color: #f7e100;
+    position: relative;
 }
 .payment-link-btn-container a {
     flex: 1;
@@ -45,4 +46,14 @@
 .create_payment_btn{
     width: 100%;
     margin-top: var(--gutter24);
+}
+.payment-btn-toss{
+    position: relative;
+}
+.link-not-null{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 1.5rem;
+    color: white;
 }

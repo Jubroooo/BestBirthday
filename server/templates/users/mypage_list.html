@@ -6,7 +6,7 @@
 
 {% block header %}
 <div class="mypage-title">
-    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
+    <a href="{%url 'fundings:main'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
     <p class="mypage-title-for-center notosans-bold-24">마이페이지</p>
 </div>
 {% endblock header %}
