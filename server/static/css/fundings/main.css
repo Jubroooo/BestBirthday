@@ -55,23 +55,18 @@
   cursor: pointer;
 }
 
-/*펀딩 이미 생성한 유저가 내 생일 축하받기 눌렀을때*/
-.clicked {
-  background-color:gray; /* 클릭 후 배경색 변경 */
-  color: #fff; /* 클릭 후 텍스트 색상 변경 */
-}
-
 .fa-solid ,.fa-circle-exclamation{
      color:var(--BB_color_blue)
 }
 
-.alert-message{
-  display: flex;
+#alert-funding{
   justify-content: center;
   gap:1rem;
+  display: none;
 }
 
 .main-class-forcenter{
+  width: 100%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -79,6 +74,7 @@
 }
 .cbtn{
   height: 4.7rem;
+  width: 80%;
   border: none;
   border-radius: 1.1rem;
   margin-bottom: 1rem ;
@@ -88,5 +84,5 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-color: gray;
+  background-color:var(--BB_color_blue);
 }
