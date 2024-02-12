@@ -6,8 +6,8 @@
 
 {% block header %}
 <div class="payment-guide-title">
-    <div onClick="history.go(-1)" class="icon-left"><i class="fa-solid fa-chevron-left"></i></div>
-    <p class="payment-guide-title-for-center notosans-bold-24">송금하기</p>
+    <a href="{%url 'fundings:create_payment'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+    <p class="payment-guide-title-for-center notosans-bold-24">송금링크 설정</p>
 </div>
 {% endblock header %}
 

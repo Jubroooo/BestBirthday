@@ -1,6 +1,6 @@
 
 #main-container {
-    gap: 4.8rem;
+    gap:var(--gutter16);
   }
 .mypage-title {
     display: flex;

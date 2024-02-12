@@ -47,17 +47,18 @@
 
 input[type="text"],
 textarea{
-    width: 100%; /* Adjust width as needed */
+    width: 100%; 
     padding: 0 10px;
     background-color: transparent; 
     border: none;
     border-bottom: 1px solid #ffffff; 
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    box-sizing: border-box; 
     color:white;
     font-family: 'Noto Sans', sans-serif;
     font-weight: initial;
     font-size: 16px;
     resize: none;
+    overflow: hidden;
   }
   .add-nickname{
     height: 5vh;

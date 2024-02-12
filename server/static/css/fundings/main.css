@@ -54,7 +54,88 @@
 .view-all {
   cursor: pointer;
 }
+#modal.modal-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: none;
+}
+#modal .modal-window {
+  background: rgba( 69, 139, 197, 0.70 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 13.5px );
+  -webkit-backdrop-filter: blur( 13.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  width: 400px;
+  height: 500px;
+  position: relative;
+  top: -100px;
+  padding: 10px;
+}
 
+
+/* 모달 디자인 */
+#modal_container{
+  position: fixed;
+  bottom: 0;
+  width: 39rem;
+  display: none;
+  background-color: var(--BB_color_black);
+}
+.result-modal-wrapper{
+ background-color:rgba(117, 117, 117,0.2); 
+ border-top-left-radius: 3.2rem; 
+ border-top-right-radius: 3.2rem;
+}
+.xmark-icon{
+ position:absolute;
+ right: var(--gutter16);
+ top: var(--gutter16); 
+ display: block;
+ font-size: 3rem;
+ cursor: pointer;
+}
+.top-bar-img{
+  display: flex;
+  flex-direction: column;
+}
+.go-and-check{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: var(--gutter24);
+}
+.congrats-notice{
+  margin: 3.2rem 0 var(--gutter16) 0;
+}
+.lock-img{
+  margin: var(--gutter24) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.result-modal-goto-letters{
+  color:gray;
+}
+.lock-img img{
+  width: 17rem;
+  height: auto;
+}
 /*펀딩 이미 생성한 유저가 내 생일 축하받기 눌렀을때*/
 .clicked {
   background-color:gray; /* 클릭 후 배경색 변경 */
@@ -65,10 +146,10 @@
      color:var(--BB_color_blue)
 }
 
-.alert-message{
-  display: flex;
+#alert-funding{
   justify-content: center;
   gap:1rem;
+  display: none;
 }
 
 .main-class-forcenter{
@@ -80,6 +161,7 @@
 }
 .cbtn{
   height: 4.7rem;
+  width: 80%;
   border: none;
   border-radius: 1.1rem;
   margin-bottom: 1rem ;
@@ -89,5 +171,5 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  background-color: gray;
+  background-color:var(--BB_color_blue);
 }

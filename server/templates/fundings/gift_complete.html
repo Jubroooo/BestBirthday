@@ -15,7 +15,7 @@
 <script>
     // Wait for 2 seconds before redirecting
     setTimeout(function() {
-        window.location.href = "{% url 'fundings:create_gift_modal' pk=pk%}";
+        window.location.href = "{% url 'fundings:main'%}";
     }, 2000); // 2000 milliseconds = 2 seconds
 </script>
 {% endblock script %}
