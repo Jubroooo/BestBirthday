@@ -12,16 +12,15 @@
     <p class="notosans-bold-24">잠깐! 선물을 받으려면</p>
     <p class="notosans-bold-24">송금링크부터 만들어주세요</p>
 </div>
-<div class="notosans-bold-20">송금 링크 추가</div>
+<div class="notosans-bold-20">송금 링크 관리</div>
 <div class="payment-description">* 카카오페이 필수</div>
 <div class="payment-description">* 설정한 송금 링크는 언제든지 수정할 수 있어요</div>
 <div class="payment-link-btn-container">
     <a href="{%url 'users:mypage_payment_guide_k'%}">
         <button class="payment-btn-kakao div-btn">
             <img src="../../static/images/kakao-pay.png">
-        
         {% if user.kakao_account != null %}
-            <i class="fa-solid fa-link link-not-null"></i>
+            <i class="fa-solid fa-link link-not-null kakao-link"></i>
         {% endif %}
     </button>
     </a>
