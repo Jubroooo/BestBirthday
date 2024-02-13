@@ -45,7 +45,7 @@
     display:flex;
     position: relative;
     align-items: center;
-    margin-top: var(--gutter24);
+    margin: 4rem 0;
 
 }
 

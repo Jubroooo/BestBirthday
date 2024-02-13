@@ -143,7 +143,7 @@
 }
 
 .fa-solid ,.fa-circle-exclamation{
-     color:white
+     color:var(--BB_color_blue)
 }
 
 #alert-funding{

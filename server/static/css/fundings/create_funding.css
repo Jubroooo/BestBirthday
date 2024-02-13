@@ -109,6 +109,7 @@ textarea {
     cursor: pointer; 
     width: 100%;
     margin: var(--gutter16) 0 var(--gutter8);
+    accent-color: var(--BB_color_blue);
 }
 
 #price-display {
@@ -117,6 +118,7 @@ textarea {
 .right-price{
     position:absolute;
     right: 0;
+    bottom: 0;
 }
 .slider-container{
     position: relative;
@@ -141,3 +143,15 @@ textarea {
     color:#808080;
 }
 
+.direct-input {
+    border: none;
+    border-bottom: 0.1rem solid var(--BB_color_white);
+    text-align: center;
+    background-color:transparent;
+    font-size: 1.6rem;
+    color: var(--BB_color_white)
+}
+
+.direct-input:focus {
+    outline: none; /* 기본 아웃라인 제거 */
+}
