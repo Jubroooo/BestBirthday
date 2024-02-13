@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="congrats-section">
-    <canvas id="c"></canvas>
+    <canvas id="c" width="360" height="360"></canvas>
 </div>
 <p class="notosans-bold-18 letters-congrats first-line-congrats">{{funding.user.nickname}}님 생일을 진심으로 축하합니다</p>
 <p class="notosans-bold-18 letters-congrats">축하 메세지 <span class="highlight-blue notosans-bold-18">{{funding_msg_count}}개</span>와 <span class="highlight-blue notosans-bold-18"> {{funding.total_price}}</span>원이 쌓였어요</p>
@@ -99,10 +99,10 @@ var ctx = c.getContext("2d");
 var bc = document.createElement("canvas");
 var bCtx = bc.getContext("2d");
 
-var cw = c.width = bc.width = window.innerWidth,
+var cw = c.width = bc.width = 390,
   cx = cw / 2;
 /*내부 스크롤 방지 위해 canvas 높이 조정 헤더가 104px*/
-var ch = c.height = bc.height = window.innerHeight-104,
+var ch = c.height = bc.height = 390,
   cy = ch;
 
 
@@ -146,8 +146,8 @@ function Init() {
     window.cancelAnimationFrame(requestId);
     requestId = null;
   }
-  cw = c.width = bc.width = window.innerWidth, cx = cw / 2;
-  ch = c.height = bc.height = window.innerHeight-104, cy = ch;
+  cw = c.width = bc.width = 390, cx = cw / 2;
+  ch = c.height = bc.height = window.innerHeight-200, cy = ch;
   bCtx.strokeStyle = "#abcdef";
   bCtx.lineWidth = 1;
   Draw();
@@ -160,12 +160,13 @@ setTimeout(function() {
 
 function updateBallons(ctx) {
   frames += 1;
-  if (frames % 37 == 0 && balloons.length < 37) {
+  if (frames % 70 == 0 && balloons.length < 20) {
     var balloon = new Balloon();
     balloons.push(balloon);
   }
   ctx.clearRect(0, 0, cw, ch);
 
+  var colorIndex = 0;
   for (var i = 0; i < balloons.length; i++) {
     var b = balloons[i];
     if (b.y > -b.a) {
@@ -177,7 +178,9 @@ function updateBallons(ctx) {
     var p = thread(b, ctx);
     b.cx = p.x;
     b.cy = p.y - b.R;
-    ctx.fillStyle = Grd(p.x, p.y, b.r, b.hue)
+    ctx.fillStyle = Grd(p.x, p.y, b.r, colorIndex);
+    colorIndex = (colorIndex + 1) % colors.length; // 다음 색상을 선택하기 위해 인덱스 업데이트
+
     drawBalloon(b, ctx);
   }
 }
@@ -277,11 +280,14 @@ function thread(b, ctx) {
   }
 }
 
-function Grd(x, y, r, hue) {
+var colors = ["#4114FF", "#FF6245", "#00FF00", "#FFD700"]; // 원하는 색상 추가 가능
+
+function Grd(x, y, r, index) {
+  var hue = colors[index % colors.length]; // 인덱스에 따라 순환하여 색상 선택
   grd = ctx.createRadialGradient(x - .5 * r, y - 1.7 * r, 0, x - .5 * r, y - 1.7 * r, r);
-  grd.addColorStop(0, 'hsla(' + hue + ',100%,65%,.95)');
-  grd.addColorStop(0.4, 'hsla(' + hue + ',100%,45%,.85)');
-  grd.addColorStop(1, 'hsla(' + hue + ',100%,25%,.80)');
+  grd.addColorStop(0, hue);
+  grd.addColorStop(0.4, hue);
+  grd.addColorStop(1, hue);
   return grd;
 }
 
