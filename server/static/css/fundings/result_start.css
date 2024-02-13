@@ -13,22 +13,6 @@
     position: relative;
     width: 100%; 
   }
-  .title-go-see-letter{
-    text-align: center;
-    margin-bottom: var(--gutter24);
-  }
-  .congrats-section{
-    height: 30vh;
-  }
-
-  .filter-congrats{
-    color: var(--BB_color_white);
-    margin:var(--gutter16) 0;
-  }
-
-  .letters-congrats{
-    margin-bottom: var(--gutter24);
-  }
 
   .delivered-messages{
     background-color:rgba(117, 117, 117,0.2);
@@ -40,12 +24,13 @@
     padding: var(--gutter8);
   }
 
-  .first-line-congrats{
-    margin: var(--gutter16) 0;
-  }
-
   .highlight-blue{
     color:var(--BB_color_blue);
+    padding: 0 var(--gutter8);
+  }
+  .highlight-orange{
+    color:var(--BB_color_orange);
+    padding: 0 var(--gutter8);
   }
   .b-day-message {
     border-bottom: 1rem solid var(----BB_color_white); 
@@ -67,7 +52,23 @@
   .no-messages{
     margin-top: var(--gutter24);
   }
-
+  .bottom-container{
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    justify-content: end;
+    flex-wrap: wrap;
+    gap:var(--gutter24);
+  }
+#letter-container{
+  background-color: var(--BB_color_background_gray);
+  border-radius: 1.1rem;
+  padding: var(--gutter8);
+  margin: var(--gutter24) 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+}
   /*모달 관련 css*/
   .modal {
     display: none; /* 기본적으로 모달 숨김 */
@@ -95,26 +96,35 @@
   margin-top: var(--gutter16);
   background-color: #FC606C;
 }
-
+.congrats-section{
+  display: inline-block;
+}
+.table-row{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+}
+/* 컨페티 */
+canvas{ 
+  position: relative;
+}
 /* 케이크 */
 
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic);
 
 #cake {
-  display: block;
   position: absolute;
-  top: -10rem;
+  top: -5rem;
   left: 25%;
-  margin: -10em auto 0 auto;
 }
-
 /* ============================================== Candle
 */
 .velas {
   background: #ffffff;
   border-radius: 10px;
   position: absolute;
-  top: 190px;
+  top: 25rem;
   left: 50%;
   margin-left: -2.4px;
   margin-top: -8.33333333px;

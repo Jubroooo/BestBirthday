@@ -1,35 +1,53 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/fundings/result_start.css' %}">
-<script defer src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
+{% extends '../base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/result_start.css' %}" />
+<script
+  defer
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+></script>
+<script src="./script.js"></script>
 
-{% endblock head %}
-
-{% block header %}
+{% endblock head %} {% block header %}
 <div class="show-card-title">
-    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
-    <p class="title-go-see-letter notosans-bold-20">생일 편지 보기</p>
+  <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
+  <p class="title-go-see-letter notosans-bold-20">생일 편지 보기</p>
 </div>
 
-{% endblock header %}
-
-{% block content %}
-
+{% endblock header %} {% block content %}
+<canvas id="drawing_canvas"></canvas>
 <div class="congrats-section">
-    <canvas id="drawing_canvas"></canvas>
-    <!-- <canvas id="canvas" width="380" height="700"></canvas> -->
-<div class="velas">
+  <!-- <canvas id="canvas" width="380" height="700"></canvas> -->
+  <div class="velas">
     <div class="fuego"></div>
     <div class="fuego"></div>
     <div class="fuego"></div>
     <div class="fuego"></div>
     <div class="fuego"></div>
-</div>
-<svg id="cake" version="1.1" x="0px" y="0px" width="200px" height="400px" viewBox="0 0 200 500" enable-background="new 0 0 200 500" xml:space="preserve">
-    <path fill="#4114FF" d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
-		c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z">
-        <animate id="bizcocho_3" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1" begin="relleno_2.end" dur="0.3s" fill="freeze" values="
+  </div>
+  <svg
+    id="cake"
+    version="1.1"
+    x="0px"
+    y="0px"
+    width="200px"
+    height="400px"
+    viewBox="0 0 200 500"
+    enable-background="new 0 0 200 500"
+    xml:space="preserve"
+  >
+    <path
+      fill="#4114FF"
+      d="M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
+		c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z"
+    >
+      <animate
+        id="bizcocho_3"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1"
+        begin="relleno_2.end"
+        dur="0.3s"
+        fill="freeze"
+        values="
                           M173.667-13.94c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c44.697,0,96.586,0,147.334,0C177.667-29.942,177.668-13.94,173.667-13.94z
                           ;
@@ -39,12 +57,24 @@
                           ;
                           M173.667,427.569c-49.795,0-101.101,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c46.385,0,97.539,0,147.334,0C177.668,411.567,177.667,427.569,173.667,427.569z
-                          " />
+                          "
+      />
     </path>
-    <path fill="#FF6245" d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
+    <path
+      fill="#FF6245"
+      d="M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
 		c0,19.144,0,57.431,0,76.574c0,10.152,0,40.607,0,40.607c0,1.858-1.506,3.364-3.364,3.364l0,0c-1.858,0-3.364-1.506-3.364-3.364c0,0,0-30.455,0-40.607c0-19.144,0-57.432,0-76.575c0-11.057,0-44.226,0-44.226C96.636-177.015,98.142-178.521,100-178.521
-		L100-178.521z">
-        <animate id="relleno_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.58 1" begin="bizcocho_2.end" dur="0.5s" fill="freeze" values="
+		L100-178.521z"
+    >
+      <animate
+        id="relleno_2"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1; 0 0 0.58 1"
+        begin="bizcocho_2.end"
+        dur="0.5s"
+        fill="freeze"
+        values="
                           M100-178.521c1.858,0,3.364,1.506,3.364,3.363c0,0,0,33.17,0,44.227
 		c0,19.144,0,57.431,0,76.574c0,10.152,0,40.607,0,40.607c0,1.858-1.506,3.364-3.364,3.364l0,0c-1.858,0-3.364-1.506-3.364-3.364c0,0,0-30.455,0-40.607c0-19.144,0-57.432,0-76.575c0-11.057,0-44.226,0-44.226C96.636-177.015,98.142-178.521,100-178.521
 		L100-178.521z
@@ -62,11 +92,23 @@
                           M102.242,427.569c5.348,0,14.079,0,17.462,0c0,0,17.026,0,27.504,0
 		c19.143,0,20.39-3.797,26.459,0c3,1.877,0,7.823,0,7.823c-2.412,2.258-58.328,0-73.667,0l0,0c-1.858,0-67.187,0-73.667,0
 		c0,0-4.125-4.983,0-7.823c5.201-3.58,16.085,0,23.725,0c8.841,0,20.762,0,20.762,0c3.686,0,8.597,0,19.511,0H102.242z
-                          " />
+                          "
+      />
     </path>
-    <path fill="#2BAAFF" d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
-		c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z">
-        <animate id="bizcocho_2" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0.25 0 0.58 1" begin="relleno_1.end" dur="0.5s" fill="freeze" values="
+    <path
+      fill="#2BAAFF"
+      d="M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
+		c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z"
+    >
+      <animate
+        id="bizcocho_2"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1; 0.25 0 0.58 1"
+        begin="relleno_1.end"
+        dur="0.5s"
+        fill="freeze"
+        values="
                           M173.667-15.929c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c43.566,0,97.96,0,147.334,0C177.667-31.931,177.666-15.929,173.667-15.929z
                           ;
@@ -78,12 +120,24 @@
                           ;
                           M173.667,451.394c-49.298,0-102.782,0-147.334,0c-3.999,0-4-16.002,0-16.002
 		c44.697,0,96.586,0,147.334,0C177.667,435.392,177.668,451.394,173.667,451.394z
-                          " />
+                          "
+      />
     </path>
-    <path fill="#12FF9D" d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
+    <path
+      fill="#12FF9D"
+      d="M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
 		c0,1.753-2.958,1.847-2.958,0c0-12.68,0-16.277,0-30.401c0-21.983,0,11.66,0-8.305c0-13.027,0-15.992,0-28.628
-		C98.411-75.883,101.368-75.592,101.368-73.685z">
-        <animate id="relleno_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 0.6 1" begin="bizcocho_1.end" dur="0.5s" fill="freeze" values="
+		C98.411-75.883,101.368-75.592,101.368-73.685z"
+    >
+      <animate
+        id="relleno_1"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1; 0 0 0.6 1"
+        begin="bizcocho_1.end"
+        dur="0.5s"
+        fill="freeze"
+        values="
                           M101.368-73.685c0,12.164,0,15.18,0,28.519c0,22.702,0-13.661,0,8.304c0,14.48,0,18.233,0,30.512
 		c0,1.753-2.958,1.847-2.958,0c0-12.68,0-16.277,0-30.401c0-21.983,0,11.66,0-8.305c0-13.027,0-15.992,0-28.628
 		C98.411-75.883,101.368-75.592,101.368-73.685z
@@ -99,11 +153,23 @@
                           M173.667,451.394c2.875,0,2.997,9.257,0,9.131c-22.662-0.956-32.09-0.956-41.756-0.956
 		c-14.48,0-17.884,0-30.163,0c-2.087,0-2.068,0-3.915,0c-13.333,0-8.963,0-23.088,0c-11.668,0-34.99-0.294-48.412,1.831
 		c-4.109,0.65-3.01-10.006,0-10.006C37.129,451.394,149.379,451.394,173.667,451.394z
-                          " />
+                          "
+      />
     </path>
-    <path fill="#FFE512" d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
-		C177.668,5.569,177.667,21.571,173.667,21.571z">
-        <animate id="bizcocho_1" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0.25 0 0.6 1" begin="2s" dur="0.8s" fill="freeze" values="
+    <path
+      fill="#FFE512"
+      d="M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
+		C177.668,5.569,177.667,21.571,173.667,21.571z"
+    >
+      <animate
+        id="bizcocho_1"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0.25 0 0.6 1"
+        begin="2s"
+        dur="0.8s"
+        fill="freeze"
+        values="
                           M173.667,21.571c-33.174,0-111.467,0-147.334,0c-4,0-4-16.002,0-16.002c39.836,0,105.982,0,147.334,0
 		C177.668,5.569,177.667,21.571,173.667,21.571z
                           ;
@@ -124,13 +190,25 @@
                           ;
                           M173.667,475.571c-46.512,0-105.486,0-147.334,0c-3.999,0-4-16.002,0-16.002c43.566,0,97.96,0,147.334,0
 		C177.667,459.569,177.666,475.571,173.667,475.571z
-                          " />
+                          "
+      />
     </path>
-    <path fill="#FFFFFF" d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
+    <path
+      fill="#FFFFFF"
+      d="M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
 	c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
 	C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
-	c0,7.618,0,22.854,0,30.472c0,4.952,0,14.854,0,19.807C104.812,96.292,104.812,107.576,104.812,113.216z">
-        <animate id="crema" attributeName="d" calcMode="spline" keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0 0 0.58 1" begin="bizcocho_3.end" dur="2s" fill="freeze" values="
+	c0,7.618,0,22.854,0,30.472c0,4.952,0,14.854,0,19.807C104.812,96.292,104.812,107.576,104.812,113.216z"
+    >
+      <animate
+        id="crema"
+        attributeName="d"
+        calcMode="spline"
+        keySplines="0 0 1 1; 0 0 1 1; 0 0 1 1; 0.25 0 1 1; 0 0 1 1; 0 0 0.58 1"
+        begin="bizcocho_3.end"
+        dur="2s"
+        fill="freeze"
+        values="
                           M104.812,113.216c0,3.119-2.164,5.67-4.812,5.67c-2.646,0-4.812-2.551-4.812-5.67c0-5.594,0-16.782,0-22.375
 	c0-5.143,0-15.427,0-20.568c0-7.333,0-21.998,0-29.33c0-5.523,0-16.569,0-22.092c0-3.295,0-9.885,0-13.181
 	C95.188,2.551,97.353,0,100,0c2.648,0,4.812,2.551,4.812,5.669c0,3.248,0,9.743,0,12.991c0,5.428,0,16.284,0,21.711
@@ -170,350 +248,392 @@
 	c-7.5,4.833-9.508-3.78-9.299-7.004c0.799-12.329,23.592-7.153,38.132-7.329c10.234-0.124,20.238-1.505,38.287-2.167
 	c16.642-0.61,32.903,1.125,46.213,1.5c12.438,0.351,35.058-5.579,31.863,6.451c-5.532,20.833,1.25,28.216-4.409,27.883
 	c-7.606-0.447-6.058-37.895-20.62-23.333c-10.167,10.166-15.972-0.747-25,12C119.547,443.568,121.798,416.515,111.547,415.233z
-                          " />
+                          "
+      />
     </path>
     <rect x="10" y="475.571" fill="#fefae9" width="180" height="4" />
-</svg>
+  </svg>
 </div>
-<p class="notosans-bold-18 filter-congrats"> 친구들이 선물한 금액  <span class="highlight-blue notosans-bold-18"> {{funding.total_price}}</span>원</p>
-{%if earliest_msg %}
-<p class="notosans-bold-18 filter-congrats">가장 먼저 축하해 준 친구  <span class="highlight-blue notosans-bold-18"> {{earliest_msg.comment_name}}</span></p>
-<p class="notosans-bold-18 filter-congrats">가장 길게 축하해 준 친구 <span class="highlight-blue notosans-bold-18"> {{longest_msg.comment_name}}</span></p>
-
-{%else%}
-<p class="notosans-bold-18 no-messages">축하해 준 친구가 없어요. ㅠㅠ</p>
-{%endif%}
-<p class="notosans-bold-18 letters-congrats first-line-congrats">{{funding.user.nickname}}님 생일을 진심으로 축하합니다</p>
-<p class="notosans-bold-18 letters-congrats">축하 메세지 <span class="highlight-blue notosans-bold-18">{{funding_msg_count}}개</span>가 쌓였어요</p>
-<div class="delivered-messages">
-    {%for funding_msg in funding_msgs%}
-    <a href="#" data-message-id="{{ funding_msg.id }}" class="b-day-message">
-        <div>
-            <span class="message-number notosans-bold-16">{{ forloop.counter }}</span>
-            <span class="message-sender notosans-regular-14 ">{{funding_msg.comment_name}}</span>
-        </div>
-        <span class="message-date notosans-regular-14 ">{{funding_msg.written_date}}</span>
-    </a>
-    {%endfor%}
+<div class="bottom-container">
+  <p class="notosans-bold-18 filter-congrats">
+    선물 받은 금액
+    <span class="highlight-blue notosans-bold-24 money">
+      {{funding.total_price}}</span
+    >원
+  </p>
+  {%if earliest_msg %}
+  <p class="notosans-bold-18 filter-congrats">
+    가장 빨리 축하해 준 친구
+    <span class="highlight-orange notosans-bold-24">
+      {{earliest_msg.comment_name}}</span
+    >
+  </p>
+  <p class="notosans-bold-18 filter-congrats">
+    제일 긴 편지를 써 준 친구
+    <span class="highlight-orange notosans-bold-24">
+      {{longest_msg.comment_name}}</span
+    >
+  </p>
+  {%endif%}
+  <p class="notosans-bold-18 letters-congrats first-line-congrats">
+    생일 축하 메시지
+    <span class="highlight-blue notosans-bold-24 money"
+      >{{funding_msg_count}}</span
+    >개를 확인해보세요!
+  </p>
+</div>
+<div id="letter-container">
+  {%for funding_msg in funding_msgs%}
+  <a href="" data-message-id="{{ funding_msg.id }}" class="b-day-message">
+    <div class="table-row">
+      <span class="message-number notosans-bold-18">{{ forloop.counter }}</span>
+      <span class="message-sender notosans-bold-16"
+        >{{funding_msg.comment_name}}</span
+      >
+    </div>
+    <span class="message-date notosans-regular-14"
+      >{{funding_msg.written_date}}</span
+    >
+  </a>
+  {%endfor%}
 </div>
 <div class="div-btn">
-    <p class="notosans-bold-18">공유하기</p>
+  <p class="notosans-bold-18">공유하기</p>
 </div>
 <div id="messageModal" class="modal">
-    <div class="modal-content">
-        <p id="modalMessageContent">메시지 내용이 여기에 표시됨</p>
-        <div class="div-btn close">
-            <p class="notosans-bold-18">편지 닫기</p>
-        </div>
+  <div class="modal-content">
+    <p id="modalMessageContent">메시지 내용이 여기에 표시됨</p>
+    <div class="div-btn close">
+      <p class="notosans-bold-18">편지 닫기</p>
     </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block script %}
+{% endblock %} {% block script %}
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // 메시지 클릭 이벤트 리스너
-    document.querySelectorAll('.b-day-message').forEach(function(messageLink) {
-        messageLink.addEventListener('click', function(e) {
-            e.preventDefault(); // 기본 링크 동작 방지
+  document.addEventListener("DOMContentLoaded", function() {
+      // 메시지 클릭 이벤트 리스너
+      document.querySelectorAll('.b-day-message').forEach(function(messageLink) {
+          messageLink.addEventListener('click', function(e) {
+              e.preventDefault(); // 기본 링크 동작 방지
 
-            const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
-            // AJAX 요청으로 메시지 상세 내용 가져오기
-               fetch(`http://127.0.0.1:8000/result_detail/${messageId}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
-                    document.getElementById('messageModal').style.display = 'block'; // 모달 표시
-                });
-        });
-    });
+              const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
+              // AJAX 요청으로 메시지 상세 내용 가져오기
+                 fetch(`http://127.0.0.1:8000/result_detail/${messageId}`)
+                  .then(response => response.text())
+                  .then(data => {
+                      document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
+                      document.getElementById('messageModal').style.display = 'block'; // 모달 표시
+                  });
+          });
+      });
 
-    // 닫기 버튼 클릭 이벤트 리스너
-    document.querySelector('.close').addEventListener('click', function() {
-        document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
-    });
-});
+      // 닫기 버튼 클릭 이벤트 리스너
+      document.querySelector('.close').addEventListener('click', function() {
+          document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
+      });
+  });
 
-//컨페티 함수
-const TWO_PI = Math.PI * 2;
-const HALF_PI = Math.PI * 0.5;
+  //컨페티 함수
+  const TWO_PI = Math.PI * 2;
+  const HALF_PI = Math.PI * 0.5;
 
-// canvas settings
-var viewWidth = 380,
-    viewHeight = 200,
-    drawingCanvas = document.getElementById("drawing_canvas"),
-    ctx,
-    timeStep = (1/60);
+  // canvas settings
+  var viewWidth = 380,
+      viewHeight = 380,
+      drawingCanvas = document.getElementById("drawing_canvas"),
+      ctx,
+      timeStep = (1/60);
 
-Point = function(x, y) {
-    this.x = x || 0;
-    this.y = y || 0;
-};
+  Point = function(x, y) {
+      this.x = x || 0;
+      this.y = y || 0;
+  };
 
-Particle = function(p0, p1, p2, p3) {
-    this.p0 = p0;
-    this.p1 = p1;
-    this.p2 = p2;
-    this.p3 = p3;
+  Particle = function(p0, p1, p2, p3) {
+      this.p0 = p0;
+      this.p1 = p1;
+      this.p2 = p2;
+      this.p3 = p3;
 
-    this.time = 0;
-    this.duration = 3 + Math.random() * 2;
-    this.color =  '#' + Math.floor((Math.random() * 0xffffff)).toString(16);
+      this.time = 0;
+      this.duration = 3 + Math.random() * 2;
+      this.color =  '#' + Math.floor((Math.random() * 0xffffff)).toString(16);
 
-    this.w = 10;
-    this.h = 6;
+      this.w = 10;
+      this.h = 6;
 
-    this.complete = false;
-};
+      this.complete = false;
+  };
 
-Particle.prototype = {
-    update:function() {
-        this.time = Math.min(this.duration, this.time + timeStep);
+  Particle.prototype = {
+      update:function() {
+          this.time = Math.min(this.duration, this.time + timeStep);
 
-        var f = Ease.outCubic(this.time, 0, 1, this.duration);
-        var p = cubeBezier(this.p0, this.p1, this.p2, this.p3, f);
+          var f = Ease.outCubic(this.time, 0, 1, this.duration);
+          var p = cubeBezier(this.p0, this.p1, this.p2, this.p3, f);
 
-        var dx = p.x - this.x;
-        var dy = p.y - this.y;
+          var dx = p.x - this.x;
+          var dy = p.y - this.y;
 
-        this.r =  Math.atan2(dy, dx) + HALF_PI;
-        this.sy = Math.sin(Math.PI * f * 10);
-        this.x = p.x;
-        this.y = p.y;
+          this.r =  Math.atan2(dy, dx) + HALF_PI;
+          this.sy = Math.sin(Math.PI * f * 10);
+          this.x = p.x;
+          this.y = p.y;
 
-        this.complete = this.time === this.duration;
-    },
-    draw:function() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.r);
-        ctx.scale(1, this.sy);
+          this.complete = this.time === this.duration;
+      },
+      draw:function() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.r);
+          ctx.scale(1, this.sy);
 
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.w * 0.5, -this.h * 0.5, this.w, this.h);
+          ctx.fillStyle = this.color;
+          ctx.fillRect(-this.w * 0.5, -this.h * 0.5, this.w, this.h);
 
-        ctx.restore();
+          ctx.restore();
+      }
+  };
+
+  Loader = function(x, y) {
+      this.x = x;
+      this.y = y;
+
+      this.r = 24;
+      this._progress = 0;
+
+      this.complete = false;
+  };
+
+  Loader.prototype = {
+      reset:function() {
+          this._progress = 0;
+          this.complete = false;
+      },
+      set progress(p) {
+          this._progress = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+          this.complete = this._progress === 1;
+      },
+      get progress() {
+          return this._progress;
+      },
+      draw:function() {
+          ctx.fillStyle = 'transparent';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, -HALF_PI, TWO_PI * this._progress - HALF_PI);
+          ctx.lineTo(this.x, this.y);
+          ctx.closePath();
+          ctx.fill();
+      }
+  };
+
+  // pun intended
+  Exploader = function(x, y) {
+      this.x = x;
+      this.y = y;
+
+      this.startRadius = 24;
+
+      this.time = 0;
+      this.duration = 0.4;
+      this.progress = 0;
+
+      this.complete = false;
+  };
+
+  Exploader.prototype = {
+      reset:function() {
+          this.time = 0;
+          this.progress = 0;
+          this.complete = false;
+      },
+      update:function() {
+          this.time = Math.min(this.duration, this.time + timeStep);
+          this.progress = Ease.inBack(this.time, 0, 1, this.duration);
+
+          this.complete = this.time === this.duration;
+      },
+      draw:function() {
+          ctx.fillStyle = 'transparent';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.startRadius * (1 - this.progress), 0, TWO_PI);
+          ctx.fill();
+      }
+  };
+
+  var particles = [],
+      loader,
+      exploader,
+      phase = 0;
+
+  function initDrawingCanvas() {
+      drawingCanvas.width = viewWidth;
+      drawingCanvas.height = viewHeight;
+      ctx = drawingCanvas.getContext('2d');
+
+      createLoader();
+      createExploader();
+      createParticles();
+  }
+
+  function createLoader() {
+      loader = new Loader(viewWidth * 0.5, viewHeight * 0.5);
+  }
+
+  function createExploader() {
+      exploader = new Exploader(viewWidth * 0.5, viewHeight * 0.5);
+  }
+
+  function createParticles() {
+      for (var i = 0; i < 128; i++) {
+          var p0 = new Point(viewWidth * 0.5, 0);
+          var p1 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+          var p2 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+          var p3 = new Point(Math.random() * viewWidth, viewHeight + 0);
+
+          particles.push(new Particle(p0, p1, p2, p3));
+      }
+  }
+
+  function update() {
+
+      switch (phase) {
+          case 0:
+              loader.progress += (1/45);
+              break;
+          case 1:
+              exploader.update();
+              break;
+          case 2:
+              particles.forEach(function(p) {
+                  p.update();
+              });
+              break;
+      }
+  }
+
+  function draw() {
+      ctx.clearRect(0, 0, viewWidth, viewHeight);
+
+      switch (phase) {
+          case 0:
+              loader.draw();
+              break;
+          case 1:
+              exploader.draw();
+              break;
+          case 2:
+              particles.forEach(function(p) {
+                  p.draw();
+              });
+          break;
+      }
+  }
+
+  window.onload = function() {
+      initDrawingCanvas();
+      setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
+  };
+
+  function runFunctionAfterDelay() {
+      requestAnimationFrame(loop);
+  }
+
+  //window.onload = function() {
+  //    initDrawingCanvas();
+  //    requestAnimationFrame(loop);
+  //};
+
+  function loop() {
+      update();
+      draw();
+
+      if (phase === 0 && loader.complete) {
+          phase = 1;
+      }
+      else if (phase === 1 && exploader.complete) {
+          phase = 2;
+      }
+      else if (phase === 2 && checkParticlesComplete()) {
+          // reset
+          phase = 0;
+          loader.reset();
+          exploader.reset();
+          particles.length = 0;
+          createParticles();
+      }
+
+      requestAnimationFrame(loop);
+  }
+
+  function checkParticlesComplete() {
+      for (var i = 0; i < particles.length; i++) {
+          if (particles[i].complete === false) return false;
+      }
+      return true;
+  }
+
+  // math and stuff
+
+  /**
+   * easing equations from http://gizma.com/easing/
+   * t = current time
+   * b = start value
+   * c = delta value
+   * d = duration
+   */
+  var Ease = {
+      inCubic:function (t, b, c, d) {
+          t /= d;
+          return c*t*t*t + b;
+      },
+      outCubic:function(t, b, c, d) {
+          t /= d;
+          t--;
+          return c*(t*t*t + 1) + b;
+      },
+      inOutCubic:function(t, b, c, d) {
+          t /= d/2;
+          if (t < 1) return c/2*t*t*t + b;
+          t -= 2;
+          return c/2*(t*t*t + 2) + b;
+      },
+      inBack: function (t, b, c, d, s) {
+          s = s || 1.70158;
+          return c*(t/=d)*t*((s+1)*t - s) + b;
+      }
+  };
+
+  function cubeBezier(p0, c0, c1, p1, t) {
+      var p = new Point();
+      var nt = (1 - t);
+
+      p.x = nt * nt * nt * p0.x + 3 * nt * nt * t * c0.x + 3 * nt * t * t * c1.x + t * t * t * p1.x;
+      p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
+
+      return p;
+  }
+
+  //금액 올라가게 하기
+  const moneyElement = document.querySelector('.money');
+  const targetNumber = {{funding.total_price}}.; // 변화할 숫자
+  const animationDuration = 2000; // 애니메이션 지속시간 (밀리초)
+  const framesPerSecond = 60; // 초당 프레임 수
+
+  const increment = targetNumber / (animationDuration / 1000 * framesPerSecond);
+
+  let currentNumber = 0;
+
+  const updateNumber = () => {
+    currentNumber += increment;
+    if (currentNumber >= targetNumber) {
+      currentNumber = targetNumber;
+      clearInterval(interval);
     }
-};
+    moneyElement.textContent = Math.round(currentNumber);
+  };
 
-Loader = function(x, y) {
-    this.x = x;
-    this.y = y;
-
-    this.r = 24;
-    this._progress = 0;
-
-    this.complete = false;
-};
-
-Loader.prototype = {
-    reset:function() {
-        this._progress = 0;
-        this.complete = false;
-    },
-    set progress(p) {
-        this._progress = p < 0 ? 0 : (p > 1 ? 1 : p);
-
-        this.complete = this._progress === 1;
-    },
-    get progress() {
-        return this._progress;
-    },
-    draw:function() {
-        ctx.fillStyle = 'transparent';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, -HALF_PI, TWO_PI * this._progress - HALF_PI);
-        ctx.lineTo(this.x, this.y);
-        ctx.closePath();
-        ctx.fill();
-    }
-};
-
-// pun intended
-Exploader = function(x, y) {
-    this.x = x;
-    this.y = y;
-
-    this.startRadius = 24;
-
-    this.time = 0;
-    this.duration = 0.4;
-    this.progress = 0;
-
-    this.complete = false;
-};
-
-Exploader.prototype = {
-    reset:function() {
-        this.time = 0;
-        this.progress = 0;
-        this.complete = false;
-    },
-    update:function() {
-        this.time = Math.min(this.duration, this.time + timeStep);
-        this.progress = Ease.inBack(this.time, 0, 1, this.duration);
-
-        this.complete = this.time === this.duration;
-    },
-    draw:function() {
-        ctx.fillStyle = 'transparent';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.startRadius * (1 - this.progress), 0, TWO_PI);
-        ctx.fill();
-    }
-};
-
-var particles = [],
-    loader,
-    exploader,
-    phase = 0;
-
-function initDrawingCanvas() {
-    drawingCanvas.width = viewWidth;
-    drawingCanvas.height = viewHeight;
-    ctx = drawingCanvas.getContext('2d');
-
-    createLoader();
-    createExploader();
-    createParticles();
-}
-
-function createLoader() {
-    loader = new Loader(viewWidth * 0.5, viewHeight * 0.5);
-}
-
-function createExploader() {
-    exploader = new Exploader(viewWidth * 0.5, viewHeight * 0.5);
-}
-
-function createParticles() {
-    for (var i = 0; i < 128; i++) {
-        var p0 = new Point(viewWidth * 0.5, 0);
-        var p1 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
-        var p2 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
-        var p3 = new Point(Math.random() * viewWidth, viewHeight + 0);
-
-        particles.push(new Particle(p0, p1, p2, p3));
-    }
-}
-
-function update() {
-
-    switch (phase) {
-        case 0:
-            loader.progress += (1/45);
-            break;
-        case 1:
-            exploader.update();
-            break;
-        case 2:
-            particles.forEach(function(p) {
-                p.update();
-            });
-            break;
-    }
-}
-
-function draw() {
-    ctx.clearRect(0, 0, viewWidth, viewHeight);
-
-    switch (phase) {
-        case 0:
-            loader.draw();
-            break;
-        case 1:
-            exploader.draw();
-            break;
-        case 2:
-            particles.forEach(function(p) {
-                p.draw();
-            });
-        break;
-    }
-}
-
-window.onload = function() {
-    initDrawingCanvas();
-    setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
-};
-
-function runFunctionAfterDelay() {
-    requestAnimationFrame(loop);
-}
-
-//window.onload = function() {
-//    initDrawingCanvas();
-//    requestAnimationFrame(loop);
-//};
-
-function loop() {
-    update();
-    draw();
-
-    if (phase === 0 && loader.complete) {
-        phase = 1;
-    }
-    else if (phase === 1 && exploader.complete) {
-        phase = 2;
-    }
-    else if (phase === 2 && checkParticlesComplete()) {
-        // reset
-        phase = 0;
-        loader.reset();
-        exploader.reset();
-        particles.length = 0;
-        createParticles();
-    }
-
-    requestAnimationFrame(loop);
-}
-
-function checkParticlesComplete() {
-    for (var i = 0; i < particles.length; i++) {
-        if (particles[i].complete === false) return false;
-    }
-    return true;
-}
-
-// math and stuff
-
-/**
- * easing equations from http://gizma.com/easing/
- * t = current time
- * b = start value
- * c = delta value
- * d = duration
- */
-var Ease = {
-    inCubic:function (t, b, c, d) {
-        t /= d;
-        return c*t*t*t + b;
-    },
-    outCubic:function(t, b, c, d) {
-        t /= d;
-        t--;
-        return c*(t*t*t + 1) + b;
-    },
-    inOutCubic:function(t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t*t + b;
-        t -= 2;
-        return c/2*(t*t*t + 2) + b;
-    },
-    inBack: function (t, b, c, d, s) {
-        s = s || 1.70158;
-        return c*(t/=d)*t*((s+1)*t - s) + b;
-    }
-};
-
-function cubeBezier(p0, c0, c1, p1, t) {
-    var p = new Point();
-    var nt = (1 - t);
-
-    p.x = nt * nt * nt * p0.x + 3 * nt * nt * t * c0.x + 3 * nt * t * t * c1.x + t * t * t * p1.x;
-    p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
-
-    return p;
-}
+  const interval = setInterval(updateNumber, 1000 / framesPerSecond);
 </script>
 {% endblock%}
