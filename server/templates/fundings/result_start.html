@@ -159,8 +159,10 @@ setTimeout(function() {
 }, 15);
 
 function updateBallons(ctx) {
-  frames += 1;
-  if (frames % 70 == 0 && balloons.length < 20) {
+    frames += 1;
+  var maxBalloons = 7; // 최대 풍선 개수
+  var addInterval = 70; // 풍선을 추가하는 간격
+  if (frames % addInterval == 0 && balloons.length < maxBalloons) {
     var balloon = new Balloon();
     balloons.push(balloon);
   }
