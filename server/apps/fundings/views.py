@@ -46,7 +46,7 @@ def main(request) :
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
-        funding_exists = request.session.get('funding_exists', False) # 1유저 1펀딩 위한 
+        funding_exists = request.session.get('funding_exists', False) # 1유저 1펀딩 위한 디폴트가 false
         ctx = {"today_fundings":today_fundings, 
                "today_fundings_num":today_fundings_num,
                "total_today_funding_msg_count":total_today_funding_msg_count,
@@ -208,7 +208,7 @@ def create_funding(request) :
 
             # 메인 페이지 템플릿에 funding_exists만 컨텍스트 전달하는 식으로 하면, 기존 main 페이지 ctx로 넘겨준게 초기화 되길래 
             if funding_exists:
-                # funding_exists를 세션에 저장
+                # funding_exists를 세션에 저장, 세션 =>브라우저랑 서버사이 일정기간 정보 저장을 위해 사용, 새로고침해도 다른 화면으로 가도 저장됨
                 request.session['funding_exists'] = True
                 return redirect('fundings:main')
 
