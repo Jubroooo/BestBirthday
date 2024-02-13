@@ -206,7 +206,7 @@
         <div class="go-and-check">
             <p id="congrats-message" class="notosans-bold-20 congrats-notice" style="color:var(--BB_color_white)"> 선물전달 완료</p>
             <div class="lock-img">
-                <img src="{%static 'images/gift_main.png'%}">
+                <img src="{%static 'images/modal2.png'%}">
             </div>
         </div>
     </div>
@@ -233,7 +233,7 @@
     modal.style.display = "block";
 
     const congratsMessage = document.getElementById("congrats-message");
-    congratsMessage.innerText = "{{modal_pk.user}}에게 전달완료";
+    congratsMessage.innerText = "생일 선물 전달완료";
 
     document.body.style.overflow = "hidden";
 
