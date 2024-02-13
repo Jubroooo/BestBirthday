@@ -193,6 +193,22 @@ def create_funding(request) :
             if request.user.toss_account is None and request.user.kakao_account is None:
                 return render (request, 'fundings/create_payment.html')
             
+            current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            birthday_month, birthday_day = request.user.birthday.month, request.user.birthday.day
+            print (current_date)
+            current_year_birthday = datetime(current_date.year, birthday_month, birthday_day)
+            print (current_year_birthday)
+            if current_date > current_year_birthday:
+                day_difference = current_date - current_year_birthday
+            else:
+                day_difference = current_year_birthday - current_date
+            print (day_difference.days)
+            if day_difference.days > 7:
+                
+                return redirect('fundings:main')
+
+            
+            
             current_time = timezone.now()
             temp_fundings = Funding.objects.filter(user=request.user)
             temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
