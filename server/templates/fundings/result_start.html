@@ -318,7 +318,7 @@
 
               const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
               // AJAX 요청으로 메시지 상세 내용 가져오기
-                 fetch(`http://127.0.0.1:8000/result_detail/${messageId}`)
+              fetch(`/result_detail/${messageId}/`)
                   .then(response => response.text())
                   .then(data => {
                       document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
