@@ -13,12 +13,11 @@
 </div>
 
 {% endblock header %} {% block content %}
-<canvas id="drawing_canvas"></canvas>
 <div class="congrats-section">
-    <canvas id="c" width="360" height="360"></canvas>
-    <canvas id="drawing_canvas"></canvas>
-    <!-- <canvas id="canvas" width="380" height="700"></canvas> -->
-<div class="velas">
+  <canvas id="drawing_canvas">
+    <canvas id="c" class="ballon"></canvas>
+  </canvas>
+  <div class="velas">
     <div class="fuego"></div>
     <div class="fuego"></div>
     <div class="fuego"></div>
@@ -310,544 +309,528 @@
     </div>
   </div>
 </div>
-{% endblock content%}
-
-{% block script %}
+{% endblock content%} {% block script %}
 <script>
-//편지 디테일 모달을 위한 
-document.addEventListener("DOMContentLoaded", function() {
-    // 메시지 클릭 이벤트 리스너
-    document.querySelectorAll('.b-day-message').forEach(function(messageLink) {
-        messageLink.addEventListener('click', function(e) {
-            e.preventDefault(); // 기본 링크 동작 방지
+    //편지 디테일 모달을 위한
+    document.addEventListener("DOMContentLoaded", function() {
+        // 메시지 클릭 이벤트 리스너
+        document.querySelectorAll('.b-day-message').forEach(function(messageLink) {
+            messageLink.addEventListener('click', function(e) {
+                e.preventDefault(); // 기본 링크 동작 방지
 
-            const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
-            // AJAX 요청으로 메시지 상세 내용 가져오기
-               fetch(`/result_detail/${messageId}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
-                    document.getElementById('messageModal').style.display = 'block'; // 모달 표시
-                });
+                const messageId = this.getAttribute('data-message-id'); // 메시지 ID 가져오기
+                // AJAX 요청으로 메시지 상세 내용 가져오기
+                   fetch(`/result_detail/${messageId}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('modalMessageContent').innerHTML = data; // 모달 내용 업데이트
+                        document.getElementById('messageModal').style.display = 'block'; // 모달 표시
+                    });
+            });
         });
-    });
 
-      // 닫기 버튼 클릭 이벤트 리스너
-      document.querySelector('.close').addEventListener('click', function() {
-          document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
+          // 닫기 버튼 클릭 이벤트 리스너
+          document.querySelector('.close').addEventListener('click', function() {
+              document.getElementById('messageModal').style.display = 'none'; // 모달 숨기기
+          });
       });
-  });
 
-//애니메이션
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // 애니메이션이 적용된 후에는 더 이상 관찰하지 않음
-            }
+    //애니메이션
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // 애니메이션이 적용된 후에는 더 이상 관찰하지 않음
+                }
+            });
+        }, {
+            threshold: 0.5 // 타겟 요소의 50%가 보일 때
         });
-    }, {
-        threshold: 0.5 // 타겟 요소의 50%가 보일 때 
+
+        // 관찰할 대상 설정
+        const elements = document.querySelectorAll('.letters-congrats');
+        elements.forEach(el => observer.observe(el));
     });
 
-    // 관찰할 대상 설정
-    const elements = document.querySelectorAll('.letters-congrats');
-    elements.forEach(el => observer.observe(el));
-});
+    //풍선 애니메이션
+    var c = document.getElementById("c");
+    var ctx = c.getContext("2d");
 
-//풍선 애니메이션
-var c = document.getElementById("c");
-var ctx = c.getContext("2d");
+    var bc = document.createElement("canvas");
+    var bCtx = bc.getContext("2d");
 
-var bc = document.createElement("canvas");
-var bCtx = bc.getContext("2d");
-
-var cw = c.width = bc.width = 390,
-  cx = cw / 2;
-/*내부 스크롤 방지 위해 canvas 높이 조정 헤더가 104px*/
-var ch = c.height = bc.height = 390,
-  cy = ch;
+    var cw = c.width = bc.width = 390,
+      cx = cw / 2;
+    /*내부 스크롤 방지 위해 canvas 높이 조정 헤더가 104px*/
+    var ch = c.height = bc.height = 390,
+      cy = ch;
 
 
-var frames = 0;
-var requestId = null;
-var rad = (Math.PI / 180);
-var kappa = 0.5522847498;
+    var frames = 0;
+    var requestId = null;
+    var rad = (Math.PI / 180);
+    var kappa = 0.5522847498;
 
-var x, y;
-bCtx.strokeStyle = "#abcdef";
-bCtx.lineWidth = 1;
+    var x, y;
+    bCtx.strokeStyle = "#abcdef";
+    bCtx.lineWidth = 1;
 
-var balloons = [];
+    var balloons = [];
 
-function Balloon() {
-  this.r = randomIntFromInterval(20, 70);
-  this.R = 1.4 * this.r;
-  this.x = randomIntFromInterval(this.r, cw - this.r);
-  this.y = ch + 2 * this.r;
-  this.a = this.r * 4.5;
-  this.pm = Math.random() < 0.5 ? -1 : 1;
-  this.speed = randomIntFromInterval(2.5,3.8);
-  this.k = this.speed / 5;
-  this.hue = this.pm > 0 ? "210" : "10";
-}
-
-function Draw() {
-
-  updateBallons(bCtx);
-
-  ctx.clearRect(0, 0, cw, ch);
-  var img = bc;
-  ctx.drawImage(img, 0, 0);
-
-  requestId = window.requestAnimationFrame(Draw);
-}
-//requestId = window.requestAnimationFrame(Draw);
-
-function Init() {
-  if (requestId) {
-    window.cancelAnimationFrame(requestId);
-    requestId = null;
-  }
-  cw = c.width = bc.width = 390, cx = cw / 2;
-  ch = c.height = bc.height = window.innerHeight-200, cy = ch;
-  bCtx.strokeStyle = "#abcdef";
-  bCtx.lineWidth = 1;
-  Draw();
-}
-
-setTimeout(function() {
-  Init();
-  window.addEventListener('resize', Init, false);
-}, 15);
-
-function updateBallons(ctx) {
-    frames += 1;
-  var maxBalloons = 7; // 최대 풍선 개수
-  var addInterval = 70; // 풍선을 추가하는 간격
-  if (frames % addInterval == 0 && balloons.length < maxBalloons) {
-    var balloon = new Balloon();
-    balloons.push(balloon);
-  }
-  ctx.clearRect(0, 0, cw, ch);
-
-  var colorIndex = 0;
-  for (var i = 0; i < balloons.length; i++) {
-    var b = balloons[i];
-    if (b.y > -b.a) {
-      b.y -= b.speed
-    } else {
-      b.y = parseInt(ch + b.r + b.R);
+    function Balloon() {
+      this.r = randomIntFromInterval(20, 70);
+      this.R = 1.4 * this.r;
+      this.x = randomIntFromInterval(this.r, cw - this.r);
+      this.y = ch + 2 * this.r;
+      this.a = this.r * 4.5;
+      this.pm = Math.random() < 0.5 ? -1 : 1;
+      this.speed = randomIntFromInterval(2.5,3.8);
+      this.k = this.speed / 5;
+      this.hue = this.pm > 0 ? "210" : "10";
     }
 
-    var p = thread(b, ctx);
-    b.cx = p.x;
-    b.cy = p.y - b.R;
+    function Draw() {
 
-    // 투명도 값 설정
-    var alpha = 0.8; // 원하는 투명도 값 (0에서 1 사이의 값)
-    
-    // 색상과 투명도 값을 전달하여 그라데이션 생성
-    ctx.fillStyle = Grd(p.x, p.y, b.r, colorIndex, alpha);
-    colorIndex = (colorIndex + 1) % colors.length; // 다음 색상을 선택하기 위해 인덱스 업데이트
+      updateBallons(bCtx);
 
-    drawBalloon(b, ctx);
-  }
-}
+      ctx.clearRect(0, 0, cw, ch);
+      var img = bc;
+      ctx.drawImage(img, 0, 0);
 
-function drawBalloon(b, ctx) {
+      requestId = window.requestAnimationFrame(Draw);
+    }
+    //requestId = window.requestAnimationFrame(Draw);
 
-  var or = b.r * kappa; // offset
-
-  var p1 = {
-    x: b.cx - b.r,
-    y: b.cy
-  }
-  var pc11 = {
-    x: p1.x,
-    y: p1.y + or
-  }
-  var pc12 = {
-    x: p1.x,
-    y: p1.y - or
-  }
-
-  var p2 = {
-    x: b.cx,
-    y: b.cy - b.r
-  }
-  var pc21 = {
-    x: b.cx - or,
-    y: p2.y
-  }
-  var pc22 = {
-    x: b.cx + or,
-    y: p2.y
-  }
-
-  var p3 = {
-    x: b.cx + b.r,
-    y: b.cy
-  }
-  var pc31 = {
-    x: p3.x,
-    y: p3.y - or
-  }
-  var pc32 = {
-    x: p3.x,
-    y: p3.y + or
-  }
-
-  var p4 = {
-    x: b.cx,
-    y: b.cy + b.R
-  };
-  var pc41 = {
-    x: p4.x + or,
-    y: p4.y
-  }
-  var pc42 = {
-    x: p4.x - or,
-    y: p4.y
-  }
-
-  var t1 = {
-    x: p4.x + .2 * b.r * Math.cos(70 * rad),
-    y: p4.y + .2 * b.r * Math.sin(70 * rad)
-  }
-  var t2 = {
-    x: p4.x + .2 * b.r * Math.cos(110 * rad),
-    y: p4.y + .2 * b.r * Math.sin(110 * rad)
-  }
-
-  //balloon
-  ctx.beginPath();
-  ctx.moveTo(p4.x, p4.y);
-  ctx.bezierCurveTo(pc42.x, pc42.y, pc11.x, pc11.y, p1.x, p1.y);
-  ctx.bezierCurveTo(pc12.x, pc12.y, pc21.x, pc21.y, p2.x, p2.y);
-  ctx.bezierCurveTo(pc22.x, pc22.y, pc31.x, pc31.y, p3.x, p3.y);
-  ctx.bezierCurveTo(pc32.x, pc32.y, pc41.x, pc41.y, p4.x, p4.y);
-  //knot
-  ctx.lineTo(t1.x, t1.y);
-  ctx.lineTo(t2.x, t2.y);
-  ctx.closePath();
-  ctx.fill();
-}
-
-function thread(b, ctx) {
-  ctx.beginPath();
-
-  for (var i = b.a; i > 0; i -= 1) {
-    var t = i * rad;
-    x = b.x + b.pm * 50 * Math.cos(b.k * t - frames * rad)
-    y = b.y + b.pm * 25 * Math.sin(b.k * t - frames * rad) + 50 * t
-    ctx.lineTo(x, y)
-  }
-  ctx.stroke();
-  return p = {
-    x: x,
-    y: y
-  }
-}
-
-var colors = ["#4114FF", "#FF6245", "#00FF00", "#FFD700"]; // 원하는 색상 추가 가능
-
-function Grd(x, y, r, index, alpha) {
-    var hue = colors[index % colors.length]; // 인덱스에 따라 순환하여 색상 선택
-    var rgbaColor = 'rgba(' + parseInt(hue.slice(1, 3), 16) + ', ' + parseInt(hue.slice(3, 5), 16) + ', ' + parseInt(hue.slice(5, 7), 16) + ', ' + alpha + ')';
-    grd = ctx.createRadialGradient(x - .5 * r, y - 1.7 * r, 0, x - .5 * r, y - 1.7 * r, r);
-    grd.addColorStop(0, rgbaColor);
-    grd.addColorStop(0.4, rgbaColor);
-    grd.addColorStop(1, rgbaColor);
-    return grd;
-  }
-
-function randomIntFromInterval(mn, mx) {
-  return ~~(Math.random() * (mx - mn + 1) + mn);
-
-//컨페티 함수
-const TWO_PI = Math.PI * 2;
-const HALF_PI = Math.PI * 0.5;
-}
-
-  // canvas settings
-  var viewWidth = 380,
-      viewHeight = 380,
-      drawingCanvas = document.getElementById("drawing_canvas"),
-      ctx,
-      timeStep = (1/60);
-
-  Point = function(x, y) {
-      this.x = x || 0;
-      this.y = y || 0;
-  };
-
-  Particle = function(p0, p1, p2, p3) {
-      this.p0 = p0;
-      this.p1 = p1;
-      this.p2 = p2;
-      this.p3 = p3;
-
-      this.time = 0;
-      this.duration = 3 + Math.random() * 2;
-      this.color =  '#' + Math.floor((Math.random() * 0xffffff)).toString(16);
-
-      this.w = 10;
-      this.h = 6;
-
-      this.complete = false;
-  };
-
-  Particle.prototype = {
-      update:function() {
-          this.time = Math.min(this.duration, this.time + timeStep);
-
-          var f = Ease.outCubic(this.time, 0, 1, this.duration);
-          var p = cubeBezier(this.p0, this.p1, this.p2, this.p3, f);
-
-          var dx = p.x - this.x;
-          var dy = p.y - this.y;
-
-          this.r =  Math.atan2(dy, dx) + HALF_PI;
-          this.sy = Math.sin(Math.PI * f * 10);
-          this.x = p.x;
-          this.y = p.y;
-
-          this.complete = this.time === this.duration;
-      },
-      draw:function() {
-          ctx.save();
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.r);
-          ctx.scale(1, this.sy);
-
-          ctx.fillStyle = this.color;
-          ctx.fillRect(-this.w * 0.5, -this.h * 0.5, this.w, this.h);
-
-          ctx.restore();
+    function Init() {
+      if (requestId) {
+        window.cancelAnimationFrame(requestId);
+        requestId = null;
       }
-  };
+      cw = c.width = bc.width = 380, cx = cw / 2;
+      ch = c.height = bc.height = window.innerHeight, cy = ch;
+      bCtx.strokeStyle = "#abcdef";
+      bCtx.lineWidth = 1;
+      Draw();
+    }
 
-  Loader = function(x, y) {
-      this.x = x;
-      this.y = y;
+    setTimeout(function() {
+      Init();
+      window.addEventListener('resize', Init, false);
+    }, 15);
 
-      this.r = 24;
-      this._progress = 0;
-
-      this.complete = false;
-  };
-
-  Loader.prototype = {
-      reset:function() {
-          this._progress = 0;
-          this.complete = false;
-      },
-      set progress(p) {
-          this._progress = p < 0 ? 0 : (p > 1 ? 1 : p);
-
-          this.complete = this._progress === 1;
-      },
-      get progress() {
-          return this._progress;
-      },
-      draw:function() {
-          ctx.fillStyle = 'transparent';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, -HALF_PI, TWO_PI * this._progress - HALF_PI);
-          ctx.lineTo(this.x, this.y);
-          ctx.closePath();
-          ctx.fill();
+    function updateBallons(ctx) {
+        frames += 1;
+      var maxBalloons = 7; // 최대 풍선 개수
+      var addInterval = 70; // 풍선을 추가하는 간격
+      if (frames % addInterval == 0 && balloons.length < maxBalloons) {
+        var balloon = new Balloon();
+        balloons.push(balloon);
       }
-  };
+      ctx.clearRect(0, 0, cw, ch);
 
-  // pun intended
-  Exploader = function(x, y) {
-      this.x = x;
-      this.y = y;
+      var colorIndex = 0;
+      for (var i = 0; i < balloons.length; i++) {
+        var b = balloons[i];
+        if (b.y > -b.a) {
+          b.y -= b.speed
+        } else {
+          b.y = parseInt(ch + b.r + b.R);
+        }
 
-      this.startRadius = 24;
+        var p = thread(b, ctx);
+        b.cx = p.x;
+        b.cy = p.y - b.R;
 
-      this.time = 0;
-      this.duration = 0.4;
-      this.progress = 0;
+        // 투명도 값 설정
+        var alpha = 0.8; // 원하는 투명도 값 (0에서 1 사이의 값)
 
-      this.complete = false;
-  };
+        // 색상과 투명도 값을 전달하여 그라데이션 생성
+        ctx.fillStyle = Grd(p.x, p.y, b.r, colorIndex, alpha);
+        colorIndex = (colorIndex + 1) % colors.length; // 다음 색상을 선택하기 위해 인덱스 업데이트
 
-  Exploader.prototype = {
-      reset:function() {
-          this.time = 0;
-          this.progress = 0;
-          this.complete = false;
-      },
-      update:function() {
-          this.time = Math.min(this.duration, this.time + timeStep);
-          this.progress = Ease.inBack(this.time, 0, 1, this.duration);
-
-          this.complete = this.time === this.duration;
-      },
-      draw:function() {
-          ctx.fillStyle = 'transparent';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.startRadius * (1 - this.progress), 0, TWO_PI);
-          ctx.fill();
+        drawBalloon(b, ctx);
       }
-  };
+    }
 
-  var particles = [],
-      loader,
-      exploader,
-      phase = 0;
+    function drawBalloon(b, ctx) {
 
-  function initDrawingCanvas() {
-      drawingCanvas.width = viewWidth;
-      drawingCanvas.height = viewHeight;
-      ctx = drawingCanvas.getContext('2d');
+      var or = b.r * kappa; // offset
 
-      createLoader();
-      createExploader();
-      createParticles();
-  }
-
-  function createLoader() {
-      loader = new Loader(viewWidth * 0.5, viewHeight * 0.5);
-  }
-
-  function createExploader() {
-      exploader = new Exploader(viewWidth * 0.5, viewHeight * 0.5);
-  }
-
-  function createParticles() {
-      for (var i = 0; i < 128; i++) {
-          var p0 = new Point(viewWidth * 0.5, 0);
-          var p1 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
-          var p2 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
-          var p3 = new Point(Math.random() * viewWidth, viewHeight + 0);
-
-          particles.push(new Particle(p0, p1, p2, p3));
+      var p1 = {
+        x: b.cx - b.r,
+        y: b.cy
       }
-  }
-
-  function update() {
-
-      switch (phase) {
-          case 0:
-              loader.progress += (1/45);
-              break;
-          case 1:
-              exploader.update();
-              break;
-          case 2:
-              particles.forEach(function(p) {
-                  p.update();
-              });
-              break;
+      var pc11 = {
+        x: p1.x,
+        y: p1.y + or
       }
-  }
-
-  function draw() {
-      ctx.clearRect(0, 0, viewWidth, viewHeight);
-
-      switch (phase) {
-          case 0:
-              loader.draw();
-              break;
-          case 1:
-              exploader.draw();
-              break;
-          case 2:
-              particles.forEach(function(p) {
-                  p.draw();
-              });
-          break;
-      }
-  }
-
-  window.onload = function() {
-      initDrawingCanvas();
-      setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
-  };
-
-  function runFunctionAfterDelay() {
-      requestAnimationFrame(loop);
-  }
-
-  //window.onload = function() {
-  //    initDrawingCanvas();
-  //    requestAnimationFrame(loop);
-  //};
-
-  function loop() {
-      update();
-      draw();
-
-      if (phase === 0 && loader.complete) {
-          phase = 1;
-      }
-      else if (phase === 1 && exploader.complete) {
-          phase = 2;
-      }
-      else if (phase === 2 && checkParticlesComplete()) {
-          // reset
-          phase = 0;
-          loader.reset();
-          exploader.reset();
-          particles.length = 0;
-          createParticles();
+      var pc12 = {
+        x: p1.x,
+        y: p1.y - or
       }
 
-      requestAnimationFrame(loop);
-  }
-
-  function checkParticlesComplete() {
-      for (var i = 0; i < particles.length; i++) {
-          if (particles[i].complete === false) return false;
+      var p2 = {
+        x: b.cx,
+        y: b.cy - b.r
       }
-      return true;
-  }
-
-  // math and stuff
-
-  /**
-   * easing equations from http://gizma.com/easing/
-   * t = current time
-   * b = start value
-   * c = delta value
-   * d = duration
-   */
-  var Ease = {
-      inCubic:function (t, b, c, d) {
-          t /= d;
-          return c*t*t*t + b;
-      },
-      outCubic:function(t, b, c, d) {
-          t /= d;
-          t--;
-          return c*(t*t*t + 1) + b;
-      },
-      inOutCubic:function(t, b, c, d) {
-          t /= d/2;
-          if (t < 1) return c/2*t*t*t + b;
-          t -= 2;
-          return c/2*(t*t*t + 2) + b;
-      },
-      inBack: function (t, b, c, d, s) {
-          s = s || 1.70158;
-          return c*(t/=d)*t*((s+1)*t - s) + b;
+      var pc21 = {
+        x: b.cx - or,
+        y: p2.y
       }
-  };
+      var pc22 = {
+        x: b.cx + or,
+        y: p2.y
+      }
 
-  function cubeBezier(p0, c0, c1, p1, t) {
-      var p = new Point();
-      var nt = (1 - t);
+      var p3 = {
+        x: b.cx + b.r,
+        y: b.cy
+      }
+      var pc31 = {
+        x: p3.x,
+        y: p3.y - or
+      }
+      var pc32 = {
+        x: p3.x,
+        y: p3.y + or
+      }
 
-      p.x = nt * nt * nt * p0.x + 3 * nt * nt * t * c0.x + 3 * nt * t * t * c1.x + t * t * t * p1.x;
-      p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
+      var p4 = {
+        x: b.cx,
+        y: b.cy + b.R
+      };
+      var pc41 = {
+        x: p4.x + or,
+        y: p4.y
+      }
+      var pc42 = {
+        x: p4.x - or,
+        y: p4.y
+      }
 
-      return p;
-  }
+      var t1 = {
+        x: p4.x + .2 * b.r * Math.cos(70 * rad),
+        y: p4.y + .2 * b.r * Math.sin(70 * rad)
+      }
+      var t2 = {
+        x: p4.x + .2 * b.r * Math.cos(110 * rad),
+        y: p4.y + .2 * b.r * Math.sin(110 * rad)
+      }
+
+      //balloon
+      ctx.beginPath();
+      ctx.moveTo(p4.x, p4.y);
+      ctx.bezierCurveTo(pc42.x, pc42.y, pc11.x, pc11.y, p1.x, p1.y);
+      ctx.bezierCurveTo(pc12.x, pc12.y, pc21.x, pc21.y, p2.x, p2.y);
+      ctx.bezierCurveTo(pc22.x, pc22.y, pc31.x, pc31.y, p3.x, p3.y);
+      ctx.bezierCurveTo(pc32.x, pc32.y, pc41.x, pc41.y, p4.x, p4.y);
+      //knot
+      ctx.lineTo(t1.x, t1.y);
+      ctx.lineTo(t2.x, t2.y);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function thread(b, ctx) {
+      ctx.beginPath();
+
+      for (var i = b.a; i > 0; i -= 1) {
+        var t = i * rad;
+        x = b.x + b.pm * 50 * Math.cos(b.k * t - frames * rad)
+        y = b.y + b.pm * 25 * Math.sin(b.k * t - frames * rad) + 50 * t
+        ctx.lineTo(x, y)
+      }
+      ctx.stroke();
+      return p = {
+        x: x,
+        y: y
+      }
+    }
+
+    var colors = ["#4114FF", "#FF6245", "#00FF00", "#FFD700"]; // 원하는 색상 추가 가능
+
+    function Grd(x, y, r, index, alpha) {
+        var hue = colors[index % colors.length]; // 인덱스에 따라 순환하여 색상 선택
+        var rgbaColor = 'rgba(' + parseInt(hue.slice(1, 3), 16) + ', ' + parseInt(hue.slice(3, 5), 16) + ', ' + parseInt(hue.slice(5, 7), 16) + ', ' + alpha + ')';
+        grd = ctx.createRadialGradient(x - .5 * r, y - 1.7 * r, 0, x - .5 * r, y - 1.7 * r, r);
+        grd.addColorStop(0, rgbaColor);
+        grd.addColorStop(0.4, rgbaColor);
+        grd.addColorStop(1, rgbaColor);
+        return grd;
+      }
+
+    function randomIntFromInterval(mn, mx) {
+      return ~~(Math.random() * (mx - mn + 1) + mn);
+
+    //컨페티 함수
+    const TWO_PI = Math.PI * 2;
+    const HALF_PI = Math.PI * 0.5;
+    }
+
+    // canvas settings 컨페티
+    var viewWidth = 380,
+        viewHeight = 640,
+        drawingCanvas = document.getElementById("drawing_canvas"),
+        ctx,
+        timeStep = (1/60);
+
+    Point = function(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+    };
+
+    Particle = function(p0, p1, p2, p3) {
+        this.p0 = p0;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+
+        this.time = 0;
+        this.duration = 3 + Math.random() * 2;
+        this.color =  '#' + Math.floor((Math.random() * 0xffffff)).toString(16);
+
+        this.w = 10;
+        this.h = 6;
+
+        this.complete = false;
+    };
+
+    Particle.prototype = {
+        update:function() {
+            this.time = Math.min(this.duration, this.time + timeStep);
+
+            var f = Ease.outCubic(this.time, 0, 1, this.duration);
+            var p = cubeBezier(this.p0, this.p1, this.p2, this.p3, f);
+
+            var dx = p.x - this.x;
+            var dy = p.y - this.y;
+
+            this.r =  Math.atan2(dy, dx) + HALF_PI;
+            this.sy = Math.sin(Math.PI * f * 10);
+            this.x = p.x;
+            this.y = p.y;
+
+            this.complete = this.time === this.duration;
+        },
+        draw:function() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.r);
+            ctx.scale(1, this.sy);
+
+            ctx.fillStyle = this.color;
+            ctx.fillRect(-this.w * 0.5, -this.h * 0.5, this.w, this.h);
+
+            ctx.restore();
+        }
+    };
+
+    Loader = function(x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.r = 24;
+        this._progress = 0;
+
+        this.complete = false;
+    };
+
+    Loader.prototype = {
+        reset:function() {
+            this._progress = 0;
+            this.complete = false;
+        },
+        set progress(p) {
+            this._progress = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+            this.complete = this._progress === 1;
+        },
+        get progress() {
+            return this._progress;
+        },
+        draw:function() {
+            ctx.fillStyle = 'transparent';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, -HALF_PI, TWO_PI * this._progress - HALF_PI);
+            ctx.lineTo(this.x, this.y);
+            ctx.closePath();
+            ctx.fill();
+        }
+    };
+
+    // pun intended
+    Exploader = function(x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.startRadius = 24;
+
+        this.time = 0;
+        this.duration = 0.4;
+        this.progress = 0;
+
+        this.complete = false;
+    };
+
+    Exploader.prototype = {
+        reset:function() {
+            this.time = 0;
+            this.progress = 0;
+            this.complete = false;
+        },
+        update:function() {
+            this.time = Math.min(this.duration, this.time + timeStep);
+            this.progress = Ease.inBack(this.time, 0, 1, this.duration);
+
+            this.complete = this.time === this.duration;
+        },
+        draw:function() {
+            ctx.fillStyle = 'transparent';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.startRadius * (1 - this.progress), 0, TWO_PI);
+            ctx.fill();
+        }
+    };
+
+    var particles = [],
+        loader,
+        exploader,
+        phase = 0;
+
+    function initDrawingCanvas() {
+        drawingCanvas.width = viewWidth;
+        drawingCanvas.height = viewHeight;
+        ctx = drawingCanvas.getContext('2d');
+
+        createLoader();
+        createExploader();
+        createParticles();
+    }
+
+    function createLoader() {
+        loader = new Loader(viewWidth * 0.5, viewHeight * 0.5);
+    }
+
+    function createExploader() {
+        exploader = new Exploader(viewWidth * 0.5, viewHeight * 0.5);
+    }
+
+    function createParticles() {
+        for (var i = 0; i < 128; i++) {
+            var p0 = new Point(viewWidth * 0.5, 0);
+            var p1 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+            var p2 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+            var p3 = new Point(Math.random() * viewWidth, viewHeight + 0);
+
+            particles.push(new Particle(p0, p1, p2, p3));
+        }
+    }
+
+    function update() {
+
+        switch (phase) {
+            case 0:
+                loader.progress += (1/45);
+                break;
+            case 1:
+                exploader.update();
+                break;
+            case 2:
+                particles.forEach(function(p) {
+                    p.update();
+                });
+                break;
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, viewWidth, viewHeight);
+
+        switch (phase) {
+            case 0:
+                loader.draw();
+                break;
+            case 1:
+                exploader.draw();
+                break;
+            case 2:
+                particles.forEach(function(p) {
+                    p.draw();
+                });
+            break;
+        }
+    }
+
+    window.onload = function() {
+        initDrawingCanvas();
+        setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
+    };
+
+    function runFunctionAfterDelay() {
+        requestAnimationFrame(loop);
+    }
+
+    function loop() {
+        update();
+        draw();
+
+        if (phase === 0 && loader.complete) {
+            phase = 1;
+        }
+        else if (phase === 1 && exploader.complete) {
+            phase = 2;
+        }
+        else if (phase === 2 && checkParticlesComplete()) {
+            // reset
+            phase = 0;
+            loader.reset();
+            exploader.reset();
+            particles.length = 0;
+            createParticles();
+        }
+
+        requestAnimationFrame(loop);
+    }
+
+    function checkParticlesComplete() {
+        for (var i = 0; i < particles.length; i++) {
+            if (particles[i].complete === false) return false;
+        }
+        return true;
+    }
+
+    var Ease = {
+        inCubic:function (t, b, c, d) {
+            t /= d;
+            return c*t*t*t + b;
+        },
+        outCubic:function(t, b, c, d) {
+            t /= d;
+            t--;
+            return c*(t*t*t + 1) + b;
+        },
+        inOutCubic:function(t, b, c, d) {
+            t /= d/2;
+            if (t < 1) return c/2*t*t*t + b;
+            t -= 2;
+            return c/2*(t*t*t + 2) + b;
+        },
+        inBack: function (t, b, c, d, s) {
+            s = s || 1.70158;
+            return c*(t/=d)*t*((s+1)*t - s) + b;
+        }
+    };
+
+    function cubeBezier(p0, c0, c1, p1, t) {
+          var p = new Point();
+          var nt = (1 - t);
+
+          p.x = nt * nt * nt * p0.x + 3 * nt * nt * t * c0.x + 3 * nt * t * t * c1.x + t * t * t * p1.x;
+          p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
+
+          return p;
+      }
 
   //금액 올라가게 하기
   const moneyElement = document.querySelector('.money');
@@ -869,6 +852,5 @@ const HALF_PI = Math.PI * 0.5;
   };
 
   const interval = setInterval(updateNumber, 1000 / framesPerSecond);
-
 </script>
 {% endblock script %}
