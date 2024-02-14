@@ -19,11 +19,9 @@
 .mandatory{
     color:red;
 }
-
 .payment-btn-kakao{
-    background-color: #f7e100;
- }
-
+    background-color:#FFEB00;
+    }
     .payment-btn-toss{
     background-color: var(--BB_color_blue_sub);
     }

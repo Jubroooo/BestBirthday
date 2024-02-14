@@ -21,7 +21,11 @@
         </div>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">사고 싶은 물건  <span class="custom-font">URL</span> 링크</p>
-            <input type="text" class="present_link" name="present_link" autocomplete="off"></input>
+            <div>
+                <input type="url" class="present_link" name="present_link" autocomplete="off" placeholder="'http://' 또는 'https://'로 시작해야 합니다">
+                </input>
+                <i class="fa-regular fa-square-check notosans-bold-20"></i>
+            </div>
         </div>
         <div class="wrapper-content-payment">
             <div class="limit-title">
@@ -45,9 +49,13 @@
         </div>
         <div class="to-friends">
             <p class="notosans-bold-18">친구들에게 전하는 메세지</p>
-            <p class="notosans-regular-12 limit-funding">*30자 ~ 50자</p>
+            <p class="notosans-regular-12 limit-funding">*50자까지 가능합니다</p>
         </div>
-        <textarea class="to-friends-message" name="content"></textarea>
+        <div class="wrapper-textarea">
+            <textarea class="to-friends-message" name="content"></textarea>
+            <!--글자수-->
+            <div id="charCount" class="notosans-regular-14">0/50</div>
+        </div>
         <button class="div-btn start-btn-for-payment "type="submit">
              <p class="notosans-bold-18">펀딩 생성하기</p>
         </button>
@@ -113,15 +121,16 @@
 
 
 //(이미지 제외)필수 항목들 채워졌는지 확인 
-
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form"); 
-    const inputs = form.querySelectorAll("input[type=text], textarea"); // 모든 텍스트 입력 필드 및 텍스트 영역 선택 (이미지 제외됨!)
+    const form = document.querySelector("form");
+    const urlInput = document.querySelector(".present_link");
+    const inputs = form.querySelectorAll("input[type=text], textarea, input[type=url]"); // 모든 필수 입력 필드 선택
     const submitButton = document.querySelector(".start-btn-for-payment");
+    const checkIcon = document.querySelector(".fa-square-check");
 
-    // 초기 상태에서 버튼 비활성화
-    submitButton.disabled = true;
-    submitButton.style.backgroundColor = "#808080"; // 비활성화 상태 회색
+    // 초기 상태에서 버튼 비활성화, 체크박스 무효처리로
+    submitButton.classList.add('disabled');
+    checkIcon.classList.add('invalid');
 
     function checkInputs() {
         let allFilled = true;
@@ -131,20 +140,58 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        if (allFilled) {
-            submitButton.disabled = false; // 모든 필드가 채워져 있으면 버튼 활성화
-            submitButton.style.backgroundColor = "#4114FF"; // 활성화 상태의 색상으로 변경
+        // URL의 유효성을 별도로 확인하고, 모든 입력 필드가 채워져 있으면 버튼을 활성화
+        if (allFilled && validateUrl()) {
+            submitButton.disabled = false;
+            submitButton.classList.replace('disabled', 'enabled');
         } else {
-            submitButton.disabled = true; // 필드가 비어 있으면 버튼 비활성화
-            submitButton.style.backgroundColor = "#808080"; // 비활성화 상태의 색상
+            submitButton.disabled = true;
+            submitButton.classList.replace('enabled', 'disabled');
         }
     }
 
+    function validateUrl() {
+        const urlPattern =/^(http(s)?:\/\/)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
+        //^ 문자열의 시작이 http 나 https로 시작 , :'//',2자 256자이하 도메인 이름길이, . ,2자이상 6자 이하 최상위 도메인
+        const isValid = urlPattern.test(urlInput.value);
+
+        if (isValid) {
+            checkIcon.classList.add("valid");
+            checkIcon.classList.remove("invalid");
+        } else {
+            checkIcon.classList.add("invalid");
+            checkIcon.classList.remove("valid");
+        }
+
+        return isValid; // URL 유효성 검사 결과 반환
+    }
+
+    // URL 입력 필드 이벤트 리스너
+    urlInput.addEventListener("input", function() {
+        validateUrl(); // URL 유효성 검사 실행
+        checkInputs(); // 모든 입력 필드 검사 실행
+    });
+
+    // 나머지 입력 필드에 대한 이벤트 리스너
     inputs.forEach(function(input) {
-        input.addEventListener("input", checkInputs);
+        input.addEventListener("input", checkInputs); // 필수 항목들이 채워졌는지 확인
     });
 });
+    //글자수 세는 
+    document.addEventListener("DOMContentLoaded", function() {
+        const messageInput = document.querySelector(".to-friends-message");
+        const charCountDisplay = document.getElementById("charCount");
+        const maxChars = 50; // 최대 5-0
 
-
+        messageInput.addEventListener("input", function() {
+            let inputText = this.value;
+            if (inputText.length > maxChars) {
+                // 글자 수가 최대치를 초과시 자름
+                this.value = inputText.substr(0, maxChars);
+            }
+            const charCount = this.value.length; // 현재 입력된 글자수 계산
+            charCountDisplay.textContent = charCount + "/50"; // 글자수 표시 업데이트
+        });
+    });
 </script>
 {% endblock %}

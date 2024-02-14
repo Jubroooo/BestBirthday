@@ -26,7 +26,7 @@
     margin-bottom: var(--gutter24);
 }
 .payment-btn-kakao{
-background-color: #f7e100;
+background-color:#FFEB00;
 }
 .payment-btn-toss{
 background-color: var(--BB_color_blue_sub);
@@ -80,8 +80,7 @@ background-color: var(--BB_color_blue_sub);
 
   .gift-second{
     display: flex;
-    align-items: center;
-    gap:var(--gutter8);
+    justify-content: space-between;
     margin-bottom: var(--gutter8);
   }
   .input-bday-message{
@@ -134,4 +133,12 @@ textarea {
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
     font-size: 12px;
+    margin-bottom: var(--gutter8);
+}
+.wrapper-message{
+  position: relative;
+}
+#charCount2{
+  position: absolute;
+  right: 0;
 }

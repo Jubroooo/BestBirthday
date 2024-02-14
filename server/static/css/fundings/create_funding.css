@@ -20,7 +20,7 @@
     border-radius: var(--gutter8);
     height: 20vh;
     background-color: var(--BB_color_white);
-    margin: var(--gutter16) 0;
+    margin: var(--gutter16) 0 var(--gutter8) 0;
 }
 
 .to-friends{
@@ -66,8 +66,8 @@
     font-size: 2rem
   }
 input[type="text"],
+input[type="url"],
 textarea {
-    width: 100%; /* Adjust width as needed */
     padding: 0 10px;
     background-color: transparent;
     box-sizing: border-box; /* Include padding and border in element's total width and height */
@@ -78,7 +78,15 @@ textarea {
     outline: none;
     resize: none;
   }
-  input[type="text"]{
+  input[type="text"],
+  textarea{
+    width: 100%;
+  }
+  input[type="url"]{
+    width: 90%;
+  }
+  input[type="text"],
+  input[type="url"]{
     border: none;
     border-bottom: 1px solid #ffffff; 
   }
@@ -154,4 +162,25 @@ textarea {
 
 .direct-input:focus {
     outline: none; /* 기본 아웃라인 제거 */
+}
+
+#invalid-url-message {
+    color:var(--BB_color_blue)
+}
+.disabled {
+    background-color: #808080;
+}
+.enabled {
+    background-color: #4114FF;
+}
+
+.valid { color: #4114FF; }
+.invalid { color:gray; }
+
+.wrapper-textarea{
+    position: relative;
+}
+#charCount{
+    position:absolute;
+    right: 0;
 }
