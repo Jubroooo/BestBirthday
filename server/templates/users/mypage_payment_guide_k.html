@@ -1,53 +1,128 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/fundings/mypage_payment_guide.css' %}">
-{% endblock head %}
-
-{% block header %}
+{% extends '../base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/fundings/mypage_payment_guide.css' %}"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock head %} {% block header %}
 <div class="payment-guide-title">
-    <a href="{%url 'fundings:create_payment'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
-    <p class="payment-guide-title-for-center notosans-bold-24">송금링크 설정</p>
+  <a href="{%url 'fundings:create_payment'%}"
+    ><i class="icon-left fa-solid fa-chevron-left"></i
+  ></a>
+  <p class="payment-guide-title-for-center notosans-bold-24">송금링크 설정</p>
 </div>
-{% endblock header %}
-
-{% block content %}
-<p class="notosans-bold-18">선물받을 계좌를 입력하세요</p>
+{% endblock header %} {% block content %}
 <div class="payment-link-btn-container">
-    <button class="payment-btn-kakao div-btn">
-        <img src="../../static/images/kakao-pay.png">
-    </button>
+  <button class="payment-btn-kakao div-btn">
+    <img src="{%static 'images/kakao-pay.png'%}" />
+  </button>
 </div>
-<p class="mandatory notosans-regular-12 ">*필수</p>
-<img  class="guide-kakaopay"src="../../static/images/guide.png">
+<p class="mandatory notosans-regular-12">
+  ① [카카오톡앱] → [더보기] → [코드스캔]에 들어가요.
+</p>
+<div class="section">
+  <input type="radio" name="slide" id="slide01" checked />
+  <input type="radio" name="slide" id="slide02" />
+  <input type="radio" name="slide" id="slide03" />
+  <div class="slidewrap">
+    <ul class="slidelist">
+      <li>
+        <a>
+          <img src="{%static 'images/kakao_1.png'%}" />
+        </a>
+      </li>
+      <li>
+        <a>
+          <img src="{%static 'images/kakao_2.png'%}" />
+        </a>
+      </li>
+      <li>
+        <a>
+          <img src="{%static 'images/kakao_3.png'%}" />
+        </a>
+      </li>
+    </ul>
 
-<form method="post" class="notosans-bold-18" id="myForm" onsubmit="return validateLink()">
-    {% csrf_token %}
-    <div class="paymentguide-link">
-        <p class="notosans-bold-18">링크</p>
-        <input type="text" autocomplete="off" class="notosans-bold-16" name="kakao_account" id="kakaolink" value="{{ form.kakao_account.value }}">
+    <div class="slide-control">
+      <div class="control01">
+        <label for="slide03" class="left"></label>
+        <label for="slide02" class="right"></label>
+      </div>
+      <div class="control02">
+        <label for="slide01" class="left"></label>
+        <label for="slide03" class="right"></label>
+      </div>
+      <div class="control03">
+        <label for="slide02" class="left"></label>
+        <label for="slide01" class="right"></label>
+      </div>
     </div>
-    <div id="linkValidationMsg" class="link-validation-message"></div><br>
-    <button class="div-btn setting-btn" type="submit">
-        <span class="notosans-bold-18">링크 저장</span>
-    </button>
+  </div>
+</div>
+<form
+  method="post"
+  class="notosans-bold-18"
+  id="myForm"
+  onsubmit="return validateLink()"
+>
+  {% csrf_token %}
+  <div class="paymentguide-link">
+    <p class="notosans-bold-18">링크</p>
+    <input
+      type="text"
+      autocomplete="off"
+      class="notosans-bold-16"
+      name="kakao_account"
+      id="kakaolink"
+      value="{{ form.kakao_account.value }}"
+    />
+  </div>
+  <div id="linkValidationMsg" class="link-validation-message"></div>
+  <br />
+  <button class="div-btn setting-btn" type="submit">
+    <span class="notosans-bold-18">링크 저장</span>
+  </button>
 </form>
 
 <!-- 링크 확인 JS -->
 <script>
-    function validateLink() {
-        const inputValue = document.getElementById("kakaolink").value;
-        const validationMessage = document.getElementById("linkValidationMsg");
-        const pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
+  function validateLink() {
+    const inputValue = document.getElementById("kakaolink").value;
+    const validationMessage = document.getElementById("linkValidationMsg");
+    const pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
 
-        if (pattern.test(inputValue)) {
-            validationMessage.innerText = "유효한 링크";
-            return true; 
-        } else {
-            validationMessage.innerText = "링크를 다시 확인해주세요!";
-            return false; 
-        }
+    if (pattern.test(inputValue)) {
+      validationMessage.innerText = "유효한 링크";
+      return true;
+    } else {
+      validationMessage.innerText = "링크를 다시 확인해주세요!";
+      return false;
     }
+  }
+
+  //슬라이더 변경될 때마다 글자 변경
+  $(document).ready(function () {
+    $('input[name="slide"]').change(function () {
+      var currentSlideId = $('input[name="slide"]:checked').attr("id");
+      var newText;
+      switch (currentSlideId) {
+        case "slide01":
+          newText = "① [카카오톡앱] → [더보기] → [코드스캔]에 들어가요";
+          break;
+        case "slide02":
+          newText = "② 코드스캔에서 [송금코드]를 눌러주세요";
+          break;
+        case "slide03":
+          newText = "③ 링크표시를 눌러 링크를 복사하고, 아래에 붙여넣으면 끝!";
+          break;
+        default:
+          newText = "";
+      }
+
+      // 텍스트 업데이트
+      $(".mandatory.notosans-regular-12").text(newText);
+    });
+  });
 </script>
 
 {% endblock content %}
