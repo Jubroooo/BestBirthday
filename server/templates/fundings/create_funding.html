@@ -14,9 +14,9 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="create-payment-wrapper">
-        <p class="notosans-regular-14 notice-for-paymentpage">펀딩은 7일 동안만 생성됩니다.</p>
+        <p class="notosans-regular-14 notice-for-paymentpage">* 펀딩은 7일 동안만 생성됩니다.</p>
         <div class="wrapper-content-payment">
-            <p class="notosans-bold-18">펀딩 이름</p>
+            <p class="notosans-bold-18">펀딩 제목</p>
             <input type="text" class="funding-title" name="title"></input>
         </div>
         <div class="wrapper-content-payment">
@@ -25,12 +25,13 @@
         </div>
         <div class="wrapper-content-payment">
             <div class="limit-title">
-                <p class="notosans-bold-18">얼마?</p>
-                <p class="notosans-regular-12 limit-funding">*최대 1,000,000원까지 가능합니다</p>
+                <p class="notosans-bold-18">목표 금액</p>
+                <p class="notosans-regular-12 limit-funding">*1원부터 1,000,000원까지 가능합니다</p>
             </div>
             <div class="slider-container">
-                <input type="range" id="price-slider" min="1" max="1000000" value="1" step="100">
-                <span id="price-display" class="notosans-bold-16">1</span>원
+                <input type="range" id="price-slider" min="1" max="1000000" value="1" step="1">
+                <input type="number" id="direct-input" min="1" max="1000000" placeholder="직접 입력" class="direct-input"> <!--직접 입력 추가-->
+                <div class="right-price notosans-bold-16"><span id="price-display" class="notosans-bold-16">1</span> 원</div>
                 <input type="hidden" name="goal_price" id="goal-price" value="1">
             </div>
         </div>
@@ -44,7 +45,7 @@
         </div>
         <div class="to-friends">
             <p class="notosans-bold-18">친구들에게 전하는 메세지</p>
-            <p class="notosans-regular-12 notice-for-paymentpage">*30자 ~ 50자</p>
+            <p class="notosans-regular-12 limit-funding">*30자 ~ 50자</p>
         </div>
         <textarea class="to-friends-message" name="content"></textarea>
         <button class="div-btn start-btn-for-payment "type="submit">
@@ -59,11 +60,45 @@
 <script>
     //슬라이더로 송금받을 금액 설정
     document.getElementById('price-slider').addEventListener('input', function(e) {
-        var price = e.target.value;
-        document.getElementById('price-display').textContent = price.toLocaleString(); // 금액을 천 단위로 구분하여 표시
+        // console.log(typeof e.target.value); =>string형임
+        var price = parseInt(e.target.value,10); //슬라이더 요소값을 가져와서 10진수 정수로 바꾼후
+        document.getElementById('price-display').textContent = price.toLocaleString('ko-KR'); // 정수를 천단위로 끊기는 문자열로 바꾸는 함수임
         document.getElementById('goal-price').value = price; // 서버로 전송될 hidden input의 값을 업데이트
     });
+    //직접 입력시
+    document.getElementById('direct-input').addEventListener('input', function(e) {
+    var directPrice = parseInt(e.target.value, 10); // 직접 입력된 값을 정수로 변환
+    if (!isNaN(directPrice) && directPrice >= 1 && directPrice <= 1000000) { // 값이 1~100만원 범위 확인
+        document.getElementById('price-slider').value = directPrice; // 슬라이더의 위치를 업데이트
+        document.getElementById('price-display').textContent = directPrice.toLocaleString('ko-KR'); // 화면에 표시되는 값 천단위로
+        document.getElementById('goal-price').value = directPrice; // 서버로 전송될 hidden input의 값을 업데이트
+    }
+    //음수 입력하거나 100만보다 큰 수 입력시 막아주는
+    document.getElementById('price-slider').addEventListener('input', function(e) {
+        var price = parseInt(e.target.value, 10); // 슬라이더 값을 정수로 변환
+        updatePriceValues(price); // 표시되는 값과 숨겨진 입력 값 업데이트
+    });
 
+    document.getElementById('direct-input').addEventListener('input', function(e) {
+        var directPrice = parseInt(e.target.value, 10); // 직접 입력된 값을 10진수 정수로 변환
+        if (!isNaN(directPrice)) { // 값이 숫자인지 확인
+            if (directPrice < 1) directPrice = 1; // 범위 아래면 최소값으로 설정
+            else if (directPrice > 1000000) directPrice = 1000000; // 범위 위면 최대값으로 설정
+            updatePriceValues(directPrice); // 표시되는 값과 숨겨진 입력 값 업데이트
+        }
+    });
+
+    function updatePriceValues(price) {
+    // 가격이 범위 내에 있는지 확인
+    price = Math.max(1, Math.min(price, 1000000));
+    
+    // 슬라이더 위치, 표시되는 가격, 숨겨진 입력 값 업데이트
+    document.getElementById('price-slider').value = price;
+    document.getElementById('price-display').textContent = price.toLocaleString('ko-KR'); //천단위로
+    document.getElementById('goal-price').value = price;
+    document.getElementById('direct-input').value = price; // 직접 입력 필드도 업데이트
+}
+});
     //이미지 미리보기
     document.getElementById('photo-upload').addEventListener('change', function(event) {
         const reader = new FileReader();
@@ -75,6 +110,41 @@
         };
         reader.readAsDataURL(event.target.files[0]); // 선택된 파일을 Data URL 형태로 읽어들임
     });
+
+
+//(이미지 제외)필수 항목들 채워졌는지 확인 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form"); 
+    const inputs = form.querySelectorAll("input[type=text], textarea"); // 모든 텍스트 입력 필드 및 텍스트 영역 선택 (이미지 제외됨!)
+    const submitButton = document.querySelector(".start-btn-for-payment");
+
+    // 초기 상태에서 버튼 비활성화
+    submitButton.disabled = true;
+    submitButton.style.backgroundColor = "#808080"; // 비활성화 상태 회색
+
+    function checkInputs() {
+        let allFilled = true;
+        inputs.forEach(function(input) {
+            if (input.value === "") {
+                allFilled = false; // 하나라도 비어있다면 allFilled를 false로 설정
+            }
+        });
+
+        if (allFilled) {
+            submitButton.disabled = false; // 모든 필드가 채워져 있으면 버튼 활성화
+            submitButton.style.backgroundColor = "#4114FF"; // 활성화 상태의 색상으로 변경
+        } else {
+            submitButton.disabled = true; // 필드가 비어 있으면 버튼 비활성화
+            submitButton.style.backgroundColor = "#808080"; // 비활성화 상태의 색상
+        }
+    }
+
+    inputs.forEach(function(input) {
+        input.addEventListener("input", checkInputs);
+    });
+});
+
 
 </script>
 {% endblock %}

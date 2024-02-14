@@ -206,7 +206,7 @@
         <div class="go-and-check">
             <p id="congrats-message" class="notosans-bold-20 congrats-notice" style="color:var(--BB_color_white)"> 선물전달 완료</p>
             <div class="lock-img">
-                <img src="{%static 'images/gift_main.png'%}">
+                <img src="{%static 'images/modal2.png'%}">
             </div>
         </div>
     </div>
@@ -233,7 +233,7 @@
     modal.style.display = "block";
 
     const congratsMessage = document.getElementById("congrats-message");
-    congratsMessage.innerText = "{{modal_pk.user}}에게 전달완료";
+    congratsMessage.innerText = "생일 선물 전달완료";
 
     document.body.style.overflow = "hidden";
 
@@ -255,7 +255,7 @@
   window.onload = showModalBasedOnPreviousPage;
   
   
-  
+  //1유저 1펀딩
   function showFundingMessage() {
   // 메시지 표시
   var messageDiv = document.getElementById('funding-exists-message');
@@ -265,8 +265,7 @@
   var createButtonDiv = document.querySelector('.cbtn.btn-main-create.change-color');
   createButtonDiv.classList.add('clicked');
 }
-document.addEventListener('DOMContentLoaded', function() {
-    // 'cbtn btn-main-create change-color' 클래스를 가진 요소에 대한 참조를 가져옵니다.
+  document.addEventListener('DOMContentLoaded', function() {
     var btn = document.querySelector('.cbtn.btn-main-create.change-color');
 
     btn.addEventListener('click', function() {

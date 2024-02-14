@@ -1,98 +1,253 @@
-  .icon-left{
-    font-size: 2.5rem;
-    cursor: pointer;
-    position: absolute;
-    left:var(--gutter8);
-    position: absolute;
-    left: 0; 
-  }
+.icon-left {
+  font-size: 2.5rem;
+  cursor: pointer;
+  position: absolute;
+  left: var(--gutter8);
+  position: absolute;
+  left: 0;
+}
 
-  .show-card-title{
-    display: flex;
-    justify-content: center;
-    position: relative;
-    width: 100%; 
-  }
-  .title-go-see-letter{
-    text-align: center;
-    margin-bottom: var(--gutter24);
-  }
-  .congrats-section{
-    height: 70vh;
-    background-color: var(--BB_color_blue);
-  }
+.show-card-title {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+.title-go-see-letter {
+  text-align: center;
+  margin-bottom: var(--gutter24);
+}
+.filter-congrats {
+  color: var(--BB_color_white);
+  margin: var(--gutter8) 0;
+}
 
-  .filter-congrats{
-    color: var(--BB_color_white);
-    margin:var(--gutter16) 0;
-  }
+.letters-congrats {
+  margin-bottom: var(--gutter16);
+}
 
-  .letters-congrats{
-    margin-bottom: var(--gutter24);
-  }
+.delivered-messages {
+  background-color: rgba(117, 117, 117, 0.2);
+  border-radius: var(--gutter8);
+  margin-bottom: var(--gutter8);
+  display: flex;
+  flex-direction: column;
+  margin: var(--gutter8) var(--gutter8) var(--gutter24);
+  padding: var(--gutter8);
+}
 
-  .delivered-messages{
-    background-color:rgba(117, 117, 117,0.2);
-    border-radius: var(--gutter8);
-    margin-bottom: var(--gutter8);
-    display: flex;
-    flex-direction: column;
-    margin: var(--gutter8) var(--gutter8) var(--gutter24);
-    padding: var(--gutter8);
-  }
+.highlight-blue {
+  color: var(--BB_color_blue);
+  padding: 0 var(--gutter8);
+}
+.highlight-orange {
+  color: var(--BB_color_orange);
+  padding: 0 var(--gutter8);
+}
+.b-day-message {
+  border-bottom: 1rem solid var(----BB_color_white);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
 
-  .first-line-congrats{
-    margin: var(--gutter16) 0;
-  }
+.message-number {
+  font-weight: bold;
+  margin-right: var(--gutter8);
+}
 
-  .highlight-blue{
-    color:var(--BB_color_blue);
-  }
-  .b-day-message {
-    border-bottom: 1rem solid var(----BB_color_white); 
-    padding: 0.5rem 1rem; 
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-  }
+.message-sender {
+  margin-right: 1rem; /* 이름과 날짜 사이 간격 설정 */
+}
 
-  .message-number {
-    font-weight: bold; 
-    margin-right: var(--gutter8);
-  }
-
-  .message-sender {
-    margin-right: 1rem; /* 이름과 날짜 사이 간격 설정 */
-  }
-
-  .no-messages{
-    margin-top: var(--gutter24);
-  }
-
-  /*모달 관련 css*/
-  .modal {
-    display: none; /* 기본적으로 모달 숨김 */
-    position: fixed; /* 화면에 고정 */
-    z-index: 1; 
-    left: 50%;
-    top: 50%;
-    right: 0;
-    bottom: 0;
-    transform: translate(-50%, -50%); /* 정중앙 정렬 */
-    width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
-    height: 100%; /* 전체 높이 */
-    background-color: rgba(0,0,0,0.9); /* 불투명도 조절 */
-
+.no-messages {
+  margin-top: var(--gutter24);
+}
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: var(--gutter24);
+}
+#letter-container {
+  background-color: var(--BB_color_background_gray);
+  border-radius: 1.1rem;
+  padding: var(--gutter8);
+  margin: var(--gutter24) 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+}
+/*모달 관련 css*/
+.modal {
+  display: none; /* 기본적으로 모달 숨김 */
+  position: fixed; /* 화면에 고정 */
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  transform: translate(-50%, -50%); /* 정중앙 정렬 */
+  width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
+  height: 100%; /* 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.9); /* 불투명도 조절 */
 }
 
 .modal-content {
-    margin: 15% auto; /* 페이지 중앙에 위치 */
-    max-width: 34.2rem; /* 모달 너비 */
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  margin: 15% auto; /* 페이지 중앙에 위치 */
+  max-width: 34.2rem; /* 모달 너비 */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
-.close{
+.close {
   margin-top: var(--gutter16);
-  background-color: #FC606C;
+  background-color: #fc606c;
+}
+
+/* 생일 축하합니다 문구 초기 상태 */
+.letters-congrats {
+  opacity: 0;
+  transform: translateY(-3rem);
+  transition: opacity 1.2s ease-out, transform 1s ease-out;
+}
+.congrats-section {
+  display: inline-block;
+  height: 40vh;
+}
+.table-row {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+}
+/* 케이크 */
+
+/* 화면에 진입했을 때 적용 */
+.letters-congrats.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+
+#cake {
+  position: absolute;
+  top: -5rem;
+  left: 25%;
+}
+/* ============================================== Candle
+*/
+.velas {
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 25rem;
+  left: 50%;
+  margin-left: -2.4px;
+  margin-top: -8.33333333px;
+  width: 5px;
+  height: 35px;
+  transform: translateY(-300px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-animation: in 500ms 6s ease-out forwards;
+  animation: in 500ms 6s ease-out forwards;
+}
+
+.velas:after,
+.velas:before {
+  background: #4114ff;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.22222222px;
+}
+
+.velas:after {
+  top: 25%;
+  left: 0;
+}
+
+.velas:before {
+  top: 45%;
+  left: 0;
+}
+
+/* ============================================== Fire
+*/
+.fuego {
+  border-radius: 100%;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  margin-left: -2.6px;
+  width: 6.66666667px;
+  height: 18px;
+}
+
+.fuego:nth-child(1) {
+  -webkit-animation: fuego 2s 6.5s infinite;
+  animation: fuego 2s 6.5s infinite;
+}
+
+.fuego:nth-child(2) {
+  -webkit-animation: fuego 1.5s 6.5s infinite;
+  animation: fuego 1.5s 6.5s infinite;
+}
+
+.fuego:nth-child(3) {
+  -webkit-animation: fuego 1s 6.5s infinite;
+  animation: fuego 1s 6.5s infinite;
+}
+
+.fuego:nth-child(4) {
+  -webkit-animation: fuego 0.5s 6.5s infinite;
+  animation: fuego 0.5s 6.5s infinite;
+}
+
+.fuego:nth-child(5) {
+  -webkit-animation: fuego 0.2s 6.5s infinite;
+  animation: fuego 0.2s 6.5s infinite;
+}
+
+/* ============================================== Animation Fire
+*/
+@-webkit-keyframes fuego {
+  0%,
+  100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@keyframes fuego {
+  0%,
+  100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@-webkit-keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes in {
+  to {
+    transform: translateY(0);
+  }
 }

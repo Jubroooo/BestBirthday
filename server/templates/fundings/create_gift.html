@@ -23,9 +23,11 @@
     <div class="gift-first">
         <div>
         <p class="notosans-bold-18">선물 금액</p>
-        <p class="notosans-regular-12 colorgray-create-html">* 0원부터 1,000,000원까지 선물할 수 있어요!</p>
+        <p id="price-range-notice"class="notosans-regular-12 colorgray-create-html">* 0원부터 300,000원까지 선물할 수 있어요!</p>
         </div>
-        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0">
+        <div class="notify-negative ">
+        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0" autocomplete="off">   
+        </div>
     </div>
 
     <div class="button-group transfer-btn-presents">
@@ -64,7 +66,7 @@
     
     <div class="nickname-container">
         <p class="notosans-bold-18">친구에게 보여줄 닉네임</p>
-        <input id="gift_nickname" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="챙용">
+        <input id="gift_nickname"  autocomplete="off" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="">
     </div>
     <button class="give_present div-btn" type="submit">
         <p class="notosans-bold-16 ">선물 완료하기</p>
@@ -96,8 +98,6 @@
        // form.addEventListener("submit", function(event) {
        // event.preventDefault(); 
        // });
-
-
         //송금링크에 금액 추가
         const transferButtons = document.querySelectorAll(".transfer-btn");
 
@@ -156,5 +156,57 @@
         });
     });
     
+    //폼 전부 작성돼어야 버튼 색 바뀌게 
+    document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+    const amountInput = document.getElementById("funding_amount"); 
+    const messageInput = document.getElementById("birthday_message"); 
+    const nicknameInput = document.getElementById("gift_nickname"); 
+    const submitButton = document.querySelector(".give_present"); 
+
+    // 초기 상태에서 버튼 비활성화 및 회색으로 설정
+    submitButton.disabled = true;
+    submitButton.style.backgroundColor = "#808080";
+
+    function checkInputs() {
+        // 금액 양수값, 메시지, 닉네임 필드가 모두 채워져 있는지 확인
+        if (amountInput.value >= 0 &&amountInput.value !== "" && messageInput.value.trim() !== "" && nicknameInput.value.trim() !== "") {
+            submitButton.disabled = false;
+            submitButton.style.backgroundColor = "#4114FF";
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.backgroundColor = "#808080";
+        }
+    }
+    //폼 필수 항목들 주시
+    amountInput.addEventListener("input", checkInputs);
+    messageInput.addEventListener("input", checkInputs);
+    nicknameInput.addEventListener("input", checkInputs);
+
+    // 버튼 그룹 내 버튼 클릭 이벤트 리스너 추가
+    document.querySelectorAll(".button-group.transfer-btn-presents button").forEach(function(button) {
+        button.addEventListener("click", function() {
+            amountInput.value = this.getAttribute("data-value"); // 버튼의 data-value (0이여도 됨) 값을 금액 입력 필드에 설정
+            checkInputs(); // 입력 상태 확인 함수 호출
+        });
+    });
+});
+
+//음수값 넣을 때 주황색으로 변하게 
+document.addEventListener("DOMContentLoaded", function() {
+    const fundingAmountInput = document.getElementById('funding_amount');
+    const priceRangeNotice = document.getElementById('price-range-notice');
+
+    fundingAmountInput.addEventListener('input', function() {
+        const value = parseInt(this.value, 10);// 사용자 입력한 값을 문자열로 바꾼 후 10진수로 바꿈
+
+        if (value < 0) {
+            priceRangeNotice.style.color = '#FF6245';
+        } else {
+            priceRangeNotice.style.color = ''; //기본색
+        }
+    });
+});
+
 </script>
 {%endblock script%}
