@@ -331,10 +331,6 @@ def funding_exist_check(request):
     temp_fundings = Funding.objects.filter(user=request.user)
     temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
     temp_fundings = temp_fundings.filter(is_closed=False)
-
-    # 생일 기간에 두 개 이상의 펀딩을 같은 유저가 만들지 못하도록! 
-    # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
-    print("temp_fundings exists:", temp_fundings.exists())
     funding_exists = temp_fundings.exists()
 
     # 에러코드2 == 펀딩메세지 존재 
