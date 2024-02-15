@@ -64,7 +64,7 @@
   <div class="card-container">
     <div class="card-top">
       {% if funding.is_achieved %}
-      <img class="badge" src="{%static 'images/badge.png'%}"></i>
+      <img class="badge" src="{%static 'images/badge.png'%}">
       {%endif%}
       {%if funding.photo.url != null and funding.photo.url != ''%}
           <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />
@@ -114,7 +114,7 @@
     <div class="card-container">
       <div class="card-top">
         {% if funding.is_achieved %}
-        <img class="badge" src="{%static 'images/badge.png'%}"></i>
+        <img class="badge" src="{%static 'images/badge.png'%}">
         {%endif%}
         {%if funding.photo.url != null and funding.photo.url != ''%}
             <img class="card-image" src="{{funding.photo.url}}" alt="대체텍스트" />

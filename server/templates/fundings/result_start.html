@@ -298,7 +298,7 @@
   </a>
   {%endfor%}
 </div>
-<div class="div-btn">
+<div id="share-btn" class="div-btn">
   <p class="notosans-bold-18">공유하기</p>
 </div>
 <div id="messageModal" class="modal">
@@ -407,8 +407,8 @@
         window.cancelAnimationFrame(requestId);
         requestId = null;
       }
-      cw = c.width = bc.width = 380, cx = cw / 2;
-      ch = c.height = bc.height = window.innerHeight, cy = ch;
+      cw = c.width = bc.width = 370, cx = cw / 2;
+      ch = c.height = bc.height = window.innerHeight-130, cy = ch;
       bCtx.strokeStyle = "#abcdef";
       bCtx.lineWidth = 1;
       Draw();
@@ -569,8 +569,8 @@
     }
 
     // canvas settings 컨페티
-    var viewWidth = 380,
-        viewHeight = 640,
+    var viewWidth = 370,
+        viewHeight =window.innerHeight-130,
         drawingCanvas = document.getElementById("drawing_canvas"),
         ctx,
         timeStep = (1/60);
@@ -834,7 +834,7 @@
 
   //금액 올라가게 하기
   const moneyElement = document.querySelector('.money');
-  const targetNumber = {{funding.total_price}}.; // 변화할 숫자
+  const targetNumber = {{funding.total_price}}; // 변화할 숫자
   const animationDuration = 2000; // 애니메이션 지속시간 (밀리초)
   const framesPerSecond = 60; // 초당 프레임 수
 
@@ -852,5 +852,28 @@
   };
 
   const interval = setInterval(updateNumber, 1000 / framesPerSecond);
+
+  document.getElementById("share-btn").addEventListener("click", function () {
+    // 현재 페이지의 URL 가져오기
+    var currentUrl = window.location.href;
+
+    // 임시 input 엘리먼트 생성
+    var tempInput = document.createElement("input");
+    tempInput.value = currentUrl;
+    document.body.appendChild(tempInput);
+
+    // input 내용 선택
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+    // 복사 명령 실행
+    document.execCommand("copy");
+
+    // 임시 input 엘리먼트 제거
+    document.body.removeChild(tempInput);
+
+    // 복사 완료 메시지 표시 (옵션)
+    alert("링크가 복사되었습니다");
+  });
 </script>
 {% endblock script %}
