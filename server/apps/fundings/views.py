@@ -7,7 +7,7 @@ from django.template.defaulttags import register
 from django.db.models.functions import Random
 from django.db.models.functions import Length
 from django.contrib import messages
-import time
+from django.contrib.auth.models import AnonymousUser
 
 
 #딕셔너리 필터링 함수
@@ -23,6 +23,7 @@ def start(request):
 def main(request) :
     #열려 있는 펀딩들 랜덤으로 정렬
     open_fundings = Funding.objects.filter(is_closed=False).order_by(Random())
+        
     if open_fundings.exists():
         today = date.today()
         today_fundings = open_fundings.filter(user__birthday__month = today.month, user__birthday__day = today.day) 
@@ -46,7 +47,7 @@ def main(request) :
         today_funding_progress_dict = funding_progress(today_fundings)
         msg_funding_progress_dict = funding_progress(fundings_in_msg_order)
         open_funding_progress_dict = funding_progress(open_fundings)
-        funding_exists = request.session.get('funding_exists', False) # 1유저 1펀딩 위한 디폴트가 false
+        funding_exists = funding_exist_check(request)
         ctx = {"today_fundings":today_fundings, 
                "today_fundings_num":today_fundings_num,
                "total_today_funding_msg_count":total_today_funding_msg_count,
@@ -190,43 +191,9 @@ def create_gift_complete(request,pk):
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
+            #유저의 계좌가 없을때 계좌페이지로 이동
             if request.user.toss_account is None and request.user.kakao_account is None:
                 return render (request, 'fundings/create_payment.html')
-            
-            current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-            birthday_month, birthday_day = request.user.birthday.month, request.user.birthday.day
-            print (current_date)
-            current_year_birthday = datetime(current_date.year, birthday_month, birthday_day)
-            print (current_year_birthday)
-            if current_date > current_year_birthday:
-                day_difference = current_date - current_year_birthday
-            else:
-                day_difference = current_year_birthday - current_date
-            print (day_difference.days)
-            if day_difference.days > 7:
-                
-                return redirect('fundings:main')
-
-            
-            
-            current_time = timezone.now()
-            temp_fundings = Funding.objects.filter(user=request.user)
-            temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
-            temp_fundings = temp_fundings.filter(is_closed=False)
-
-            # if temp_fundings.exists():
-            #     return redirect('fundings:main')
-            # 생일 기간에 두 개 이상의 펀딩을 같은 유저가 만들지 못하도록! 
-            # 이 부분 하는 중 ! 
-            # main으로 redirect를 해두었는데, 알림 메시지가 뜨도록 하면 좋을 듯 ! (JS 써야 하나?)
-            print("temp_fundings exists:", temp_fundings.exists())
-            funding_exists = temp_fundings.exists()
-
-            # 메인 페이지 템플릿에 funding_exists만 컨텍스트 전달하는 식으로 하면, 기존 main 페이지 ctx로 넘겨준게 초기화 되길래 
-            if funding_exists:
-                # funding_exists를 세션에 저장, 세션 =>브라우저랑 서버사이 일정기간 정보 저장을 위해 사용, 새로고침해도 다른 화면으로 가도 저장됨
-                request.session['funding_exists'] = True
-                return redirect('fundings:main')
 
             funding = Funding(user=request.user)
             form = FundingForm(instance=funding)
@@ -342,3 +309,30 @@ def finish(request, pk):
         funding.is_closed = True
         funding.save()
         return redirect ('fundings:result_modal', pk=pk)
+    
+#1인 1펀딩을 위한 열려있는 펀딩 체크 확인 함수    
+def funding_exist_check(request):
+    #에러코드0 == 로그인한 유저가 아닐때
+    if request.user.is_anonymous:
+           return 0 
+    #생일 기한 인지 확인하는 부분
+    current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    birthday_month, birthday_day = request.user.birthday.month, request.user.birthday.day
+    current_year_birthday = datetime(current_date.year, birthday_month, birthday_day)
+    if current_date > current_year_birthday:
+        day_difference = current_date - current_year_birthday
+    else:
+        day_difference = current_year_birthday - current_date
+    if day_difference.days > 7:
+        return 1
+    #에러코드1 == 생일 기한 아님
+    
+    current_time = timezone.now()
+    temp_fundings = Funding.objects.filter(user=request.user)
+    temp_fundings = temp_fundings.filter(created_date__gte=current_time-timezone.timedelta(days=7))
+    temp_fundings = temp_fundings.filter(is_closed=False)
+    funding_exists = temp_fundings.exists()
+
+    # 에러코드2 == 펀딩메세지 존재 
+    if funding_exists:
+        return 2

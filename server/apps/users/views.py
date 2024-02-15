@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
+from django.contrib.auth import logout as account_logout
 from ..fundings.models import *
 from datetime import datetime, date, timedelta
 from django.utils import timezone
@@ -12,6 +13,11 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect ('fundings:main')
+
+def delete_user(request):
+    request.user.delete()
+    account_logout(request)
+    return redirect ('fundings:main')    
 
 def login_info(request): 
     user = request.user

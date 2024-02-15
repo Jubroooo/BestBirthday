@@ -18,7 +18,7 @@
 
 
 .birthday_input {
-    width: 32.7rem;
+    width: auto;
     height: 4.7rem;
     margin: 2rem 0;
     padding: 0 1rem;
@@ -26,6 +26,12 @@
     border-radius: 1.1rem;
     color: var(--BB_color_black);
     cursor: pointer;
+}
+
+.birthday_input_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
 .birthday_input:focus{
@@ -42,6 +48,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 3rem;
     cursor: pointer;
 }
 
