@@ -1,24 +1,21 @@
-  .message-detail{
-    height: 40vh;
-    background-color:rgba(117, 117, 117,0.6);
-    border-radius: var(--gutter24);
-    margin-bottom: var(--gutter24);
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: start;
-    flex-direction: column;
-    padding: var(--gutter24);
-    gap: var(--gutter16);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .letters-congrats{
-    margin-bottom: var(--gutter24);
-  }
-  .message-content{
-    margin: 3.2rem 0;
-  }
-  
+.message-detail {
+  background-color: rgba(117, 117, 117, 0.6);
+  border-radius: var(--gutter24);
+  margin-bottom: var(--gutter24);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  padding: var(--gutter24);
+  gap: var(--gutter16);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
 
-
+.letters-congrats {
+  margin-bottom: var(--gutter24);
+}
+.message-content {
+  margin: 3.2rem 0;
+}
