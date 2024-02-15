@@ -1,95 +1,102 @@
 .input_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.input_birthday{
-    width: 100%; /* 입력 필드 너비를 부모 요소의 100%로 설정 */
-    align-self: flex-start; 
-    margin-top: 7vh;
-    text-align: left;
+.input_birthday {
+  width: 100%; /* 입력 필드 너비를 부모 요소의 100%로 설정 */
+  align-self: flex-start;
+  margin-top: 7vh;
+  text-align: left;
 }
-.check_bday{
-    align-self: flex-start; 
-    color: var(--BB_color_orange);
-    margin-bottom: var(--gutter24);
+.check_bday {
+  align-self: flex-start;
+  color: var(--BB_color_orange);
+  margin-bottom: var(--gutter24);
 }
-
 
 .birthday_input {
-    width: 32.7rem;
-    height: 4.7rem;
-    margin: 2rem 0;
-    padding: 0 1rem;
-    border: none;
-    border-radius: 1.1rem;
-    color: var(--BB_color_black);
-    cursor: pointer;
+  width: auto;
+  height: 4.7rem;
+  margin: 2rem 0;
+  padding: 0 1rem;
+  border: none;
+  border-radius: 1.1rem;
+  color: var(--BB_color_black);
+  cursor: pointer;
 }
 
-.birthday_input:focus{
-    outline: none;
+.birthday_input_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
-.xmark-icon  {
-    text-align: right; 
+
+.birthday_input:focus {
+  outline: none;
+}
+.xmark-icon {
+  text-align: right;
 }
 
 .xmark-icon .fa-xmark {
-    font-size: 2rem;
+  font-size: 2rem;
 }
-.profile-for-center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
+.profile-for-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+  cursor: pointer;
 }
 
-.logo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-.nickname_img_wrapper{
-    display: flex; 
-    flex-direction: column;
-    margin-top: var(--gutter24);
+.nickname_img_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--gutter24);
 }
-#profile-upload{
-    display: none;
+#profile-upload {
+  display: none;
 }
 /* 미리보기 프로필 출력형태 */
 .input-profile-img {
-    margin: var(--gutter24) auto;
-    width: 100px;  /* 이미지의 너비 */
-    height: 100px; /* 이미지의 높이 */
-    border-radius: 50%; /* 이미지를 원형으로 만들기 */
-    object-fit: cover; /* 이미지 비율 유지하면서 영역 채우기 */
+  margin: var(--gutter24) auto;
+  width: 100px; /* 이미지의 너비 */
+  height: 100px; /* 이미지의 높이 */
+  border-radius: 50%; /* 이미지를 원형으로 만들기 */
+  object-fit: cover; /* 이미지 비율 유지하면서 영역 채우기 */
 }
 input[type="text"],
 textarea {
-    width: 100%; /* Adjust width as needed */
-    padding: 0 10px;
-    background-color: transparent; 
-    border: none;
-    border-bottom: 1px solid #ffffff; 
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    color:white;
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: initial;
-    font-size: 16px;
-    resize: none;
-  }
-.add-nickname{
-    height: 5vh;
-    background-color: transparent; 
-    color: #ffffff; 
-    padding: 10px 20px; 
-    cursor: pointer;
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 12px;
-    margin-bottom: var(--gutter24);
+  width: 100%; /* Adjust width as needed */
+  padding: 0 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: initial;
+  font-size: 16px;
+  resize: none;
+  overflow: hidden;
+}
+.add-nickname {
+  height: 5vh;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  margin-bottom: var(--gutter24);
 }
 .add-nickname:focus {
-    outline: none;
+  outline: none;
 }

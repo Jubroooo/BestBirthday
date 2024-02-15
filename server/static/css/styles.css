@@ -29,7 +29,7 @@ header {
   padding-top: 6rem;
   margin-bottom: var(--margin8px);
 }
-#header-container-icon{
+#header-container-icon {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -46,7 +46,7 @@ main {
   display: flex;
   flex-direction: column;
 }
-a{
+a {
   text-decoration: none;
 }
 .logo {
@@ -154,7 +154,7 @@ progress {
   width: 3.6rem;
   height: 3.6rem;
 }
-.btn{
+.btn {
   width: 34rem;
   height: 4.7rem;
   border: none;
@@ -167,13 +167,13 @@ progress {
   text-align: center;
   align-items: center;
 }
-.null-guide{
+.null-guide {
   margin: var(--gutter24);
   text-align: center;
 }
-.badge{
+.badge {
   width: 3.5rem;
   height: 5rem;
-  position:absolute;
+  position: absolute;
   left: 0;
 }

@@ -9,7 +9,20 @@
     <div class="input_container">
         <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
         <p class="input_birthday notosans-bold-18" >생일을 입력해주세요</p>
-        <input type="date" id="birthday" name="birthday" class="birthday_input notosans-regular-14">
+        <div class="birthday_input_container">
+            <select id="birth_year" name="birth_year" class="birthday_input notosans-regular-14">
+                <option value="" disabled selected>출생년도</option>
+                <!-- 연도에 대한 옵션 -->
+            </select>
+            <select id="birth_month" name="birth_month" class="birthday_input notosans-regular-14">
+                <option value="" disabled selected>월</option>
+                <!-- 월에 대한 옵션 -->
+            </select>
+            <select id="birth_day" name="birth_day" class="birthday_input notosans-regular-14">
+                <option value="" disabled selected>일</option>
+                <!-- 일에 대한 옵션 -->
+            </select>
+        </div>
         <p class="notosans-regular-12 check_bday"  >*한 번 입력된 생일은 수정 불가합니다. 다시 한 번 확인해주세요.</p>
     </div>
     <div class="nickname_img_wrapper">
@@ -37,29 +50,89 @@
         }
     };
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form"); 
-    const dateInput = document.getElementById("birthday");
-    const nicknameInput = document.querySelector(".add-nickname"); 
-    const submitButton = form.querySelector(".div-btn"); 
-
-    // 초기 상태에서 버튼 비활성화 및 회색으로 설정
-    submitButton.disabled = true;
-    submitButton.style.backgroundColor = "#808080";
-
-    function checkInputs() {
-        // 생일과 닉네임 필드가 모두 채워져 있는지 확인
-        if (dateInput.value !== "" && nicknameInput.value.trim() !== "") {
-            submitButton.disabled = false;
-            submitButton.style.backgroundColor = "#4114FF";
-        } else {
-            submitButton.disabled = true;
-            submitButton.style.backgroundColor = "#808080";
+    // '출생 연도' 셀렉트 박스 option 목록 동적 생성
+    const birthYearEl = document.getElementById('birth_year')
+    // option 목록 생성 여부 확인
+    let isYearOptionExisted = false;
+    birthYearEl.addEventListener("focus", function () {
+        // year 목록 생성되지 않았을 때 (최초 클릭 시)
+        if(!isYearOptionExisted) {
+            isYearOptionExisted = true
+            for(var i = 1970; i <= 2024; i++) {
+                // option element 생성
+                const YearOption = document.createElement('option')
+                YearOption.setAttribute('value', i)
+                YearOption.innerText = i
+                // birthYearEl의 자식 요소로 추가
+                this.appendChild(YearOption);
+            }
         }
-    }
+    });
+    // '출생 월' 셀렉트 박스 option 목록 동적 생성
+    const birthMonthEl = document.getElementById('birth_month')
+    // option 목록 생성 여부 확인
+    let isMonthOptionExisted = false;
+    birthMonthEl.addEventListener("focus", function () {
+        // Month 목록 생성되지 않았을 때 (최초 클릭 시)
+        if(!isMonthOptionExisted) {
+            isMonthOptionExisted = true
+            for(var i = 1; i <= 12; i++) {
+                // option element 생성
+                const MonthOption = document.createElement('option')
+                MonthOption.setAttribute('value', i)
+                MonthOption.innerText = i
+                // birthMonthEl의 자식 요소로 추가
+                this.appendChild(MonthOption);
+            }
+        }
+    });
+    // '출생 일' 셀렉트 박스 option 목록 동적 생성
+    const birthDayEl = document.getElementById('birth_day')
+    // option 목록 생성 여부 확인
+    let isDayOptionExisted = false;
+    birthDayEl.addEventListener("focus", function () {
+        // Day 목록 생성되지 않았을 때 (최초 클릭 시)
+        if(!isDayOptionExisted) {
+            isDayOptionExisted = true
+            for(var i = 1; i <= 31; i++) {
+                // option element 생성
+                const DayOption = document.createElement('option')
+                DayOption.setAttribute('value', i)
+                DayOption.innerText = i
+                // birthDayEl의 자식 요소로 추가
+                this.appendChild(DayOption);
+            }
+        }
+    });
 
-    dateInput.addEventListener("input", checkInputs);
-    nicknameInput.addEventListener("input", checkInputs);
-});
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form"); 
+        const yearInput = document.getElementById("birth_year");
+        const monthInput = document.getElementById("birth_month");
+        const dayInput = document.getElementById("birth_day");
+        const nicknameInput = document.querySelector(".add-nickname");
+        const submitButton = form.querySelector(".div-btn"); 
+
+        // 초기 상태에서 버튼 비활성화 및 회색으로 설정
+        submitButton.disabled = true;
+        submitButton.style.backgroundColor = "#808080";
+
+        function checkInputs() {
+            // 생일과 닉네임 필드가 모두 채워져 있는지 확인
+            if (yearInput.value !== "" && monthInput.value !== "" && dayInput.value !== "" && yearInput.value !== "" && nicknameInput.value.trim() !== "") {
+                submitButton.disabled = false;
+                submitButton.style.backgroundColor = "#4114FF";
+            } else {
+                submitButton.disabled = true;
+                submitButton.style.backgroundColor = "#808080";
+            }
+        }
+
+        yearInput.addEventListener("input", checkInputs);
+        monthInput.addEventListener("input", checkInputs);
+        dayInput.addEventListener("input", checkInputs);
+        nicknameInput.addEventListener("input", checkInputs);
+
+    });
 </script>
 {% endblock script %}
