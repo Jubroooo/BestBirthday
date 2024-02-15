@@ -4,7 +4,6 @@ from .models import Funding, Funding_Msg
 from datetime import datetime, date, timedelta
 from django.utils import timezone
 from django.template.defaulttags import register
-from django.db.models.functions import Random
 from django.db.models.functions import Length
 from django.contrib import messages
 from django.contrib.auth.models import AnonymousUser
@@ -22,7 +21,7 @@ def start(request):
 #1-1 펀딩 확인 뷰
 def main(request) :
     #열려 있는 펀딩들 랜덤으로 정렬
-    open_fundings = Funding.objects.filter(is_closed=False).order_by(Random())
+    open_fundings = Funding.objects.filter(is_closed=False)
         
     if open_fundings.exists():
         today = date.today()
@@ -99,7 +98,6 @@ def main_ranking_list(request):
 def main_all_funding_list(request):
     fundings = Funding.objects.filter(is_closed=False)
     if fundings.exists():
-        fundings = fundings.order_by(Random())
         funding_dday_dict = funding_dday_cal(fundings)
         funding_progresses = funding_progress(fundings)
         ctx = {
