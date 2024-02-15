@@ -768,12 +768,13 @@
     }
 
     window.onload = function() {
+        initDrawingCanvas();
         setTimeout(runFunctionAfterDelay, 6000); // 6초 후 함수 실행
     };
 
     function runFunctionAfterDelay() {
-      initDrawingCanvas();
-      requestAnimationFrame();
+        requestAnimationFrame(loop);
+        console.log("컨페티")
     }
 
     function loop() {
