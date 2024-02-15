@@ -108,7 +108,22 @@
   margin-top: var(--gutter16);
   background-color: #fc606c;
 }
+.present-button-wrapper{
+  display: flex;
+  justify-content: center;
+  gap: var(--gutter8);
+  margin-bottom: var(--gutter8);
+  align-items: center;
+}
+#home-btn{
+  width:40%;
+  background-color: var(--BB_color_yellow);
+  
+}
+#home-btn>i{
+  font-size: 2rem;
 
+}
 /* 생일 축하합니다 문구 초기 상태 */
 .letters-congrats {
   opacity: 0;
