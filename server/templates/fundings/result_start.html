@@ -396,7 +396,7 @@
       this.hue = this.pm > 0 ? "210" : "10";
     }
 
-    function Draw() {
+    function Draw1() {
 
       updateBallons(bCtx);
 
@@ -404,9 +404,9 @@
       var img = bc;
       ctx.drawImage(img, 0, 0);
 
-      requestId = window.requestAnimationFrame(Draw);
+      requestId = window.requestAnimationFrame(Draw1);
     }
-    //requestId = window.requestAnimationFrame(Draw);
+    //requestId = window.requestAnimationFrame(Draw1);
 
     function Init() {
       if (requestId) {
@@ -417,7 +417,7 @@
       ch = c.height = bc.height = window.innerHeight-130, cy = ch;
       bCtx.strokeStyle = "#abcdef";
       bCtx.lineWidth = 1;
-      Draw();
+      Draw1();
     }
 
     setTimeout(function() {
@@ -568,11 +568,10 @@
 
     function randomIntFromInterval(mn, mx) {
       return ~~(Math.random() * (mx - mn + 1) + mn);
-
+    }
     //컨페티 함수
     const TWO_PI = Math.PI * 2;
     const HALF_PI = Math.PI * 0.5;
-    }
 
     // canvas settings 컨페티
     var viewWidth = 370,
@@ -769,12 +768,12 @@
     }
 
     window.onload = function() {
-        initDrawingCanvas();
-        setTimeout(runFunctionAfterDelay, 6000); // 3초 후 함수 실행
+        setTimeout(runFunctionAfterDelay, 6000); // 6초 후 함수 실행
     };
 
     function runFunctionAfterDelay() {
-        requestAnimationFrame(loop);
+      initDrawingCanvas();
+      requestAnimationFrame();
     }
 
     function loop() {

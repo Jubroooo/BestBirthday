@@ -96,7 +96,9 @@
   height: 100%; /* 전체 높이 */
   background-color: rgba(0, 0, 0, 0.9); /* 불투명도 조절 */
 }
-
+#drawing_canvas{
+  z-index: 99;
+}
 .modal-content {
   margin: 15% auto; /* 페이지 중앙에 위치 */
   max-width: 34.2rem; /* 모달 너비 */
