@@ -96,7 +96,9 @@
   height: 100%; /* 전체 높이 */
   background-color: rgba(0, 0, 0, 0.8); /* 배경 불투명도 조절 */
 }
-
+#drawing_canvas{
+  z-index: 99;
+}
 .modal-content {
   margin: 20% auto; /* 페이지 중앙에 위치 */
   max-width: 34.2rem; /* 모달 너비 */
@@ -109,7 +111,22 @@
   margin-top: var(--gutter16);
   background-color: #fc606c;
 }
+.present-button-wrapper{
+  display: flex;
+  justify-content: center;
+  gap: var(--gutter8);
+  margin-bottom: var(--gutter8);
+  align-items: center;
+}
+#home-btn{
+  width:40%;
+  background-color: var(--BB_color_yellow);
+  
+}
+#home-btn>i{
+  font-size: 2rem;
 
+}
 /* 생일 축하합니다 문구 초기 상태 */
 .letters-congrats {
   opacity: 0;

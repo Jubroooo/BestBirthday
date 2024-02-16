@@ -15,6 +15,7 @@
 
   .funding-title-for-center{
     text-align: center;
+    padding-left: var(--gutter24);
     margin-bottom: var(--gutter24);
   }
 
@@ -26,45 +27,25 @@
 }
 
 .funding-info {
-    margin: 1rem 0;
+    margin: var(--gutter16) 0;
     color:gray;
 }
 
-.user-birthday {  
-    margin-bottom: 2rem;
-}
-
-.user-birthday .dday {
-    padding: 0.2rem 0.6rem;
-    display: inline-block;
+.dday {
     margin-left: 0.5rem;
-    background-color: var(--BB_color_blue);
+    color: var(--BB_color_orange);
 }
-
-.give_present{
-    background-color: var(--BB_color_blue);
-    color: var(--BB_color_white);
-}
-
 .percentage-container {
     display: flex; 
     justify-content: space-between; 
     align-items: center;
+    margin-bottom: var(--gutter8);
 }
-
-.participate-num{
-    margin-bottom: 1rem;
-}
-
 .present-button-wrapper{
     display: flex;
     justify-content: center;
     gap: var(--gutter8);
     margin-bottom: var(--gutter8);
-}
-
-.participate-num{
-    margin: var(--gutter24) 0;
 }
 .funding-title-for-margin{
     margin-top: var(--gutter16);
@@ -74,9 +55,6 @@
 }
 .current-progress{
     color: var(--BB_color_orange);
-}
-.give_present{
-    margin-top: var(--gutter24);
 }
 .gift-to-buy{
     cursor: pointer;
@@ -96,29 +74,30 @@
     color: var(--BB_color_blue);
 }
 .detail-funding-title{
-    margin-top: 1rem;
+    margin-top: var(--gutter16);
 }
 
 .detail-styles{
     display: inline-block; 
-    margin: 0; 
     vertical-align: middle;
 }
-
+.notosans-regular-14>span{
+    margin-right: var(--gutter8);
+}
+#detail-container{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter8);
+}
 .give_present{
     background-color: var(--BB_color_blue);
     color: var(--BB_color_white);
-    margin-left: 1rem;
-}
-
-.percentage-container {
-    display: flex; 
-    justify-content: space-between; 
+    margin-top: var(--gutter16);
 }
 
 .participate-num{
-    margin-bottom: 1rem;margin: 
-    var(--gutter24) 0;
+    margin-bottom: 1rem;
+    margin: var(--gutter16) 0;
 }
 .share-btn{
     background-color:var(--BB_color_yellow);

@@ -41,8 +41,9 @@
     color:gray;
 }
 .lock-img img{
-    width: 17rem;
+    width: 15rem;
     height: auto;
+    margin-bottom: var(--gutter16);
 }
 
 @keyframes floatAnimation {

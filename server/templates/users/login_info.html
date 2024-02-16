@@ -8,7 +8,7 @@
     {% csrf_token %}
     <div class="input_container">
         <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
-        <p class="input_birthday notosans-bold-18" >생일을 입력해주세요</p>
+        <p class="input_birthday notosans-bold-18" >생일 입력</p>
         <div class="birthday_input_container">
             <select id="birth_year" name="birth_year" class="birthday_input notosans-regular-14">
                 <option value="" disabled selected>출생년도</option>
@@ -23,21 +23,21 @@
                 <!-- 일에 대한 옵션 -->
             </select>
         </div>
-        <p class="notosans-regular-12 check_bday"  >*한 번 입력된 생일은 수정 불가합니다. 다시 한 번 확인해주세요.</p>
+        <p class="notosans-regular-12 check_bday"  >*한 번 설정된 생일은 수정할 수 없어요. 다시 확인해주세요!</p>
     </div>
     <div class="nickname_img_wrapper">
-        <p class="notosans-bold-18">프로필 설정</p>
+        <p class="notosans-bold-20">프로필 설정</p>
         <label for="profile-upload" class="profile-for-center">
             <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
             <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
         </label>
         <div class="nickname-input-container">
-            <p class="notosans-bold-18">닉네임을 입력하세요</p>
+            <p class="notosans-bold-20">닉네임</p>
             <p class="notosans-regular-12 nickname-limit">*최대 12자</p>
         </div>
         <input type="text" class="add-nickname" name="nickname" maxlength="12" autocomplete="off"></input>
         <button class="div-btn" type="submit">
-            <p class="notosans-bold-18" >확인</p>
+            <p class="notosans-bold-20" >확인</p>
         </button>
     </div>
 </form>
