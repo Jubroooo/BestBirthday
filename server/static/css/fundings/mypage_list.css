@@ -1,6 +1,6 @@
 
 #main-container {
-    gap:var(--gutter16);
+    gap:var(--gutter24);
   }
 .mypage-title {
     display: flex;
@@ -45,10 +45,9 @@
     display:flex;
     position: relative;
     align-items: center;
-    margin: 4rem 0;
+    margin-bottom: var(--gutter8);
 
 }
-
 .right-icon{
     position:absolute;
     right:0;

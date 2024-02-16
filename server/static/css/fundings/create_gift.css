@@ -90,7 +90,6 @@ background-color: var(--BB_color_blue_sub);
   }
   .colorgray-create-html{
     color:gray;
-    margin: var(--gutter8) 0;
   }
   .create-gift-container{
     display: flex;
@@ -107,12 +106,20 @@ background-color: var(--BB_color_blue_sub);
     align-items: center;
     justify-content: space-between;
 }
+#nickname-container2{
+  display: flex;
+  flex-direction: row;
+  gap: var(--gutter8);
+  align-items: end;
+}
+
 input[type="text"],
 textarea {
     width: 100%; /* Adjust width as needed */
     padding: 0 10px;
     background-color: transparent; 
     border: none;
+    border-radius: 0;
     border-bottom: 1px solid #ffffff; 
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     color:white;
