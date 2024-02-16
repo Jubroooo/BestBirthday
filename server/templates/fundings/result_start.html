@@ -1,10 +1,5 @@
 {% extends '../base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/fundings/result_start.css' %}" />
-<script
-  defer
-  src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-></script>
-<script src="./script.js"></script>
 
 {% endblock head %} {% block header %}
 <div class="show-card-title">
@@ -14,9 +9,8 @@
 
 {% endblock header %} {% block content %}
 <div class="congrats-section">
-  <canvas id="drawing_canvas">
-    <canvas id="c" class="ballon"></canvas>
-  </canvas>
+  <canvas id="drawing_canvas"></canvas>
+  <canvas id="c" class="ballon"></canvas>
   <div class="velas">
     <div class="fuego"></div>
     <div class="fuego"></div>
@@ -316,6 +310,19 @@
   </div>
 </div>
 {% endblock content%} {% block script %}
+<script
+  defer
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+></script>
+<script src="{% static 'js/fundings/particles.js'%} "></script>
+<script>
+  $(document).ready(function(){
+    function reAction(){
+      setTimeout(6000);
+    }
+    reAction();
+  })
+</script>
 <script>
     //편지 디테일 모달을 위한
     document.addEventListener("DOMContentLoaded", function() {
@@ -574,11 +581,11 @@
     const HALF_PI = Math.PI * 0.5;
 
     // canvas settings 컨페티
-    var viewWidth = 370,
-        viewHeight =window.innerHeight-130,
+    var viewWidth = 350,
+        viewHeight =window.innerHeight -10,
         drawingCanvas = document.getElementById("drawing_canvas"),
         ctx,
-        timeStep = (1/60);
+        timeStep = (1/120);
 
     Point = function(x, y) {
         this.x = x || 0;
@@ -769,7 +776,7 @@
 
     window.onload = function() {
         initDrawingCanvas();
-        setTimeout(runFunctionAfterDelay, 6000); // 6초 후 함수 실행
+        setTimeout(runFunctionAfterDelay, 0); // 6초 후 함수 실행
     };
 
     function runFunctionAfterDelay() {
