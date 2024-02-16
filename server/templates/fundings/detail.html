@@ -20,7 +20,7 @@
 
 <div class="detail-wrapper">
   <div class="notosans-bold-20 detail-funding-title">{{funding.title}}</div>
-  <div class="funding-info notosans-regular-12">{{funding.content}}</div>
+  <div class="funding-info notosans-regular-14">{{funding.content}}</div>
   <div class="percentage-container">
     <div class="user-birthday notosans-bold-16">
       모인 금액 : {{funding.total_price}}원
@@ -33,41 +33,42 @@
   <div class="participate-num notosans-bold-16">
     참여 인원<strong>{{funding.msg_count}}</strong>명
   </div>
-  <div class="notosans-bold-16">
-    <p class="detail-styles">
-      <img class="detial-img" src="{%static 'images/target.svg'%}" />
-    </p>
-    목표 금액 {{funding.goal_price}}원
-  </div>
-  <div class="notosans-bold-16">
-    <p class="detail-styles">
-      <img class="detial-img" src="{%static 'images/cake.svg'%}" />
-    </p>
-    친구 생일 {{funding.user.birthday}} {% if dday < 0 %}
-    <span class="dday"> D{{dday}} </span>
-    {% elif dday == 0 %}
-    <span class="dday"> D-Day </span>
-    {% else %}
-    <span class="dday"> D+{{dday}} </span>
-    {% endif %}
-  </div>
-
-  {% if request.user == funding.user %} {% if funding.is_closed == False %}
-  <a href="{{funding.present_link}}" target="_blank">
-    <div class="gift-to-buy notosans-bold-16">
+  <div id="detail-container">
+    <div class="notosans-regular-14">
       <p class="detail-styles">
-        <img class="detial-img" src="{%static 'images/computer.png'%}" />
+        <img class="detial-img" src="{%static 'images/target.svg'%}" />
       </p>
-      내가 받을 물건 보기
+      <span  class="notosans-bold-16">목표 금액</span> {{funding.goal_price}}원
     </div>
-  </a>
-  <div class="present-button-wrapper">
-    <button id="share-btn" class="share-btn btn" type="button">
-      <p class="notosans-bold-16">공유하기</p>
-    </button>
-    <button class="btn give-onload-btn" type="button" onclick="showMessage()">
-      <p class="notosans-bold-16">선물이 쌓이는 중..</p>
-    </button>
+    <div class="notosans-regular-14">
+      <p class="detail-styles">
+        <img class="detial-img" src="{%static 'images/cake.svg'%}" />
+      </p>
+      <span  class="notosans-bold-16">친구 생일</span> {{funding.user.birthday}} {% if dday < 0 %}
+      <span class="dday"> D{{dday}} </span>
+      {% elif dday == 0 %}
+      <span class="dday"> D-Day </span>
+      {% else %}
+      <span class="dday"> D+{{dday}} </span>
+      {% endif %}
+    </div>
+    {% if request.user == funding.user %} {% if funding.is_closed == False %}
+    <a href="{{funding.present_link}}" target="_blank">
+      <div class="gift-to-buy notosans-bold-16">
+        <p class="detail-styles">
+          <img class="detial-img" src="{%static 'images/computer.png'%}" />
+        </p>
+        내가 받을 물건 보기
+      </div>
+    </a>
+    <div class="present-button-wrapper">
+      <button id="share-btn" class="share-btn btn" type="button">
+        <p class="notosans-bold-16">공유하기</p>
+      </button>
+      <button class="btn give-onload-btn" type="button" onclick="showMessage()">
+        <p class="notosans-bold-16">선물이 쌓이는 중..</p>
+      </button>
+    </div>
   </div>
   <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
     {% csrf_token %}
