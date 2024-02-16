@@ -45,11 +45,11 @@
         <img class="detial-img" src="{%static 'images/cake.svg'%}" />
       </p>
       <span  class="notosans-bold-16">친구 생일</span> {{funding.user.birthday}} {% if dday < 0 %}
-      <span class="dday"> D{{dday}} </span>
+      <span class="dday"> D {{dday}} </span>
       {% elif dday == 0 %}
-      <span class="dday"> D-Day </span>
+      <span class="dday"> D - Day </span>
       {% else %}
-      <span class="dday"> D+{{dday}} </span>
+      <span class="dday"> D + {{dday}} </span>
       {% endif %}
     </div>
     {% if request.user == funding.user %} {% if funding.is_closed == False %}
