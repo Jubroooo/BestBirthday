@@ -48,10 +48,15 @@
 {% endif %}
 
 </div>
-
+{%if today_fundings%}
 <div class="funding-status notosans-bold-20">
   오늘 생일 <strong>{{today_fundings_num}}</strong>명, 축하메시지 <strong>{{total_today_funding_msg_count}}</strong>개
 </div>
+{%else%}
+<div class="funding-status notosans-bold-20">
+  오늘 생일 <strong>0</strong>명, 축하메시지 <strong>0</strong>개
+</div>
+{% endif %}
 <div class="main-title">
   <div class="notosans-bold-20">오늘 생일인 펀딩</div>
   <a href="{%url 'fundings:main_all_birthday_list' %}">

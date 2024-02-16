@@ -31,8 +31,11 @@
             <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
             <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
         </label>
-        <p class="notosans-bold-18">닉네임을 입력하세요</p>
-        <textarea class="add-nickname" name="nickname"></textarea>
+        <div class="nickname-input-container">
+            <p class="notosans-bold-18">닉네임을 입력하세요</p>
+            <p class="notosans-regular-12 nickname-limit">*최대 12자</p>
+        </div>
+        <input type="text" class="add-nickname" name="nickname" maxlength="12" autocomplete="off"></input>
         <button class="div-btn" type="submit">
             <p class="notosans-bold-18" >확인</p>
         </button>

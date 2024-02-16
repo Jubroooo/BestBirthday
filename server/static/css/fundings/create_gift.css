@@ -104,6 +104,7 @@ background-color: var(--BB_color_blue_sub);
 
 .nickname-container{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 input[type="text"],
@@ -117,7 +118,7 @@ textarea {
     color:white;
     font-family: 'Noto Sans', sans-serif;
     font-weight: initial;
-    font-size: 16px;
+    font-size: 1.6rem;
     outline: none;
     resize: none;
   }
@@ -132,7 +133,7 @@ textarea {
     border: 1px solid #ffffff;
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.6rem;
     margin-bottom: var(--gutter8);
 }
 .wrapper-message{

@@ -74,7 +74,7 @@ textarea {
     color:white;
     font-family: 'Noto Sans', sans-serif;
     font-weight: initial;
-    font-size: 12px;
+    font-size: 1.6rem;
     outline: none;
     resize: none;
   }
@@ -84,11 +84,12 @@ textarea {
   }
   input[type="url"]{
     width: 90%;
+    font-size: 1.2rem;
   }
   input[type="text"],
   input[type="url"]{
     border: none;
-    border-bottom: 1px solid #ffffff; 
+    border-bottom: 0.1rem solid #ffffff; 
   }
   .to-friends-message,
   .funding-title,
@@ -96,7 +97,7 @@ textarea {
   {
     background-color: transparent; 
     color: #ffffff; 
-    padding: 10px 20px; 
+    padding: 1rem 2rem; 
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
 

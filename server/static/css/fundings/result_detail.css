@@ -1,5 +1,5 @@
 .message-detail {
-  background-color: rgba(117, 117, 117, 0.6);
+  background-color: rgba(117, 117, 117, 0.2);
   border-radius: var(--gutter24);
   margin-bottom: var(--gutter24);
   display: flex;
@@ -9,13 +9,25 @@
   flex-direction: column;
   padding: var(--gutter24);
   gap: var(--gutter16);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  height: 35vh;
 }
+
+
 
 .letters-congrats {
   margin-bottom: var(--gutter24);
 }
+/*편지 길이 길어질때 편지 content내에서 스크롤*/
 .message-content {
   margin: 3.2rem 0;
+  width: 29.4rem;
+  overflow: auto;
+  height: 20vh;
+  /* align-items: center; 이거 하면 길게 쓴 메세지 위 아래 잘림  */
+  justify-content: center;
+  display: flex;
+}
+.margin-for-content{
+  margin: auto;
 }
