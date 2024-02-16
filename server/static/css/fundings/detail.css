@@ -45,7 +45,6 @@
     display: flex;
     justify-content: center;
     gap: var(--gutter8);
-    margin-bottom: var(--gutter8);
 }
 .funding-title-for-margin{
     margin-top: var(--gutter16);

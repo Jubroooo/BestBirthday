@@ -11,9 +11,6 @@
     position: absolute;
     left: 0; 
 }
-.payment-link{
-    margin-bottom: var(--gutter8);
-}
 .create-payment-title-for-center{
     text-align: center;
     margin-bottom: var(--gutter24);
@@ -44,14 +41,19 @@
 }
 .payment-description{
     color: var(--BB_color_orange);
-    margin-top: 0.5rem;
+}
+#payment-description-container{
+    display: flex;
+    flex-direction: row;
+    gap: var(--gutter8);
+    align-items: end;
 }
 .create_payment_btn{
     width: 100%;
-    margin-top: var(--gutter24);
 }
 .payment-btn-toss{
     position: relative;
+    background-color: var(--BB_color_blue_sub);
 }
 .link-not-null{
     position: absolute;
@@ -67,7 +69,14 @@
 .payment_description p {
     animation: pulse 5s infinite; /* 2초 동안 무한 반복 */
 }
-
+.payment-description2{
+    margin: var(--gutter8) 0;
+    text-align: center;
+    
+}
+.fa-circle-exclamation{
+    color: var(--BB_color_orange);
+}
 @keyframes pulse {
     0%, 100% {
         transform: scale(1); /* 원래 크기 */
