@@ -14,26 +14,24 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="create-payment-wrapper">
-        <p class="notosans-regular-14 notice-for-paymentpage">* 펀딩은 7일 동안만 생성됩니다.</p>
         <div class="wrapper-content-payment">
             <div class="limit-title">
                 <p class="notosans-bold-18">펀딩 제목</p>
-                <p class="notosans-regular-12 limit-funding">*24자까지 가능합니다</p>
+                <p class="notosans-regular-12 limit-funding">* 최대 24자</p>
             </div>
-            <input type="text" class="funding-title" name="title" maxlength="24"></input>
+            <input type="text" class="funding-title" name="title" maxlength="24">
         </div>
         <div class="wrapper-content-payment">
             <p class="notosans-bold-18">사고 싶은 물건  <span class="custom-font">URL</span> 링크</p>
             <div>
                 <input type="url" class="present_link" name="present_link" autocomplete="off" placeholder="'http://' 또는 'https://'로 시작해야 합니다">
-                </input>
                 <i class="fa-regular fa-square-check notosans-bold-20"></i>
             </div>
         </div>
         <div class="wrapper-content-payment">
             <div class="limit-title">
                 <p class="notosans-bold-18">목표 금액</p>
-                <p class="notosans-regular-12 limit-funding">*1원부터 1,000,000원까지 가능합니다</p>
+                <p class="notosans-regular-12 limit-funding">* 최대 1,000,000원</p>
             </div>
             <div class="slider-container">
                 <input type="range" id="price-slider" min="1" max="1000000" value="1" step="1">
@@ -50,18 +48,22 @@
              <!-- 이미지 미리보기 -->
             <img id="photo-preview" src="" alt="Image preview" >
         </div>
-        <div class="to-friends">
+        <div class="limit-title">
             <p class="notosans-bold-18">친구들에게 전하는 메세지</p>
-            <p class="notosans-regular-12 limit-funding">*50자까지 가능합니다</p>
+            <p class="notosans-regular-12 limit-funding">* 최대 50자</p>
         </div>
         <div class="wrapper-textarea">
             <textarea class="to-friends-message" name="content"></textarea>
             <!--글자수-->
             <div id="charCount" class="notosans-regular-14">0/50</div>
         </div>
-        <button class="div-btn start-btn-for-payment "type="submit">
-             <p class="notosans-bold-18">펀딩 생성하기</p>
-        </button>
+        <div>
+            <p class="notosans-regular-14 notice-for-paymentpage"> 
+                <i class="fa-solid fa-circle-exclamation notosans-regular-14" aria-hidden="true"></i>펀딩은 7일 동안 진행된 후, 자동 마감됩니다.</p>
+            <button class="div-btn start-btn-for-payment "type="submit">
+                 <p class="notosans-bold-18">펀딩 생성하기</p>
+            </button>
+        </div>
     </div>
 </form>
 {% endblock  %}
