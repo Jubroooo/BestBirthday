@@ -34,9 +34,10 @@
     </button>
     </a>
 </div>
-
-
-<button class="div-btn create_payment_btn" type="submit">
-    <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
-</button>
+<!--마이페이지에서 여기로 이동했을땐 안 뜨게-->
+{% if hide_button %}
+    <button class="div-btn create_payment_btn" type="submit">
+        <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
+    </button>
+{% endif %}
 {% endblock content %}

@@ -38,7 +38,8 @@
     <p class="notosans-bold-24 mypage-links">펀딩</p>
     <a href="{%url 'users:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
     <a href="{%url 'users:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
-    <a href="{%url 'fundings:create_payment'%}" class="mypage-links notosans-regular-18">송금 링크 관리</a>
+    <a href="{% url 'fundings:create_payment' %}?hide_button=false" class="mypage-links notosans-regular-18">송금 링크 관리</a>
+
 </div>
 
 <div class="mypage-account">

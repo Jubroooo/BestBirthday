@@ -189,9 +189,12 @@ def create_gift_complete(request,pk):
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
+            #추가
+            hide_button = 'hide_button' in request.GET
             #유저의 계좌가 없을때 계좌페이지로 이동
             if request.user.toss_account is None and request.user.kakao_account is None:
-                return render (request, 'fundings/create_payment.html')
+                ctx = {'hide_button': hide_button} 
+                return render (request, 'fundings/create_payment.html',ctx)
 
             funding = Funding(user=request.user)
             form = FundingForm(instance=funding)
@@ -207,7 +210,8 @@ def create_funding(request) :
                 return redirect('fundings:main')
             else:
                 ctx = {
-                    "form": form
+                    "form": form,
+                    "hide_button": hide_button #추가
                 }
                 return render (request, 'fundings/create_funding.html', ctx)
     else:
