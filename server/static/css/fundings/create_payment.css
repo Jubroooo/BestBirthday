@@ -11,6 +11,9 @@
     position: absolute;
     left: 0; 
 }
+.payment-link{
+    margin-bottom: var(--gutter8);
+}
 .create-payment-title-for-center{
     text-align: center;
     margin-bottom: var(--gutter24);
@@ -59,4 +62,17 @@
 }
 .kakao-link{
     color: black;
+}
+
+.payment_description p {
+    animation: pulse 5s infinite; /* 2초 동안 무한 반복 */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1); /* 원래 크기 */
+    }
+    50% {
+        transform: scale(1.05); /* 10% 확대 */
+    }
 }

@@ -29,5 +29,5 @@
   display: flex;
 }
 .margin-for-content{
-  margin: var(--gutter8);
+  margin: auto;
 }
