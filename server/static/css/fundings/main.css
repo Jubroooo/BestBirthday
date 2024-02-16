@@ -94,11 +94,8 @@
   width: 39rem;
   display: none;
   background-color: var(--BB_color_black);
-}
-.result-modal-wrapper{
- background-color:rgba(117, 117, 117,0.2); 
- border-top-left-radius: 3.2rem; 
- border-top-right-radius: 3.2rem;
+  border-top-left-radius: 3.2rem; 
+  border-top-right-radius: 3.2rem;
 }
 .xmark-icon{
  position:absolute;
@@ -141,8 +138,7 @@
   background-color:gray; /* 클릭 후 배경색 변경 */
   color: #fff; /* 클릭 후 텍스트 색상 변경 */
 }
-
-.fa-solid ,.fa-circle-exclamation{
+.fa-circle-exclamation{
      color:var(--BB_color_blue)
 }
 
