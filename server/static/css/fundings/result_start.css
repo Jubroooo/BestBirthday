@@ -94,16 +94,17 @@
   transform: translate(-50%, -50%); /* 정중앙 정렬 */
   width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
   height: 100%; /* 전체 높이 */
-  background-color: rgba(0, 0, 0, 0.9); /* 불투명도 조절 */
+  background-color: rgba(0, 0, 0, 0.8); /* 배경 불투명도 조절 */
 }
 
 .modal-content {
-  margin: 15% auto; /* 페이지 중앙에 위치 */
+  margin: 20% auto; /* 페이지 중앙에 위치 */
   max-width: 34.2rem; /* 모달 너비 */
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
+
 .close {
   margin-top: var(--gutter16);
   background-color: #fc606c;

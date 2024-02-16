@@ -104,6 +104,7 @@ background-color: var(--BB_color_blue_sub);
 
 .nickname-container{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 input[type="text"],

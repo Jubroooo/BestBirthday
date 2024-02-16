@@ -101,3 +101,11 @@ textarea {
 .add-nickname:focus {
   outline: none;
 }
+.nickname-limit{
+  color: gray;
+}
+.nickname-input-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
