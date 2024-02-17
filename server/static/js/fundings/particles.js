@@ -1,4 +1,4 @@
-(function () {
+window.onload = function () {
     // globals
     var canvas;
     var ctx;
@@ -207,6 +207,7 @@
     }
 
     window.requestAnimFrame = (function () {
+        console.log('진짜 파티클 실행!!!!!');
         return window.requestAnimationFrame || 
         window.webkitRequestAnimationFrame || 
         window.mozRequestAnimationFrame || 
@@ -216,4 +217,4 @@
             return window.setTimeout(callback, 1000 / 60);
         };
     })();
-})();
+}();
