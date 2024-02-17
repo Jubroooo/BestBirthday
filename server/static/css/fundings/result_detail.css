@@ -7,21 +7,24 @@
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  padding: var(--gutter24);
-  gap: var(--gutter16);
+  padding: var(--gutter24) ;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  height: 50vh;
+  height: 45vh;
 }
+.detail-center{
+  height: 11.8rem;
+  display: flex;
 
-
-
+}
 .letters-congrats {
   margin-bottom: var(--gutter24);
 }
 /*편지 길이 길어질때 편지 content내에서 스크롤*/
 .message-content {
-  margin: 3.2rem 0;
+  margin: 0.5rem 0;
+  width: 29.4rem;
   overflow: auto;
+  height: 55vh;
   /* align-items: center; 이거 하면 길게 쓴 메세지 위 아래 잘림  */
   justify-content: center;
   display: flex;

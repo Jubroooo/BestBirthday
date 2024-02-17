@@ -30,9 +30,10 @@
             <p class="notosans-bold-20">닉네임</p>
             <p class="notosans-regular-12 nickname-limit">*최대 12자</p>
         </div>
-        <textarea class="add-nickname" name="nickname" >{{ user.nickname }}</textarea> 
-        <button class="div-btn" type="submit">
-            <p class="notosans-bold-20">완료</p>
+        <textarea class="add-nickname" name="nickname" id="nickname">{{user.nickname}}</textarea> 
+        <div id="nickname-error2"  class="notosans-regular-12"></div>
+        <button class="div-btn" type="submit" id="submit-button">
+            <p class="notosans-bold-18">완료</p>
         </button>
     </div>
 </form>
@@ -47,5 +48,40 @@
             URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거
         }
     };
+
+    // 닉네임 중복 확인후 버튼 회=>파
+    document.addEventListener("DOMContentLoaded", function() {
+    const nicknameInput = document.getElementById('nickname');
+    const submitButton = document.getElementById('submit-button');
+    const errorMessage = document.getElementById('nickname-error2');
+
+    // 초기 상태에서 버튼 비활성화 및 회색으로 설정
+   
+
+    // 닉네임 중복 상태를 추적하는 변수
+    let isNicknameTaken = false;
+
+
+
+    // 닉네임 입력 필드에 이벤트 리스너 추가
+    nicknameInput.addEventListener('input', function() {
+        const nickname = this.value;
+
+        fetch(`/users/api/check-nickname?nickname=${encodeURIComponent(nickname)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.is_taken) {
+                    submitButton.disabled = true;
+                    submitButton.style.backgroundColor = "#808080";
+                    isNicknameTaken = true; 
+                    errorMessage.textContent = "*이미 사용중인 닉네임입니다."; 
+                } else {
+                    errorMessage.textContent = "";
+                    isNicknameTaken = false; 
+                }
+                checkInputs(); // 버튼 상태 업데이트
+            })
+    });
+});
 </script>
 {% endblock script %}

@@ -97,7 +97,7 @@ textarea {
   cursor: pointer;
   font-family: "Noto Sans", sans-serif;
   font-size: 12px;
-  margin-bottom: var(--gutter24);
+  margin-bottom: var(--gutter8);
 }
 .add-nickname:focus {
   outline: none;
@@ -110,4 +110,7 @@ textarea {
   display: flex;
   justify-content:left;
   align-items: end;
+}
+#nickname-error{
+  margin-bottom: var(--gutter8) ;
 }
