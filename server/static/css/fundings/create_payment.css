@@ -51,6 +51,10 @@
 .create_payment_btn{
     width: 100%;
 }
+.create_payment_null{
+    width: 100%;
+    background-color: gray;
+}
 .payment-btn-toss{
     position: relative;
     background-color: var(--BB_color_blue_sub);

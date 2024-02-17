@@ -63,14 +63,20 @@
 
 <div class="payment-description2 notosans-regular-12">
     <i class="fa-solid fa-circle-exclamation notosans-regular-12" aria-hidden="true"></i> 설정한 송금 링크는 마이페이지에서 수정할 수 있어요</div>
-{% if from_page != 'list' and "list" not in request.path%}
-    <button class="div-btn create_payment_btn" type="submit">
-        <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
-    </button>
+    {% if user.kakao_account %}
+        {% if from_page != 'list' and "list" not in request.path %}
+            <button class="div-btn create_payment_btn" type="submit">
+                <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
+            </button>
+        {% else %}
+            <button class="div-btn create_payment_btn" type="submit">
+                <a href="{% url 'users:mypage_list' %}" class="notosans-bold-18">송금링크 저장</a>
+            </button>
+        {% endif %}
     {%else%}
-    <button class="div-btn create_payment_btn" type="submit">
-        <a href="{% url 'users:mypage_list' %}" class="notosans-bold-18">송금링크 저장</a>
+    <button class="div-btn create_payment_null" type="submit">
+        <a href="" class="notosans-bold-18">송금링크 저장</a>
     </button>
-{% endif %}
+    {% endif %}
 
 {% endblock content %}
