@@ -6,7 +6,8 @@ from django.contrib.auth import logout as account_logout
 from ..fundings.models import *
 from datetime import datetime, date, timedelta
 from django.utils import timezone
-        
+from django.http import JsonResponse  
+from.models import User    
 def login(request):
     return render (request, 'users/login.html')
 
@@ -45,8 +46,11 @@ def redirect_view(request):
             return redirect('/')  # Redirect to home for subsequent logins
     else:
         return redirect('/')  # Redirect to home for non-authenticated users
-
-
+##닉네임 유효 확인 뷰 
+def check_nickname(request):
+    nickname = request.GET.get('nickname', '')
+    is_taken = User.objects.filter(nickname=nickname).exists()
+    return JsonResponse({'is_taken': is_taken})
 # 마이페이지 뷰
 def mypage_list(request):
     user=request.user

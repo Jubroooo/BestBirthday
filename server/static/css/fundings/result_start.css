@@ -100,11 +100,13 @@
   z-index: 99;
 }
 .modal-content {
-  margin: 20% auto; /* 페이지 중앙에 위치 */
+  margin: 0% auto; /* 페이지 중앙에 위치 */
   max-width: 34.2rem; /* 모달 너비 */
   display: flex;
   justify-content: center;
   flex-direction: column;
+  white-space: pre-line;
+  line-height: 1.5;
 }
 
 .close {

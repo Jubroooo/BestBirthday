@@ -68,7 +68,7 @@ textarea{
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
     font-size: 1.6rem;
-    margin-bottom: var(--gutter24);
+    margin-bottom: var(--gutter8);
 }
 
 form{
@@ -76,4 +76,7 @@ form{
 }
 .add-nickname:focus {
     outline: none;
+}
+#nickname-error2{
+    margin-bottom: var(--gutter8) ;
 }
