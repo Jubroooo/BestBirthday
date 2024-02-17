@@ -11,7 +11,7 @@
 <div class="congrats-section">
   <div class="js-container">
   <canvas id="c" class="ballon"></canvas>
-  </div>
+  </div>  
   <div class="velas">
     <div class="fuego"></div>
     <div class="fuego"></div>
@@ -577,17 +577,18 @@
     function randomIntFromInterval(mn, mx) {
       return ~~(Math.random() * (mx - mn + 1) + mn);
     }
-    //컨페티 함수
-    const Confettiful = function (el) {
-    this.el = el;
-    this.containerEl = null;
 
-    this.confettiFrequency = 3;
-    this.confettiColors = ["#fce18a", "#ff726d", "#b48def", "#f4306d"];
-    this.confettiAnimations = ["slow", "medium", "fast"];
+  //컨페티 함수
+  const Confettiful = function (el) {
+  this.el = el;
+  this.containerEl = null;
 
-    this._setupElements();
-    this._renderConfetti();
+  this.confettiFrequency = 3;
+  this.confettiColors = ["#fce18a", "#ff726d", "#b48def", "#f4306d"];
+  this.confettiAnimations = ["slow", "medium", "fast"];
+
+  this._setupElements();
+  this._renderConfetti();
   };
 
   Confettiful.prototype._setupElements = function () {
