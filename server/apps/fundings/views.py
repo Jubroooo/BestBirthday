@@ -4,6 +4,7 @@ from .models import Funding, Funding_Msg
 from datetime import datetime, date, timedelta
 from django.utils import timezone
 from django.template.defaulttags import register
+from django.db.models import Max
 from django.db.models.functions import Length
 from django.contrib import messages
 from django.contrib.auth.models import AnonymousUser
@@ -189,6 +190,8 @@ def create_gift_complete(request,pk):
 def create_funding(request) :
     if request.user.is_authenticated:
         if request.method == 'GET':
+            if request.user.birthday is None or request.user.nickname is None:
+                return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
             #유저의 계좌가 없을때 계좌페이지로 이동
             if request.user.toss_account is None and request.user.kakao_account is None:
                 return render (request, 'fundings/create_payment.html')
@@ -235,12 +238,14 @@ def result_start(request, pk):
     if funding_msgs.exists():
         earliest_msg = funding_msgs.earliest('written_date')
         longest_msg = funding_msgs.annotate(content_length=Length('content')).order_by('-content_length').first()
+        max_msg = funding_msgs.order_by('-funding_price').first()
         ctx = {
             'funding':funding,
             'pk': pk,
             "funding_msgs": funding_msgs,
             'earliest_msg': earliest_msg,
             'longest_msg': longest_msg,
+            'max_msg': max_msg,
             'funding_msg_count': funding_msg_count,  # funding_msg_count 변수 추가
         }
         return render (request, 'fundings/result_start.html', ctx)
@@ -303,10 +308,14 @@ def funding_progress(fundings):
 
 def finish(request, pk):
     if request.method == "POST":
-        funding = Funding.objects.get(id=pk)
-        funding.is_closed = True
-        funding.save()
-        return redirect ('fundings:result_modal', pk=pk)
+        today = timezone.now().date()
+        today_month_day = (today.month, today.day)
+        
+        user_birthday_month_day = (request.user.birthday.month, request.user.birthday.day)
+        if today_month_day == user_birthday_month_day:
+            return redirect ('fundings:result_modal', pk=pk)
+        else:
+            return redirect ('fundings:result_start', pk=pk)
     
 #1인 1펀딩을 위한 열려있는 펀딩 체크 확인 함수    
 def funding_exist_check(request):
@@ -315,6 +324,8 @@ def funding_exist_check(request):
            return 0 
     #생일 기한 인지 확인하는 부분
     current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    if request.user.birthday is None or request.user.nickname is None:
+        return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
     birthday_month, birthday_day = request.user.birthday.month, request.user.birthday.day
     current_year_birthday = datetime(current_date.year, birthday_month, birthday_day)
     if current_date > current_year_birthday:

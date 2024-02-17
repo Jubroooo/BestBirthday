@@ -264,7 +264,7 @@
   </p>
   {%if earliest_msg %}
   <p class="notosans-bold-18 filter-congrats">
-    가장 빨리 축하해 준 친구
+    제일 빨리 축하해 준 친구
     <span class="highlight-orange notosans-bold-24">
       {{earliest_msg.comment_name}}</span
     >
@@ -274,6 +274,13 @@
     <span class="highlight-orange notosans-bold-24">
       {{longest_msg.comment_name}}</span
     >
+  </p>
+  <p class="notosans-bold-18 filter-congrats">
+    제일 큰 선물을 해 준 친구
+    <span class="highlight-orange notosans-bold-24">
+      {{max_msg.comment_name}}
+    </span>
+      
   </p>
   {%endif%}
   <p class="notosans-bold-18 letters-congrats first-line-congrats">
