@@ -49,6 +49,8 @@ def redirect_view(request):
 
 # 마이페이지 뷰
 def mypage_list(request):
+    if request.user.birthday is None or request.user.nickname is None:
+        return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
     user=request.user
     ctx={"user":user}
     return render(request,'users/mypage_list.html',ctx)
