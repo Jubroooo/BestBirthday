@@ -13,20 +13,24 @@
 
 
 {% block content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="nickname_img_wrapper">
         <p class="notosans-bold-20">프로필 설정</p>
         <label for="profile-upload" class="profile-for-center">
-            <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
+            {% if user.profile %}
+                <img class="input-profile-img" src="{{ user.profile.url }}" width="100" height="100">
+            {% else %}
+                <img class="input-profile-img" src="{%static 'images/default_profile.png'%}" width="100" height="100">
+            {% endif %}
             <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
         </label>
         <div class="nickname-input-container">
             <p class="notosans-bold-20">닉네임</p>
             <p class="notosans-regular-12 nickname-limit">*최대 12자</p>
         </div>
-        <textarea class="add-nickname" name="nickname"></textarea> 
+        <textarea class="add-nickname" name="nickname" >{{ user.nickname }}</textarea> 
         <button class="div-btn" type="submit">
             <p class="notosans-bold-20">완료</p>
         </button>

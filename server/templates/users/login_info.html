@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/users/login_info.css' %}">
 {% endblock head %} 
 {% block content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="input_container">
         <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>

@@ -10,7 +10,7 @@
   padding: var(--gutter24);
   gap: var(--gutter16);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  height: 35vh;
+  height: 50vh;
 }
 
 
@@ -25,6 +25,7 @@
   /* align-items: center; 이거 하면 길게 쓴 메세지 위 아래 잘림  */
   justify-content: center;
   display: flex;
+  height: 40vh;
 }
 .margin-for-content{
   margin: auto;
