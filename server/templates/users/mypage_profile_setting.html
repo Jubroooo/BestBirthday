@@ -43,5 +43,28 @@
             URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거
         }
     };
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form"); 
+        const nicknameInput = document.querySelector(".add-nickname");
+        const submitButton = form.querySelector(".div-btn"); 
+
+        // 초기 상태에서 버튼 비활성화 및 회색으로 설정
+        submitButton.disabled = true;
+        submitButton.style.backgroundColor = "#808080";
+
+        function checkInputs() {
+            // 생일과 닉네임 필드가 모두 채워져 있는지 확인
+            if (nicknameInput.value.trim() !== "") {
+                submitButton.disabled = false;
+                submitButton.style.backgroundColor = "#4114FF";
+            } else {
+                submitButton.disabled = true;
+                submitButton.style.backgroundColor = "#808080";
+            }
+        }
+        nicknameInput.addEventListener("input", checkInputs);
+
+    });
 </script>
 {% endblock script %}
