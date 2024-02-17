@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/fundings/create_payment.css'%}" /> {% endblock head %}
 {% block header %}
     <div class="create-payment-title">
-        <a href="{%url 'users:mypage_list'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+        <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
         <p class="create-payment-title-for-center notosans-bold-24">송금링크 설정</p>
     </div>
 {% endblock header %} 
@@ -35,7 +35,7 @@
     </a>
 </div>
 <!--마이페이지에서 여기로 이동했을땐 안 뜨게-->
-{% if hide_button %}
+{% if from_page != 'list' %}
     <button class="div-btn create_payment_btn" type="submit">
         <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">송금링크 저장</a>
     </button>
