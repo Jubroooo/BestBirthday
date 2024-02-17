@@ -6,6 +6,7 @@ from django.contrib.auth import logout as account_logout
 from ..fundings.models import *
 from datetime import datetime, date, timedelta
 from django.utils import timezone
+from django.urls import reverse
         
 def login(request):
     return render (request, 'users/login.html')
@@ -99,11 +100,17 @@ def mypage_profile_setting(request):
 
 def mypage_payment_guide_k(request):
     user = request.user
+    from_list = request.GET.get('from', None) 
     if request.method == "POST":
         form = kakaoForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('fundings:create_payment')
+            if from_list:
+                # 'fundings:create_payment' 패턴 이름을 사용하여 URL 가져오기
+                create_payment_url = reverse('fundings:create_payment') + '?from=' + from_list
+                return redirect(create_payment_url)
+            else:
+                return redirect('fundings:create_payment')
     else:
         form = kakaoForm(instance=user)
     ctx = {
@@ -113,11 +120,17 @@ def mypage_payment_guide_k(request):
 
 def mypage_payment_guide_t(request):
     user = request.user
+    from_list = request.GET.get('from', None)
     if request.method == "POST":
         form = tossForm(request.POST, instance = user)
         if form.is_valid():
             form.save()
-            return redirect ('fundings:create_payment')
+            if from_list:
+                # 'fundings:create_payment' 패턴 이름을 사용하여 URL 가져오기
+                create_payment_url = reverse('fundings:create_payment') + '?from=' + from_list
+                return redirect(create_payment_url)
+            else:
+                return redirect('fundings:create_payment')
     else:
         form = tossForm(instance=user)
     ctx = {

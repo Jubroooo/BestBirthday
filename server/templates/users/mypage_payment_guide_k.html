@@ -6,9 +6,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock head %} {% block header %}
 <div class="payment-guide-title">
-  <a href="{%url 'fundings:create_payment'%}"
-    ><i class="icon-left fa-solid fa-chevron-left"></i
-  ></a>
+  {% if 'from=list' not in request.get_full_path %}
+    <a href="{% url 'fundings:create_payment'%}">
+      <i class="icon-left fa-solid fa-chevron-left"></i>
+    </a>
+  {% else %}
+    <a href="{% url 'fundings:create_payment'%}?from=list">
+      <i class="icon-left fa-solid fa-chevron-left"></i>
+    </a>
+  {% endif %}
   <p class="payment-guide-title-for-center notosans-bold-24">송금링크 설정</p>
 </div>
 {% endblock header %} {% block content %}
@@ -92,10 +98,9 @@
     const pattern = /^https:\/\/qr\.kakaopay\.com\/\w{9}$/;
 
     if (pattern.test(inputValue)) {
-      validationMessage.innerText = "유효한 링크";
       return true;
     } else {
-      validationMessage.innerText = "링크를 다시 확인해주세요!";
+      alert("링크를 다시 확인해주세요!");
       return false;
     }
   }
