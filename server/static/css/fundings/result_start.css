@@ -92,7 +92,7 @@
   right: 0;
   bottom: 0;
   transform: translate(-50%, -50%); /* 정중앙 정렬 */
-  width: 80rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
+  width: 100rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
   height: 100%; /* 전체 높이 */
   background-color: rgba(0, 0, 0, 0.8); /* 배경 불투명도 조절 */
 }

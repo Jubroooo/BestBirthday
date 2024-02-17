@@ -21,9 +21,7 @@
 /*편지 길이 길어질때 편지 content내에서 스크롤*/
 .message-content {
   margin: 3.2rem 0;
-  width: 29.4rem;
   overflow: auto;
-  height: 20vh;
   /* align-items: center; 이거 하면 길게 쓴 메세지 위 아래 잘림  */
   justify-content: center;
   display: flex;
