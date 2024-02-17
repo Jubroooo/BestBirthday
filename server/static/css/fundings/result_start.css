@@ -23,11 +23,6 @@
   color: var(--BB_color_white);
   margin: var(--gutter8) 0;
 }
-
-.letters-congrats {
-  margin-bottom: var(--gutter16);
-}
-
 .delivered-messages {
   background-color: rgba(117, 117, 117, 0.2);
   border-radius: var(--gutter8);
@@ -94,13 +89,13 @@
   transform: translate(-50%, -50%); /* 정중앙 정렬 */
   width: 100rem; /* 모달 창의 너비, 필요에 따라 조절 가능 */
   height: 100%; /* 전체 높이 */
-  background-color: rgba(0, 0, 0, 0.8); /* 배경 불투명도 조절 */
+  background-color: rgba(0, 0, 0, 0.9); /* 배경 불투명도 조절 */
 }
 #drawing_canvas{
   z-index: 99;
 }
 .modal-content {
-  margin: 0% auto; /* 페이지 중앙에 위치 */
+  margin: auto; /* 페이지 중앙에 위치 */
   max-width: 34.2rem; /* 모달 너비 */
   display: flex;
   justify-content: center;
