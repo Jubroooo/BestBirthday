@@ -12,6 +12,43 @@
 
 <https://bestbirthday.co.kr>
 
+## 👀 프로젝트 프리뷰
+<details>
+<summary>메인 페이지</summary>
+<div markdown="1">
+<img src="./README_img/main.png">
+</div>
+</details>
+
+<details>
+<summary>펀딩 생성 페이지</summary>
+<div markdown="1">
+<img src="./README_img/fundingcreate.png">
+</div>
+</details>
+
+<details>
+<summary>선물 보내기 페이지</summary>
+<div markdown="1">
+<img src="./README_img/presentpage.png">
+</div>
+</details>
+
+<details>
+<summary>선물 확인 페이지</summary>
+<div markdown="1">
+<img src="./README_img/resultmodal.png">
+<img src="./README_img/resultstart.png">
+</div>
+</details>
+
+<details>
+<summary>마이 페이지</summary>
+<div markdown="1">
+<img src="./README_img/mypage.png">
+</div>
+</details>
+
 ## 👇 프로젝트 사용법
 1. 생일인 유저는 펀딩을 1개 만들 수 있습니다 (로그인과 정보 등록이 완료된 후).
 2. 생성된 펀딩은 생성일 기준 7일 이후에 마감되며, 생일인 유저는 받은 메시지를 언제든 확인 가능합니다.
@@ -33,6 +70,9 @@ $ pip install django-crontab (자동 마감 기능을 위함, Linux 환경에서
 <img src="https://img.shields.io/badge/CSS3-white?style=flat-square&logo=css3&logoColor=092E20" /><br>
 <img src="https://img.shields.io/badge/JavaScript-white?style=flat-square&logo=JavaScript&logoColor=092E20" /><br>
 <img src="https://img.shields.io/badge/Python-white?style=flat-square&logo=Python&logoColor=092E20" /><br>
+
+## 📑 아키텍쳐 설계도
+<img src="./README_img/architecture.png">
 
 ## 🧑‍💻 팀원 소개
 - 이주형 (팀장, BE)<br>
