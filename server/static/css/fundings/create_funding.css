@@ -3,6 +3,7 @@
     justify-content: center;
     position: relative;
     width: 100%; 
+  
 }
 .icon-left{
     font-size: 2.5rem;
@@ -141,6 +142,7 @@ textarea {
     justify-content: start;
     align-items: flex-end;
     gap: var(--gutter8);
+    margin-top: var(--gutter8);
 }
 
 .limit-funding{
