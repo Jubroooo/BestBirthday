@@ -7,7 +7,7 @@ class Funding(models.Model) :
     goal_price = models.IntegerField('목표금액', default=0)
     total_price = models.IntegerField('받은금액', default=0)
     photo = models.ImageField('이미지', blank=True, upload_to='fundings/%Y%m%d')
-    present_link = models.CharField('상품 링크', max_length=100)
+    present_link = models.CharField('상품 링크', max_length=250)
     
     is_closed = models.BooleanField('펀딩 종료', default=False, blank=True)
     is_achieved = models.BooleanField('펀딩 달성 여부', default = False, blank=True)
