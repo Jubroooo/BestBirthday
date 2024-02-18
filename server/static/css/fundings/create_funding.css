@@ -117,7 +117,7 @@ textarea {
 }
 
 #price-display {
-    color: var(--BB_color_blue);
+    color: var(--BB_color_yellow);
 }
 .right-price{
     position:absolute;
