@@ -3,6 +3,7 @@
     justify-content: center;
     position: relative;
     width: 100%; 
+  
 }
 .icon-left{
     font-size: 2.5rem;
@@ -100,11 +101,11 @@ textarea {
 .to-friends-message{
     height: 15vh;
 }
-
+/* 
 .funding-title,
 .present_link{
-    height: 5vh;
-}
+     height: 5vh; 
+} */
 #photo-upload{
     display: none;
 }
@@ -141,8 +142,11 @@ textarea {
     justify-content: start;
     align-items: flex-end;
     gap: var(--gutter8);
+    margin: var(--gutter8) 0;
 }
-
+.wish-url{
+    margin: var(--gutter8) 0;
+}
 .limit-funding{
     color:#808080;
 }
@@ -153,7 +157,8 @@ textarea {
     text-align: center;
     background-color:transparent;
     font-size: 1.6rem;
-    color: var(--BB_color_white)
+    color: var(--BB_color_white);
+    padding: 0 1px;
 }
 
 .direct-input:focus {

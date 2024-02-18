@@ -84,12 +84,18 @@
       <p class="detail-styles">
         <img class="detial-img" src="{%static 'images/computer.png'%}" />
       </p>
-      내가 받을 물건 보기
+      내가 받은 물건 보기
     </div>
   </a>
   <div class="btn give-onload-btn end-funding">
     <span class="notosans-bold-16">마감된 펀딩</span>
   </div>
+  <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
+    {% csrf_token %}
+    <button class="div-btn" type="submit">
+      <p class="notosans-bold-16">생일 메시지 보러 가기</p>
+    </button>
+  </form>
   {% endif %} {% else %}
   <a href="{{funding.present_link}}" target="_blank">
     <div class="gift-to-buy notosans-bold-16">
