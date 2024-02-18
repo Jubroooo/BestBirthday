@@ -100,17 +100,14 @@ background-color: var(--BB_color_blue_sub);
   .give_present{
     margin-top: var(--gutter8);
   }
-
-.nickname-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+#price-range-notice{
+  margin-top: var(--gutter8);
 }
+
 #nickname-container2{
   display: flex;
-  flex-direction: row;
-  gap: var(--gutter8);
-  align-items: end;
+  align-items: center;
+  justify-content: space-between;
 }
 
 input[type="text"],
@@ -129,9 +126,10 @@ textarea {
     outline: none;
     resize: none;
   }
-#funding_amount, #gift_nickname{
+#funding_amount {
   width: 8rem;
 }
+
 #birthday_message {
     background-color: transparent; 
     padding: 10px;
