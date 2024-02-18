@@ -1,32 +1,34 @@
 .message-detail {
+  z-index: 5;
   background-color: rgba(117, 117, 117, 0.2);
   border-radius: var(--gutter24);
-  margin-bottom: var(--gutter24);
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  padding: var(--gutter24);
-  gap: var(--gutter16);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: var(--gutter24) ;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 35vh;
 }
+.detail-center{
+  height: 11.8rem;
+  display: flex;
 
-
-
+}
 .letters-congrats {
   margin-bottom: var(--gutter24);
 }
 /*편지 길이 길어질때 편지 content내에서 스크롤*/
 .message-content {
-  margin: 3.2rem 0;
+  margin: 0rem 0;
   width: 29.4rem;
   overflow: auto;
-  height: 20vh;
+  height: 55vh;
   /* align-items: center; 이거 하면 길게 쓴 메세지 위 아래 잘림  */
   justify-content: center;
   display: flex;
+  height: 40vh;
 }
 .margin-for-content{
   margin: auto;

@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function validateUrl() {
-        const urlPattern =/^(http(s)?:\/\/)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
+        const urlPattern =/^(http(s)?:\/\/)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,30}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
         //^ 문자열의 시작이 http 나 https로 시작 , :'//',2자 256자이하 도메인 이름길이, . ,2자이상 6자 이하 최상위 도메인
         const isValid = urlPattern.test(urlInput.value);
 
