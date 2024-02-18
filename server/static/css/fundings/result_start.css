@@ -114,6 +114,7 @@
   background-color: #fc606c;
 }
 .present-button-wrapper{
+  z-index: 3;
   display: flex;
   justify-content: center;
   gap: var(--gutter8);
