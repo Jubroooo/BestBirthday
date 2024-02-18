@@ -69,7 +69,7 @@ textarea{
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
     font-size: 1.6rem;
-    margin-bottom: var(--gutter24);
+    margin-bottom: var(--gutter8);
 }
 
 form{
@@ -87,3 +87,6 @@ form{
     margin-left: var(--gutter8);
     color: gray;
   }
+#nickname-error2{
+    margin-bottom: var(--gutter24) ;
+}

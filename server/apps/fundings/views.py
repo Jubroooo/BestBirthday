@@ -194,11 +194,13 @@ def create_funding(request) :
                 return redirect('users:login_info')  # 소셜 로그인 후 생일 입력하는 화면 
             #유저의 계좌가 없을때 계좌페이지로 이동
             if request.user.toss_account is None and request.user.kakao_account is None:
-                return render (request, 'fundings/create_payment.html')
+                return render(request, 'fundings/create_payment.html')
 
+            # 계좌가 있는 경우 펀딩 생성 폼을 보여줌
             funding = Funding(user=request.user)
             form = FundingForm(instance=funding)
             return render(request, 'fundings/create_funding.html', {'form': form})
+        
         #post일때
         elif request.method == "POST":
             funding = Funding()
@@ -219,7 +221,14 @@ def create_funding(request) :
 
 def create_payment(request):
     user=request.user
-    ctx = {"user":user}
+    #추가
+    from_page = request.GET.get('from', '')
+    if from_page == 'list':
+        ctx = {"user":user,
+               'from_page': from_page
+               }
+        return render(request, 'fundings/create_payment.html', ctx)
+    ctx={"user":user}
     return render(request, 'fundings/create_payment.html', ctx)
 
 

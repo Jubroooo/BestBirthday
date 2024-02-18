@@ -16,7 +16,11 @@
     <p class="notosans-bold-24 mypage-links">프로필</p>
     <div class="mypage-background">
         <div class="mypage-first-section">
-            <div class="profile"></div>
+            {% if user.profile %}
+                <img class="input-profile-img" src="{{ user.profile.url }}" width="40" height="40">
+            {% else %}
+                <div class="profile"></div>
+            {% endif %}
             <div class="mypage-profile">
                 <div class="mypage-profile2">
                 <p class="notosans-bold-20 myname">{{user.nickname}}</p>
@@ -38,7 +42,7 @@
     <p class="notosans-bold-24 mypage-links">펀딩</p>
     <a href="{%url 'users:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
     <a href="{%url 'users:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
-    <a href="{%url 'fundings:create_payment'%}" class="mypage-links notosans-regular-18">송금 링크 관리</a>
+    <a href="{% url 'fundings:create_payment' %}?from=list" class="mypage-links notosans-regular-18">송금 링크 관리</a>
 </div>
 
 <div class="mypage-account">

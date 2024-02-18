@@ -278,7 +278,7 @@
       
   </p>
   {%endif%}
-  <p class="notosans-bold-18 letters-congrats first-line-congrats">
+  <p class="notosans-bold-18 letters-congrats first-line-congrats filter-congrats">
     생일 축하 메시지
     <span class="highlight-blue notosans-bold-24 money"
       >{{funding_msg_count}}</span
@@ -305,13 +305,13 @@
   <div id="share-btn" class="div-btn">
     <p class="notosans-bold-18">공유하기</p>
   </div>
-  <button id="home-btn" class="div-btn" onclick="showMessage()">
+  <a href="{%url 'fundings:main'%}"id="home-btn" class="div-btn">
     <i class="fa-solid fa-house"></i>
-  </button>
+  </a>
 </div>
 <div id="messageModal" class="modal">
-  <div class="modal-content">
-    <p id="modalMessageContent">메시지 내용이 여기에 표시됨</p>
+  <div class="modal-content  ">
+    <p id="modalMessageContent" >메시지 내용이 여기에 표시됨</p>
     <div class="div-btn close">
       <p class="notosans-bold-18">편지 닫기</p>
     </div>
