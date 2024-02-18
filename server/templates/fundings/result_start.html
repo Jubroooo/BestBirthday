@@ -316,14 +316,6 @@
   src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"
 ></script>
 <script>
-  $(document).ready(function(){
-    function reAction(){
-      setTimeout(6000);
-    }
-    reAction();
-  })
-</script>
-<script>
     //편지 디테일 모달을 위한
     document.addEventListener("DOMContentLoaded", function() {
         // 메시지 클릭 이벤트 리스너
@@ -421,7 +413,7 @@
         window.cancelAnimationFrame(requestId);
         requestId = null;
       }
-      cw = c.width = bc.width = 400, cx = cw / 2;
+      cw = c.width = bc.width = window.innerWidth, cx = cw / 2;
       ch = c.height = bc.height = window.innerHeight-130, cy = ch;
       bCtx.strokeStyle = "#abcdef";
       bCtx.lineWidth = 1;
