@@ -16,36 +16,36 @@
 <details>
 <summary>메인 페이지</summary>
 <div markdown="1">
-<img src="./README_img/main.png">
+<img src="./README_img/main.png" width="300" height="650">
 </div>
 </details>
 
 <details>
 <summary>펀딩 생성 페이지</summary>
 <div markdown="1">
-<img src="./README_img/fundingcreate.png">
+<img src="./README_img/fundingcreate.png" width="300" height="650">
 </div>
 </details>
 
 <details>
 <summary>선물 보내기 페이지</summary>
 <div markdown="1">
-<img src="./README_img/presentpage.png">
+<img src="./README_img/presentpage.png" width="300" height="650">
 </div>
 </details>
 
 <details>
 <summary>선물 확인 페이지</summary>
 <div markdown="1">
-<img src="./README_img/resultmodal.png">
-<img src="./README_img/resultstart.png">
+<img src="./README_img/resultmodal.png" width="300" height="650">
+<img src="./README_img/resultstart.png" width="300" height="650">
 </div>
 </details>
 
 <details>
 <summary>마이 페이지</summary>
 <div markdown="1">
-<img src="./README_img/mypage.png">
+<img src="./README_img/mypage.png" width="300" height="650">
 </div>
 </details>
 
