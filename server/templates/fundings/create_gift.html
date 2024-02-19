@@ -71,7 +71,7 @@
 
     <div id="nickname-container2">
         <p class="notosans-bold-18">친구에게 보여줄 닉네임</p>
-        <p class="notosans-regular-12 colorgray-create-html">*최대 12자</p>
+        <p class="notosans-regular-12 colorgray-create-html">*최대 8자</p>
     </div>
     <input maxlength="8" id="gift_nickname"  autocomplete="off" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="">
 
@@ -132,6 +132,8 @@
     priceButtons.forEach(function(button) {
         button.addEventListener("click", function() {
             let value = this.getAttribute("data-value");
+            presentImage.style.opacity = '0'; // 이미지를 서서히 사라지게 함
+            setTimeout(function() { // 500ms 후에 이미지 소스 변경 및 페이드 인
             switch(value) {
                 case "5000":
                     presentImage.src = "{% static 'images/2.png' %}";
@@ -154,8 +156,10 @@
                 default:
                     presentImage.src = "{% static 'images/1.png' %}";
             }
-        });
+            presentImage.style.opacity = '1'; // 이미지를 서서히 나타나게 함
+        }, 500);
     });
+});
     
     //폼 전부 작성돼어야 버튼 색 바뀌게 
     document.addEventListener("DOMContentLoaded", function() {

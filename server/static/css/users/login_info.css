@@ -90,6 +90,9 @@ textarea {
   outline: none;
   border-radius: 0;
 }
+input[type="text"]{
+  height: 5vh;
+}
 .add-nickname {
   background-color: transparent;
   color: #ffffff;

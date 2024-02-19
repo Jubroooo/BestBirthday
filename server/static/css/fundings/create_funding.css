@@ -73,6 +73,7 @@ textarea {
     font-size: 1.6rem;
     outline: none;
     resize: none;
+    height: 5vh;
   }
   input[type="text"],
   textarea{
