@@ -86,6 +86,7 @@ textarea {
   input[type="url"]{
     border: none;
     border-bottom: 0.1rem solid #ffffff; 
+    border-radius: 0;
   }
   .to-friends-message,
   .funding-title,
