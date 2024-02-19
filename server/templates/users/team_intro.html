@@ -1,0 +1,66 @@
+{% extends "base.html" %} {%load static%} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_list.css'%}" />
+<link rel="stylesheet" href="{% static 'css/users/team_intro.css'%}" />
+{% endblock head %}
+
+{% block header %}
+<div class="mypage-title">
+  <a href="{%url 'users:mypage_list'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+    <p class="mypage-title-for-center notosans-bold-24">팀 소개</p>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="intro-container">
+    <div class="personal-profile-wrapper">
+        <img class="personal-profile" src="{%static 'images/leejuhyoung.png'%}" alt="">
+    </div>
+    <div class="intro-detail">
+        <div class="name notosans-bold-20">이주형</div>
+        <div class="oneline-intro notosans-regular-12">Best Birthday 서비스 팀장 이주형입니다.<br> 서로의 생일을 부담없이 축하해주는 그날까지~!<br>문의사항이 있다면 아래 메일로 연락주세요!!</div>
+        <div class="email">✉️ ljh465921@naver.com</div>
+    </div>
+</div>
+<div class="intro-container">
+    <div class="intro-detail">
+        <div class="name notosans-bold-20">정예진</div>
+        <div class="oneline-intro notosans-regular-12">프론트 개발자로 참여한 정예진입니다!
+            Best Birthday 덕분에 올해 생일이 더 기다려지네요🫶🏻</div>
+        <div class="email">✉️ yejin6947@naver.com</div>
+    </div>
+    <div class="personal-profile-wrapper">
+        <img class="personal-profile" src="{%static 'images/jeongyejin.png'%}" alt="">
+    </div>
+</div>
+<div class="intro-container">
+    <div class="personal-profile-wrapper">
+        <img class="personal-profile" src="{%static 'images/leejinhyeok.png'%}" alt="">
+    </div>
+    <div class="intro-detail">
+        <div class="name notosans-bold-20">이진혁</div>
+        <div class="oneline-intro notosans-regular-12">당신의 생일을 최고의 날로 만들고 싶은 이진혁입니다! 
+            당신의 생일, 이젠 BB로!</div>
+        <div class="email">✉️ kmer1024@naver.com</div>
+    </div>
+</div>
+<div class="intro-container">
+    <div class="intro-detail">
+        <div class="name notosans-bold-20">박채연</div>
+        <div class="oneline-intro notosans-regular-12">매년 오는 생일, 원하는 방식으로 기념하고 싶은 박채연입니다
+            함께 당신의 생일을 특별하게 만들어보세요~! </div>
+        <div class="email">✉️ qkrcodus0722@naver.com</div>
+    </div>
+    <div class="personal-profile-wrapper">
+        <img class="personal-profile" src="{%static 'images/parkchaeyeon.png'%}" alt="">
+    </div>
+</div>
+<div class="link-wrapper">
+    <a href="https://nosy-ceres-298.notion.site/Best-Birthday-948b9b99406f41f8986b79d8bf84e1e6?pvs=4" target="_blank">
+        <img src="{% static 'images/notion.png' %}" alt="Notion">
+    </a>
+    <a href="https://github.com/Jubroooo/BestBirthday" target="_blank">
+        <img src="{% static 'images/github.png' %}" alt="GitHub">
+    </a>
+</div>
+{% endblock content %}

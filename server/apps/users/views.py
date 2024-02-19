@@ -170,3 +170,7 @@ def funding_progress(fundings):
         funding_progress_dict[funding.id] = int(funding.total_price / funding.goal_price * 100)
 
     return funding_progress_dict
+
+#팀 소개
+def team_intro(request):
+    return render(request, 'users/team_intro.html')
