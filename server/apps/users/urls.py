@@ -18,4 +18,5 @@ urlpatterns = [
     path('mypage_payment_guide_t/', mypage_payment_guide_t, name="mypage_payment_guide_t"), 
     path('mypage_myfunding/', mypage_myfunding, name="mypage_myfunding"), 
     path('mypage_participated/', mypage_participated, name="mypage_participated"),
+    path('team_intro/', team_intro, name="team_intro"),
 ]

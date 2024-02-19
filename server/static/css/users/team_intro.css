@@ -1,0 +1,30 @@
+.intro-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem 0 1rem 0;
+    justify-content: center;
+}
+
+.personal-profile-wrapper{
+    width: 30%;
+}
+
+.intro-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.personal-profile{
+    width: 10rem;
+    height: 100%;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.oneline-intro{
+    margin: 0.7rem 0 0.7rem 0;
+}
