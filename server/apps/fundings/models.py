@@ -7,7 +7,7 @@ class Funding(models.Model) :
     goal_price = models.IntegerField('목표금액', default=0)
     total_price = models.IntegerField('받은금액', default=0)
     photo = models.ImageField('이미지', blank=True, upload_to='fundings/%Y%m%d')
-    present_link = models.CharField('상품 링크', max_length=250)
+    present_link = models.CharField('상품 링크', max_length=1000)
     
     is_closed = models.BooleanField('펀딩 종료', default=False, blank=True)
     is_achieved = models.BooleanField('펀딩 달성 여부', default = False, blank=True)
@@ -23,7 +23,7 @@ class Funding(models.Model) :
 class Funding_Msg(models.Model) :
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = '작성자', related_name='funding_msg_user', null = True, blank=True)
     post = models.ForeignKey(Funding, on_delete=models.CASCADE, verbose_name = '펀딩글', related_name="funding_post")
-    comment_name = models.CharField('친구에게 보여질 이름', max_length=12)
+    comment_name = models.CharField('친구에게 보여질 이름', max_length=8)
     funding_price = models.IntegerField('선물금액', default=0, null=True)
     content = models.TextField('축하 메시지') 
     written_date = models.DateTimeField('메시지 작성일', auto_now_add=True)

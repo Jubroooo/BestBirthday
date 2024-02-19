@@ -35,3 +35,14 @@
     margin-top: 5rem;
     gap: 5rem;
 }
+
+.link-wrapper > a {
+    width: 5rem;
+    height: auto; 
+}
+
+.link-wrapper > a > img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
