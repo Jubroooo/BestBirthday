@@ -36,7 +36,7 @@
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "20000">20,000</button>
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "30000">30,000</button>
       <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "50000">50,000</button>
-      <button class="notosans-bold-16 orange-btn-gift" type="button" data-value = "0">직접 입력</button>
+      <button class="notosans-bold-16 orange-btn-gift" type="button" data-value = "" onclick="focus_input()">직접 입력</button>
     </div>
 
     
@@ -199,12 +199,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const priceRangeNotice = document.getElementById('price-range-notice');
 
     fundingAmountInput.addEventListener('input', function() {
-        const value = parseInt(this.value, 10);// 사용자 입력한 값을 문자열로 바꾼 후 10진수로 바꿈
+        const value = this.value.trim(); // 공백 제거
 
-        if (value < 0 || value > 300000) {
-            priceRangeNotice.style.color = '#FF6245';
+        if (value === '' || isNaN(value)) {
+            priceRangeNotice.style.color = '#FF6245'; 
         } else {
-            priceRangeNotice.style.color = ''; //기본색
+            const numericValue = parseInt(value, 10);
+            if (numericValue < 0 || numericValue > 300000) {
+                priceRangeNotice.style.color = '#FF6245';
+            } else {
+                priceRangeNotice.style.color = '';
+            }
         }
     });
 });
@@ -232,5 +237,11 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    function focus_input(){
+        var input = document.getElementById("funding_amount");
+        input.value = "";
+        input.focus();
+
+    }
 </script>
 {%endblock script%}
