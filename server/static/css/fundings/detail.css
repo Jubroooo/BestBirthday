@@ -20,11 +20,17 @@
   }
 
 
-.image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+  .image-container {
+    height: 20rem; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+
+  .image-container img {
+    height: 100%; 
+    width: auto; 
+  }
 
 .funding-info {
     margin: var(--gutter16) 0;

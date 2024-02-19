@@ -6,15 +6,11 @@
   <p class="funding-title-for-center notosans-bold-24">{{funding.title}}</p>
 </div>
 {% endblock header %} {%block content%}
-<div class="image">
+<div class="image-container">
   {% if funding.photo %}
-  <p>
     <img src="{{ funding.photo.url }}" />
-  </p>
   {%else%}
-  <p>
     <img src="{%static 'images/no_img.png'%}" />
-  </p>
   {% endif %}
 </div>
 
