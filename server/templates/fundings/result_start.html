@@ -259,19 +259,19 @@
   </p>
   {%if earliest_msg %}
   <p class="notosans-bold-18 filter-congrats">
-    제일 빨리 축하해 준 친구
+    속도 1등
     <span class="highlight-orange notosans-bold-24">
       {{earliest_msg.comment_name}}</span
     >
   </p>
   <p class="notosans-bold-18 filter-congrats">
-    제일 긴 편지를 써 준 친구
+    작문 1등
     <span class="highlight-orange notosans-bold-24">
       {{longest_msg.comment_name}}</span
     >
   </p>
   <p class="notosans-bold-18 filter-congrats">
-    제일 큰 선물을 해 준 친구
+    큰손 1등
     <span class="highlight-orange notosans-bold-24">
       {{max_msg.comment_name}}
     </span>
@@ -291,12 +291,12 @@
     <div class="table-row">
       <span class="message-number notosans-bold-18">{{ forloop.counter }}</span>
       <span class="message-sender notosans-bold-16"
-        >{{funding_msg.comment_name}}</span
+        >{{funding_msg.comment_name}}의 편지</span
       >
     </div>
-    <span class="message-date notosans-regular-14"
+    {% comment %} <span class="message-date notosans-regular-14"
       >{{funding_msg.written_date}}</span
-    >
+    > {% endcomment %}
   </a>
   {%endfor%}
 </div>
