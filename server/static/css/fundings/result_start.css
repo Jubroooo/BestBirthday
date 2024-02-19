@@ -41,6 +41,10 @@
   color: var(--BB_color_orange);
   padding: 0 var(--gutter8);
 }
+.highlight-yellow {
+  color: var(--BB_color_yellow);
+  padding: 0 var(--gutter8);
+}
 .b-day-message {
   border-bottom: 1rem solid var(----BB_color_white);
   padding: 0.5rem 1rem;
