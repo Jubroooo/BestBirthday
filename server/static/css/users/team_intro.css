@@ -28,3 +28,10 @@
 .oneline-intro{
     margin: 0.7rem 0 0.7rem 0;
 }
+
+.link-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    gap: 5rem;
+}
