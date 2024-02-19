@@ -30,12 +30,20 @@ def login_info(request):
         if form.is_valid():
             form.save()
             return redirect ('fundings:main')
+        else:
+            # 유효하지 않은 경우, 로그인 정보 페이지로 리다이렉트
+            ctx = {
+                "form": form,
+                "errors": form.non_field_errors,
+            }
+            return render(request, 'users/login_info.html', ctx)
+    
     else:
         form = UserProfileUpdateForm(instance=user)
-    ctx = {
-        "form": form,
-    }
-    return render (request, 'users/login_info.html', ctx)  
+        ctx = {
+            "form": form,
+        }
+        return render (request, 'users/login_info.html', ctx)  
 
 def nickname_profile_input(request):
     return render(request,'users/nickname_profile_input.html')
