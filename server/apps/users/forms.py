@@ -17,18 +17,25 @@ class UserProfileUpdateForm(forms.ModelForm):
         model = User
         fields = ['nickname', 'profile']
 
-    def clean_birthday(self):
-        birth_year = self.cleaned_data.get('birth_year')
-        birth_month = self.cleaned_data.get('birth_month')
-        birth_day = self.cleaned_data.get('birth_day')
-        
-        try:
-            birthday = date(birth_year, birth_month, birth_day)
-        except ValueError:
+    def clean(self):
+        cleaned_data = super().clean()
+        birth_year = cleaned_data.get('birth_year')
+        birth_month = cleaned_data.get('birth_month')
+        birth_day = cleaned_data.get('birth_day')
+
+        if not self.is_valid_birthday(birth_year, birth_month, birth_day):
             raise forms.ValidationError("올바른 날짜를 선택해주세요.")
 
-        return birthday
-
+    def is_valid_birthday(self, year, month, day):
+        # 여기서 생일의 유효성 검사를 수행합니다.
+        # 예를 들어, 실제로 존재하는 날짜인지 확인하는 로직을 추가합니다.
+        # 이 예시에서는 간단한 범위 검사를 수행하도록 했습니다.
+        try:
+            birthday = datetime(year, month, day)
+            return True
+        except ValueError:
+            return False  # 잘못된 날짜 형식일 경우 False 반환
+    
     def save(self, commit=True):
         user = super(UserProfileUpdateForm, self).save(commit=False)
 
