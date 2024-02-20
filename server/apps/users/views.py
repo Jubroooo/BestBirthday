@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import *
+from django.db.models import F
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth import logout as account_logout
@@ -19,6 +20,18 @@ def logout(request):
     return redirect ('fundings:main')
 
 def delete_user(request):
+    user = request.user
+    
+    #유저가 작성한 메세지가 삭제될테니 msg_count에서 제거
+    funding_messages = Funding_Msg.objects.filter(user=user)
+    for funding_message in funding_messages:
+        funding = funding_message.post
+        funding.msg_count = F('msg_count') - 1
+        funding.save()
+
+    # 유저가 작성한 메세지 모두 삭제
+    funding_messages.delete()
+    
     request.user.delete()
     account_logout(request)
     return redirect ('fundings:main')    
