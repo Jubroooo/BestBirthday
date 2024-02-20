@@ -1,0 +1,145 @@
+#main-container {
+  gap: var(--gutter24);
+}
+
+.create-funding-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gutter16);
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(-10px); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(-10px); }
+}
+#gift-img {
+  width: 20rem;
+  height: 20rem;
+  background-image: url(../../images/gift_main.png);
+  background-size: cover;
+
+  /* 이미지 애니메이션 */
+  animation-name: floatAnimation;
+  animation-duration: 3s; 
+  animation-iteration-count: infinite; 
+  animation-fill-mode: forwards; 
+}
+
+.btn-main-create {
+  width: 80%;
+}
+.funding-status {
+  text-align: center;
+}
+.funding-status > strong {
+  font-size: 2.4rem;
+  color: var(--BB_color_orange);
+}
+.funding-status > strong:nth-child(2) {
+  color: var(--BB_color_blue);
+}
+.main-title {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: var(--gutter8);
+}
+.main-title > :nth-child(2) {
+  text-decoration: underline;
+}
+.view-all {
+  cursor: pointer;
+}
+
+/* 모달 디자인 */
+#modal_container{
+  position: fixed;
+  bottom: 0;
+  display: none;
+  width: 100%;
+  max-width: 39rem;
+  background-color: var(--BB_color_black);
+  border-top-left-radius: 3.2rem; 
+  border-top-right-radius: 3.2rem;
+}
+.xmark-icon{
+ position:absolute;
+ right: var(--gutter16);
+ top: var(--gutter16); 
+ display: block;
+ font-size: 3rem;
+ cursor: pointer;
+}
+.top-bar-img{
+  display: flex;
+  flex-direction: column;
+}
+.go-and-check{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: var(--gutter24);
+}
+.congrats-notice{
+  margin: 3.2rem 0 var(--gutter16) 0;
+}
+.lock-img{
+  margin: var(--gutter24) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+.result-modal-goto-letters{
+  color:gray;
+}
+.lock-img img{
+  width: 17rem;
+  height: auto;
+}
+/*펀딩 이미 생성한 유저가 내 생일 축하받기 눌렀을때*/
+.clicked {
+  background-color:gray; /* 클릭 후 배경색 변경 */
+  color: #fff; /* 클릭 후 텍스트 색상 변경 */
+}
+.fa-circle-exclamation{
+     color:var(--BB_color_blue)
+}
+
+#alert-funding{
+  justify-content: center;
+  gap:1rem;
+  display: none;
+}
+
+.main-class-forcenter{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cbtn{
+  height: 4.7rem;
+  width: 80%;
+  border: none;
+  border-radius: 1.1rem;
+  margin-bottom: 1rem ;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color:var(--BB_color_blue);
+}
+.funding-list-container{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter16);
+}

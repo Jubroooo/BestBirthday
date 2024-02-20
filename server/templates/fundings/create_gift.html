@@ -1,0 +1,251 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/create_gift.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock head %}
+
+{% block header %}
+<div class="create-gift-title">
+    <i onClick="history.go(-1)" class="icon-left fa-solid fa-chevron-left"></i>
+    <p class="create-gift-title-for-center notosans-bold-24">선물하기</p>
+</div>
+{% endblock header %}
+
+{%block content%}
+
+<div class="img-container">
+<img class="changing-present" src="{%static 'images/1.png'%}">
+</div>
+<form method = "POST" action="">
+    {% csrf_token %}
+<div class="create-gift-container">
+    <div class="gift-first">
+        <div>
+        <p class="notosans-bold-18">선물 금액</p>
+        <p id="price-range-notice"class="notosans-regular-12 colorgray-create-html">* 0원부터 300,000원까지 선물할 수 있어요!</p>
+        </div>
+        <div class="notify-negative ">
+        <input id="funding_amount" class="funding_price_input notosans-bold-18" type="text" name="funding_price" value="0" autocomplete="off">   
+        </div>
+    </div>
+
+    <div class="button-group transfer-btn-presents">
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "5000">5,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "10000">10,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "20000">20,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "30000">30,000</button>
+      <button class="notosans-bold-16 blue-btn-gift" type="button" data-value = "50000">50,000</button>
+      <button class="notosans-bold-16 orange-btn-gift" type="button" data-value = "" onclick="focus_input()">직접 입력</button>
+    </div>
+
+    
+    <p class="notosans-bold-18">송금할 서비스</p>
+    <div class="payment-link-btn-container">
+        <div class="payment-btn-kakao div-btn transfer-btn" id="kakaoTransferLink">
+            <a href="{{funding.user.kakao_account}}">
+                <img src="{%static 'images/kakao-pay.png'%}">
+            </a>
+        </div>        
+        {% if funding.user.toss_account %}
+        <div class="payment-btn-toss div-btn transfer-btn" id="tossTransferLink">
+            <a href="{{funding.user.toss_account}}">
+                <img src="{%static 'images/toss-pay.png'%}">
+            </a>
+        </div>
+        {%endif%}
+
+    </div>
+
+    <div class="input-group-create-gift">
+        <div class="gift-second">
+            <label class="notosans-bold-18" for="message">생일 축하 메시지</label>
+        </div>
+        <div class="wrapper-message">
+            <textarea id="birthday_message" class="input-bday-message" name="content"></textarea>
+            <div id="charCount2" class="notosans-regular-14">0/500</div>
+        </div>
+        <p class="notosans-regular-12 colorgray-create-html"> 전달 완료된 메시지는 수정할 수 없어요<br>상대를 비방하는 메시지는 전달되지 않을 수 있습니다. </p>
+    </div>
+    
+
+    <div id="nickname-container2">
+        <p class="notosans-bold-18">친구에게 보여줄 닉네임</p>
+        <p class="notosans-regular-12 colorgray-create-html">*최대 8자</p>
+    </div>
+    <input maxlength="8" id="gift_nickname"  autocomplete="off" class="notosans-bold-16 gift-nickname" type="text" name="comment_name" value="">
+
+    <button class="give_present div-btn" type="submit">
+        <p class="notosans-bold-16 ">선물 완료하기</p>
+    </button>
+</div>
+</form>
+
+  
+{%endblock%}
+
+{%block script%}
+<script>
+        
+    document.addEventListener("DOMContentLoaded", function() {
+        //버튼 누를시 input 벨류를 버튼 클릭시 금액으로 변경
+        const priceButtons = document.querySelectorAll(".blue-btn-gift");
+
+        //금액 직접 입력시
+        priceButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                let value = this.getAttribute("data-value");
+                document.querySelector("input[name='funding_price']").value = value;
+            });
+        });
+        
+        //송금링크에 금액 추가
+        const transferButtons = document.querySelectorAll(".transfer-btn");
+
+        const originalKakaoURL = document.getElementById("kakaoTransferLink").querySelector("a").href;
+        const originalTossURL = document.getElementById("tossTransferLink").querySelector("a").href;
+
+        transferButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                let kakaoTransferLink = document.getElementById("kakaoTransferLink").querySelector("a");
+                let tossTransferLink = document.getElementById("tossTransferLink").querySelector("a");
+
+                let inputValue = document.querySelector("input[name='funding_price']").value;
+                let multipliedValue = inputValue * 8;
+                let hexadecimalValue = multipliedValue.toString(16);
+                
+                let kakaoInfo = [originalKakaoURL, hexadecimalValue, '0000'];
+                kakaoTransferLink.href = kakaoInfo.join('');
+                
+                let tossInfo = [originalTossURL, inputValue.toString()];
+                tossTransferLink.href = tossInfo.join('/');
+            });
+        });
+    });
+
+
+
+    //금액 버튼 누를때 뜨는 선물 이미지가 달라지게 
+    const priceButtons = document.querySelectorAll(".blue-btn-gift");
+    const presentImage = document.querySelector(".changing-present");
+
+    priceButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            let value = this.getAttribute("data-value");
+            presentImage.style.opacity = '0'; // 이미지를 서서히 사라지게 함
+            setTimeout(function() { // 500ms 후에 이미지 소스 변경 및 페이드 인
+            switch(value) {
+                case "5000":
+                    presentImage.src = "{% static 'images/2.png' %}";
+                    break;
+                case "10000":
+                    presentImage.src = "{% static 'images/3.png' %}";
+                    break;
+                case "20000":
+                    presentImage.src = "{% static 'images/4.png' %}";
+                    break;
+                case "30000":
+                    presentImage.src = "{% static 'images/5.png' %}";
+                    break;
+                case "50000":
+                    presentImage.src = "{% static 'images/6.png' %}";
+                    break;
+                case "0":
+                    presentImage.src = "{% static 'images/7.png' %}";
+                    break;
+                default:
+                    presentImage.src = "{% static 'images/1.png' %}";
+            }
+            presentImage.style.opacity = '1'; // 이미지를 서서히 나타나게 함
+        }, 500);
+    });
+});
+    
+    //폼 전부 작성돼어야 버튼 색 바뀌게 
+    document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+    const amountInput = document.getElementById("funding_amount"); 
+    const messageInput = document.getElementById("birthday_message"); 
+    const nicknameInput = document.getElementById("gift_nickname"); 
+    const submitButton = document.querySelector(".give_present"); 
+
+    // 초기 상태에서 버튼 비활성화 및 회색으로 설정
+    submitButton.disabled = true;
+    submitButton.style.backgroundColor = "#808080";
+
+    function checkInputs() {
+        // 금액 양수값, 메시지, 닉네임 필드가 모두 채워져 있는지 확인
+        if (amountInput.value >= 0  && amountInput.value <= 300000 &&amountInput.value !== "" && messageInput.value.trim() !== "" && nicknameInput.value.trim() !== "") {
+            submitButton.disabled = false;
+            submitButton.style.backgroundColor = "#4114FF"; //파란색
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.backgroundColor = "#808080";
+        }
+    }
+    //폼 필수 항목들 주시
+    amountInput.addEventListener("input", checkInputs);
+    messageInput.addEventListener("input", checkInputs);
+    nicknameInput.addEventListener("input", checkInputs);
+
+    // 버튼 그룹 내 버튼 클릭 이벤트 리스너 추가
+    document.querySelectorAll(".button-group.transfer-btn-presents button").forEach(function(button) {
+        button.addEventListener("click", function() {
+            amountInput.value = this.getAttribute("data-value"); // 버튼의 data-value (0이여도 됨) 값을 금액 입력 필드에 설정
+            checkInputs(); // 입력 상태 확인 함수 호출
+        });
+    });
+});
+
+//음수값 넣을 때 주황색으로 변하게 
+document.addEventListener("DOMContentLoaded", function() {
+    const fundingAmountInput = document.getElementById('funding_amount');
+    const priceRangeNotice = document.getElementById('price-range-notice');
+
+    fundingAmountInput.addEventListener('input', function() {
+        const value = this.value.trim(); // 공백 제거
+
+        if (value === '' || isNaN(value)) {
+            priceRangeNotice.style.color = '#FF6245'; 
+        } else {
+            const numericValue = parseInt(value, 10);
+            if (numericValue < 0 || numericValue > 300000) {
+                priceRangeNotice.style.color = '#FF6245';
+            } else {
+                priceRangeNotice.style.color = '';
+            }
+        }
+    });
+});
+
+    //글자수 세기
+    document.addEventListener("DOMContentLoaded",function(){
+        const messageInput=document.querySelector(".input-bday-message");
+        const charCountDisplay=document.getElementById("charCount2");
+        const maxChars=500;//최대 500
+
+        messageInput.addEventListener("input",function(){
+            let inputText=this.value;
+            if(inputText.length>maxChars){
+                this.value=inputText.substr(0,maxChars);
+            }
+            const charCount=this.value.length;
+            charCountDisplay.textContent=charCount+"/500";
+
+             // 글자수가 500자가 되면 글자색을 빨간색으로 변경
+        if (charCount === maxChars) {
+            charCountDisplay.style.color = 'red';
+        } else {
+            charCountDisplay.style.color = ''; // 다시 기본색으로 변경
+        }
+        })
+    })
+
+    function focus_input(){
+        var input = document.getElementById("funding_amount");
+        input.value = "";
+        input.focus();
+
+    }
+</script>
+{%endblock script%}

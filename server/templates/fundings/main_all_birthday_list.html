@@ -1,0 +1,66 @@
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/all_list.css'%}" /> {% endblock head %}
+{% block header %}
+<a href="{%url 'fundings:main'%}">
+  <p class="logo unna-bold-36">Best Birthday</p>
+</a>
+{% if user.is_authenticated %}
+<a href="{%url 'users:mypage_list'%}">
+  <div class="profile"></div>
+</a>
+{% else %}
+<a href="{%url 'users:login'%}">
+  <div class="profile"></div>
+</a>
+{% endif %}
+{% endblock header %} {% block content %}
+<div class="header-title-container">
+  <a href="{%url 'fundings:main'%}">
+    <div><i class="ri-arrow-left-s-line"></i></div>
+  </a>
+  <div class="header-title notosans-bold-20">오늘 생일자</div>
+  <div></div>
+</div>
+{%if fundings%}
+    {%for funding in fundings%}
+<a href="{%url 'fundings:detail' pk=funding.pk%}">
+  <div class="card-container card2-container">
+    {%if funding.photo.url != null and funding.photo.url != ''%}
+    <img class="card2-image" src="{{funding.photo.url}}" alt="대체텍스트" />
+    {%else%}
+    <img class="card2-image" src="{%static 'images/no_img.png'%}" alt="" />
+    {%endif%}
+    <div class="card2-right">
+        <div class="D-day div-btn">
+              <p class="notosans-regular-12">
+                {% with dday=funding_dday_dict|get_item:funding.id %}
+                {% if dday > 0 %}
+                    D - {{dday}} 
+                {% elif dday == 0 %}
+                    D - Day 
+                {% endif %}
+                {% endwith %}
+                </p>
+          </div>
+        <div class="card2-content">
+          <div class="card2-title notosans-bold-16">{{funding.title}}</div>
+          <div class="progress-percent2 notosans-regular-14">
+            {% with progress=funding_progresses|get_item:funding.id %}
+            {{progress}}%
+          </div>
+          <div class="progress-container">
+          <div class="progress-value-container">
+            <progress value="{{progress}}" max="100"></progress>
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+{%endfor%}
+    {%else%}
+    <div class="null-guide notosans-bold-16">오늘 생일자가 없습니다.</div>
+    {%endif%}
+
+{% endblock content %}

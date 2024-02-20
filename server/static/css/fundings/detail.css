@@ -1,0 +1,127 @@
+.funding-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+
+  .funding-title-for-center{
+    text-align: center;
+    padding-left: var(--gutter24);
+    margin-bottom: var(--gutter24);
+  }
+
+
+  .image-container {
+    height: 20rem; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+
+  .image-container img {
+    height: 100%; 
+    width: auto; 
+  }
+
+.funding-info {
+    margin: var(--gutter16) 0;
+    color:gray;
+}
+
+.dday {
+    margin-left: 0.5rem;
+    color: var(--BB_color_orange);
+}
+.percentage-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: var(--gutter8);
+}
+.present-button-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--gutter8);
+    align-items: center;
+    width: 100%;    
+}
+.funding-title-for-margin{
+    margin-top: var(--gutter16);
+}
+.images-icons{
+    display: inline-block; margin: 0; vertical-align: middle;
+}
+.current-progress{
+    color: var(--BB_color_orange);
+}
+.gift-to-buy{
+    cursor: pointer;
+}
+.detail-img{
+    vertical-align: middle;
+}
+.friend-birthday{
+    margin: var(--gutter8) 0;
+}
+.participate-num{
+    margin-top: 0;
+}
+.participate-num strong{
+    font-size: 2rem;
+    padding: 0 var(--gutter8);
+    color: var(--BB_color_blue);
+}
+.detail-funding-title{
+    margin-top: var(--gutter16);
+}
+
+.detail-styles{
+    display: inline-block; 
+    vertical-align: middle;
+}
+.notosans-regular-14>span{
+    margin-right: var(--gutter8);
+}
+#detail-container{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter8);
+}
+.give_present{
+    background-color: var(--BB_color_blue);
+    color: var(--BB_color_white);
+    margin-top: var(--gutter16);
+}
+
+.participate-num{
+    margin-bottom: 1rem;
+    margin: var(--gutter16) 0;
+}
+.share-btn{
+    background-color:var(--BB_color_yellow);
+    width: 100%;
+}
+.btn{
+    width: 100%;
+}
+#pop-up-message{
+    display:none; color:var(--BB_color_orange); text-align: center; margin-top: 20px;
+}
+.give-onload-btn{
+    background-color: gray;
+}
+.give-onload-btn p{
+    color: var(--BB_color_white);
+}
+.end-funding{
+    margin-top: 3.2rem;
+}

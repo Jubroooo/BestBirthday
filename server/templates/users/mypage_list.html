@@ -1,0 +1,78 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/mypage_list.css' %}">
+{% endblock head %}
+
+{% block header %}
+<div class="mypage-title">
+    <a href="{%url 'fundings:main'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+    <p class="mypage-title-for-center notosans-bold-24">마이페이지</p>
+</div>
+{% endblock header %}
+
+{% block content %}
+<a href="{%url 'users:mypage_profile_setting'%}">
+    <p class="notosans-bold-24 mypage-links">프로필</p>
+    <div class="mypage-background">
+        <div class="mypage-first-section">
+            {% if user.profile %}
+                <img class="input-profile-img" src="{{ user.profile.url }}" width="40" height="40">
+            {% else %}
+                <div class="profile"></div>
+            {% endif %}
+            <div class="mypage-profile">
+                <div class="mypage-profile2">
+                <p class="notosans-bold-20 myname">{{user.nickname}}</p>
+                <div class="D-day div-btn">
+                    <p>
+                      {{user.birthday|date:"F j일"}}
+                    </p>
+                  </div>
+                </div>
+            </div>
+            <div class="right-icon" onclick="">
+            <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div class="mypage-funding">
+    <p class="notosans-bold-24 mypage-links">펀딩</p>
+    <a href="{%url 'users:mypage_myfunding'%}" class="mypage-links notosans-regular-18">내 생일 펀딩</a>
+    <a href="{%url 'users:mypage_participated'%}" class="mypage-links notosans-regular-18">내가 참여한 펀딩</a>
+    <a href="{% url 'fundings:create_payment' %}?from=list" class="mypage-links notosans-regular-18">송금 링크 관리</a>
+</div>
+
+<div class="mypage-account">
+    <p class="notosans-bold-24 mypage-links">계정 관리</p>
+    <a href="{%url 'users:logout'%}" class="mypage-links notosans-regular-18">로그아웃</a>
+    <!--탈퇴 전에 confirm 확인 받고 url로 이동-->
+    <a href="{%url 'users:delete_user'%}" class="mypage-links notosans-regular-18"  onclick="confirmDelete(event)">회원탈퇴</a>
+</div>
+
+<div class="mypage-etc">
+<a href=""class="notosans-bold-24 mypage-links">서비스</a>
+<a href="{%url 'users:team_intro'%}"class="notosans-regular-18 mypage-links">팀소개</a>
+<a href="https://tally.so/r/npB7eB"class="notosans-regular-18 mypage-links">피드백 보내기</a>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+function confirmDelete(event) {
+    // 기본 링크 동작 중지
+    event.preventDefault();
+
+    // confirm 대화 상자 표시
+    var result = confirm("정말로 회원 탈퇴 하시겠습니까?");
+
+    // 사용자가 'OK'를 선택한 경우
+    if (result) {
+        // 회원 탈퇴 처리 페이지로 이동
+        window.location.href = event.target.href;
+    }
+}
+</script>
+{% endblock script %}

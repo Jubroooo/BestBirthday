@@ -1,0 +1,91 @@
+.create-payment-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.create-payment-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+.payment_description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10rem 0;
+}
+.payment-link-btn-container{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: var(--gutter8);
+    margin: var(--gutter16) 0;
+    position: relative;
+    width: 100%;
+}
+.payment-btn-kakao{
+    background-color: #f7e100;
+    position: relative;
+}
+.payment-link-btn-container a {
+    flex: 1;
+}
+.payment-description{
+    color: var(--BB_color_orange);
+}
+#payment-description-container{
+    display: flex;
+    flex-direction: row;
+    gap: var(--gutter8);
+    align-items: end;
+}
+.create_payment_btn{
+    width: 100%;
+}
+.create_payment_null{
+    width: 100%;
+    background-color: gray;
+}
+.payment-btn-toss{
+    position: relative;
+    background-color: var(--BB_color_blue_sub);
+}
+.link-not-null{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 1.5rem;
+    color: white;
+}
+.kakao-link{
+    color: black;
+}
+
+.payment_description p {
+    animation: pulse 5s infinite; /* 2초 동안 무한 반복 */
+}
+.payment-description2{
+    margin: var(--gutter8) 0;
+    text-align: center;
+    
+}
+.fa-circle-exclamation{
+    color: var(--BB_color_orange);
+}
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1); /* 원래 크기 */
+    }
+    50% {
+        transform: scale(1.05); /* 10% 확대 */
+    }
+}

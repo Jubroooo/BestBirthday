@@ -1,0 +1,21 @@
+{% extends "base.html" %} {%load static%} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/create_gift_complete.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="gift-giving">
+    <p class="notosans-bold-24">{{ funding.user.nickname }}에게 선물하는 중...</p>
+    <img src="{%static 'images/givinggift.png'%}">
+    <p class="notosans-bold-18 giving-comment">메세지는 생일 날 {{ funding.user.nickname }}에게 전달됩니다</p>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    // Wait for 2 seconds before redirecting
+    setTimeout(function() {
+        window.location.href = "{% url 'fundings:main'%}";
+    }, 2000); // 2000 milliseconds = 2 seconds
+</script>
+{% endblock script %}

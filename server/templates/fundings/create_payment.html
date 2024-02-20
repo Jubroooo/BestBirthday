@@ -1,0 +1,83 @@
+{% extends "base.html" %} {%load static%} {% block head %}
+<link rel="stylesheet" href="{% static 'css/fundings/create_payment.css'%}" /> {% endblock head %}
+{% block header %}
+    <div class="create-payment-title">
+        {% if from_page != 'list' %}
+        <a href="{%url 'fundings:main'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+        {%else%}
+        <a href="{%url 'users:mypage_list'%}"><i class="icon-left fa-solid fa-chevron-left"></i></a>
+        {%endif%}
+        <p class="create-payment-title-for-center notosans-bold-24">송금링크 설정</p>
+    </div>
+{% endblock header %} 
+
+{% block content %}
+<div class="payment_description">
+    <p class="notosans-bold-24">잠깐! 선물을 받으려면</p>
+    <p class="notosans-bold-24">송금링크부터 만들어주세요</p>
+</div>
+<div id="payment-description-container">
+    <div class="notosans-bold-20 payment-link">송금 링크 관리</div>
+    <div class="notosans-regular-12 payment-description">* 카카오페이 필수</div>
+</div>
+
+<div class="payment-link-btn-container">
+    {% if from_page != 'list' %}
+        <a href="{%url 'users:mypage_payment_guide_k'%}">
+            <button class="div-btn payment-btn-kakao ">
+                <img src="../../static/images/kakao-pay.png">
+            {% if user.kakao_account != null %}
+                <i class="fa-solid fa-link link-not-null kakao-link"></i>
+            {% endif %}
+        </button>
+        </a>
+        <a href="{%url 'users:mypage_payment_guide_t'%}">
+            <button class="div-btn payment-btn-toss ">
+                <img src="../../static/images/toss-pay.png">
+            
+            {% if user.toss_account != null %}
+                <i class="fa-solid fa-link link-not-null"></i>
+            {% endif %}
+        </button>
+        </a>
+    {% else %}
+        <a href="{%url 'users:mypage_payment_guide_k'%}?from=list">
+            <button class="div-btn payment-btn-kakao ">
+                <img src="../../static/images/kakao-pay.png">
+            {% if user.kakao_account != null %}
+                <i class="fa-solid fa-link link-not-null kakao-link"></i>
+            {% endif %}
+        </button>
+        </a>
+        <a href="{%url 'users:mypage_payment_guide_t'%}?from=list">
+            <button class="div-btn payment-btn-toss ">
+                <img src="../../static/images/toss-pay.png">
+            
+            {% if user.toss_account != null %}
+                <i class="fa-solid fa-link link-not-null"></i>
+            {% endif %}
+        </button>
+        </a>
+    {% endif %}
+</div>
+<div class="payment-description2 notosans-regular-12">
+    <i class="fa-solid fa-circle-exclamation notosans-regular-12" aria-hidden="true"></i> 설정한 송금 링크는 마이페이지에서 수정할 수 있어요</div>
+    {% if user.kakao_account %}
+        {% if from_page != 'list' and "list" not in request.path %}
+            <a href="{% url 'fundings:create_funding' %}" class="notosans-bold-18">
+                <button class="div-btn create_payment_btn" type="submit">
+                <p class="notosans-bold-18">송금링크 저장</p>
+            </button></a>
+        {% else %}
+            <a href="{% url 'users:mypage_list' %}" class="notosans-bold-18">
+                <button class="div-btn create_payment_btn" type="submit">
+                <p class="notosans-bold-18">송금링크 저장</p>
+            </button></a>
+        {% endif %}
+    {%else%}
+    <button class="div-btn create_payment_null" type="submit">
+        <a href="" class="notosans-bold-18">송금링크 저장</a>
+    </button>
+    {% endif %}
+
+{% endblock content %}

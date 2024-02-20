@@ -1,0 +1,124 @@
+.input_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_birthday {
+  width: 100%; 
+  align-self: flex-start;
+  margin-top: 7vh;
+  text-align: left;
+}
+.check_bday {
+  align-self: flex-start;
+  color: var(--BB_color_orange);
+  margin:var(--gutter8) 0 var(--gutter16) 0;
+}
+
+.birthday_input {
+  width: auto;
+  height: 4.7rem;
+  margin: var(--gutter16) 0 0 0;
+  padding: 0 1rem;
+  border: none;
+  border-radius: 1.1rem;
+  color: var(--BB_color_black);
+  cursor: pointer;
+}
+
+.birthday_input_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.birthday_input:focus {
+  outline: none;
+}
+.xmark-icon {
+  text-align: right;
+}
+
+.xmark-icon .fa-xmark {
+  font-size: 2rem;
+}
+.profile-for-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+  cursor: pointer;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nickname_img_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--gutter24);
+}
+#profile-upload {
+  display: none;
+}
+
+/* 미리보기 프로필 출력형태 */
+.input-profile-img {
+  margin: var(--gutter24) auto;
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+input[type="text"],
+textarea {
+  width: 100%; 
+  padding: 0 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box; 
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: initial;
+  font-size: 1.6rem;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  border-radius: 0;
+}
+input[type="text"]{
+  height: 5vh;
+}
+.add-nickname {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  margin-bottom: var(--gutter8);
+}
+.add-nickname:focus {
+  outline: none;
+}
+.nickname-limit{
+  margin-left: var(--gutter8);
+  color: gray;
+}
+.nickname-input-container{
+  display: flex;
+  justify-content:left;
+  align-items: end;
+}
+#nickname-error{
+  margin-bottom: var(--gutter8) ;
+}
+
+.alert-danger > ul > li{
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}

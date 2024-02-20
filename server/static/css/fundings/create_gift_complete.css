@@ -1,0 +1,47 @@
+.modal_container{
+    position: fixed;
+    bottom: 0;
+    width: 39rem;
+}
+.result-modal-wrapper{
+   background-color:rgba(117, 117, 117,0.2); 
+   border-top-left-radius: 3.2rem; 
+   border-top-right-radius: 3.2rem;
+}
+.xmark-icon{
+   position:absolute;
+   right: var(--gutter16);
+   top: var(--gutter16); 
+   display: block;
+   font-size: 3rem;
+   cursor: pointer;
+}
+.top-bar-img{
+    display: flex;
+    flex-direction: column;
+}
+.go-and-check{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: var(--gutter24);
+}
+.congrats-notice{
+    margin: 3.2rem 0 var(--gutter16) 0;
+}
+.lock-img img{
+    width: 17rem;
+    height: auto;
+}
+.gift-giving{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.giving-comment{
+    color:gray;
+}

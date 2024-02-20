@@ -1,0 +1,189 @@
+.create-payment-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+  
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.create-payment-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+.to-friends-message{
+    border-radius: var(--gutter8);
+    height: 20vh;
+    background-color: var(--BB_color_white);
+    margin-bottom: var(--gutter8);
+}
+
+.funding-image{
+    display: flex;
+    gap:var(--gutter16);
+    align-items: flex-end
+    
+}
+.fa-circle-plus{
+    cursor: pointer;
+    font-size: var(--gutter16);
+    color: gray;
+}
+.create-payment-wrapper{
+    margin: var(--gutter16) 0;
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--gutter24)
+}
+
+.notice-for-paymentpage{
+margin: var(--gutter8) 0;
+text-align: center;
+color: gray;
+}
+.fa-circle-exclamation{
+    margin-right: var(--gutter8);
+    color: var(--BB_color_orange)
+}
+.wrapper-content-payment{
+display: flex; 
+flex-direction: column; 
+}
+
+.custom-font{
+font-family: var(--font-family-unna);
+font-weight: bold;
+font-size: 2rem
+}
+input[type="text"],
+input[type="url"],
+textarea {
+    padding: 0 10px;
+    background-color: transparent;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    color:white;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: initial;
+    font-size: 1.6rem;
+    outline: none;
+    resize: none;
+    height: 5vh;
+  }
+  input[type="text"],
+  textarea{
+    width: 100%;
+  }
+  input[type="url"]{
+    width: 90%;
+    font-size: 1.2rem;
+  }
+  input[type="text"],
+  input[type="url"]{
+    border: none;
+    border-bottom: 0.1rem solid #ffffff; 
+    border-radius: 0;
+  }
+  .to-friends-message,
+  .funding-title,
+  .present_link
+  {
+    background-color: transparent; 
+    color: #ffffff; 
+    padding: 1rem 2rem; 
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+.to-friends-message{
+    height: 15vh;
+}
+/* 
+.funding-title,
+.present_link{
+     height: 5vh; 
+} */
+#photo-upload{
+    display: none;
+}
+
+#price-slider {
+    cursor: pointer; 
+    width: 100%;
+    margin: var(--gutter16) 0 var(--gutter8);
+    accent-color: var(--BB_color_blue);
+}
+
+#price-display {
+    color: var(--BB_color_yellow);
+}
+.right-price{
+    position:absolute;
+    right: 0;
+    bottom: 0;
+}
+.slider-container{
+    position: relative;
+}
+
+#photo-preview{
+    width: auto;
+    max-height: 4vh;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+
+.limit-title{
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
+    gap: var(--gutter8);
+    margin: var(--gutter8) 0;
+}
+.wish-url{
+    margin: var(--gutter8) 0;
+}
+.limit-funding{
+    color:#808080;
+}
+
+.direct-input {
+    border: none;
+    border-bottom: 0.1rem solid var(--BB_color_white);
+    text-align: center;
+    background-color:transparent;
+    font-size: 1.6rem;
+    color: var(--BB_color_white);
+    padding: 0 1px;
+}
+
+.direct-input:focus {
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+#invalid-url-message {
+    color:var(--BB_color_blue)
+}
+.disabled {
+    background-color: #808080;
+}
+.enabled {
+    background-color: #4114FF;
+}
+
+.valid { color: #4114FF; }
+.invalid { color:gray; }
+
+.wrapper-textarea{
+    position: relative;
+}
+#charCount{
+    position:absolute;
+    right: 0;
+}

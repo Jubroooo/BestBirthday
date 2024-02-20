@@ -1,0 +1,65 @@
+
+#main-container {
+    gap:var(--gutter24);
+  }
+.mypage-title {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%; 
+}
+.icon-left{
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    left:var(--gutter8);
+    position: absolute;
+    left: 0; 
+}
+.mypage-title-for-center{
+    text-align: center;
+    margin-bottom: var(--gutter24);
+}
+
+.mypage-profile2{
+    display: flex;
+    align-items: center;
+}
+.myname{
+    margin-right: var(--gutter8);
+}
+
+.mypage-links{
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--gutter16);
+}
+
+.mypage-profile{
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--gutter24);
+}
+
+.mypage-first-section{
+    display:flex;
+    position: relative;
+    align-items: center;
+    margin: 4.8rem 0 var(--gutter24) 0;
+
+}
+.right-icon{
+    position:absolute;
+    right:0;
+    font-size: 3rem;
+    cursor: pointer;
+}
+.D-day{
+    height: 2rem;
+    font-weight: normal;
+}
+.input-profile-img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}

@@ -1,0 +1,37 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/users/nickname_profile_input.css' %}">
+{% endblock head %} 
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <a href="{% url 'fundings:main' %}" class="logo unna-bold-40" > Best Birthday</a>
+    <div class="nickname_img_wrapper">
+        <p class="notosans-bold-18">프로필 설정</p>
+        <label for="profile-upload" class="profile-for-center">
+            <img class="input-profile-img"src="{% static 'images/default_profile.png' %}">
+            <input id="profile-upload" type="file" name="profile" onchange="loadFile(event)">
+        </label>
+        <p class="notosans-bold-18">닉네임을 입력하세요</p>
+        <input type="text" autocomplete="off" class="add-nickname notosans-regular-12" name="nickname"></input>
+        <button type="submit"class="div-btn setting-btn">
+            <a href="{% url 'fundings:main' %}"class="notosans-bold-18">확인</a>
+        </button>
+    </div>
+</form>
+{% endblock content %}
+<!-- 사진 첨부 후 미리보기 위해 자바스크립트 사용 -->
+{% block script %}
+<script>
+    var loadFile = function(event) {
+        var output = document.querySelector('.input-profile-img');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src); // 메모리에서 이미지 URL을 제거
+        }
+    };
+</script>
+{% endblock script %}
