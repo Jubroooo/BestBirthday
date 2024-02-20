@@ -117,3 +117,8 @@ input[type="text"]{
 #nickname-error{
   margin-bottom: var(--gutter8) ;
 }
+
+.alert-danger > ul > li{
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}

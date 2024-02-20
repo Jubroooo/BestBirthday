@@ -125,7 +125,8 @@ def create_gift(request, pk):
             funding_msg = Funding_Msg()
             funding_msg.user = request.user
             funding_msg.post = funding
-            form = MessageForm(instance=funding_msg)
+            form = MessageForm(initial={'funding_price': 0})
+            form = MessageForm(instance=funding_msg)            
             ctx = {
                 'form':form, 'funding':funding
             }

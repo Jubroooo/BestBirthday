@@ -48,9 +48,11 @@
     margin-bottom: var(--gutter8);
 }
 .present-button-wrapper{
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: var(--gutter8);
+    align-items: center;
+    width: 100%;    
 }
 .funding-title-for-margin{
     margin-top: var(--gutter16);
@@ -106,7 +108,10 @@
 }
 .share-btn{
     background-color:var(--BB_color_yellow);
-    width: 50%;
+    width: 100%;
+}
+.btn{
+    width: 100%;
 }
 #pop-up-message{
     display:none; color:var(--BB_color_orange); text-align: center; margin-top: 20px;

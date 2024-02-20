@@ -63,17 +63,20 @@
       <button id="share-btn" class="share-btn btn" type="button">
         <p class="notosans-bold-16">공유하기</p>
       </button>
+      {% if dday < 0 %}
       <button class="btn give-onload-btn" type="button">
         <p class="notosans-bold-16">선물이 쌓이는 중..</p>
       </button>
+      {% else %}
+      <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
+        {% csrf_token %}
+        <button class="div-btn" type="submit">
+          <p class="notosans-bold-16">생일 메시지 보러 가기</p>
+        </button>
+      </form>
+      {% endif %}
     </div>
   </div>
-  <form method="post" action="{% url 'fundings:finish' pk=funding.id %}">
-    {% csrf_token %}
-    <button class="div-btn" type="submit">
-      <p class="notosans-bold-16">생일 메시지 보러 가기</p>
-    </button>
-  </form>
   {% else %}
   <a href="{{funding.present_link}}" target="_blank">
     <div class="gift-to-buy notosans-bold-16">
@@ -101,13 +104,11 @@
       내가 사줄 물건 보기
     </div>
   </a>
-  <div class="present-button-wrapper">
-    <a href="{% url 'fundings:create_gift' pk=funding.id%}">
-      <button class="give_present btn" type="button">
-        <p class="notosans-bold-16">선물하기</p>
-      </button>
-    </a>
-  </div>
+  <a href="{% url 'fundings:create_gift' pk=funding.id%}">
+    <button class="give_present btn" type="button">
+      <p class="notosans-bold-16">선물하기</p>
+    </button>
+  </a>
   {% endif %}
 </div>
 
